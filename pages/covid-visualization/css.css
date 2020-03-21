@@ -1,0 +1,129 @@
+.chart-viz {
+  background-color:hsla(270, 30%, 99%, 1);
+  border-left: solid 1px #ccc;
+  border-right: solid 1px #ccc;
+  border-top: solid 1px #ccc;
+}
+
+.chart-header {
+  
+  /* border: solid 1px #ccc; */
+  border-bottom-width: 0px;
+  padding: 0px;
+}
+
+.chart-header h2 {
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 0px;
+}
+
+.chart-footer {
+  background-color:hsla(270, 30%, 99%, 1);
+  border: solid 1px #ccc;
+  padding: 5px;
+}
+
+.axis text {
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.axis-title {
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.grid {
+  stroke-opacity: 0.15;
+  color:hsla(270, 30%, 50%, 1);
+}
+
+.tip-country {
+  font-weight: bold;
+  border-bottom: solid 1px black;      
+}
+
+.tip-details {
+  font-size: 12px;
+}
+
+.text-credits {
+  opacity: 0.3;
+  font-weight: bold;
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.label-country {
+  font-size: 10px;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+
+
+/* == https://rawgit.com/Caged/d3-tip/master/examples/example-styles.css ==  */
+.d3-tip {
+  line-height: 1;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #000;
+  border-radius: 2px;
+  pointer-events: none;
+  border: solid 1px black;
+
+  margin-bottom: 200px;
+  
+  width: 200px;
+  text-align: center;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  pointer-events: none;
+}
+
+.d3-tip.n:after {
+  content: "\25BC";
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+  text-align: center;
+}
+
+/* Eastward tooltips */
+.d3-tip.e:after {
+  content: "\25C0";
+  margin: -4px 0 0 0;
+  top: 50%;
+  left: -8px;
+}
+
+/* Southward tooltips */
+.d3-tip.s:after {
+  content: "\25B2";
+  margin: 0 0 1px 0;
+  top: -8px;
+  left: 0;
+  text-align: center;
+}
+
+/* Westward tooltips */
+.d3-tip.w:after {
+  content: "\25B6";
+  margin: -4px 0 0 -1px;
+  top: 50%;
+  left: 100%;
+}

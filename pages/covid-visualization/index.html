@@ -1,0 +1,148 @@
+---
+layout: bare
+---
+
+<header class="container-fluid header-small">
+  <div class="container">
+    <h1>
+      <a href="/">91-DIVOC</a>
+    </h1>
+  </div>
+</header>
+
+<link rel="stylesheet" href="css.css">
+
+<div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1);">
+  <div class="container lead">
+    <h2>An interactive visualization of the exponential spread of COVID-19</h2>
+    A project to explore the global growth of COVID-19.  Updated daily.  Inspired by the work of <a href="https://twitter.com/jburnmurdoch" target="_blank">John Burn-Murdoch</a>.
+  </div>
+</div>
+
+
+<div class="container viz">
+  <div class="alert alert-secondary" style="margin-top: 10px; padding-top: 20px;">
+    A few interesting bits I found interesting to explore:
+    <ul>
+      <li>
+        In nearly every country in the world, when the virus reaches 100 people the number of cases begins to increase by 35% daily. <i>(Dashed black line.)</i>
+        <ul>
+          <li>At that rate, a country would reach 1,000,000 cases just 31 days after reaching 100 cases.</li>
+          <li>The curve flattens with social distancing -- check out Japan, South Korea, and China over time.</li>
+        </ul>
+      </li>
+      <li>
+        There are two different ways to view the exact same data:
+        <ul>
+          <li>The <b>logarithmic scale</b> shows a great comparison of the magnitude of growth between countries, but less of the human impact.</li>
+          <li>The <b>linear scale</b> shows the real human impact -- a growth twice the size is twice the number of real people infected.</li>    
+          <li><b>Switch between the two</b> by toggling the scale at the bottom of each graph.</li>
+        </ul>
+      </li>
+      <li>
+        Finally, these graphs are not just images.  <b>Hover over any data point</b> to see the data behind it!
+      </li>
+    </ul>
+  </div>
+
+  <div id="sizer"></div>
+
+  <div class="chart-header" style="margin-top: 20px;">
+    <h2>COVID-19 Cases by Country</h2>
+  </div>
+  <div id="chart-countries" class="chart-viz"></div>
+  <div class="chart-footer">
+    <div class="row">
+      <div class="col-md-6" style="padding-bottom: 3px;">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Highlight Country:</span>
+          </div>
+          <select class="form-control" id="highlight-chart-countries">
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6 text-right">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Scale:</span>
+          </div>          
+          <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="countries">
+            <input type="radio" name="scale" autocomplete="off" checked> Log Scale
+          </label>
+          <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="countries">
+            <input type="radio" name="scale" autocomplete="off"> Linear Scale
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="chart-header" style="margin-top: 20px;">
+    <h2>COVID-19 Cases by US States</h2>
+  </div>
+  <div id="chart-states" class="chart-viz"></div>
+  <div class="chart-footer">
+    <div class="row">
+      <div class="col-md-6" style="padding-bottom: 3px;">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Highlight State:</span>
+          </div>
+          <select class="form-control" id="highlight-chart-states">
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6 text-right">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Scale:</span>
+          </div>          
+          <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="states">
+            <input type="radio" name="scale" autocomplete="off" checked> Log Scale
+          </label>
+          <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="states">
+            <input type="radio" name="scale" autocomplete="off"> Linear Scale
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<div class="container-fluid viz" style="margin-top: 20px;">
+  <div class="container lead">
+    <div><b>More Details</b>: <a href="/">91-DIVOC #01 - COVID-19 Dataset</a></div>
+    <div><b>Dataset</b>: <a href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series" target="_blank">2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns Hopkins CSSE</a></div>
+  </div>
+</div>
+
+<style>.social-hide { display: none; }</style>
+<img class="social-hide" itemprop="image" src="img.png">
+
+<footer class="container-fluid">
+  <div class="container" style="text-align: right;">
+    <div style="color: #ddd;">&ndash; wade</div>
+    <div style="font-size: 12px;">
+      <a href="https://waf.cs.illinois.edu">Website</a> | 
+      <a href="https://www.instagram.com/profwade/">Instagram</a> |
+      <a href="https://www.twitter.com/profwade_/">Instagram</a> |
+      <a href="https://www.github.com/wadefagen/">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js" integrity="sha256-VeNaFBVDhoX3H+gJ37DpT/nTuZTdjYro9yBruHjVmoQ=" crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="d3-tip.js"></script>
+<script src="updated.js"></script>
+<script src="vis.js"></script>

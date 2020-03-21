@@ -1,0 +1,63 @@
+header, footer {
+  background-color: hsla(199, 100%, 6%, 1);
+  color: #eee;
+  padding: 20px;
+}
+
+header, header a, header a:hover { color: #eee; }
+footer { color: hsla(199, 40%, 40%, 1); }
+footer a { color: hsla(199, 40%, 50%, 1); }
+footer a:hover { color: hsla(199, 40%, 60%, 1); }
+
+
+.viz h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+
+
+header h1 {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: bold;
+  font-size: 3em;
+  margin: 0px;
+}
+header h2 {
+  margin: 0px;
+  font-size: 1em;
+  font-style: italic;
+}
+
+header.header-small h1 {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: bold;
+  font-size: 1.5em;
+  margin: 0px;
+}
+
+header.header-small { padding: 5px; }
+
+
+.lead {
+  padding: 20px;
+}
+
+a {
+  color: hsla(199, 100%, 35%, 1);
+}
+
+.content, footer {
+  font-family: 'Roboto', sans-serif;
+}
+
+.card {
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  font-weight: bold;
+  width: 90%;
+  margin: 0px auto 15px auto;
+  padding: 3px;
+  background-color: hsla(199, 100%, 96%, 1);
+}
