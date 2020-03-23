@@ -247,31 +247,56 @@ $(function() {
       chart.scale = value;
       render(chart);
     }
-  })
+  });
 
-  var x = d3.csv("time_series_19-covid-Confirmed.csv", function (row) {
-      var country = row["Country/Region"];
-      if (country == "US") { country = "United States"; }
-      if (country == "Korea, South") { country = "South Korea"; }
-      row["Country/Region"] = country;
+  var accessor = (row) => {
+    var country = row["Country/Region"];
+    if (country == "US") { country = "United States"; }
+    if (country == "Korea, South") { country = "South Korea"; }
+    row["Country/Region"] = country;
 
-      return row;
-    })
-    .then(function (data) {
-      _rawData = data;
-      dateColumns = data.columns.slice(4);
+    return row;
+  };
 
-      process_data(data, charts["countries"]);
-      render(charts["countries"]);
+  var processCSVData = (data) => {
+    _rawData = data;
+    dateColumns = data.columns.slice(4);
 
-      process_data(data, charts["states"]);
-      render(charts["states"]);
+    process_data(data, charts["countries"]);
+    render(charts["countries"]);
 
-    })
-    .catch(function (err) {
-      console.error(err);
-      alert("Failed to load data.")
-    });
+    process_data(data, charts["states"]);
+    render(charts["states"]);
+  };
+
+  var updateFromLocalCSV = (e) => {
+    console.warn("Falling back to static data.");
+    var x = d3.csv("time_series_19-covid-Confirmed.csv", accessor)
+      .then(processCSVData)
+      .catch(function (err) {
+        console.error(err);
+        alert("Failed to load data.");
+      });
+  };
+
+  var githubXHttp = new XMLHttpRequest();
+  githubXHttp.responseType = "json";
+  githubXHttp.onabort = updateFromLocalCSV;
+  githubXHttp.onerror = updateFromLocalCSV;
+  githubXHttp.onload = function(e) {
+    var ghApiRespBody = githubXHttp.response;
+    if (ghApiRespBody.encoding !== "base64") {
+      console.error(`GitHub API returned content with encoding "${ghApiRespBody.encoding}"`);
+      updateFromLocalCSV();
+      return;
+    }
+    var csvData = window.atob(ghApiRespBody.content);
+    _dateUpdated = new Date(Date.now()).toLocaleDateString();
+    processCSVData(d3.csvParse(csvData, accessor));
+  };
+  var csvAPIAddress = "https://api.github.com/repos/CSSEGISandData/COVID-19/contents/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv";
+  githubXHttp.open("GET", csvAPIAddress);
+  githubXHttp.send();
 });
 
 
