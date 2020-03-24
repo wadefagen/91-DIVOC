@@ -55,13 +55,15 @@ title: An interactive visualization of the exponential spread of COVID-19
   <div class="chart-header" style="margin-top: 20px;">
     <h2>COVID-19 Cases by Country</h2>
   </div>
-  <div id="chart-countries" class="chart-viz"></div>
+  <div id="chart-countries" class="chart-viz">
+    <div class="text-center" style="height: 500px;"><b>Loading Data...</b></div>
+  </div>
   <div class="chart-footer">
     <div class="row">
       <div class="col-md-6">
         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
           <div class="input-group-prepend">
-            <span class="input-group-text">Highlight Country:</span>
+            <span class="input-group-text">Highlight:</span>
           </div>
           <select class="form-control" id="highlight-chart-countries">
           </select>
@@ -69,7 +71,7 @@ title: An interactive visualization of the exponential spread of COVID-19
 
         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
           <div class="input-group-prepend">
-            <span class="input-group-text">Filter:</span>
+            <span class="input-group-text">Show:</span>
           </div>
           <select class="form-control filter-select" id="filter-chart-countries" data-chart="countries">
             <option value="10">10</option>
@@ -77,10 +79,22 @@ title: An interactive visualization of the exponential spread of COVID-19
             <option value="40" selected>40</option>
             <option value="9999">All</option>
           </select>
-        </div>
+        </div> 
       </div>
 
       <div class="col-md-6 text-right">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Data:</span>
+          </div>
+          <select class="form-control data-select" data-chart="countries">
+            <option value="active">Active Cases</option>
+            <option value="cases" selected>Confirmed Cases</option>
+            <option value="deaths">Deaths</option>
+            <option value="recovered">Recovered </option>
+          </select>
+        </div>
+
         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
           <div class="input-group-prepend">
             <span class="input-group-text">Scale:</span>
@@ -99,13 +113,15 @@ title: An interactive visualization of the exponential spread of COVID-19
   <div class="chart-header" style="margin-top: 20px;">
     <h2>COVID-19 Cases by US States/Territories</h2>
   </div>
-  <div id="chart-states" class="chart-viz"></div>
+  <div id="chart-states" class="chart-viz">
+    <div class="text-center" style="height: 500px;"><b>Loading Data...</b></div>
+  </div>
   <div class="chart-footer">
     <div class="row">
       <div class="col-md-6">
         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
           <div class="input-group-prepend">
-            <span class="input-group-text">Highlight State:</span>
+            <span class="input-group-text">Highlight:</span>
           </div>
           <select class="form-control" id="highlight-chart-states">
           </select>
@@ -113,7 +129,7 @@ title: An interactive visualization of the exponential spread of COVID-19
 
         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
           <div class="input-group-prepend">
-            <span class="input-group-text">Filter:</span>
+            <span class="input-group-text">Show:</span>
           </div>
           <select class="form-control filter-select" id="filter-chart-states" data-chart="states">
             <option value="10">10</option>
@@ -121,10 +137,22 @@ title: An interactive visualization of the exponential spread of COVID-19
             <option value="40">40</option>
             <option value="9999" selected>All</option>
           </select>
-        </div>        
+        </div>
       </div>
 
       <div class="col-md-6 text-right">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Data:</span>
+          </div>
+          <select class="form-control data-select" data-chart="states">
+            <option value="active">Active Cases</option>
+            <option value="cases" selected>Confirmed Cases</option>
+            <option value="deaths">Deaths</option>
+            <option value="recovered">Recovered </option>
+          </select>
+        </div>
+
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <div class="input-group-prepend">
             <span class="input-group-text">Scale:</span>
@@ -161,13 +189,15 @@ title: An interactive visualization of the exponential spread of COVID-19
   <div class="chart-header" style="margin-top: 20px;">
     <h2>COVID-19 Cases by Country, normalized by country population</h2>
   </div>
-  <div id="chart-countries-normalized" class="chart-viz"></div>
+  <div id="chart-countries-normalized" class="chart-viz">
+    <div class="text-center" style="height: 500px;"><b>Loading Data...</b></div>
+  </div>
   <div class="chart-footer">
     <div class="row">
       <div class="col-md-6">
         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
           <div class="input-group-prepend">
-            <span class="input-group-text">Highlight Country:</span>
+            <span class="input-group-text">Highlight:</span>
           </div>
           <select class="form-control" id="highlight-chart-countries-normalized">
           </select>
@@ -175,7 +205,7 @@ title: An interactive visualization of the exponential spread of COVID-19
 
         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
           <div class="input-group-prepend">
-            <span class="input-group-text">Filter:</span>
+            <span class="input-group-text">Show:</span>
           </div>
           <select class="form-control filter-select" id="filter-chart-countries-normalized" data-chart="countries-normalized">
             <option value="10">10</option>
@@ -187,6 +217,18 @@ title: An interactive visualization of the exponential spread of COVID-19
       </div>
 
       <div class="col-md-6 text-right">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Data:</span>
+          </div>
+          <select class="form-control data-select" data-chart="countries-normalized">
+            <option value="active">Active Cases</option>
+            <option value="cases" selected>Confirmed Cases</option>
+            <option value="deaths">Deaths</option>
+            <option value="recovered">Recovered </option>
+          </select>
+        </div>
+
         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
           <div class="input-group-prepend">
             <span class="input-group-text">Scale:</span>
@@ -205,13 +247,15 @@ title: An interactive visualization of the exponential spread of COVID-19
   <div class="chart-header" style="margin-top: 20px;">
     <h2>COVID-19 Cases by US States/Territories, normalized by population</h2>
   </div>
-  <div id="chart-states-normalized" class="chart-viz"></div>
+  <div id="chart-states-normalized" class="chart-viz">
+    <div class="text-center" style="height: 500px;"><b>Loading Data...</b></div>
+  </div>
   <div class="chart-footer">
     <div class="row">
       <div class="col-md-6">
         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
           <div class="input-group-prepend">
-            <span class="input-group-text">Highlight State:</span>
+            <span class="input-group-text">Highlight:</span>
           </div>
           <select class="form-control" id="highlight-chart-states-normalized">
           </select>
@@ -219,18 +263,30 @@ title: An interactive visualization of the exponential spread of COVID-19
 
         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
           <div class="input-group-prepend">
-            <span class="input-group-text">Filter:</span>
+            <span class="input-group-text">Show:</span>
           </div>
           <select class="form-control filter-select" id="filter-chart-states-normalized" data-chart="states-normalized">
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="40">40</option>
-            <option value="9999" selected>All</option>
+            <option value="9999" selected>None</option>
           </select>
         </div>
       </div>
 
       <div class="col-md-6 text-right">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Data:</span>
+          </div>
+          <select class="form-control data-select" data-chart="states-normalized">
+            <option value="active">Active Cases</option>
+            <option value="cases" selected>Confirmed Cases</option>
+            <option value="deaths">Deaths</option>
+            <option value="recovered">Recovered </option>
+          </select>
+        </div>
+                
         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
           <div class="input-group-prepend">
             <span class="input-group-text">Scale:</span>
@@ -284,4 +340,4 @@ title: An interactive visualization of the exponential spread of COVID-19
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="d3-tip.js"></script>
 <script src="updated.js"></script>
-<script src="vis.js"></script>
+<script src="vis.js?v=20200323"></script>

@@ -79,9 +79,10 @@ var reducer_byUSstate = function(result, value, key) {
     stateDict[ s[1] ] = s[0];
   }
 
-  country = value["Country/Region"];
-  state = value["Province/State"];
+  country = value["Country_Region"];
+  state = value["Province_State"];
 
+  if (state == "") { return result; }
   if (country != "United States") { return result; }
   if (state.indexOf("Princess") != -1) { return result; }
   if (state.indexOf(",") != -1 && state.length > 2) {
@@ -91,7 +92,9 @@ var reducer_byUSstate = function(result, value, key) {
 
   // Use the state name as key
   key = state;
+  return reducer_sum_with_key(result, value, key);
 
+  /*
   if (!result[key]) { result[key] = {} }
   let obj = result[key];
 
@@ -100,24 +103,33 @@ var reducer_byUSstate = function(result, value, key) {
     if (!obj[column]) { obj[column] = 0; }
     obj[column] = obj[column] + (+value[column]);
   }
+
+  return result;
+  */
+};
+
+var reducer_sum_with_key = function(result, value, key) {
+  if (!result[key]) { result[key] = {} }
+  let obj = result[key];
+
+  let date = value["Date"];
+
+  if (!obj[date]) { obj[date] = { active: 0, recovered: 0, deaths: 0, cases: 0 } }
+  obj[date].active += value["Active"];
+  obj[date].recovered += value["Recovered"];
+  obj[date].deaths += value["Deaths"];
+  obj[date].cases += value["Confirmed"];
 
   return result;
 };
 
 
 var reducer_byCountry = function(result, value, key) {
-  key = value["Country/Region"];
+  state = value["Province_State"];
+  if (state != "") { return result; }
 
-  if (!result[key]) { result[key] = {} }
-  let obj = result[key];
-
-  for (var i = 0; i < dateColumns.length; i++) {
-    var column = dateColumns[i];
-    if (!obj[column]) { obj[column] = 0; }
-    obj[column] = obj[column] + (+value[column]);
-  }
-
-  return result;
+  key = value["Country_Region"];
+  return reducer_sum_with_key(result, value, key);
 };
 
 
@@ -133,18 +145,22 @@ var charts = {
     normalizePopulation: false,
     show: 40,
     sort: function (d) { return -d.maxCases; },
+    dataSelection: 'cases',
+    dataSelection_y0: { 'active': 100, 'cases': 100, 'deaths': 10, 'recovered': 100 },
     xMax: null, yMax: null, data: null
   },
   'states': {
     reducer: reducer_byUSstate,
     scale: "log",
-    highlight: "Illinois",
+    highlight: "New York",
     y0: 20,
     xCap: 40,
     id: "chart-states",
     normalizePopulation: false,
     show: 9999,
     sort: function (d) { return -d.maxCases; },
+    dataSelection: 'cases',
+    dataSelection_y0: { 'active': 20, 'cases': 20, 'deaths': 5, 'recovered': 20 },
     xMax: null, yMax: null, data: null
   },
 
@@ -158,18 +174,22 @@ var charts = {
     normalizePopulation: "country",
     show: 40,
     sort: function (d) { return -d.maxCases + -(d.pop / 1e6); },
+    dataSelection: 'cases',
+    dataSelection_y0: { 'active': 1, 'cases': 1, 'deaths': 1, 'recovered': 1 },
     xMax: null, yMax: null, data: null
   },
   'states-normalized': {
     reducer: reducer_byUSstate,
     scale: "log",
-    highlight: "Illinois",
+    highlight: "New York",
     y0: 1,
     xCap: 40,
     id: "chart-states-normalized",
     normalizePopulation: "state",
     show: 9999,
     sort: function (d) { return -d.maxCases; },
+    dataSelection: 'cases',
+    dataSelection_y0: { 'active': 1, 'cases': 1, 'deaths': 1, 'recovered': 1 },
     xMax: null, yMax: null, data: null
   },
 };
@@ -223,46 +243,31 @@ var process_data = function(data, chart) {
 
     dayCounter = -1;
     maxCases = 0;
+    maxDay = -1;
     countryData = [];
-    for (const date of dateColumns) {
+    for (const date in agg[country]) {
       // Start counting days only after the first day w/ 100 cases:
-      var cases = agg[country][date];
+      //console.log(agg[country][date]);
+      var cases = agg[country][date][chart.dataSelection];
       if (chart.normalizePopulation) { cases = (cases / popSize) * 1e6; }
 
       if (dayCounter == -1 && cases >= chart.y0) {
         dayCounter = 0;
-
-        if (country == "China") {
-          var factor = 1;
-          if (chart.normalizePopulation) { factor = 1e6 / popSize; }
-
-          // Add in missing early data, sourced from Wikipedia
-          if (121 * factor >= chart.y0) {
-            if (dateColumns.indexOf("1/18/20") == -1) { countryData.push({ country: country, dayCounter: dayCounter++, date: "1/18/20", cases: 121 * factor }); }
-          }
-          if (198 * factor >= chart.y0) {
-            if (dateColumns.indexOf("1/19/20") == -1) { countryData.push({ country: country, dayCounter: dayCounter++, date: "1/19/20", cases: 198 * factor }); }
-          }
-          if (291 * factor >= chart.y0) {
-            if (dateColumns.indexOf("1/20/20") == -1) { countryData.push({ country: country, dayCounter: dayCounter++, date: "1/20/20", cases: 291 * factor }); }
-          }
-          if (440 * factor >= chart.y0) {
-            if (dateColumns.indexOf("1/21/20") == -1) { countryData.push({ country: country, dayCounter: dayCounter++, date: "1/21/20", cases: 440 * factor }); }
-          }
-
-          
-        }
       }
       
       // Once we start counting days, add data
       if (dayCounter > -1) {
-        countryData.push({
-          pop: popSize,
-          country: country,
-          dayCounter: dayCounter,
-          date: date,
-          cases: cases
-        });
+        if (cases >= chart.y0) {
+          countryData.push({
+            pop: popSize,
+            country: country,
+            dayCounter: dayCounter,
+            date: date,
+            cases: cases
+          });
+
+          maxDay = dayCounter;
+        }
         if (cases > maxCases) { maxCases = cases; }
 
         dayCounter++;
@@ -275,7 +280,7 @@ var process_data = function(data, chart) {
         country: country,
         data: countryData,
         maxCases: maxCases,
-        maxDay: dayCounter - 1
+        maxDay: maxDay
       });
 
       if (dayCounter > maxDayCounter) {
@@ -288,8 +293,6 @@ var process_data = function(data, chart) {
   chart.fullData = caseData;
 
   casesMax = _.sortBy(caseData, function(d) { return -d.maxCases; } )[0];
-  console.log(caseData);
-  console.log(casesMax);
   chart.yMax = findNextExp(casesMax.maxCases);
 
   chart.xMax = maxDayCounter;
@@ -316,7 +319,6 @@ $(function() {
   });
 
   $(".filter-select").change(function (e) {
-    console.log("Filter select;")
     var chartId = $(e.target).data("chart");
     var chart = charts[chartId];
     
@@ -325,24 +327,47 @@ $(function() {
     render(chart);
   });
 
+  $(".data-select").change(function (e) {
+    console.log("Data select: ")
+    var chartId = $(e.target).data("chart");
+    var chart = charts[chartId];
+    var value = $(e.target).val();
+    
+    chart.dataSelection = value;
+    chart.y0 = chart.dataSelection_y0[value];
+    process_data(_rawData, chart);
+    render(chart);
+  });
 
+  const country_replacement = {
+    "US": "United States",
+    "Korea, South": "South Korea",
+    "Taiwan*": "Taiwan",
+    "Bahamas, The": "Bahamas",
+    "The Bahamas": "Bahamas",
+    "Gambia, The": "Gambia",
+    "The Gambia": "Gambia",
+    "Cabo Verde": "Cape Verde",
+    "Mainland China": "China",
+    "Iran (Islamic Republic of)": "Iran",
+    "Republic of Korea": "South Korea",
+    "UK": "United Kingdom",
+  };
 
-  var x = d3.csv("time_series_19-covid-Confirmed.csv?d=20200322", function (row) {
-      var country = row["Country/Region"];
-      if (country == "US") { country = "United States"; }
-      else if (country == "Korea, South") { country = "South Korea"; }
-      else if (country == "Taiwan*") { country = "Taiwan"; }
-      else if (country == "Bahamas, The") { country = "Bahamas"; }
-      else if (country == "Gambia, The") { country = "Gambia"; }
-      else if (country == "The Bahamas") { country = "Bahamas"; }
-      else if (country == "The Gambia") { country = "Gambia"; }
-      else if (country == "Cabo Verde") { country = "Cape Verde"; }
-      else if (country == "Congo (Brazzaville)") { country = "Republic of the Congo"; }
-      row["Country/Region"] = country;
+  var x = d3.csv("jhu-data.csv", function (row) {
+      row["Active"] = +row["Active"];
+      row["Confirmed"] = +row["Confirmed"];
+      row["Recovered"] = +row["Recovered"];
+      row["Deaths"] = +row["Deaths"];
 
-      var state = row["Province/State"];
+      var country = row["Country_Region"];
+      if (country in country_replacement) {
+        row["Country_Region"] = country_replacement[country];
+      }
+
+      var state = row["Province_State"];
       if (state == "United States Virgin Islands") { state = "Virgin Islands"; }
-      row["Province/State"] = state;
+      row["Province_State"] = state;
 
       return row;
     })
@@ -360,11 +385,7 @@ $(function() {
           if (pop.Country) { _popData.country[pop.Country] = pop.Population; }
           if (pop.State) { _popData.state[pop.State] = pop.Population; }
         }
-        //console.log(_popData);
-        //_popData = populationData;
 
-        dateColumns = data.columns.slice(4);
-  
         process_data(data, charts["countries"]);
         render(charts["countries"]);
   
@@ -394,15 +415,21 @@ var tip_html = function(chart) {
     var s2 = "";
     if (chart.normalizePopulation) { s2 = " per 1,000,000 people"; }
 
+    var dataLabel;
+    if (chart.dataSelection == 'cases') { dataLabel = "confirmed cases"; }
+    else if (chart.dataSelection == 'active') { dataLabel = "active cases"; }
+    else if (chart.dataSelection == 'deaths') { dataLabel = "deaths from COVID-19"; }
+    else if (chart.dataSelection == 'recovered') { dataLabel = "recoveries"; }
+  
     return `<div class="tip-country">${d.country} &ndash; Day ${d.dayCounter}</div>
-            <div class="tip-details" style="border-bottom: solid 1px black; padding-bottom: 2px;"><b>${d.cases.toLocaleString()}</b> confirmed cases${s2} on ${d.date} (<b>${d.dayCounter}</b> days after reaching ${chart.y0} cases${s2})</div>
+            <div class="tip-details" style="border-bottom: solid 1px black; padding-bottom: 2px;"><b>${d.cases.toLocaleString()}</b> ${dataLabel}${s2} on ${d.date} (<b>${d.dayCounter}</b> days after reaching ${chart.y0} ${dataLabel}${s2})</div>
             <div class="tip-details"><i>Avg. geometric growth: <b>${geometicGrowth.toFixed(2)}x</b> /day</i></div>`;
   }
 };
 
 var render = function(chart) {
   var maxDayRendered = chart.xMax;
-  var margin = { top: 10, right: 20, bottom: 40, left: 80 };
+  var margin = { top: 10, right: 20, bottom: 40, left: 60 };
 
   var cur_width = $("#sizer").width();
   _client_width = cur_width;
@@ -519,12 +546,30 @@ var render = function(chart) {
     //.attr("alignment-baseline", "middle")    
     .text((!isSmall) ? "1.35x daily growth" : "1.35x daily");
 
+  var xAxisLabel = `Days since ${chart.y0} `
+  if (chart.dataSelection == 'cases') { xAxisLabel += "case"; if (chart.y0 != 1) { xAxisLabel += "s"; }}
+  else if (chart.dataSelection == 'active') { xAxisLabel += "active case"; if (chart.y0 != 1) { xAxisLabel += "s"; }}
+  else if (chart.dataSelection == 'deaths') { xAxisLabel += "death"; if (chart.y0 != 1) { xAxisLabel += "s"; } }
+  else if (chart.dataSelection == 'recovered') { xAxisLabel += "recover"; if (chart.y0 != 1) { xAxisLabel += "ies"; } else { xAxisLabel += "y"; }}
+  if (chart.normalizePopulation) {
+    xAxisLabel += "/1m people";
+  }
+
   svg.append("text")
      .attr("x", width - 5)
      .attr("y", height - 5)
      .attr("class", "axis-title")
      .attr("text-anchor", "end")
-     .text( (chart.normalizePopulation) ? `Days since ${chart.y0} case /1m people` : "Days since " + chart.y0 + "+ cases");
+     .text(xAxisLabel);
+
+  var yAxisLabel = "";
+  if (chart.dataSelection == 'cases') { yAxisLabel += "Confirmed Cases"; }
+  else if (chart.dataSelection == 'active') { yAxisLabel += "Active Cases"; }
+  else if (chart.dataSelection == 'deaths') { yAxisLabel += "COVID-19 Deaths"; }
+  else if (chart.dataSelection == 'recovered') { yAxisLabel += "Recoveries" }
+  if (chart.normalizePopulation) {
+    yAxisLabel += "/1m people";
+  }
 
   svg.append("text")
      .attr("transform", "rotate(-90)")
@@ -532,7 +577,7 @@ var render = function(chart) {
      .attr("y", 15)
      .attr("class", "axis-title")
      .attr("text-anchor", "end")
-     .text( (chart.normalizePopulation) ? "Confirmed Cases /1m people" : "Confirmed Cases of COVID-19");
+     .text(yAxisLabel);
 
   svg.append("text")
     .attr("x", width)
