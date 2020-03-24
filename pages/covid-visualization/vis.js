@@ -1,4 +1,5 @@
 var _rawData = null;
+var _popData = null;
 var dateColumns = [];
 var _client_width = -1;
 
@@ -11,6 +12,8 @@ $(window).resize(function () {
     if (_client_width != new_width) {
       render( charts['countries'] );
       render( charts['states'] );
+      render( charts['countries-normalized'] );
+      render( charts['states-normalized'] );
     }
   }
 });
@@ -80,6 +83,7 @@ var reducer_byUSstate = function(result, value, key) {
   state = value["Province/State"];
 
   if (country != "United States") { return result; }
+  if (state.indexOf("Princess") != -1) { return result; }
   if (state.indexOf(",") != -1 && state.length > 2) {
     var abbr = state[ state.length - 2 ] + state[ state.length - 1 ];
     state = stateDict[abbr];
@@ -117,25 +121,57 @@ var reducer_byCountry = function(result, value, key) {
 };
 
 
+
 var charts = {
   'countries': {
     reducer: reducer_byCountry,
     scale: "log",
     highlight: "United States",
     y0: 100,
-    xCap: 40,
+    xCap: 25,
     id: "chart-countries",
+    normalizePopulation: false,
+    show: 40,
+    sort: function (d) { return -d.maxCases; },
     xMax: null, yMax: null, data: null
   },
   'states': {
     reducer: reducer_byUSstate,
     scale: "log",
-    highlight: "New York",
+    highlight: "Illinois",
     y0: 20,
     xCap: 40,
     id: "chart-states",
+    normalizePopulation: false,
+    show: 9999,
+    sort: function (d) { return -d.maxCases; },
     xMax: null, yMax: null, data: null
-  }
+  },
+
+  'countries-normalized': {
+    reducer: reducer_byCountry,
+    scale: "log",
+    highlight: "United States",
+    y0: 1,
+    xCap: 25,
+    id: "chart-countries-normalized",
+    normalizePopulation: "country",
+    show: 40,
+    sort: function (d) { return -d.maxCases + -(d.pop / 1e6); },
+    xMax: null, yMax: null, data: null
+  },
+  'states-normalized': {
+    reducer: reducer_byUSstate,
+    scale: "log",
+    highlight: "Illinois",
+    y0: 1,
+    xCap: 40,
+    id: "chart-states-normalized",
+    normalizePopulation: "state",
+    show: 9999,
+    sort: function (d) { return -d.maxCases; },
+    xMax: null, yMax: null, data: null
+  },
 };
 
 var findNextExp = function(x) {
@@ -145,68 +181,11 @@ var findNextExp = function(x) {
   else { return pow10; }
 };
 
+var prep_data = function(chart) {
+  var caseData = chart.fullData;
 
-var process_data = function(data, chart) {
-  var agg = _.reduce(data, chart.reducer, {});
-  console.log(agg);
-
-  var caseData = [];
-  var maxDayCounter = 0;
-  
-  for (var country in agg) {
-    dayCounter = -1;
-    maxCases = 0;
-    countryData = [];
-    for (const date of dateColumns) {
-      // Start counting days only after the first day w/ 100 cases:
-      if (dayCounter == -1 && agg[country][date] >= chart.y0) {
-        dayCounter = 0;
-
-        if (country == "China") {
-          // Add in missing early data, sourced from Wikipedia
-          if (dateColumns.indexOf("1/18/20") == -1) { countryData.push({ country: country, dayCounter: dayCounter++, date: "1/18/20", cases: 121 }); }
-          if (dateColumns.indexOf("1/19/20") == -1) { countryData.push({ country: country, dayCounter: dayCounter++, date: "1/19/20", cases: 198 }); }
-          if (dateColumns.indexOf("1/20/20") == -1) { countryData.push({ country: country, dayCounter: dayCounter++, date: "1/20/20", cases: 291 }); }
-          if (dateColumns.indexOf("1/21/20") == -1) { countryData.push({ country: country, dayCounter: dayCounter++, date: "1/21/20", cases: 440 }); }
-        }
-      }
-      
-      // Once we start counting days, add data
-      if (dayCounter > -1) {
-        var cases = agg[country][date];
-
-        countryData.push({
-          country: country,
-          dayCounter: dayCounter,
-          date: date,
-          cases: cases
-        });
-        if (cases > maxCases) { maxCases = cases; }
-
-        dayCounter++;
-      }
-    }
-
-    if (dayCounter > 0) {
-      caseData.push({
-        country: country,
-        data: countryData,
-        maxCases: maxCases,
-        maxDay: dayCounter - 1
-      });
-
-      if (dayCounter > maxDayCounter) {
-        maxDayCounter = dayCounter;
-      }
-    }
-  }
-  
-
-  caseData = _.sortBy(caseData, function (d) { return -d.maxCases });
-  caseData = _.take(caseData, 20);
-
+  if (chart.show < 9999) { caseData = _.take(caseData, chart.show); }
   var countries = _.map(caseData, 'country').sort();
-
 
   var $highlight = $("#highlight-" + chart.id);
   $highlight.html("");
@@ -221,16 +200,103 @@ var process_data = function(data, chart) {
     render(chart);
   });
 
-
-  chart.yMax = findNextExp(caseData[0].maxCases);
-  chart.xMax = maxDayCounter;
-  if (chart.xMax > 40) { chart.xMax = 40; }
   chart.data = caseData;
-
   return chart;
 };
 
 
+var process_data = function(data, chart) {
+  var agg = _.reduce(data, chart.reducer, {});
+
+  var caseData = [];
+  var maxDayCounter = 0;  
+  
+  for (var country in agg) {
+    var popSize = -1;
+    if (chart.normalizePopulation) {
+      popSize = _popData[chart.normalizePopulation][country];
+
+      if (!popSize && location.hostname === "localhost") {
+        console.log("Missing " + chart.normalizePopulation + ": " + country);
+      }
+    } 
+
+    dayCounter = -1;
+    maxCases = 0;
+    countryData = [];
+    for (const date of dateColumns) {
+      // Start counting days only after the first day w/ 100 cases:
+      var cases = agg[country][date];
+      if (chart.normalizePopulation) { cases = (cases / popSize) * 1e6; }
+
+      if (dayCounter == -1 && cases >= chart.y0) {
+        dayCounter = 0;
+
+        if (country == "China") {
+          var factor = 1;
+          if (chart.normalizePopulation) { factor = 1e6 / popSize; }
+
+          // Add in missing early data, sourced from Wikipedia
+          if (121 * factor >= chart.y0) {
+            if (dateColumns.indexOf("1/18/20") == -1) { countryData.push({ country: country, dayCounter: dayCounter++, date: "1/18/20", cases: 121 * factor }); }
+          }
+          if (198 * factor >= chart.y0) {
+            if (dateColumns.indexOf("1/19/20") == -1) { countryData.push({ country: country, dayCounter: dayCounter++, date: "1/19/20", cases: 198 * factor }); }
+          }
+          if (291 * factor >= chart.y0) {
+            if (dateColumns.indexOf("1/20/20") == -1) { countryData.push({ country: country, dayCounter: dayCounter++, date: "1/20/20", cases: 291 * factor }); }
+          }
+          if (440 * factor >= chart.y0) {
+            if (dateColumns.indexOf("1/21/20") == -1) { countryData.push({ country: country, dayCounter: dayCounter++, date: "1/21/20", cases: 440 * factor }); }
+          }
+
+          
+        }
+      }
+      
+      // Once we start counting days, add data
+      if (dayCounter > -1) {
+        countryData.push({
+          pop: popSize,
+          country: country,
+          dayCounter: dayCounter,
+          date: date,
+          cases: cases
+        });
+        if (cases > maxCases) { maxCases = cases; }
+
+        dayCounter++;
+      }
+    }
+
+    if (dayCounter > 0) {
+      caseData.push({
+        pop: popSize,
+        country: country,
+        data: countryData,
+        maxCases: maxCases,
+        maxDay: dayCounter - 1
+      });
+
+      if (dayCounter > maxDayCounter) {
+        maxDayCounter = dayCounter + 2;
+      }
+    }
+  }
+  
+  caseData = _.sortBy(caseData, chart.sort);
+  chart.fullData = caseData;
+
+  casesMax = _.sortBy(caseData, function(d) { return -d.maxCases; } )[0];
+  console.log(caseData);
+  console.log(casesMax);
+  chart.yMax = findNextExp(casesMax.maxCases);
+
+  chart.xMax = maxDayCounter;
+  if (chart.xMax > 40) { chart.xMax = 40; }
+
+  return prep_data(chart);
+};
 
 
 
@@ -247,25 +313,71 @@ $(function() {
       chart.scale = value;
       render(chart);
     }
-  })
+  });
 
-  var x = d3.csv("time_series_19-covid-Confirmed.csv", function (row) {
+  $(".filter-select").change(function (e) {
+    console.log("Filter select;")
+    var chartId = $(e.target).data("chart");
+    var chart = charts[chartId];
+    
+    chart.show = $(e.target).val();
+    prep_data(chart);
+    render(chart);
+  });
+
+
+
+  var x = d3.csv("time_series_19-covid-Confirmed.csv?d=20200322", function (row) {
       var country = row["Country/Region"];
       if (country == "US") { country = "United States"; }
-      if (country == "Korea, South") { country = "South Korea"; }
+      else if (country == "Korea, South") { country = "South Korea"; }
+      else if (country == "Taiwan*") { country = "Taiwan"; }
+      else if (country == "Bahamas, The") { country = "Bahamas"; }
+      else if (country == "Gambia, The") { country = "Gambia"; }
+      else if (country == "The Bahamas") { country = "Bahamas"; }
+      else if (country == "The Gambia") { country = "Gambia"; }
+      else if (country == "Cabo Verde") { country = "Cape Verde"; }
+      else if (country == "Congo (Brazzaville)") { country = "Republic of the Congo"; }
       row["Country/Region"] = country;
+
+      var state = row["Province/State"];
+      if (state == "United States Virgin Islands") { state = "Virgin Islands"; }
+      row["Province/State"] = state;
 
       return row;
     })
     .then(function (data) {
-      _rawData = data;
-      dateColumns = data.columns.slice(4);
 
-      process_data(data, charts["countries"]);
-      render(charts["countries"]);
+      d3.csv("wikipedia-population.csv", function (row) {
+        row["Population"] = (+row["Population"]);
+        return row;
+      })
+      .then(function (populationData) {
+        _rawData = data;
 
-      process_data(data, charts["states"]);
-      render(charts["states"]);
+        _popData = {country: {}, state: {}};
+        for (var pop of populationData) {
+          if (pop.Country) { _popData.country[pop.Country] = pop.Population; }
+          if (pop.State) { _popData.state[pop.State] = pop.Population; }
+        }
+        //console.log(_popData);
+        //_popData = populationData;
+
+        dateColumns = data.columns.slice(4);
+  
+        process_data(data, charts["countries"]);
+        render(charts["countries"]);
+  
+        process_data(data, charts["states"]);
+        render(charts["states"]);
+        
+        process_data(data, charts["countries-normalized"]);
+        render(charts["countries-normalized"]);
+  
+        process_data(data, charts["states-normalized"]);
+        render(charts["states-normalized"]);
+
+      });
 
     })
     .catch(function (err) {
@@ -277,10 +389,13 @@ $(function() {
 
 var tip_html = function(chart) {
   return function(d, i) {
-    var geometicGrowth = Math.pow(d.cases / 100, 1 / d.dayCounter);
+    var geometicGrowth = Math.pow(d.cases / chart.y0, 1 / d.dayCounter);
+
+    var s2 = "";
+    if (chart.normalizePopulation) { s2 = " per 1,000,000 people"; }
 
     return `<div class="tip-country">${d.country} &ndash; Day ${d.dayCounter}</div>
-            <div class="tip-details" style="border-bottom: solid 1px black; padding-bottom: 2px;"><b>${d.cases.toLocaleString()}</b> confirmed cases on ${d.date} (<b>${d.dayCounter}</b> days after reaching ${chart.y0} cases)</div>
+            <div class="tip-details" style="border-bottom: solid 1px black; padding-bottom: 2px;"><b>${d.cases.toLocaleString()}</b> confirmed cases${s2} on ${d.date} (<b>${d.dayCounter}</b> days after reaching ${chart.y0} cases${s2})</div>
             <div class="tip-details"><i>Avg. geometric growth: <b>${geometicGrowth.toFixed(2)}x</b> /day</i></div>`;
   }
 };
@@ -343,8 +458,20 @@ var render = function(chart) {
      .attr("class", "grid")
      .call(x_grid);
 
+  // Have tickValues at 1, 5, 10, 50, 100, ...
+  var tickValue = 1;
+  var tickValueIncrease = 5; 
+  var tickValues = [];
+  while (tickValue <= 1e6) {
+    if (tickValue >= chart.y0) { tickValues.push(tickValue); }
+    tickValue *= tickValueIncrease;
+
+    if (tickValueIncrease == 5) { tickValueIncrease = 2; }
+    else { tickValueIncrease = 5; }
+  }
+
   var y_axis = d3.axisLeft(casesScale).tickFormat(d3.format("0,")); 
-  if (chart.scale == "log") { y_axis.tickValues([100, 500, 1000, 5000, 10000, 50000, 100000]); }
+  if (chart.scale == "log") { y_axis.tickValues(tickValues); }
   
   svg.append('g')
     .attr("class", "axis")
@@ -397,7 +524,7 @@ var render = function(chart) {
      .attr("y", height - 5)
      .attr("class", "axis-title")
      .attr("text-anchor", "end")
-     .text("Days since " + chart.y0 + "+ cases");
+     .text( (chart.normalizePopulation) ? `Days since ${chart.y0} case /1m people` : "Days since " + chart.y0 + "+ cases");
 
   svg.append("text")
      .attr("transform", "rotate(-90)")
@@ -405,7 +532,7 @@ var render = function(chart) {
      .attr("y", 15)
      .attr("class", "axis-title")
      .attr("text-anchor", "end")
-     .text("Confirmed Cases of COVID-19");
+     .text( (chart.normalizePopulation) ? "Confirmed Cases /1m people" : "Confirmed Cases of COVID-19");
 
   svg.append("text")
     .attr("x", width)

@@ -1,5 +1,8 @@
 ---
 layout: bare
+
+social-img: http://91-divoc.com/pages/covid-visualization/img.png
+title: An interactive visualization of the exponential spread of COVID-19
 ---
 
 <header class="container-fluid header-small">
@@ -40,31 +43,45 @@ layout: bare
         </ul>
       </li>
       <li>
-        Finally, these graphs are not just images.  <b>Hover over any data point</b> to see the data behind it!
+        Finally, these graphs are not just images.  <b>Hover over any data point</b> to see the data behind it.
       </li>
     </ul>
+
+    This visualization is <b>updated daily</b> with the John Hopkins CSSE data, which is typically released around 7:00pm Central.
   </div>
 
   <div id="sizer"></div>
-
+  <!-- -->
   <div class="chart-header" style="margin-top: 20px;">
     <h2>COVID-19 Cases by Country</h2>
   </div>
   <div id="chart-countries" class="chart-viz"></div>
   <div class="chart-footer">
     <div class="row">
-      <div class="col-md-6" style="padding-bottom: 3px;">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <div class="col-md-6">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
           <div class="input-group-prepend">
             <span class="input-group-text">Highlight Country:</span>
           </div>
           <select class="form-control" id="highlight-chart-countries">
           </select>
         </div>
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Filter:</span>
+          </div>
+          <select class="form-control filter-select" id="filter-chart-countries" data-chart="countries">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="40" selected>40</option>
+            <option value="9999">All</option>
+          </select>
+        </div>
       </div>
 
       <div class="col-md-6 text-right">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
           <div class="input-group-prepend">
             <span class="input-group-text">Scale:</span>
           </div>          
@@ -78,22 +95,33 @@ layout: bare
       </div>
     </div>
   </div>
-
-
+  <!-- -->
   <div class="chart-header" style="margin-top: 20px;">
-    <h2>COVID-19 Cases by US States</h2>
+    <h2>COVID-19 Cases by US States/Territories</h2>
   </div>
   <div id="chart-states" class="chart-viz"></div>
   <div class="chart-footer">
     <div class="row">
-      <div class="col-md-6" style="padding-bottom: 3px;">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <div class="col-md-6">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
           <div class="input-group-prepend">
             <span class="input-group-text">Highlight State:</span>
           </div>
           <select class="form-control" id="highlight-chart-states">
           </select>
         </div>
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Filter:</span>
+          </div>
+          <select class="form-control filter-select" id="filter-chart-states" data-chart="states">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="40">40</option>
+            <option value="9999" selected>All</option>
+          </select>
+        </div>        
       </div>
 
       <div class="col-md-6 text-right">
@@ -111,13 +139,124 @@ layout: bare
       </div>
     </div>
   </div>
+</div>
+
+<div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1); margin-top: 15px;">
+</div>
+
+<div class="container viz">
+  <div class="alert alert-secondary" style="margin-top: 10px; padding-top: 20px;">
+    <h4>Same Data -- Normalized by Population</h4>
+
+    The visualizations below use the exact same COVID-19 data from John Hopkins except that the data is now normalized by dividing
+    by the country or state population.
+    <ul>
+      <li>
+        The data is presented as <b>confirmed cases per 1,000,000 people</b>, based on the <a href="https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population" target="_blank">country</a> or <a href="https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States_by_population">US state/territory</a> population found on Wikipedia.
+      </li>
+    </ul>
+  </div>
+
+  <!-- -->
+  <div class="chart-header" style="margin-top: 20px;">
+    <h2>COVID-19 Cases by Country, normalized by country population</h2>
+  </div>
+  <div id="chart-countries-normalized" class="chart-viz"></div>
+  <div class="chart-footer">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Highlight Country:</span>
+          </div>
+          <select class="form-control" id="highlight-chart-countries-normalized">
+          </select>
+        </div>
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Filter:</span>
+          </div>
+          <select class="form-control filter-select" id="filter-chart-countries-normalized" data-chart="countries-normalized">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="40" selected>40</option>
+            <option value="9999">All</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6 text-right">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Scale:</span>
+          </div>          
+          <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="countries-normalized">
+            <input type="radio" name="scale" autocomplete="off" checked> Log Scale
+          </label>
+          <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="countries-normalized">
+            <input type="radio" name="scale" autocomplete="off"> Linear Scale
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- -->
+  <div class="chart-header" style="margin-top: 20px;">
+    <h2>COVID-19 Cases by US States/Territories, normalized by population</h2>
+  </div>
+  <div id="chart-states-normalized" class="chart-viz"></div>
+  <div class="chart-footer">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Highlight State:</span>
+          </div>
+          <select class="form-control" id="highlight-chart-states-normalized">
+          </select>
+        </div>
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Filter:</span>
+          </div>
+          <select class="form-control filter-select" id="filter-chart-states-normalized" data-chart="states-normalized">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="40">40</option>
+            <option value="9999" selected>All</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6 text-right">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Scale:</span>
+          </div>          
+          <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="states-normalized">
+            <input type="radio" name="scale" autocomplete="off" checked> Log Scale
+          </label>
+          <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="states-normalized">
+            <input type="radio" name="scale" autocomplete="off"> Linear Scale
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- -->
   
 </div>
 
 <div class="container-fluid viz" style="margin-top: 20px;">
   <div class="container lead">
     <div><b>More Details</b>: <a href="/">91-DIVOC #01 - COVID-19 Dataset</a></div>
-    <div><b>Dataset</b>: <a href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series" target="_blank">2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns Hopkins CSSE</a></div>
+    <div><b>COVID-19 Dataset</b>: <a href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series" target="_blank">2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns Hopkins CSSE</a></div>
+    <div><b>Population Datasets</b>:
+      <a href="https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population">Wikipedia, list of countries</a> and 
+      <a href="https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States_by_population">Wikipedia, list of US states</a>
+    </div>
   </div>
 </div>
 
@@ -130,7 +269,7 @@ layout: bare
     <div style="font-size: 12px;">
       <a href="https://waf.cs.illinois.edu">Website</a> | 
       <a href="https://www.instagram.com/profwade/">Instagram</a> |
-      <a href="https://www.twitter.com/profwade_/">Instagram</a> |
+      <a href="https://www.twitter.com/profwade_/">Twitter</a> |
       <a href="https://www.github.com/wadefagen/">GitHub</a>
     </div>
   </div>
