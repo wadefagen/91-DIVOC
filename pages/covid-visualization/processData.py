@@ -41,5 +41,40 @@ for filename in os.listdir(path):
 
   df = df.append(processDate(date))
 
+
+# == Replace Data to Match Population ==
+countryReplacement = {
+  "US": "United States",
+  "Korea, South": "South Korea",
+  "Taiwan*": "Taiwan",
+  "Bahamas, The": "Bahamas",
+  "The Bahamas": "Bahamas",
+  "Gambia, The": "Gambia",
+  "The Gambia": "Gambia",
+  "Cabo Verde": "Cape Verde",
+  "Mainland China": "China",
+  "Iran (Islamic Republic of)": "Iran",
+  "Republic of Korea": "South Korea",
+  "UK": "United Kingdom"  
+}
+
+stateReplacement = {
+  "United States Virgin Islands": "Virgin Islands"
+}
+
+for key in countryReplacement:
+  old = key
+  new = countryReplacement[key]
+  df["Country_Region"] = df["Country_Region"].replace(old, new)
+
+for key in stateReplacement:
+  old = key
+  new = stateReplacement[key]
+  df["Province_State"] = df["Province_State"].replace(old, new)
+
+
+# == Add Population ==
+
+
 #print(df)
 df.to_csv('jhu-data.csv')

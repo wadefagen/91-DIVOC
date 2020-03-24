@@ -301,6 +301,61 @@ var process_data = function(data, chart) {
   return prep_data(chart);
 };
 
+var covidData_promise = d3.csv("jhu-data.csv?v=2", function (row) {
+  row["Active"] = +row["Active"];
+  row["Confirmed"] = +row["Confirmed"];
+  row["Recovered"] = +row["Recovered"];
+  row["Deaths"] = +row["Deaths"];
+  return row;
+});
+
+var populationData_promise = d3.csv("wikipedia-population.csv", function (row) {
+  row["Population"] = (+row["Population"]);
+  return row;
+});
+
+
+var _dataReady = false, _pageReady = false;
+
+
+var tryRender = function () {
+  if (_dataReady && _pageReady) {
+    process_data(_rawData, charts["countries"]);
+    render(charts["countries"]);
+
+    process_data(_rawData, charts["states"]);
+    render(charts["states"]);
+    
+    process_data(_rawData, charts["countries-normalized"]);
+    render(charts["countries-normalized"]);
+
+    process_data(_rawData, charts["states-normalized"]);
+    render(charts["states-normalized"]);  
+  }
+}
+
+
+
+Promise.all([covidData_promise, populationData_promise])
+  .then(function(result) {
+    data = result[0];
+    populationData = result[1];
+    
+    _rawData = data;
+
+    _popData = {country: {}, state: {}};
+    for (var pop of populationData) {
+      if (pop.Country) { _popData.country[pop.Country] = pop.Population; }
+      if (pop.State) { _popData.state[pop.State] = pop.Population; }
+    }
+
+    _dataReady = true;
+    tryRender();
+  })
+  .catch(function (err) {
+    console.error(err);
+    alert("Failed to load data.");
+  });
 
 
 
@@ -339,72 +394,8 @@ $(function() {
     render(chart);
   });
 
-  const country_replacement = {
-    "US": "United States",
-    "Korea, South": "South Korea",
-    "Taiwan*": "Taiwan",
-    "Bahamas, The": "Bahamas",
-    "The Bahamas": "Bahamas",
-    "Gambia, The": "Gambia",
-    "The Gambia": "Gambia",
-    "Cabo Verde": "Cape Verde",
-    "Mainland China": "China",
-    "Iran (Islamic Republic of)": "Iran",
-    "Republic of Korea": "South Korea",
-    "UK": "United Kingdom",
-  };
-
-  var x = d3.csv("jhu-data.csv", function (row) {
-      row["Active"] = +row["Active"];
-      row["Confirmed"] = +row["Confirmed"];
-      row["Recovered"] = +row["Recovered"];
-      row["Deaths"] = +row["Deaths"];
-
-      var country = row["Country_Region"];
-      if (country in country_replacement) {
-        row["Country_Region"] = country_replacement[country];
-      }
-
-      var state = row["Province_State"];
-      if (state == "United States Virgin Islands") { state = "Virgin Islands"; }
-      row["Province_State"] = state;
-
-      return row;
-    })
-    .then(function (data) {
-
-      d3.csv("wikipedia-population.csv", function (row) {
-        row["Population"] = (+row["Population"]);
-        return row;
-      })
-      .then(function (populationData) {
-        _rawData = data;
-
-        _popData = {country: {}, state: {}};
-        for (var pop of populationData) {
-          if (pop.Country) { _popData.country[pop.Country] = pop.Population; }
-          if (pop.State) { _popData.state[pop.State] = pop.Population; }
-        }
-
-        process_data(data, charts["countries"]);
-        render(charts["countries"]);
-  
-        process_data(data, charts["states"]);
-        render(charts["states"]);
-        
-        process_data(data, charts["countries-normalized"]);
-        render(charts["countries-normalized"]);
-  
-        process_data(data, charts["states-normalized"]);
-        render(charts["states-normalized"]);
-
-      });
-
-    })
-    .catch(function (err) {
-      console.error(err);
-      alert("Failed to load data.")
-    });
+  _pageReady = true;
+  tryRender();
 });
 
 
