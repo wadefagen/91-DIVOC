@@ -12,6 +12,11 @@
     {% if page.title %}<meta name="twitter:description" content="{{page.title}}" />{% endif %}
     {% if page.social-img %}<meta name="twitter:image" content="{{page.social-img}}" />{% endif %}
 
+    <meta property="og:title" content="{{site.title}}">
+    {% if page.title %}<meta property="og:description" content="{{page.title}}">{% endif %}
+    {% if page.social-img %}<meta property="og:image" content="{{page.social-img}}">{% endif %}
+    <meta property="og:url" content="http://91-divoc.com{{page.url}}">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono&display=swap" rel="stylesheet">
