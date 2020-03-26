@@ -90,6 +90,7 @@ title: An interactive visualization of the exponential spread of COVID-19
           <select class="form-control data-select" data-chart="countries">
             <option value="active">Active Cases</option>
             <option value="cases" selected>Confirmed Cases</option>
+            <option value="cases-daily">New Cases /Day</option>
             <option value="deaths">Deaths</option>
             <option value="recovered">Recovered </option>
           </select>
@@ -148,6 +149,7 @@ title: An interactive visualization of the exponential spread of COVID-19
           <select class="form-control data-select" data-chart="states">
             <option value="active">Active Cases</option>
             <option value="cases" selected>Confirmed Cases</option>
+            <option value="cases-daily">New Cases /Day</option>
             <option value="deaths">Deaths</option>
             <option value="recovered">Recovered </option>
           </select>
@@ -224,6 +226,7 @@ title: An interactive visualization of the exponential spread of COVID-19
           <select class="form-control data-select" data-chart="countries-normalized">
             <option value="active">Active Cases</option>
             <option value="cases" selected>Confirmed Cases</option>
+            <option value="cases-daily">New Cases /Day</option>
             <option value="deaths">Deaths</option>
             <option value="recovered">Recovered </option>
           </select>
@@ -269,7 +272,7 @@ title: An interactive visualization of the exponential spread of COVID-19
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="40">40</option>
-            <option value="9999" selected>None</option>
+            <option value="9999" selected>All</option>
           </select>
         </div>
       </div>
@@ -282,6 +285,7 @@ title: An interactive visualization of the exponential spread of COVID-19
           <select class="form-control data-select" data-chart="states-normalized">
             <option value="active">Active Cases</option>
             <option value="cases" selected>Confirmed Cases</option>
+            <option value="cases-daily">New Cases /Day</option>
             <option value="deaths">Deaths</option>
             <option value="recovered">Recovered </option>
           </select>
@@ -316,8 +320,10 @@ title: An interactive visualization of the exponential spread of COVID-19
   </div>
 </div>
 
-<style>.social-hide { display: none; }</style>
-<img class="social-hide" itemprop="image" src="img.png">
+<noscript>
+  <style>.social-hide { display: none; }</style>
+  <img class="social-hide" itemprop="image" src="img.png">
+</noscript>
 
 <footer class="container-fluid">
   <div class="container" style="text-align: right;">
@@ -339,5 +345,4 @@ title: An interactive visualization of the exponential spread of COVID-19
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js" integrity="sha256-VeNaFBVDhoX3H+gJ37DpT/nTuZTdjYro9yBruHjVmoQ=" crossorigin="anonymous"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="d3-tip.js"></script>
-<script src="updated.js"></script>
 <script src="vis.js?v=20200323"></script>

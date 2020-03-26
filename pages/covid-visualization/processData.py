@@ -2,6 +2,77 @@
 path = '../../../../COVID-19/csse_covid_19_data\csse_covid_19_daily_reports/'
 
 
+stateTranslation = [
+  ['Arizona', 'AZ'],
+  ['Alabama', 'AL'],
+  ['Alaska', 'AK'],
+  ['Arkansas', 'AR'],
+  ['California', 'CA'],
+  ['Colorado', 'CO'],
+  ['Connecticut', 'CT'],
+  ['Delaware', 'DE'],
+  ['Florida', 'FL'],
+  ['Georgia', 'GA'],
+  ['Hawaii', 'HI'],
+  ['Idaho', 'ID'],
+  ['Illinois', 'IL'],
+  ['Indiana', 'IN'],
+  ['Iowa', 'IA'],
+  ['Kansas', 'KS'],
+  ['Kentucky', 'KY'],
+  ['Louisiana', 'LA'],
+  ['Maine', 'ME'],
+  ['Maryland', 'MD'],
+  ['Massachusetts', 'MA'],
+  ['Michigan', 'MI'],
+  ['Minnesota', 'MN'],
+  ['Mississippi', 'MS'],
+  ['Missouri', 'MO'],
+  ['Montana', 'MT'],
+  ['Nebraska', 'NE'],
+  ['Nevada', 'NV'],
+  ['New Hampshire', 'NH'],
+  ['New Jersey', 'NJ'],
+  ['New Mexico', 'NM'],
+  ['New York', 'NY'],
+  ['North Carolina', 'NC'],
+  ['North Dakota', 'ND'],
+  ['Ohio', 'OH'],
+  ['Oklahoma', 'OK'],
+  ['Oregon', 'OR'],
+  ['Pennsylvania', 'PA'],
+  ['Rhode Island', 'RI'],
+  ['South Carolina', 'SC'],
+  ['South Dakota', 'SD'],
+  ['Tennessee', 'TN'],
+  ['Texas', 'TX'],
+  ['Utah', 'UT'],
+  ['Vermont', 'VT'],
+  ['Virginia', 'VA'],
+  ['Washington', 'WA'],
+  ['West Virginia', 'WV'],
+  ['Wisconsin', 'WI'],
+  ['Wyoming', 'WY'],
+]
+
+stateDict = {}
+
+for el in stateTranslation:
+  stateDict[ el[1] ] = el[0]
+
+
+def translateState(row):
+  state = str(row["Province_State"])
+  if ("," in state):
+    if state == "Virgin Islands, U.S.":
+      row["Province_State"] = "Virgin Islands"
+    else:
+      stateCode = state[-2:]
+      if stateCode in stateDict:
+        row["Province_State"] = stateDict[stateCode]
+
+  return row
+
 def processDate(date):
   print(date)
   df = pd.read_csv(path + date + ".csv")
@@ -13,6 +84,9 @@ def processDate(date):
     })
 
   df = df[ df['Province_State'].str.contains('Diamond Princess') != True ]
+
+  df = df.apply( translateState, axis=1 )
+
 
   #print(df['Province_State'].str.contains('Diamond Princess'))
   stateData = df.groupby(['Country_Region', 'Province_State']).agg('sum').reset_index()
@@ -74,7 +148,7 @@ for key in stateReplacement:
 
 
 # == Add Population ==
-
+df = df.astype({"Confirmed": "int32", "Recovered": "int32", "Active": "int32", "Deaths": "int32"})
 
 #print(df)
-df.to_csv('jhu-data.csv')
+df.to_csv('jhu-data.csv', index=False)
