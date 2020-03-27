@@ -2,7 +2,7 @@ var _rawData = null;
 var _popData = null;
 var dateColumns = [];
 var _client_width = -1;
-
+var _intial_load = true;
 
 // Resize
 $(window).resize(function () {
@@ -100,7 +100,7 @@ var charts = {
     xCap: 25,
     id: "chart-countries",
     normalizePopulation: false,
-    show: 40,
+    show: 50,
     sort: function (d) { return -d.maxCases; },
     dataSelection: 'cases',
     showDelta: false,
@@ -130,8 +130,8 @@ var charts = {
     xCap: 25,
     id: "chart-countries-normalized",
     normalizePopulation: "country",
-    show: 40,
-    sort: function (d) { return -d.maxCases + -(d.pop / 1e6); },
+    show: 50,
+    sort: function (d) { return -d.maxCases + -(d.pop / 1e2); },
     dataSelection: 'cases',
     dataSelection_y0: { 'active': 1, 'cases': 1, 'deaths': 1, 'recovered': 1 },
     xMax: null, yMax: null, data: null
@@ -156,8 +156,12 @@ var charts = {
 var findNextExp = function(x) {
   var pow10 = Math.pow(10, Math.ceil( Math.log10(x) ));
 
-  if (x < pow10 / 2) { return pow10 / 2; }
-  else { return pow10; }
+  var val;
+  if (x < pow10 / 2) { val = pow10 / 2; }
+  else { val = pow10; }
+
+  if (x > 0.8 * val) { val *= 1.5; }
+  return val;
 };
 
 var prep_data = function(chart) {
@@ -165,6 +169,14 @@ var prep_data = function(chart) {
 
   if (chart.show < 9999) { caseData = _.take(caseData, chart.show); }
   var countries = _.map(caseData, 'country').sort();
+
+  // ensure highlighted country shows when new page load with cookie
+  if (_intial_load && countries.indexOf(chart.highlight) == -1) {
+    chart.show = 9999;
+    caseData = chart.fullData;
+    countries = _.map(caseData, 'country').sort();
+    $("#filter-" + chart.id).val(9999);
+  }
 
   var $highlight = $("#highlight-" + chart.id);
   $highlight.html("");
@@ -186,7 +198,6 @@ var prep_data = function(chart) {
 
     if (chart.id.indexOf("countries") != -1) { setCookie('country', val, 30); }
     if (chart.id.indexOf("states") != -1) { setCookie('state', val, 30); }
-
     render(chart);
   });
 
@@ -289,7 +300,7 @@ var process_data = function(data, chart) {
 };
 
 var _dateUpdated = "03/26/2020";
-var covidData_promise = d3.csv("jhu-data.csv?d=20200325", function (row) {
+var covidData_promise = d3.csv("jhu-data.csv?d=20200326", function (row) {
   row["Active"] = +row["Active"];
   row["Confirmed"] = +row["Confirmed"];
   row["Recovered"] = +row["Recovered"];
@@ -318,7 +329,9 @@ var tryRender = function () {
     render(charts["countries-normalized"]);
 
     process_data(_rawData, charts["states-normalized"]);
-    render(charts["states-normalized"]);  
+    render(charts["states-normalized"]);
+
+    _intial_load = false;
   }
 }
 
@@ -543,7 +556,6 @@ var render = function(chart) {
 
 
   // Add Data
-
   // Create 35%-line
   var cases = scale_y0, day = 0;
   var pctLine = [];
@@ -568,14 +580,17 @@ var render = function(chart) {
       .y(function (d) { return casesScale(d.cases); })
     );
 
+  growthLineLabel_x = daysScale( Math.log( chart.yMax / chart.y0 ) ) / Math.log( 1.35 ) + 2;
   svg.append("text")
     .attr("fill", colorScale(i))
     .attr("class", "label-country")
-    .attr("x", daysScale( Math.log( chart.yMax / chart.y0 ) ) / Math.log( 1.35 ) + 2 )
+    .attr("x", growthLineLabel_x)
     .attr("y", casesScale( chart.yMax ) + 12 )
     .attr("fill", "black")
-    //.attr("alignment-baseline", "middle")    
-    .text((!isSmall) ? "1.35x daily growth" : "1.35x daily");
+    .text(function() {
+      if (growthLineLabel_x >= width - 50) { return ""; }
+      return (!isSmall) ? "1.35x daily growth" : "1.35x daily";
+    })
 
   var xAxisLabel = `Days since ${chart.y0} `
   if (chart.dataSelection == 'cases') { xAxisLabel += "case"; if (chart.y0 != 1) { xAxisLabel += "s"; }}

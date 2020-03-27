@@ -1220,7 +1220,7 @@ United States,Massachusetts,1,1,0,0,02-28-2020
 United States,Texas,1,0,1,0,02-28-2020
 United States,Washington,1,1,0,0,02-28-2020
 United States,Wisconsin,1,0,1,0,02-28-2020
- Azerbaijan,,1,0,1,0,02-28-2020
+Azerbaijan,,1,0,1,0,02-28-2020
 Afghanistan,,1,0,1,0,02-28-2020
 Algeria,,1,0,1,0,02-28-2020
 Australia,,15,11,4,0,02-28-2020
@@ -1372,7 +1372,7 @@ Brazil,,2,0,2,0,03-01-2020
 Cambodia,,1,1,0,0,03-01-2020
 Canada,,24,6,18,0,03-01-2020
 Croatia,,7,0,7,0,03-01-2020
-Czech Republic,,3,0,3,0,03-01-2020
+Czechia,,3,0,3,0,03-01-2020
 Denmark,,4,0,4,0,03-01-2020
 Dominican Republic,,1,0,1,0,03-01-2020
 Ecuador,,6,0,6,0,03-01-2020
@@ -1452,7 +1452,7 @@ Brazil,,2,0,2,0,03-02-2020
 Cambodia,,1,1,0,0,03-02-2020
 Canada,,27,6,21,0,03-02-2020
 Croatia,,7,0,7,0,03-02-2020
-Czech Republic,,3,0,3,0,03-02-2020
+Czechia,,3,0,3,0,03-02-2020
 Denmark,,4,0,4,0,03-02-2020
 Dominican Republic,,1,0,1,0,03-02-2020
 Ecuador,,6,0,6,0,03-02-2020
@@ -1542,7 +1542,7 @@ Cambodia,,1,1,0,0,03-03-2020
 Canada,,30,6,24,0,03-03-2020
 Chile,,1,0,1,0,03-03-2020
 Croatia,,9,0,9,0,03-03-2020
-Czech Republic,,5,0,5,0,03-03-2020
+Czechia,,5,0,5,0,03-03-2020
 Denmark,,6,0,6,0,03-03-2020
 Dominican Republic,,1,0,1,0,03-03-2020
 Ecuador,,7,0,7,0,03-03-2020
@@ -1634,7 +1634,7 @@ Cambodia,,1,1,0,0,03-04-2020
 Canada,,33,6,27,0,03-04-2020
 Chile,,1,0,1,0,03-04-2020
 Croatia,,10,0,10,0,03-04-2020
-Czech Republic,,8,0,8,0,03-04-2020
+Czechia,,8,0,8,0,03-04-2020
 Denmark,,10,0,10,0,03-04-2020
 Dominican Republic,,1,0,1,0,03-04-2020
 Ecuador,,10,0,10,0,03-04-2020
@@ -1737,7 +1737,7 @@ Cambodia,,1,1,0,0,03-05-2020
 Canada,,37,6,31,0,03-05-2020
 Chile,,4,0,4,0,03-05-2020
 Croatia,,10,0,10,0,03-05-2020
-Czech Republic,,12,0,12,0,03-05-2020
+Czechia,,12,0,12,0,03-05-2020
 Denmark,,10,0,10,0,03-05-2020
 Dominican Republic,,1,0,1,0,03-05-2020
 Ecuador,,13,0,13,0,03-05-2020
@@ -1854,7 +1854,7 @@ Chile,,4,0,4,0,03-06-2020
 Colombia,,1,0,1,0,03-06-2020
 Costa Rica,,1,0,1,0,03-06-2020
 Croatia,,11,0,11,0,03-06-2020
-Czech Republic,,18,0,18,0,03-06-2020
+Czechia,,18,0,18,0,03-06-2020
 Denmark,,23,1,22,0,03-06-2020
 Dominican Republic,,2,0,2,0,03-06-2020
 Ecuador,,13,0,13,0,03-06-2020
@@ -1929,7 +1929,7 @@ United Kingdom,,163,8,153,2,03-06-2020
 United States,,233,8,211,14,03-06-2020
 Ukraine,,1,0,1,0,03-06-2020
 United Arab Emirates,,29,5,24,0,03-06-2020
-Vatican City,,1,0,1,0,03-06-2020
+Holy See,,1,0,1,0,03-06-2020
 Vietnam,,16,16,0,0,03-06-2020
 United States,Arizona,5,1,4,0,03-07-2020
 United States,California,82,2,79,1,03-07-2020
@@ -1941,7 +1941,6 @@ United States,Grand Princess Cruise Ship,21,0,21,0,03-07-2020
 United States,Hawaii,1,0,1,0,03-07-2020
 United States,Illinois,6,2,4,0,03-07-2020
 United States,Indiana,1,0,1,0,03-07-2020
-United States,"Jackson County, OR ",1,0,1,0,03-07-2020
 United States,Kentucky,1,0,1,0,03-07-2020
 United States,Maryland,3,0,3,0,03-07-2020
 United States,Massachusetts,7,1,6,0,03-07-2020
@@ -1953,7 +1952,7 @@ United States,New Jersey,4,0,4,0,03-07-2020
 United States,New York,76,0,76,0,03-07-2020
 United States,North Carolina,2,0,2,0,03-07-2020
 United States,Oklahoma,1,0,1,0,03-07-2020
-United States,Oregon,5,0,5,0,03-07-2020
+United States,Oregon,6,0,6,0,03-07-2020
 United States,Pennsylvania,2,0,2,0,03-07-2020
 United States,Rhode Island,3,0,3,0,03-07-2020
 United States,South Carolina,2,0,2,0,03-07-2020
@@ -1983,7 +1982,7 @@ Chile,,4,0,4,0,03-07-2020
 Colombia,,1,0,1,0,03-07-2020
 Costa Rica,,1,0,1,0,03-07-2020
 Croatia,,12,0,12,0,03-07-2020
-Czech Republic,,19,0,19,0,03-07-2020
+Czechia,,19,0,19,0,03-07-2020
 Denmark,,23,1,22,0,03-07-2020
 Dominican Republic,,2,0,2,0,03-07-2020
 Ecuador,,13,0,13,0,03-07-2020
@@ -2061,7 +2060,7 @@ United Kingdom,,206,18,186,2,03-07-2020
 United States,,372,8,347,17,03-07-2020
 Ukraine,,1,0,1,0,03-07-2020
 United Arab Emirates,,45,7,38,0,03-07-2020
-Vatican City,,1,0,1,0,03-07-2020
+Holy See,,1,0,1,0,03-07-2020
 Vietnam,,18,16,2,0,03-07-2020
 United States,Arizona,5,1,4,0,03-08-2020
 United States,California,98,2,95,1,03-08-2020
@@ -2073,7 +2072,6 @@ United States,Grand Princess Cruise Ship,21,0,21,0,03-08-2020
 United States,Hawaii,1,0,1,0,03-08-2020
 United States,Illinois,7,2,5,0,03-08-2020
 United States,Indiana,2,0,2,0,03-08-2020
-United States,"Jackson County, OR ",2,0,2,0,03-08-2020
 United States,Kansas,1,0,1,0,03-08-2020
 United States,Kentucky,1,0,1,0,03-08-2020
 United States,Maryland,5,0,5,0,03-08-2020
@@ -2087,7 +2085,7 @@ United States,New Jersey,5,0,5,0,03-08-2020
 United States,New York,106,0,106,0,03-08-2020
 United States,North Carolina,2,0,2,0,03-08-2020
 United States,Oklahoma,1,0,1,0,03-08-2020
-United States,Oregon,12,0,12,0,03-08-2020
+United States,Oregon,14,0,14,0,03-08-2020
 United States,Pennsylvania,6,0,6,0,03-08-2020
 United States,Rhode Island,3,0,3,0,03-08-2020
 United States,South Carolina,2,0,2,0,03-08-2020
@@ -2122,7 +2120,7 @@ Chile,,8,0,8,0,03-08-2020
 Colombia,,1,0,1,0,03-08-2020
 Costa Rica,,5,0,5,0,03-08-2020
 Croatia,,12,0,12,0,03-08-2020
-Czech Republic,,31,0,31,0,03-08-2020
+Czechia,,31,0,31,0,03-08-2020
 Denmark,,35,1,34,0,03-08-2020
 Dominican Republic,,5,0,5,0,03-08-2020
 Ecuador,,14,0,14,0,03-08-2020
@@ -2179,7 +2177,7 @@ Philippines,,10,1,8,1,03-08-2020
 Poland,,11,0,11,0,03-08-2020
 Portugal,,30,0,30,0,03-08-2020
 Qatar,,15,0,15,0,03-08-2020
-Republic of Ireland,,21,0,21,0,03-08-2020
+Ireland,,21,0,21,0,03-08-2020
 Romania,,15,3,12,0,03-08-2020
 Russia,,17,3,14,0,03-08-2020
 Saint Barthelemy,,3,0,3,0,03-08-2020
@@ -2204,7 +2202,7 @@ United Kingdom,,273,18,252,3,03-08-2020
 United States,,492,8,463,21,03-08-2020
 Ukraine,,1,0,1,0,03-08-2020
 United Arab Emirates,,45,7,38,0,03-08-2020
-Vatican City,,1,0,1,0,03-08-2020
+Holy See,,1,0,1,0,03-08-2020
 Vietnam,,30,16,14,0,03-08-2020
 United States,Arizona,5,1,4,0,03-09-2020
 United States,California,104,2,101,1,03-09-2020
@@ -2217,7 +2215,6 @@ United States,Hawaii,2,0,2,0,03-09-2020
 United States,Illinois,7,2,5,0,03-09-2020
 United States,Indiana,3,0,3,0,03-09-2020
 United States,Iowa,3,0,3,0,03-09-2020
-United States,"Jackson County, OR ",2,0,2,0,03-09-2020
 United States,Kansas,1,0,1,0,03-09-2020
 United States,Kentucky,4,0,4,0,03-09-2020
 United States,Louisiana,1,0,1,0,03-09-2020
@@ -2232,7 +2229,7 @@ United States,New Jersey,5,0,5,0,03-09-2020
 United States,New York,142,0,142,0,03-09-2020
 United States,North Carolina,2,0,2,0,03-09-2020
 United States,Oklahoma,1,0,1,0,03-09-2020
-United States,Oregon,12,0,12,0,03-09-2020
+United States,Oregon,14,0,14,0,03-09-2020
 United States,Pennsylvania,7,0,7,0,03-09-2020
 United States,Rhode Island,3,0,3,0,03-09-2020
 United States,South Carolina,6,0,6,0,03-09-2020
@@ -2270,7 +2267,7 @@ Colombia,,1,0,1,0,03-09-2020
 Costa Rica,,9,0,9,0,03-09-2020
 Croatia,,12,0,12,0,03-09-2020
 Cyprus,,2,0,2,0,03-09-2020
-Czech Republic,,31,0,31,0,03-09-2020
+Czechia,,31,0,31,0,03-09-2020
 Denmark,,90,1,89,0,03-09-2020
 Dominican Republic,,5,0,5,0,03-09-2020
 Ecuador,,15,0,15,0,03-09-2020
@@ -2341,7 +2338,7 @@ South Africa,,3,0,3,0,03-09-2020
 South Korea,,7478,118,7307,53,03-09-2020
 Spain,,1073,32,1013,28,03-09-2020
 Sri Lanka,,1,1,0,0,03-09-2020
-St. Martin,,2,0,2,0,03-09-2020
+Saint Martin,,2,0,2,0,03-09-2020
 Sweden,,248,1,247,0,03-09-2020
 Switzerland,,374,3,369,2,03-09-2020
 Taiwan,,45,15,29,1,03-09-2020
@@ -2352,7 +2349,7 @@ United Kingdom,,321,18,299,4,03-09-2020
 United States,,560,8,530,22,03-09-2020
 Ukraine,,1,0,1,0,03-09-2020
 United Arab Emirates,,45,7,38,0,03-09-2020
-Vatican City,,1,0,1,0,03-09-2020
+Holy See,,1,0,1,0,03-09-2020
 Vietnam,,30,16,14,0,03-09-2020
 United States,Alaska,0,0,0,0,03-10-2020
 United States,Arizona,6,1,5,0,03-10-2020
@@ -2433,7 +2430,7 @@ Colombia,,3,0,3,0,03-10-2020
 Costa Rica,,9,0,9,0,03-10-2020
 Croatia,,14,0,14,0,03-10-2020
 Cyprus,,3,0,3,0,03-10-2020
-Czech Republic,,41,0,41,0,03-10-2020
+Czechia,,41,0,41,0,03-10-2020
 Denmark,,262,1,261,0,03-10-2020
 Dominican Republic,,5,0,5,0,03-10-2020
 Ecuador,,15,0,15,0,03-10-2020
@@ -2448,7 +2445,7 @@ Germany,,1457,18,1437,2,03-10-2020
 Gibraltar,,1,1,0,0,03-10-2020
 Greece,,89,0,89,0,03-10-2020
 Holy See,,1,0,1,0,03-10-2020
-Hong Kong SAR,,120,65,52,3,03-10-2020
+Hong Kong,,120,65,52,3,03-10-2020
 Hungary,,9,0,9,0,03-10-2020
 Iceland,,69,1,68,0,03-10-2020
 India,,56,4,52,0,03-10-2020
@@ -2466,7 +2463,7 @@ Lebanon,,41,1,39,1,03-10-2020
 Liechtenstein,,1,0,1,0,03-10-2020
 Lithuania,,1,0,1,0,03-10-2020
 Luxembourg,,5,0,5,0,03-10-2020
-Macao SAR,,10,10,0,0,03-10-2020
+Macao,,10,10,0,0,03-10-2020
 China,,80757,60106,17515,3136,03-10-2020
 Malaysia,,129,24,105,0,03-10-2020
 Maldives,,6,0,6,0,03-10-2020
@@ -2492,9 +2489,9 @@ Poland,,22,0,22,0,03-10-2020
 Portugal,,41,0,41,0,03-10-2020
 Qatar,,24,0,24,0,03-10-2020
 South Korea,,7513,247,7212,54,03-10-2020
-Republic of Moldova,,3,0,3,0,03-10-2020
+Moldova,,3,0,3,0,03-10-2020
 Romania,,25,3,22,0,03-10-2020
-Russian Federation,,10,3,7,0,03-10-2020
+Russia,,10,3,7,0,03-10-2020
 Saint Barthelemy,,1,0,1,0,03-10-2020
 Saint Martin,,2,0,2,0,03-10-2020
 San Marino,,51,0,49,2,03-10-2020
@@ -2517,7 +2514,7 @@ United Kingdom,,382,18,358,6,03-10-2020
 United States,,913,8,877,28,03-10-2020
 Ukraine,,1,0,1,0,03-10-2020
 United Arab Emirates,,74,12,62,0,03-10-2020
-Viet Nam,,31,16,15,0,03-10-2020
+Vietnam,,31,16,15,0,03-10-2020
 occupied Palestinian territory,,25,0,25,0,03-10-2020
 United States,Alaska,0,0,0,0,03-11-2020
 United States,Arizona,9,1,8,0,03-11-2020
@@ -3309,7 +3306,7 @@ Central African Republic,,1,0,1,0,03-15-2020
 Chile,,74,0,74,0,03-15-2020
 China,,81003,67017,10783,3203,03-15-2020
 Colombia,,34,0,34,0,03-15-2020
-Congo (Brazzaville),,1,0,1,0,03-15-2020
+Republic of the Congo,,1,0,1,0,03-15-2020
 Congo (Kinshasa),,2,0,2,0,03-15-2020
 Costa Rica,,27,0,27,0,03-15-2020
 Cote d'Ivoire,,1,0,1,0,03-15-2020
@@ -3510,7 +3507,7 @@ Central African Republic,,1,0,1,0,03-16-2020
 Chile,,155,0,155,0,03-16-2020
 China,,81033,67910,9906,3217,03-16-2020
 Colombia,,54,0,54,0,03-16-2020
-Congo (Brazzaville),,1,0,1,0,03-16-2020
+Republic of the Congo,,1,0,1,0,03-16-2020
 Congo (Kinshasa),,2,0,2,0,03-16-2020
 Costa Rica,,35,0,35,0,03-16-2020
 Cote d'Ivoire,,1,0,1,0,03-16-2020
@@ -3721,7 +3718,7 @@ Central African Republic,,1,0,1,0,03-17-2020
 Chile,,201,0,201,0,03-17-2020
 China,,81058,68798,9030,3230,03-17-2020
 Colombia,,65,1,64,0,03-17-2020
-Congo (Brazzaville),,1,0,1,0,03-17-2020
+Republic of the Congo,,1,0,1,0,03-17-2020
 Congo (Kinshasa),,3,0,3,0,03-17-2020
 Costa Rica,,41,0,41,0,03-17-2020
 Cote d'Ivoire,,5,1,4,0,03-17-2020
@@ -3936,7 +3933,7 @@ Central African Republic,,1,0,1,0,03-18-2020
 Chile,,238,0,238,0,03-18-2020
 China,,81102,69755,8106,3241,03-18-2020
 Colombia,,93,1,92,0,03-18-2020
-Congo (Brazzaville),,1,0,1,0,03-18-2020
+Republic of the Congo,,1,0,1,0,03-18-2020
 Congo (Kinshasa),,4,0,4,0,03-18-2020
 Costa Rica,,50,0,50,0,03-18-2020
 Cote d'Ivoire,,6,1,5,0,03-18-2020
@@ -4157,7 +4154,7 @@ Chad,,1,0,1,0,03-19-2020
 Chile,,238,0,238,0,03-19-2020
 China,,81156,70535,7372,3249,03-19-2020
 Colombia,,102,1,101,0,03-19-2020
-Congo (Brazzaville),,3,0,3,0,03-19-2020
+Republic of the Congo,,3,0,3,0,03-19-2020
 Congo (Kinshasa),,14,0,14,0,03-19-2020
 Costa Rica,,69,0,68,1,03-19-2020
 Cote d'Ivoire,,9,1,8,0,03-19-2020
@@ -4381,7 +4378,7 @@ Chad,,1,0,1,0,03-20-2020
 Chile,,434,6,428,0,03-20-2020
 China,,81250,71266,6731,3253,03-20-2020
 Colombia,,128,1,127,0,03-20-2020
-Congo (Brazzaville),,3,0,3,0,03-20-2020
+Republic of the Congo,,3,0,3,0,03-20-2020
 Congo (Kinshasa),,18,0,18,0,03-20-2020
 Costa Rica,,89,0,88,1,03-20-2020
 Cote d'Ivoire,,9,1,8,0,03-20-2020
@@ -4611,7 +4608,7 @@ Chad,,1,0,1,0,03-21-2020
 Chile,,537,6,531,0,03-21-2020
 China,,81305,71857,6189,3259,03-21-2020
 Colombia,,196,1,195,0,03-21-2020
-Congo (Brazzaville),,3,0,3,0,03-21-2020
+Republic of the Congo,,3,0,3,0,03-21-2020
 Congo (Kinshasa),,23,0,22,1,03-21-2020
 Costa Rica,,117,2,113,2,03-21-2020
 Cote d'Ivoire,,14,1,13,0,03-21-2020
@@ -4845,7 +4842,7 @@ Chad,,1,0,1,0,03-22-2020
 Chile,,632,8,623,1,03-22-2020
 China,,81397,72362,5770,3265,03-22-2020
 Colombia,,231,3,226,2,03-22-2020
-Congo (Brazzaville),,3,0,3,0,03-22-2020
+Republic of the Congo,,3,0,3,0,03-22-2020
 Congo (Kinshasa),,30,0,29,1,03-22-2020
 Costa Rica,,134,2,130,2,03-22-2020
 Cote d'Ivoire,,14,1,13,0,03-22-2020
@@ -5070,7 +5067,7 @@ Chad,,1,0,1,0,03-23-2020
 Chile,,746,11,733,2,03-23-2020
 China,,81496,72819,5403,3274,03-23-2020
 Colombia,,277,3,271,3,03-23-2020
-Congo (Brazzaville),,4,0,4,0,03-23-2020
+Republic of the Congo,,4,0,4,0,03-23-2020
 Congo (Kinshasa),,36,0,35,1,03-23-2020
 Costa Rica,,158,2,154,2,03-23-2020
 Cote d'Ivoire,,25,2,23,0,03-23-2020
@@ -5296,7 +5293,7 @@ Chad,,3,0,3,0,03-24-2020
 Chile,,922,17,903,2,03-24-2020
 China,,81591,73280,5030,3281,03-24-2020
 Colombia,,378,6,369,3,03-24-2020
-Congo (Brazzaville),,4,0,4,0,03-24-2020
+Republic of the Congo,,4,0,4,0,03-24-2020
 Congo (Kinshasa),,45,0,43,2,03-24-2020
 Costa Rica,,177,2,173,2,03-24-2020
 Cote d'Ivoire,,73,2,71,0,03-24-2020
@@ -5523,7 +5520,7 @@ Chad,,3,0,3,0,03-25-2020
 Chile,,1142,22,1117,3,03-25-2020
 China,,81661,73773,4603,3285,03-25-2020
 Colombia,,470,8,458,4,03-25-2020
-Congo (Brazzaville),,4,0,4,0,03-25-2020
+Republic of the Congo,,4,0,4,0,03-25-2020
 Congo (Kinshasa),,48,0,46,2,03-25-2020
 Costa Rica,,201,2,197,2,03-25-2020
 Cote d'Ivoire,,80,3,77,0,03-25-2020
@@ -5661,3 +5658,236 @@ Venezuela,,91,15,76,0,03-25-2020
 Vietnam,,141,17,124,0,03-25-2020
 Zambia,,12,0,12,0,03-25-2020
 Zimbabwe,,3,0,2,1,03-25-2020
+United States,Alabama,517,0,0,1,03-26-2020
+United States,Alaska,56,0,0,1,03-26-2020
+United States,American Samoa,0,0,0,0,03-26-2020
+United States,Arizona,508,0,0,8,03-26-2020
+United States,Arkansas,335,0,0,2,03-26-2020
+United States,California,3899,0,0,81,03-26-2020
+United States,Colorado,1430,0,0,19,03-26-2020
+United States,Connecticut,1012,0,0,21,03-26-2020
+United States,Delaware,130,0,0,1,03-26-2020
+United States,District of Columbia,231,0,0,3,03-26-2020
+United States,Florida,2357,0,0,29,03-26-2020
+United States,Georgia,1525,0,0,48,03-26-2020
+United States,Grand Princess,28,0,0,1,03-26-2020
+United States,Guam,45,0,0,1,03-26-2020
+United States,Hawaii,95,0,0,0,03-26-2020
+United States,Idaho,146,0,0,3,03-26-2020
+United States,Illinois,2538,0,0,26,03-26-2020
+United States,Indiana,645,0,0,17,03-26-2020
+United States,Iowa,179,0,0,1,03-26-2020
+United States,Kansas,172,0,0,3,03-26-2020
+United States,Kentucky,247,0,0,5,03-26-2020
+United States,Louisiana,2304,0,0,83,03-26-2020
+United States,Maine,155,0,0,0,03-26-2020
+United States,Maryland,583,0,0,4,03-26-2020
+United States,Massachusetts,2417,0,0,25,03-26-2020
+United States,Michigan,2845,0,0,61,03-26-2020
+United States,Minnesota,344,0,0,2,03-26-2020
+United States,Mississippi,485,0,0,6,03-26-2020
+United States,Missouri,520,0,0,9,03-26-2020
+United States,Montana,90,0,0,0,03-26-2020
+United States,Nebraska,74,0,0,0,03-26-2020
+United States,Nevada,420,0,0,10,03-26-2020
+United States,New Hampshire,137,0,0,1,03-26-2020
+United States,New Jersey,6876,0,0,81,03-26-2020
+United States,New Mexico,113,0,0,1,03-26-2020
+United States,New York,37877,0,0,385,03-26-2020
+United States,North Carolina,738,0,0,3,03-26-2020
+United States,North Dakota,51,0,0,0,03-26-2020
+United States,Northern Mariana Islands,0,0,0,0,03-26-2020
+United States,Ohio,868,0,0,15,03-26-2020
+United States,Oklahoma,248,0,0,7,03-26-2020
+United States,Oregon,316,0,0,11,03-26-2020
+United States,Pennsylvania,1795,0,0,18,03-26-2020
+United States,Puerto Rico,64,0,0,2,03-26-2020
+United States,Recovered,0,681,0,0,03-26-2020
+United States,Rhode Island,165,0,0,0,03-26-2020
+United States,South Carolina,424,0,0,9,03-26-2020
+United States,South Dakota,46,0,0,1,03-26-2020
+United States,Tennessee,1097,0,0,3,03-26-2020
+United States,Texas,1563,0,0,21,03-26-2020
+United States,Utah,396,0,0,1,03-26-2020
+United States,Vermont,158,0,0,9,03-26-2020
+United States,Virgin Islands,17,0,0,0,03-26-2020
+United States,Virginia,466,0,0,10,03-26-2020
+United States,Washington,3207,0,0,150,03-26-2020
+United States,West Virginia,52,0,0,0,03-26-2020
+United States,Wisconsin,728,0,0,10,03-26-2020
+United States,Wyoming,53,0,0,0,03-26-2020
+Afghanistan,,94,2,88,4,03-26-2020
+Albania,,174,17,151,6,03-26-2020
+Algeria,,367,29,313,25,03-26-2020
+Andorra,,224,1,220,3,03-26-2020
+Angola,,4,0,4,0,03-26-2020
+Antigua and Barbuda,,7,0,7,0,03-26-2020
+Argentina,,502,63,430,9,03-26-2020
+Armenia,,290,18,271,1,03-26-2020
+Australia,,2810,172,2625,13,03-26-2020
+Austria,,6909,112,6748,49,03-26-2020
+Azerbaijan,,122,15,104,3,03-26-2020
+Bahamas,,9,1,8,0,03-26-2020
+Bahrain,,458,204,250,4,03-26-2020
+Bangladesh,,44,11,28,5,03-26-2020
+Barbados,,18,0,18,0,03-26-2020
+Belarus,,86,29,57,0,03-26-2020
+Belgium,,6235,675,5340,220,03-26-2020
+Belize,,2,0,2,0,03-26-2020
+Benin,,6,0,6,0,03-26-2020
+Bhutan,,2,0,2,0,03-26-2020
+Bolivia,,43,0,43,0,03-26-2020
+Bosnia and Herzegovina,,191,2,186,3,03-26-2020
+Brazil,,2985,6,2902,77,03-26-2020
+Brunei,,114,5,109,0,03-26-2020
+Bulgaria,,264,8,253,3,03-26-2020
+Burkina Faso,,152,10,135,7,03-26-2020
+Cape Verde,,4,0,3,1,03-26-2020
+Cambodia,,96,10,86,0,03-26-2020
+Cameroon,,75,2,72,1,03-26-2020
+Canada,,4042,184,0,37,03-26-2020
+Central African Republic,,3,0,3,0,03-26-2020
+Chad,,3,0,3,0,03-26-2020
+Chile,,1306,22,1280,4,03-26-2020
+China,,81782,74181,4310,3291,03-26-2020
+Colombia,,491,8,477,6,03-26-2020
+Republic of the Congo,,4,0,4,0,03-26-2020
+Congo (Kinshasa),,51,0,48,3,03-26-2020
+Costa Rica,,231,2,227,2,03-26-2020
+Cote d'Ivoire,,96,3,93,0,03-26-2020
+Croatia,,495,22,470,3,03-26-2020
+Cuba,,67,1,64,2,03-26-2020
+Cyprus,,146,4,139,3,03-26-2020
+Czechia,,1925,10,1906,9,03-26-2020
+Denmark,,2023,50,1932,41,03-26-2020
+Diamond Princess,,712,597,105,10,03-26-2020
+Djibouti,,11,0,11,0,03-26-2020
+Dominica,,11,0,11,0,03-26-2020
+Dominican Republic,,488,3,475,10,03-26-2020
+Ecuador,,1403,3,1366,34,03-26-2020
+Egypt,,495,102,369,24,03-26-2020
+El Salvador,,13,0,13,0,03-26-2020
+Equatorial Guinea,,12,0,12,0,03-26-2020
+Eritrea,,6,0,6,0,03-26-2020
+Estonia,,538,8,529,1,03-26-2020
+Eswatini,,6,0,6,0,03-26-2020
+Ethiopia,,12,0,12,0,03-26-2020
+Fiji,,5,0,5,0,03-26-2020
+Finland,,958,10,943,5,03-26-2020
+France,,29551,4955,22898,1698,03-26-2020
+Gabon,,7,0,6,1,03-26-2020
+Gambia,,3,0,2,1,03-26-2020
+Georgia,,79,11,68,0,03-26-2020
+Germany,,43938,5673,37998,267,03-26-2020
+Ghana,,132,1,127,4,03-26-2020
+Greece,,892,36,830,26,03-26-2020
+Grenada,,7,0,7,0,03-26-2020
+Guatemala,,25,4,20,1,03-26-2020
+Guinea,,4,0,4,0,03-26-2020
+Guinea-Bissau,,2,0,2,0,03-26-2020
+Guyana,,5,0,4,1,03-26-2020
+Haiti,,8,0,8,0,03-26-2020
+Holy See,,4,0,4,0,03-26-2020
+Honduras,,52,0,51,1,03-26-2020
+Hungary,,261,28,223,10,03-26-2020
+Iceland,,802,82,718,2,03-26-2020
+India,,727,45,662,20,03-26-2020
+Indonesia,,893,35,780,78,03-26-2020
+Iran,,29406,10457,16715,2234,03-26-2020
+Iraq,,382,105,241,36,03-26-2020
+Ireland,,1819,5,1795,19,03-26-2020
+Israel,,2693,68,2617,8,03-26-2020
+Italy,,80589,10361,62013,8215,03-26-2020
+Jamaica,,26,2,23,1,03-26-2020
+Japan,,1387,359,981,47,03-26-2020
+Jordan,,212,1,211,0,03-26-2020
+Kazakhstan,,111,2,108,1,03-26-2020
+Kenya,,31,1,29,1,03-26-2020
+South Korea,,9241,4144,4966,131,03-26-2020
+Kosovo,,71,0,70,1,03-26-2020
+Kuwait,,208,49,159,0,03-26-2020
+Kyrgyzstan,,44,0,44,0,03-26-2020
+Laos,,6,0,6,0,03-26-2020
+Latvia,,244,1,243,0,03-26-2020
+Lebanon,,368,23,339,6,03-26-2020
+Liberia,,3,0,3,0,03-26-2020
+Libya,,1,0,1,0,03-26-2020
+Liechtenstein,,56,0,56,0,03-26-2020
+Lithuania,,299,1,294,4,03-26-2020
+Luxembourg,,1453,6,1438,9,03-26-2020
+Madagascar,,23,0,23,0,03-26-2020
+Malaysia,,2031,215,1793,23,03-26-2020
+Maldives,,13,8,5,0,03-26-2020
+Mali,,4,0,4,0,03-26-2020
+Malta,,134,2,132,0,03-26-2020
+Mauritania,,3,0,3,0,03-26-2020
+Mauritius,,81,0,79,2,03-26-2020
+Mexico,,475,4,465,6,03-26-2020
+Moldova,,177,2,174,1,03-26-2020
+Monaco,,33,1,32,0,03-26-2020
+Mongolia,,11,0,11,0,03-26-2020
+Montenegro,,69,0,68,1,03-26-2020
+Morocco,,275,8,256,11,03-26-2020
+Mozambique,,7,0,7,0,03-26-2020
+Namibia,,8,2,6,0,03-26-2020
+Nepal,,3,1,2,0,03-26-2020
+Netherlands,,7468,6,7027,435,03-26-2020
+New Zealand,,283,27,256,0,03-26-2020
+Nicaragua,,2,0,2,0,03-26-2020
+Niger,,10,0,9,1,03-26-2020
+Nigeria,,65,2,62,1,03-26-2020
+North Macedonia,,201,3,195,3,03-26-2020
+Norway,,3369,6,3349,14,03-26-2020
+Oman,,109,23,86,0,03-26-2020
+Pakistan,,1201,21,1171,9,03-26-2020
+Panama,,558,2,548,8,03-26-2020
+Papua New Guinea,,1,0,1,0,03-26-2020
+Paraguay,,41,0,38,3,03-26-2020
+Peru,,580,14,557,9,03-26-2020
+Philippines,,707,28,634,45,03-26-2020
+Poland,,1221,7,1198,16,03-26-2020
+Portugal,,3544,43,3441,60,03-26-2020
+Qatar,,549,43,506,0,03-26-2020
+Romania,,1029,94,912,23,03-26-2020
+Russia,,840,38,799,3,03-26-2020
+Rwanda,,50,0,50,0,03-26-2020
+Saint Kitts and Nevis,,2,0,2,0,03-26-2020
+Saint Lucia,,3,0,3,0,03-26-2020
+Saint Vincent and the Grenadines,,1,0,1,0,03-26-2020
+San Marino,,208,4,183,21,03-26-2020
+Saudi Arabia,,1012,33,976,3,03-26-2020
+Senegal,,105,9,96,0,03-26-2020
+Serbia,,384,0,383,1,03-26-2020
+Seychelles,,7,0,7,0,03-26-2020
+Singapore,,683,172,509,2,03-26-2020
+Slovakia,,226,2,224,0,03-26-2020
+Slovenia,,562,10,546,6,03-26-2020
+Somalia,,2,0,2,0,03-26-2020
+South Africa,,927,12,915,0,03-26-2020
+Spain,,57786,7015,46406,4365,03-26-2020
+Sri Lanka,,106,7,99,0,03-26-2020
+Sudan,,3,0,2,1,03-26-2020
+Suriname,,8,0,8,0,03-26-2020
+Sweden,,2840,16,2747,77,03-26-2020
+Switzerland,,11811,131,11489,191,03-26-2020
+Syria,,5,0,5,0,03-26-2020
+Taiwan,,252,29,221,2,03-26-2020
+Tanzania,,13,0,13,0,03-26-2020
+Thailand,,1045,88,953,4,03-26-2020
+Timor-Leste,,1,0,1,0,03-26-2020
+Togo,,23,1,22,0,03-26-2020
+Trinidad and Tobago,,65,0,64,1,03-26-2020
+Tunisia,,197,2,189,6,03-26-2020
+Turkey,,3629,26,3528,75,03-26-2020
+United States,,83787,681,0,1209,03-26-2020
+Uganda,,14,0,14,0,03-26-2020
+Ukraine,,196,1,190,5,03-26-2020
+United Arab Emirates,,333,52,279,2,03-26-2020
+United Kingdom,,11812,150,11082,580,03-26-2020
+Uruguay,,217,0,217,0,03-26-2020
+Uzbekistan,,75,0,75,0,03-26-2020
+Venezuela,,107,15,92,0,03-26-2020
+Vietnam,,153,20,133,0,03-26-2020
+West Bank and Gaza,,84,17,66,1,03-26-2020
+Zambia,,16,0,16,0,03-26-2020
+Zimbabwe,,3,0,2,1,03-26-2020

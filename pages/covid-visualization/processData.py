@@ -62,7 +62,7 @@ for el in stateTranslation:
 
 
 def translateState(row):
-  state = str(row["Province_State"])
+  state = str(row["Province_State"]).strip()
   if ("," in state):
     if state == "Virgin Islands, U.S.":
       row["Province_State"] = "Virgin Islands"
@@ -129,7 +129,18 @@ countryReplacement = {
   "Mainland China": "China",
   "Iran (Islamic Republic of)": "Iran",
   "Republic of Korea": "South Korea",
-  "UK": "United Kingdom"  
+  "UK": "United Kingdom",
+  "Vatican City": "Holy See",
+  "Hong Kong SAR": "Hong Kong",
+  "Macao SAR": "Macao",
+  "Russian Federation": "Russia",
+  "St. Martin": "Saint Martin",
+  " Azerbaijan": "Azerbaijan",
+  "Republic of Ireland": "Ireland",
+  "Viet Nam": "Vietnam",
+  "Congo (Brazzaville)": "Republic of the Congo",
+  "Czech Republic": "Czechia",
+  "Republic of Moldova": "Moldova",
 }
 
 stateReplacement = {
