@@ -34,17 +34,27 @@ var reducer_sum_with_key = function(result, value, key) {
   return result;
 };
 
-var reducer_byUSstate = function(result, value, key) {
-  country = value["Country_Region"];
+var reducer_byState = function(result, value, key) {
   state = value["Province_State"];
 
   if (state == "") { return result; }
-  if (country != "United States") { return result; }
   if (state.indexOf("Princess") != -1) { return result; }
 
   // Use the state name as key
   key = state;
   return reducer_sum_with_key(result, value, key);
+};
+
+var reducer_byStateUS = function(result, value, key) {
+  country = value["Country_Region"];
+  if (country != "United States") { return result; }
+  return reducer_byState(result, value, key);
+};
+
+var reducer_byStateCA = function(result, value, key) {
+  country = value["Country_Region"];
+  if (country != "Canada") { return result; }
+  return reducer_byState(result, value, key);
 };
 
 var reducer_byCountry = function(result, value, key) {
@@ -108,12 +118,26 @@ var charts = {
     xMax: null, yMax: null, data: null
   },
   'states': {
-    reducer: reducer_byUSstate,
+    reducer: reducer_byStateUS,
     scale: "log",
     highlight: defaultState,
     y0: 20,
     xCap: 40,
     id: "chart-states",
+    normalizePopulation: false,
+    show: 9999,
+    sort: function (d) { return -d.maxCases; },
+    dataSelection: 'cases',
+    dataSelection_y0: { 'active': 20, 'cases': 20, 'deaths': 5, 'recovered': 20 },
+    xMax: null, yMax: null, data: null
+  },
+  'states-ca': {
+    reducer: reducer_byStateCA,
+    scale: "log",
+    highlight: defaultState,
+    y0: 20,
+    xCap: 40,
+    id: "chart-states-ca",
     normalizePopulation: false,
     show: 9999,
     sort: function (d) { return -d.maxCases; },
@@ -137,12 +161,26 @@ var charts = {
     xMax: null, yMax: null, data: null
   },
   'states-normalized': {
-    reducer: reducer_byUSstate,
+    reducer: reducer_byStateUS,
     scale: "log",
     highlight: defaultState,
     y0: 1,
     xCap: 40,
     id: "chart-states-normalized",
+    normalizePopulation: "state",
+    show: 9999,
+    sort: function (d) { return -d.maxCases; },
+    dataSelection: 'cases',
+    dataSelection_y0: { 'active': 1, 'cases': 1, 'deaths': 1, 'recovered': 1 },
+    xMax: null, yMax: null, data: null
+  },
+  'states-normalized-ca': {
+    reducer: reducer_byStateCA,
+    scale: "log",
+    highlight: defaultState,
+    y0: 1,
+    xCap: 40,
+    id: "chart-states-normalized-ca",
     normalizePopulation: "state",
     show: 9999,
     sort: function (d) { return -d.maxCases; },

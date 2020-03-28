@@ -170,6 +170,69 @@ title: An interactive visualization of the exponential spread of COVID-19
     </div>
   </div>
 </div>
+<!-- -->
+
+  <!-- -->
+  <div class="chart-header" style="margin-top: 20px;">
+    <h2>COVID-19 Cases by Canadian Provinces</h2>
+  </div>
+  <div id="chart-states-ca" class="chart-viz">
+    <div class="text-center" style="height: 500px;"><b>Loading Data...</b></div>
+  </div>
+  <div class="chart-footer">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Highlight:</span>
+          </div>
+          <select class="form-control" id="highlight-chart-states-ca">
+          </select>
+        </div>
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Show:</span>
+          </div>
+          <select class="form-control filter-select" id="filter-chart-states-ca" data-chart="states-ca">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="9999" selected>All</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6 text-right">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Data:</span>
+          </div>
+          <select class="form-control data-select" data-chart="states-ca">
+            <option value="active">Active Cases</option>
+            <option value="cases" selected>Confirmed Cases</option>
+            <option value="cases-daily">New Cases /Day</option>
+            <option value="deaths">Deaths</option>
+            <option value="recovered">Recovered </option>
+          </select>
+        </div>
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Scale:</span>
+          </div>          
+          <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="states-ca">
+            <input type="radio" name="scale" autocomplete="off" checked> Log Scale
+          </label>
+          <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="states-ca">
+            <input type="radio" name="scale" autocomplete="off"> Linear Scale
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- -->
 
 <div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1); margin-top: 15px;">
 </div>
@@ -182,7 +245,7 @@ title: An interactive visualization of the exponential spread of COVID-19
     by the country or state population.
     <ul>
       <li>
-        The data is presented as <b>confirmed cases per 1,000,000 people</b>, based on the <a href="https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population" target="_blank">country</a> or <a href="https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States_by_population">US state/territory</a> population found on Wikipedia.
+        The data is presented as <b>confirmed cases per 1,000,000 people</b>, based on the <a href="https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population" target="_blank">country</a> or <a href="https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States_by_population">US state/territory</a> or <a href="https://en.wikipedia.org/wiki/List_of_Canadian_provinces_and_territories_by_population">Canadian province</a> population found on Wikipedia.
       </li>
     </ul>
   </div>
@@ -306,7 +369,66 @@ title: An interactive visualization of the exponential spread of COVID-19
     </div>
   </div>
   <!-- -->
-  
+  <div class="chart-header" style="margin-top: 20px;">
+    <h2>COVID-19 Cases by Canadian Provinces, normalized by population</h2>
+  </div>
+  <div id="chart-states-normalized-ca" class="chart-viz">
+    <div class="text-center" style="height: 500px;"><b>Loading Data...</b></div>
+  </div>
+  <div class="chart-footer">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Highlight:</span>
+          </div>
+          <select class="form-control" id="highlight-chart-states-normalized-ca">
+          </select>
+        </div>
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Show:</span>
+          </div>
+          <select class="form-control filter-select" id="filter-chart-states-normalized-ca" data-chart="states-normalized-ca">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="9999" selected>All</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6 text-right">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Data:</span>
+          </div>
+          <select class="form-control data-select" data-chart="states-normalized-ca">
+            <option value="active">Active Cases</option>
+            <option value="cases" selected>Confirmed Cases</option>
+            <option value="cases-daily">New Cases /Day</option>
+            <option value="deaths">Deaths</option>
+            <option value="recovered">Recovered </option>
+          </select>
+        </div>
+                
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Scale:</span>
+          </div>          
+          <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="states-normalized-ca">
+            <input type="radio" name="scale" autocomplete="off" checked> Log Scale
+          </label>
+          <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="states-normalized-ca">
+            <input type="radio" name="scale" autocomplete="off"> Linear Scale
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- -->
+
 </div>
 
 <div class="container-fluid viz" style="margin-top: 20px;">
@@ -316,6 +438,7 @@ title: An interactive visualization of the exponential spread of COVID-19
     <div><b>Population Datasets</b>:
       <a href="https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population">Wikipedia, list of countries</a> and 
       <a href="https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States_by_population">Wikipedia, list of US states</a>
+      <a href="https://en.wikipedia.org/wiki/List_of_Canadian_provinces_and_territories_by_population">Wikipedia, list of Canadian provinces</a>
     </div>
   </div>
 </div>
