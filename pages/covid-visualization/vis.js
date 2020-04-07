@@ -291,6 +291,7 @@ var process_data = function(data, chart) {
   chart.fullData = caseData;
 
   casesMax = _.sortBy(caseData, function(d) { return -d.maxCases; } )[0];
+  chart.yMaxCases = casesMax.maxCases;
   chart.yMax = findNextExp(casesMax.maxCases);
 
   chart.xMax = maxDayCounter;
@@ -496,7 +497,11 @@ var render = function(chart) {
       }
     }
   }
-  casesScale.domain([scale_y0, chart.yMax]).range([height, 0]);
+  if (chart.scale == "log") {
+    casesScale.domain([scale_y0, chart.yMax]).range([height, 0]);
+  } else {
+    casesScale.domain([scale_y0, chart.yMaxCases]).range([height, 0]);
+  }
   
   // Color Scale
   var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
