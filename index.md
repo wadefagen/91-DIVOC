@@ -1,11 +1,86 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: home
 ---
 
-<h3>#01 - COVID-19 Dataset</h3>
+<h3>Projects</h3>
+
+<ul>
+  <li>
+    #02: <a href="pages/covid-by-your-locations/">COVID-19 Data for Locations of People You Love</a>
+  </li>
+  <li>
+    #01: <a href="pages/covid-visualization/">An interactive visualization of the exponential spread of COVID-19</a>
+  </li>
+</ul>
+
+<hr>
+
+<h3>#02 - Local Storage - April 5, 2020</h3>
+
+<p>
+  A lot of people had amazing suggestions on the COVID-19 visualization and I implemented many of them to make the visualization as useful to as
+  many people as possible.  One specific suggestion -- to allow the visualization to "remember" you previous choice -- was added with a quick bit
+  of code to use a cookie to remember your previously selected county and state.
+</p>
+
+<p>
+  Even though this feature was added nearly two weeks ago, I was never entirely happy with it.  Specifically, when a cookie is used, all of the
+  data stored in the cookie is sent to the server every time a page is loaded.  For this site, that is absolutely not needed -- the highlighting
+  of a selected country on the COVID-19 visualization is done inside of your web browser and not by the server.   I was certain there was a way
+  to do this better: <i>How can I store user settings without needing to send the data to the server?</i>
+</p>
+
+<p>
+  The goal of my second 91-DIVOC project was to explore the storage options available for "remembering" user preferences without a database.
+  I found that every modern browser supports three ways:
+</p>
+
+<ul>
+  <li>
+    <b>Cookies</b>: Stores up to 4,096 bytes, accessible via JavaScript, and sent to the server along with every request (as part of the HTTP header).
+  </li>
+  <li>
+    <b>Web Storage</b>: Stores up to ~5 MB, accessible via JavaScript, and <b>not sent</b> to the server.  Two sub-types:
+    <ul>
+      <li>
+        <code>sessionStorage</code>, stores data for the current session but <b>lost when the browser is closed</b>
+      </li>
+      <li>
+        <code>localStorage </code>, stores data with no expiration date and <b>persists when the browser is closed</b>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>
+  So <code>localStorage</code> is the winner -- a large amount of data can be stored, the data is private (never sent to the server), and
+  persists for a long time.  But how can I build something to explore this technology?
+</p>
+
+<p>
+  Reflecting on the past week, I found myself caring less and less on the depressing global statistics and focusing more on the cases and
+  deaths in the communities where I have people I love.  The University of Illinois is located in Champaign County, Illinois and, as April 5, 2020,
+  the cases have started to explode -- 400% growth, from 11 to 55 cases, all in the past week.
+</p>
+
+<p>
+  My second project was to create a COVID-19 tool that shows <b>only</b> the data from the locations that means the most to you:
+</p>
+
+<div class="card">
+  <a href="pages/covid-by-your-locations/">COVID-19 Data for Locations of People You Love &gt;&gt;</a>
+</div>
+
+<p>
+  If you have never created something that has had user preferences saved locally -- not without a database or other infrastructure -- this
+  was <b>surprisingly easy</b>.  It's worth getting it a shot and I hope you go start creating! :)
+</p>
+
+
+<hr>
+
+
+<h3>#01 - COVID-19 Dataset - March 21, 2020</h3>
 
 <p>
   One thing that has impressed me the most is the vast amount of high-quality, organized data around COVID-19.  One of the leaders
@@ -59,5 +134,5 @@ layout: home
 <p>
   I hope you will download the dataset and play with it!  The dataset opens in Excel, in Google Sheets, and is easily readable using Python and
   JavaScript -- it is data that is impacting this world more than anything else right now and you have access to it!  I would love to see
-  and share what you create, be sure to use <b>#91-divoc</b> and <b>#91-divoc-01</b>.  Go start creating! :)
+  and share what you create, be sure to use <b>#91divoc</b>.  Go start creating! :)
 </p>

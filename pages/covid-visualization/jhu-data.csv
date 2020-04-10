@@ -1,4 +1,5 @@
 Country_Region,Province_State,Confirmed,Recovered,Active,Deaths,Date
+China,,62,0,62,0,01-17-2020
 China,,121,0,121,0,01-18-2020
 China,,198,0,198,0,01-19-2020
 China,,291,0,291,0,01-20-2020
@@ -4525,7 +4526,7 @@ United States,California,1364,0,1340,24,03-21-2020
 United States,Colorado,390,0,386,4,03-21-2020
 United States,Connecticut,194,0,190,4,03-21-2020
 United States,Delaware,45,0,45,0,03-21-2020
-United States,District of Columbia,77,0,76,1,03-21-2020
+United States,District of Columbia,98,0,97,1,03-21-2020
 United States,Florida,659,0,646,13,03-21-2020
 United States,Georgia,507,0,493,14,03-21-2020
 United States,Grand Princess,23,0,23,0,03-21-2020
@@ -4739,7 +4740,7 @@ Togo,,16,1,15,0,03-21-2020
 Trinidad and Tobago,,49,1,48,0,03-21-2020
 Tunisia,,60,0,59,1,03-21-2020
 Turkey,,670,0,661,9,03-21-2020
-United States,,25444,171,24966,307,03-21-2020
+United States,,25465,171,24987,307,03-21-2020
 Uganda,,1,0,1,0,03-21-2020
 Ukraine,,47,1,43,3,03-21-2020
 United Arab Emirates,,153,38,113,2,03-21-2020
@@ -4750,64 +4751,64 @@ Venezuela,,70,0,70,0,03-21-2020
 Vietnam,,94,17,77,0,03-21-2020
 Zambia,,2,0,2,0,03-21-2020
 Zimbabwe,,3,0,3,0,03-21-2020
-United States,Alabama,157,0,0,0,03-22-2020
-United States,Alaska,20,0,0,0,03-22-2020
+United States,Alabama,157,0,157,0,03-22-2020
+United States,Alaska,20,0,20,0,03-22-2020
 United States,American Samoa,0,0,0,0,03-22-2020
-United States,Arizona,152,0,0,2,03-22-2020
-United States,Arkansas,165,0,0,0,03-22-2020
-United States,California,1646,0,0,30,03-22-2020
-United States,Colorado,591,0,0,6,03-22-2020
-United States,Connecticut,327,0,0,8,03-22-2020
-United States,Delaware,56,0,0,0,03-22-2020
-United States,District of Columbia,102,0,0,2,03-22-2020
-United States,Florida,1004,0,0,13,03-22-2020
-United States,Georgia,621,0,0,25,03-22-2020
-United States,Grand Princess,30,0,0,1,03-22-2020
-United States,Guam,27,0,0,1,03-22-2020
-United States,Hawaii,53,0,0,0,03-22-2020
-United States,Idaho,42,0,0,0,03-22-2020
-United States,Illinois,1049,0,0,9,03-22-2020
-United States,Indiana,204,0,0,6,03-22-2020
-United States,Iowa,90,0,0,0,03-22-2020
-United States,Kansas,65,0,0,2,03-22-2020
-United States,Kentucky,103,0,0,3,03-22-2020
-United States,Louisiana,837,0,0,20,03-22-2020
-United States,Maine,89,0,0,0,03-22-2020
-United States,Maryland,244,0,0,3,03-22-2020
-United States,Massachusetts,646,0,0,5,03-22-2020
-United States,Michigan,1035,0,0,9,03-22-2020
-United States,Minnesota,167,0,0,1,03-22-2020
-United States,Mississippi,207,0,0,1,03-22-2020
-United States,Missouri,87,0,0,3,03-22-2020
-United States,Montana,34,0,0,0,03-22-2020
-United States,Nebraska,51,0,0,0,03-22-2020
-United States,Nevada,190,0,0,2,03-22-2020
-United States,New Hampshire,74,0,0,0,03-22-2020
-United States,New Jersey,1914,0,0,20,03-22-2020
-United States,New Mexico,57,0,0,0,03-22-2020
-United States,New York,15800,0,0,117,03-22-2020
-United States,North Carolina,305,0,0,0,03-22-2020
-United States,North Dakota,28,0,0,0,03-22-2020
+United States,Arizona,152,0,150,2,03-22-2020
+United States,Arkansas,165,0,165,0,03-22-2020
+United States,California,1646,0,1616,30,03-22-2020
+United States,Colorado,591,0,585,6,03-22-2020
+United States,Connecticut,327,0,319,8,03-22-2020
+United States,Delaware,56,0,56,0,03-22-2020
+United States,District of Columbia,204,0,202,2,03-22-2020
+United States,Florida,1004,0,991,13,03-22-2020
+United States,Georgia,621,0,596,25,03-22-2020
+United States,Grand Princess,30,0,29,1,03-22-2020
+United States,Guam,27,0,26,1,03-22-2020
+United States,Hawaii,53,0,53,0,03-22-2020
+United States,Idaho,42,0,42,0,03-22-2020
+United States,Illinois,1049,0,1040,9,03-22-2020
+United States,Indiana,204,0,198,6,03-22-2020
+United States,Iowa,90,0,90,0,03-22-2020
+United States,Kansas,65,0,63,2,03-22-2020
+United States,Kentucky,103,0,100,3,03-22-2020
+United States,Louisiana,837,0,817,20,03-22-2020
+United States,Maine,89,0,89,0,03-22-2020
+United States,Maryland,244,0,241,3,03-22-2020
+United States,Massachusetts,646,0,641,5,03-22-2020
+United States,Michigan,1035,0,1026,9,03-22-2020
+United States,Minnesota,167,0,166,1,03-22-2020
+United States,Mississippi,207,0,206,1,03-22-2020
+United States,Missouri,87,0,84,3,03-22-2020
+United States,Montana,34,0,34,0,03-22-2020
+United States,Nebraska,51,0,51,0,03-22-2020
+United States,Nevada,190,0,188,2,03-22-2020
+United States,New Hampshire,74,0,74,0,03-22-2020
+United States,New Jersey,1914,0,1894,20,03-22-2020
+United States,New Mexico,57,0,57,0,03-22-2020
+United States,New York,15800,0,15683,117,03-22-2020
+United States,North Carolina,305,0,305,0,03-22-2020
+United States,North Dakota,28,0,28,0,03-22-2020
 United States,Northern Mariana Islands,0,0,0,0,03-22-2020
-United States,Ohio,356,0,0,3,03-22-2020
-United States,Oklahoma,67,0,0,2,03-22-2020
-United States,Oregon,161,0,0,5,03-22-2020
-United States,Pennsylvania,509,0,0,4,03-22-2020
-United States,Puerto Rico,23,0,0,1,03-22-2020
-United States,Rhode Island,83,0,0,0,03-22-2020
-United States,South Carolina,196,0,0,3,03-22-2020
-United States,South Dakota,21,0,0,1,03-22-2020
-United States,Tennessee,505,0,0,2,03-22-2020
-United States,Texas,643,0,0,7,03-22-2020
-United States,Utah,162,0,0,1,03-22-2020
-United States,Vermont,52,0,0,2,03-22-2020
-United States,Virgin Islands,6,0,0,0,03-22-2020
-United States,Virginia,220,0,0,6,03-22-2020
-United States,Washington,1997,0,0,97,03-22-2020
-United States,West Virginia,16,0,0,0,03-22-2020
-United States,Wisconsin,381,0,0,4,03-22-2020
-United States,Wuhan Evacuee,4,0,0,0,03-22-2020
-United States,Wyoming,26,0,0,0,03-22-2020
+United States,Ohio,356,0,353,3,03-22-2020
+United States,Oklahoma,67,0,65,2,03-22-2020
+United States,Oregon,161,0,156,5,03-22-2020
+United States,Pennsylvania,509,0,505,4,03-22-2020
+United States,Puerto Rico,23,0,22,1,03-22-2020
+United States,Rhode Island,83,0,83,0,03-22-2020
+United States,South Carolina,196,0,193,3,03-22-2020
+United States,South Dakota,21,0,20,1,03-22-2020
+United States,Tennessee,505,0,503,2,03-22-2020
+United States,Texas,643,0,636,7,03-22-2020
+United States,Utah,162,0,161,1,03-22-2020
+United States,Vermont,52,0,50,2,03-22-2020
+United States,Virgin Islands,6,0,6,0,03-22-2020
+United States,Virginia,220,0,214,6,03-22-2020
+United States,Washington,1997,0,1900,97,03-22-2020
+United States,West Virginia,16,0,16,0,03-22-2020
+United States,Wisconsin,381,0,377,4,03-22-2020
+United States,Wuhan Evacuee,4,0,4,0,03-22-2020
+United States,Wyoming,26,0,26,0,03-22-2020
 Afghanistan,,40,1,38,1,03-22-2020
 Albania,,89,2,85,2,03-22-2020
 Algeria,,201,65,119,17,03-22-2020
@@ -4963,7 +4964,7 @@ Togo,,16,0,16,0,03-22-2020
 Trinidad and Tobago,,50,0,50,0,03-22-2020
 Tunisia,,75,1,71,3,03-22-2020
 Turkey,,1236,0,1206,30,03-22-2020
-United States,,33697,0,0,427,03-22-2020
+United States,,33799,0,33372,427,03-22-2020
 Uganda,,1,0,1,0,03-22-2020
 Ukraine,,73,1,69,3,03-22-2020
 United Arab Emirates,,153,38,113,2,03-22-2020
@@ -4974,64 +4975,64 @@ Venezuela,,70,15,55,0,03-22-2020
 Vietnam,,113,17,96,0,03-22-2020
 Zambia,,3,0,3,0,03-22-2020
 Zimbabwe,,3,0,3,0,03-22-2020
-United States,Alabama,196,0,0,0,03-23-2020
-United States,Alaska,30,0,0,0,03-23-2020
+United States,Alabama,196,0,196,0,03-23-2020
+United States,Alaska,30,0,30,0,03-23-2020
 United States,American Samoa,0,0,0,0,03-23-2020
-United States,Arizona,235,0,0,2,03-23-2020
-United States,Arkansas,192,0,0,0,03-23-2020
-United States,California,2108,0,0,39,03-23-2020
-United States,Colorado,704,0,0,7,03-23-2020
-United States,Connecticut,415,0,0,10,03-23-2020
-United States,Delaware,68,0,0,0,03-23-2020
-United States,District of Columbia,120,0,0,2,03-23-2020
-United States,Florida,1227,0,0,18,03-23-2020
-United States,Georgia,772,0,0,25,03-23-2020
-United States,Grand Princess,28,0,0,1,03-23-2020
-United States,Guam,29,0,0,1,03-23-2020
-United States,Hawaii,56,0,0,0,03-23-2020
-United States,Idaho,68,0,0,0,03-23-2020
-United States,Illinois,1285,0,0,12,03-23-2020
-United States,Indiana,270,0,0,7,03-23-2020
-United States,Iowa,105,0,0,0,03-23-2020
-United States,Kansas,84,0,0,2,03-23-2020
-United States,Kentucky,123,0,0,4,03-23-2020
-United States,Louisiana,1172,0,0,35,03-23-2020
-United States,Maine,107,0,0,0,03-23-2020
-United States,Maryland,290,0,0,3,03-23-2020
-United States,Massachusetts,777,0,0,9,03-23-2020
-United States,Michigan,1329,0,0,15,03-23-2020
-United States,Minnesota,234,0,0,1,03-23-2020
-United States,Mississippi,249,0,0,1,03-23-2020
-United States,Missouri,187,0,0,4,03-23-2020
-United States,Montana,34,0,0,0,03-23-2020
-United States,Nebraska,51,0,0,0,03-23-2020
-United States,Nevada,245,0,0,4,03-23-2020
-United States,New Hampshire,101,0,0,1,03-23-2020
-United States,New Jersey,2844,0,0,27,03-23-2020
-United States,New Mexico,83,0,0,0,03-23-2020
-United States,New York,20884,0,0,158,03-23-2020
-United States,North Carolina,353,0,0,0,03-23-2020
-United States,North Dakota,30,0,0,0,03-23-2020
+United States,Arizona,235,0,233,2,03-23-2020
+United States,Arkansas,192,0,192,0,03-23-2020
+United States,California,2108,0,2069,39,03-23-2020
+United States,Colorado,704,0,697,7,03-23-2020
+United States,Connecticut,415,0,405,10,03-23-2020
+United States,Delaware,68,0,68,0,03-23-2020
+United States,District of Columbia,120,0,118,2,03-23-2020
+United States,Florida,1227,0,1209,18,03-23-2020
+United States,Georgia,772,0,747,25,03-23-2020
+United States,Grand Princess,28,0,27,1,03-23-2020
+United States,Guam,29,0,28,1,03-23-2020
+United States,Hawaii,56,0,56,0,03-23-2020
+United States,Idaho,68,0,68,0,03-23-2020
+United States,Illinois,1285,0,1273,12,03-23-2020
+United States,Indiana,270,0,263,7,03-23-2020
+United States,Iowa,105,0,105,0,03-23-2020
+United States,Kansas,84,0,82,2,03-23-2020
+United States,Kentucky,123,0,119,4,03-23-2020
+United States,Louisiana,1172,0,1137,35,03-23-2020
+United States,Maine,107,0,107,0,03-23-2020
+United States,Maryland,290,0,287,3,03-23-2020
+United States,Massachusetts,777,0,768,9,03-23-2020
+United States,Michigan,1329,0,1314,15,03-23-2020
+United States,Minnesota,234,0,233,1,03-23-2020
+United States,Mississippi,249,0,248,1,03-23-2020
+United States,Missouri,187,0,183,4,03-23-2020
+United States,Montana,34,0,34,0,03-23-2020
+United States,Nebraska,51,0,51,0,03-23-2020
+United States,Nevada,245,0,241,4,03-23-2020
+United States,New Hampshire,101,0,100,1,03-23-2020
+United States,New Jersey,2844,0,2817,27,03-23-2020
+United States,New Mexico,83,0,83,0,03-23-2020
+United States,New York,20884,0,20726,158,03-23-2020
+United States,North Carolina,353,0,353,0,03-23-2020
+United States,North Dakota,30,0,30,0,03-23-2020
 United States,Northern Mariana Islands,0,0,0,0,03-23-2020
-United States,Ohio,443,0,0,6,03-23-2020
-United States,Oklahoma,81,0,0,2,03-23-2020
-United States,Oregon,191,0,0,5,03-23-2020
-United States,Pennsylvania,698,0,0,6,03-23-2020
-United States,Puerto Rico,31,0,0,2,03-23-2020
-United States,Rhode Island,106,0,0,0,03-23-2020
-United States,South Carolina,298,0,0,5,03-23-2020
-United States,South Dakota,28,0,0,1,03-23-2020
-United States,Tennessee,614,0,0,2,03-23-2020
-United States,Texas,758,0,0,9,03-23-2020
-United States,Utah,257,0,0,1,03-23-2020
-United States,Vermont,75,0,0,5,03-23-2020
-United States,Virgin Islands,7,0,0,0,03-23-2020
-United States,Virginia,254,0,0,6,03-23-2020
-United States,Washington,2221,0,0,109,03-23-2020
-United States,West Virginia,16,0,0,0,03-23-2020
-United States,Wisconsin,425,0,0,5,03-23-2020
-United States,Wuhan Evacuee,4,0,0,0,03-23-2020
-United States,Wyoming,26,0,0,0,03-23-2020
+United States,Ohio,443,0,437,6,03-23-2020
+United States,Oklahoma,81,0,79,2,03-23-2020
+United States,Oregon,191,0,186,5,03-23-2020
+United States,Pennsylvania,698,0,692,6,03-23-2020
+United States,Puerto Rico,31,0,29,2,03-23-2020
+United States,Rhode Island,106,0,106,0,03-23-2020
+United States,South Carolina,298,0,293,5,03-23-2020
+United States,South Dakota,28,0,27,1,03-23-2020
+United States,Tennessee,614,0,612,2,03-23-2020
+United States,Texas,758,0,749,9,03-23-2020
+United States,Utah,257,0,256,1,03-23-2020
+United States,Vermont,75,0,70,5,03-23-2020
+United States,Virgin Islands,7,0,7,0,03-23-2020
+United States,Virginia,254,0,248,6,03-23-2020
+United States,Washington,2221,0,2112,109,03-23-2020
+United States,West Virginia,16,0,16,0,03-23-2020
+United States,Wisconsin,425,0,420,5,03-23-2020
+United States,Wuhan Evacuee,4,0,4,0,03-23-2020
+United States,Wyoming,26,0,26,0,03-23-2020
 Afghanistan,,40,1,38,1,03-23-2020
 Albania,,104,2,98,4,03-23-2020
 Algeria,,230,65,148,17,03-23-2020
@@ -5188,7 +5189,7 @@ Togo,,18,0,18,0,03-23-2020
 Trinidad and Tobago,,51,0,51,0,03-23-2020
 Tunisia,,89,1,85,3,03-23-2020
 Turkey,,1529,0,1492,37,03-23-2020
-United States,,43618,0,0,552,03-23-2020
+United States,,43618,0,43066,552,03-23-2020
 Uganda,,9,0,9,0,03-23-2020
 Ukraine,,73,1,69,3,03-23-2020
 United Arab Emirates,,198,41,155,2,03-23-2020
@@ -5199,65 +5200,65 @@ Venezuela,,77,15,62,0,03-23-2020
 Vietnam,,123,17,106,0,03-23-2020
 Zambia,,3,0,3,0,03-23-2020
 Zimbabwe,,3,0,2,1,03-23-2020
-United States,Alabama,242,0,0,0,03-24-2020
-United States,Alaska,34,0,0,0,03-24-2020
+United States,Alabama,242,0,242,0,03-24-2020
+United States,Alaska,34,0,34,0,03-24-2020
 United States,American Samoa,0,0,0,0,03-24-2020
-United States,Arizona,326,0,0,5,03-24-2020
-United States,Arkansas,219,0,0,2,03-24-2020
-United States,California,2538,0,0,50,03-24-2020
-United States,Colorado,723,0,0,8,03-24-2020
-United States,Connecticut,618,0,0,12,03-24-2020
-United States,Delaware,104,0,0,0,03-24-2020
-United States,District of Columbia,141,0,0,2,03-24-2020
-United States,Florida,1412,0,0,18,03-24-2020
-United States,Georgia,1026,0,0,32,03-24-2020
-United States,Grand Princess,28,0,0,1,03-24-2020
-United States,Guam,32,0,0,1,03-24-2020
-United States,Hawaii,90,0,0,1,03-24-2020
-United States,Idaho,81,0,0,0,03-24-2020
-United States,Illinois,1537,0,0,16,03-24-2020
-United States,Indiana,368,0,0,12,03-24-2020
-United States,Iowa,124,0,0,0,03-24-2020
-United States,Kansas,100,0,0,2,03-24-2020
-United States,Kentucky,162,0,0,4,03-24-2020
-United States,Louisiana,1388,0,0,46,03-24-2020
-United States,Maine,118,0,0,0,03-24-2020
-United States,Maryland,349,0,0,4,03-24-2020
-United States,Massachusetts,1159,0,0,11,03-24-2020
-United States,Michigan,1793,0,0,24,03-24-2020
-United States,Minnesota,261,0,0,1,03-24-2020
-United States,Mississippi,320,0,0,1,03-24-2020
-United States,Missouri,257,0,0,7,03-24-2020
-United States,Montana,51,0,0,0,03-24-2020
-United States,Nebraska,66,0,0,0,03-24-2020
-United States,Nevada,278,0,0,4,03-24-2020
-United States,New Hampshire,101,0,0,1,03-24-2020
-United States,New Jersey,3675,0,0,44,03-24-2020
-United States,New Mexico,100,0,0,0,03-24-2020
-United States,New York,25681,0,0,210,03-24-2020
-United States,North Carolina,495,0,0,0,03-24-2020
-United States,North Dakota,36,0,0,0,03-24-2020
+United States,Arizona,326,0,321,5,03-24-2020
+United States,Arkansas,219,0,217,2,03-24-2020
+United States,California,2538,0,2488,50,03-24-2020
+United States,Colorado,723,0,715,8,03-24-2020
+United States,Connecticut,618,0,606,12,03-24-2020
+United States,Delaware,104,0,104,0,03-24-2020
+United States,District of Columbia,141,0,139,2,03-24-2020
+United States,Florida,1412,0,1394,18,03-24-2020
+United States,Georgia,1026,0,994,32,03-24-2020
+United States,Grand Princess,28,0,27,1,03-24-2020
+United States,Guam,32,0,31,1,03-24-2020
+United States,Hawaii,90,0,89,1,03-24-2020
+United States,Idaho,81,0,81,0,03-24-2020
+United States,Illinois,1537,0,1521,16,03-24-2020
+United States,Indiana,368,0,356,12,03-24-2020
+United States,Iowa,124,0,124,0,03-24-2020
+United States,Kansas,100,0,98,2,03-24-2020
+United States,Kentucky,162,0,158,4,03-24-2020
+United States,Louisiana,1388,0,1342,46,03-24-2020
+United States,Maine,118,0,118,0,03-24-2020
+United States,Maryland,349,0,345,4,03-24-2020
+United States,Massachusetts,1159,0,1148,11,03-24-2020
+United States,Michigan,1793,0,1769,24,03-24-2020
+United States,Minnesota,261,0,260,1,03-24-2020
+United States,Mississippi,320,0,319,1,03-24-2020
+United States,Missouri,257,0,250,7,03-24-2020
+United States,Montana,51,0,51,0,03-24-2020
+United States,Nebraska,66,0,66,0,03-24-2020
+United States,Nevada,278,0,274,4,03-24-2020
+United States,New Hampshire,101,0,100,1,03-24-2020
+United States,New Jersey,3675,0,3631,44,03-24-2020
+United States,New Mexico,100,0,100,0,03-24-2020
+United States,New York,25681,0,25471,210,03-24-2020
+United States,North Carolina,495,0,495,0,03-24-2020
+United States,North Dakota,36,0,36,0,03-24-2020
 United States,Northern Mariana Islands,0,0,0,0,03-24-2020
-United States,Ohio,567,0,0,8,03-24-2020
-United States,Oklahoma,106,0,0,3,03-24-2020
-United States,Oregon,210,0,0,8,03-24-2020
-United States,Pennsylvania,946,0,0,8,03-24-2020
-United States,Puerto Rico,39,0,0,2,03-24-2020
-United States,Recovered,0,348,0,0,03-24-2020
-United States,Rhode Island,124,0,0,0,03-24-2020
-United States,South Carolina,342,0,0,5,03-24-2020
-United States,South Dakota,30,0,0,1,03-24-2020
-United States,Tennessee,772,0,0,2,03-24-2020
-United States,Texas,955,0,0,12,03-24-2020
-United States,Utah,298,0,0,1,03-24-2020
-United States,Vermont,95,0,0,7,03-24-2020
-United States,Virgin Islands,17,0,0,0,03-24-2020
-United States,Virginia,293,0,0,9,03-24-2020
-United States,Washington,2328,0,0,116,03-24-2020
-United States,West Virginia,22,0,0,0,03-24-2020
-United States,Wisconsin,481,0,0,5,03-24-2020
-United States,Wuhan Evacuee,4,0,0,0,03-24-2020
-United States,Wyoming,29,0,0,0,03-24-2020
+United States,Ohio,567,0,559,8,03-24-2020
+United States,Oklahoma,106,0,103,3,03-24-2020
+United States,Oregon,210,0,202,8,03-24-2020
+United States,Pennsylvania,946,0,938,8,03-24-2020
+United States,Puerto Rico,39,0,37,2,03-24-2020
+United States,Recovered,0,348,-348,0,03-24-2020
+United States,Rhode Island,124,0,124,0,03-24-2020
+United States,South Carolina,342,0,337,5,03-24-2020
+United States,South Dakota,30,0,29,1,03-24-2020
+United States,Tennessee,772,0,770,2,03-24-2020
+United States,Texas,955,0,943,12,03-24-2020
+United States,Utah,298,0,297,1,03-24-2020
+United States,Vermont,95,0,88,7,03-24-2020
+United States,Virgin Islands,17,0,17,0,03-24-2020
+United States,Virginia,293,0,284,9,03-24-2020
+United States,Washington,2328,0,2212,116,03-24-2020
+United States,West Virginia,22,0,22,0,03-24-2020
+United States,Wisconsin,481,0,476,5,03-24-2020
+United States,Wuhan Evacuee,4,0,4,0,03-24-2020
+United States,Wyoming,29,0,29,0,03-24-2020
 Afghanistan,,74,1,72,1,03-24-2020
 Albania,,123,10,108,5,03-24-2020
 Algeria,,264,24,221,19,03-24-2020
@@ -5416,7 +5417,7 @@ Togo,,20,1,19,0,03-24-2020
 Trinidad and Tobago,,57,0,57,0,03-24-2020
 Tunisia,,114,1,109,4,03-24-2020
 Turkey,,1872,0,1828,44,03-24-2020
-United States,,53691,348,0,706,03-24-2020
+United States,,53691,348,52637,706,03-24-2020
 Uganda,,9,0,9,0,03-24-2020
 Ukraine,,97,1,93,3,03-24-2020
 United Arab Emirates,,248,45,201,2,03-24-2020
@@ -5427,64 +5428,64 @@ Venezuela,,84,15,69,0,03-24-2020
 Vietnam,,134,17,117,0,03-24-2020
 Zambia,,3,0,3,0,03-24-2020
 Zimbabwe,,3,0,2,1,03-24-2020
-United States,Alabama,381,0,0,1,03-25-2020
-United States,Alaska,41,0,0,1,03-25-2020
+United States,Alabama,381,0,380,1,03-25-2020
+United States,Alaska,41,0,40,1,03-25-2020
 United States,American Samoa,0,0,0,0,03-25-2020
-United States,Arizona,401,0,0,6,03-25-2020
-United States,Arkansas,280,0,0,2,03-25-2020
-United States,California,2998,0,0,65,03-25-2020
-United States,Colorado,1021,0,0,16,03-25-2020
-United States,Connecticut,875,0,0,19,03-25-2020
-United States,Delaware,119,0,0,0,03-25-2020
-United States,District of Columbia,187,0,0,2,03-25-2020
-United States,Florida,1682,0,0,23,03-25-2020
-United States,Georgia,1247,0,0,40,03-25-2020
-United States,Grand Princess,28,0,0,1,03-25-2020
-United States,Guam,37,0,0,1,03-25-2020
-United States,Hawaii,91,0,0,0,03-25-2020
-United States,Idaho,91,0,0,0,03-25-2020
-United States,Illinois,1865,0,0,19,03-25-2020
-United States,Indiana,477,0,0,14,03-25-2020
-United States,Iowa,146,0,0,1,03-25-2020
-United States,Kansas,134,0,0,3,03-25-2020
-United States,Kentucky,197,0,0,5,03-25-2020
-United States,Louisiana,1795,0,0,65,03-25-2020
-United States,Maine,142,0,0,0,03-25-2020
-United States,Maryland,425,0,0,4,03-25-2020
-United States,Massachusetts,1838,0,0,15,03-25-2020
-United States,Michigan,2296,0,0,43,03-25-2020
-United States,Minnesota,286,0,0,1,03-25-2020
-United States,Mississippi,377,0,0,3,03-25-2020
-United States,Missouri,354,0,0,8,03-25-2020
-United States,Montana,65,0,0,0,03-25-2020
-United States,Nebraska,71,0,0,0,03-25-2020
-United States,Nevada,323,0,0,6,03-25-2020
-United States,New Hampshire,108,0,0,1,03-25-2020
-United States,New Jersey,4402,0,0,62,03-25-2020
-United States,New Mexico,113,0,0,1,03-25-2020
-United States,New York,30841,0,0,285,03-25-2020
-United States,North Carolina,590,0,0,2,03-25-2020
-United States,North Dakota,45,0,0,0,03-25-2020
+United States,Arizona,401,0,395,6,03-25-2020
+United States,Arkansas,280,0,278,2,03-25-2020
+United States,California,2998,0,2933,65,03-25-2020
+United States,Colorado,1021,0,1005,16,03-25-2020
+United States,Connecticut,875,0,856,19,03-25-2020
+United States,Delaware,119,0,119,0,03-25-2020
+United States,District of Columbia,187,0,185,2,03-25-2020
+United States,Florida,1682,0,1659,23,03-25-2020
+United States,Georgia,1247,0,1207,40,03-25-2020
+United States,Grand Princess,28,0,27,1,03-25-2020
+United States,Guam,37,0,36,1,03-25-2020
+United States,Hawaii,91,0,91,0,03-25-2020
+United States,Idaho,91,0,91,0,03-25-2020
+United States,Illinois,1865,0,1846,19,03-25-2020
+United States,Indiana,477,0,463,14,03-25-2020
+United States,Iowa,146,0,145,1,03-25-2020
+United States,Kansas,134,0,131,3,03-25-2020
+United States,Kentucky,197,0,192,5,03-25-2020
+United States,Louisiana,1795,0,1730,65,03-25-2020
+United States,Maine,142,0,142,0,03-25-2020
+United States,Maryland,425,0,421,4,03-25-2020
+United States,Massachusetts,1838,0,1823,15,03-25-2020
+United States,Michigan,2296,0,2253,43,03-25-2020
+United States,Minnesota,286,0,285,1,03-25-2020
+United States,Mississippi,377,0,374,3,03-25-2020
+United States,Missouri,354,0,346,8,03-25-2020
+United States,Montana,65,0,65,0,03-25-2020
+United States,Nebraska,71,0,71,0,03-25-2020
+United States,Nevada,323,0,317,6,03-25-2020
+United States,New Hampshire,108,0,107,1,03-25-2020
+United States,New Jersey,4402,0,4340,62,03-25-2020
+United States,New Mexico,113,0,112,1,03-25-2020
+United States,New York,30841,0,30556,285,03-25-2020
+United States,North Carolina,590,0,588,2,03-25-2020
+United States,North Dakota,45,0,45,0,03-25-2020
 United States,Northern Mariana Islands,0,0,0,0,03-25-2020
-United States,Ohio,704,0,0,11,03-25-2020
-United States,Oklahoma,164,0,0,5,03-25-2020
-United States,Oregon,266,0,0,10,03-25-2020
-United States,Pennsylvania,1260,0,0,15,03-25-2020
-United States,Puerto Rico,51,0,0,2,03-25-2020
-United States,Recovered,0,361,0,0,03-25-2020
-United States,Rhode Island,132,0,0,0,03-25-2020
-United States,South Carolina,424,0,0,7,03-25-2020
-United States,South Dakota,41,0,0,1,03-25-2020
-United States,Tennessee,916,0,0,3,03-25-2020
-United States,Texas,1229,0,0,15,03-25-2020
-United States,Utah,340,0,0,1,03-25-2020
-United States,Vermont,125,0,0,8,03-25-2020
-United States,Virgin Islands,17,0,0,0,03-25-2020
-United States,Virginia,396,0,0,9,03-25-2020
-United States,Washington,2591,0,0,133,03-25-2020
-United States,West Virginia,39,0,0,0,03-25-2020
-United States,Wisconsin,621,0,0,7,03-25-2020
-United States,Wyoming,44,0,0,0,03-25-2020
+United States,Ohio,704,0,693,11,03-25-2020
+United States,Oklahoma,164,0,159,5,03-25-2020
+United States,Oregon,266,0,256,10,03-25-2020
+United States,Pennsylvania,1260,0,1245,15,03-25-2020
+United States,Puerto Rico,51,0,49,2,03-25-2020
+United States,Recovered,0,361,-361,0,03-25-2020
+United States,Rhode Island,132,0,132,0,03-25-2020
+United States,South Carolina,424,0,417,7,03-25-2020
+United States,South Dakota,41,0,40,1,03-25-2020
+United States,Tennessee,916,0,913,3,03-25-2020
+United States,Texas,1229,0,1214,15,03-25-2020
+United States,Utah,340,0,339,1,03-25-2020
+United States,Vermont,125,0,117,8,03-25-2020
+United States,Virgin Islands,17,0,17,0,03-25-2020
+United States,Virginia,396,0,387,9,03-25-2020
+United States,Washington,2591,0,2458,133,03-25-2020
+United States,West Virginia,39,0,39,0,03-25-2020
+United States,Wisconsin,621,0,614,7,03-25-2020
+United States,Wyoming,44,0,44,0,03-25-2020
 Afghanistan,,84,2,80,2,03-25-2020
 Albania,,146,17,124,5,03-25-2020
 Algeria,,302,65,216,21,03-25-2020
@@ -5529,7 +5530,6 @@ Cuba,,57,1,55,1,03-25-2020
 Cyprus,,132,3,126,3,03-25-2020
 Czechia,,1654,10,1638,6,03-25-2020
 Denmark,,1862,41,1787,34,03-25-2020
-Diamond Princess,,712,587,115,10,03-25-2020
 Djibouti,,11,0,11,0,03-25-2020
 Dominica,,7,0,7,0,03-25-2020
 Dominican Republic,,392,3,379,10,03-25-2020
@@ -5647,7 +5647,7 @@ Togo,,23,1,22,0,03-25-2020
 Trinidad and Tobago,,60,0,59,1,03-25-2020
 Tunisia,,173,2,166,5,03-25-2020
 Turkey,,2433,26,2348,59,03-25-2020
-United States,,65729,361,0,942,03-25-2020
+United States,,65729,361,64426,942,03-25-2020
 Uganda,,14,0,14,0,03-25-2020
 Ukraine,,145,1,139,5,03-25-2020
 United Arab Emirates,,333,52,279,2,03-25-2020
@@ -5658,64 +5658,64 @@ Venezuela,,91,15,76,0,03-25-2020
 Vietnam,,141,17,124,0,03-25-2020
 Zambia,,12,0,12,0,03-25-2020
 Zimbabwe,,3,0,2,1,03-25-2020
-United States,Alabama,517,0,0,1,03-26-2020
-United States,Alaska,56,0,0,1,03-26-2020
+United States,Alabama,517,0,516,1,03-26-2020
+United States,Alaska,56,0,55,1,03-26-2020
 United States,American Samoa,0,0,0,0,03-26-2020
-United States,Arizona,508,0,0,8,03-26-2020
-United States,Arkansas,335,0,0,2,03-26-2020
-United States,California,3899,0,0,81,03-26-2020
-United States,Colorado,1430,0,0,19,03-26-2020
-United States,Connecticut,1012,0,0,21,03-26-2020
-United States,Delaware,130,0,0,1,03-26-2020
-United States,District of Columbia,231,0,0,3,03-26-2020
-United States,Florida,2357,0,0,29,03-26-2020
-United States,Georgia,1525,0,0,48,03-26-2020
-United States,Grand Princess,28,0,0,1,03-26-2020
-United States,Guam,45,0,0,1,03-26-2020
-United States,Hawaii,95,0,0,0,03-26-2020
-United States,Idaho,146,0,0,3,03-26-2020
-United States,Illinois,2538,0,0,26,03-26-2020
-United States,Indiana,645,0,0,17,03-26-2020
-United States,Iowa,179,0,0,1,03-26-2020
-United States,Kansas,172,0,0,3,03-26-2020
-United States,Kentucky,247,0,0,5,03-26-2020
-United States,Louisiana,2304,0,0,83,03-26-2020
-United States,Maine,155,0,0,0,03-26-2020
-United States,Maryland,583,0,0,4,03-26-2020
-United States,Massachusetts,2417,0,0,25,03-26-2020
-United States,Michigan,2845,0,0,61,03-26-2020
-United States,Minnesota,344,0,0,2,03-26-2020
-United States,Mississippi,485,0,0,6,03-26-2020
-United States,Missouri,520,0,0,9,03-26-2020
-United States,Montana,90,0,0,0,03-26-2020
-United States,Nebraska,74,0,0,0,03-26-2020
-United States,Nevada,420,0,0,10,03-26-2020
-United States,New Hampshire,137,0,0,1,03-26-2020
-United States,New Jersey,6876,0,0,81,03-26-2020
-United States,New Mexico,113,0,0,1,03-26-2020
-United States,New York,37877,0,0,385,03-26-2020
-United States,North Carolina,738,0,0,3,03-26-2020
-United States,North Dakota,51,0,0,0,03-26-2020
+United States,Arizona,508,0,500,8,03-26-2020
+United States,Arkansas,335,0,333,2,03-26-2020
+United States,California,3899,0,3818,81,03-26-2020
+United States,Colorado,1430,0,1411,19,03-26-2020
+United States,Connecticut,1012,0,991,21,03-26-2020
+United States,Delaware,130,0,129,1,03-26-2020
+United States,District of Columbia,231,0,228,3,03-26-2020
+United States,Florida,2357,0,2328,29,03-26-2020
+United States,Georgia,1525,0,1477,48,03-26-2020
+United States,Grand Princess,28,0,27,1,03-26-2020
+United States,Guam,45,0,44,1,03-26-2020
+United States,Hawaii,95,0,95,0,03-26-2020
+United States,Idaho,146,0,143,3,03-26-2020
+United States,Illinois,2538,0,2512,26,03-26-2020
+United States,Indiana,645,0,628,17,03-26-2020
+United States,Iowa,179,0,178,1,03-26-2020
+United States,Kansas,172,0,169,3,03-26-2020
+United States,Kentucky,247,0,242,5,03-26-2020
+United States,Louisiana,2304,0,2221,83,03-26-2020
+United States,Maine,155,0,155,0,03-26-2020
+United States,Maryland,583,0,579,4,03-26-2020
+United States,Massachusetts,2417,0,2392,25,03-26-2020
+United States,Michigan,2845,0,2784,61,03-26-2020
+United States,Minnesota,344,0,342,2,03-26-2020
+United States,Mississippi,485,0,479,6,03-26-2020
+United States,Missouri,520,0,511,9,03-26-2020
+United States,Montana,90,0,90,0,03-26-2020
+United States,Nebraska,74,0,74,0,03-26-2020
+United States,Nevada,420,0,410,10,03-26-2020
+United States,New Hampshire,137,0,136,1,03-26-2020
+United States,New Jersey,6876,0,6795,81,03-26-2020
+United States,New Mexico,113,0,112,1,03-26-2020
+United States,New York,37877,0,37492,385,03-26-2020
+United States,North Carolina,738,0,735,3,03-26-2020
+United States,North Dakota,51,0,51,0,03-26-2020
 United States,Northern Mariana Islands,0,0,0,0,03-26-2020
-United States,Ohio,868,0,0,15,03-26-2020
-United States,Oklahoma,248,0,0,7,03-26-2020
-United States,Oregon,316,0,0,11,03-26-2020
-United States,Pennsylvania,1795,0,0,18,03-26-2020
-United States,Puerto Rico,64,0,0,2,03-26-2020
-United States,Recovered,0,681,0,0,03-26-2020
-United States,Rhode Island,165,0,0,0,03-26-2020
-United States,South Carolina,424,0,0,9,03-26-2020
-United States,South Dakota,46,0,0,1,03-26-2020
-United States,Tennessee,1097,0,0,3,03-26-2020
-United States,Texas,1563,0,0,21,03-26-2020
-United States,Utah,396,0,0,1,03-26-2020
-United States,Vermont,158,0,0,9,03-26-2020
-United States,Virgin Islands,17,0,0,0,03-26-2020
-United States,Virginia,466,0,0,10,03-26-2020
-United States,Washington,3207,0,0,150,03-26-2020
-United States,West Virginia,52,0,0,0,03-26-2020
-United States,Wisconsin,728,0,0,10,03-26-2020
-United States,Wyoming,53,0,0,0,03-26-2020
+United States,Ohio,868,0,853,15,03-26-2020
+United States,Oklahoma,248,0,241,7,03-26-2020
+United States,Oregon,316,0,305,11,03-26-2020
+United States,Pennsylvania,1795,0,1777,18,03-26-2020
+United States,Puerto Rico,64,0,62,2,03-26-2020
+United States,Recovered,0,681,-681,0,03-26-2020
+United States,Rhode Island,165,0,165,0,03-26-2020
+United States,South Carolina,424,0,415,9,03-26-2020
+United States,South Dakota,46,0,45,1,03-26-2020
+United States,Tennessee,1097,0,1094,3,03-26-2020
+United States,Texas,1563,0,1542,21,03-26-2020
+United States,Utah,396,0,395,1,03-26-2020
+United States,Vermont,158,0,149,9,03-26-2020
+United States,Virgin Islands,17,0,17,0,03-26-2020
+United States,Virginia,466,0,456,10,03-26-2020
+United States,Washington,3207,0,3057,150,03-26-2020
+United States,West Virginia,52,0,52,0,03-26-2020
+United States,Wisconsin,728,0,718,10,03-26-2020
+United States,Wyoming,53,0,53,0,03-26-2020
 Afghanistan,,94,2,88,4,03-26-2020
 Albania,,174,17,151,6,03-26-2020
 Algeria,,367,29,313,25,03-26-2020
@@ -5760,7 +5760,6 @@ Cuba,,67,1,64,2,03-26-2020
 Cyprus,,146,4,139,3,03-26-2020
 Czechia,,1925,10,1906,9,03-26-2020
 Denmark,,2023,50,1932,41,03-26-2020
-Diamond Princess,,712,597,105,10,03-26-2020
 Djibouti,,11,0,11,0,03-26-2020
 Dominica,,11,0,11,0,03-26-2020
 Dominican Republic,,488,3,475,10,03-26-2020
@@ -5879,7 +5878,7 @@ Togo,,23,1,22,0,03-26-2020
 Trinidad and Tobago,,65,0,64,1,03-26-2020
 Tunisia,,197,2,189,6,03-26-2020
 Turkey,,3629,26,3528,75,03-26-2020
-United States,,83787,681,0,1209,03-26-2020
+United States,,83787,681,81897,1209,03-26-2020
 Uganda,,14,0,14,0,03-26-2020
 Ukraine,,196,1,190,5,03-26-2020
 United Arab Emirates,,333,52,279,2,03-26-2020
@@ -5891,3 +5890,3321 @@ Vietnam,,153,20,133,0,03-26-2020
 West Bank and Gaza,,84,17,66,1,03-26-2020
 Zambia,,16,0,16,0,03-26-2020
 Zimbabwe,,3,0,2,1,03-26-2020
+United States,Alabama,587,0,583,4,03-27-2020
+United States,Alaska,58,0,57,1,03-27-2020
+United States,American Samoa,0,0,0,0,03-27-2020
+United States,Arizona,665,0,652,13,03-27-2020
+United States,Arkansas,381,0,378,3,03-27-2020
+United States,California,4657,0,4563,94,03-27-2020
+United States,Colorado,1433,0,1406,27,03-27-2020
+United States,Connecticut,1291,0,1264,27,03-27-2020
+United States,Delaware,163,0,161,2,03-27-2020
+United States,District of Columbia,271,0,268,3,03-27-2020
+United States,Florida,2900,0,2865,35,03-27-2020
+United States,Georgia,2000,0,1936,64,03-27-2020
+United States,Grand Princess,28,0,25,3,03-27-2020
+United States,Guam,51,0,50,1,03-27-2020
+United States,Hawaii,106,0,106,0,03-27-2020
+United States,Idaho,205,0,202,3,03-27-2020
+United States,Illinois,3024,0,2990,34,03-27-2020
+United States,Indiana,979,0,954,25,03-27-2020
+United States,Iowa,235,0,232,3,03-27-2020
+United States,Kansas,206,0,202,4,03-27-2020
+United States,Kentucky,301,0,294,7,03-27-2020
+United States,Louisiana,2744,0,2625,119,03-27-2020
+United States,Maine,168,0,167,1,03-27-2020
+United States,Maryland,775,0,770,5,03-27-2020
+United States,Massachusetts,3240,0,3205,35,03-27-2020
+United States,Michigan,3634,0,3542,92,03-27-2020
+United States,Minnesota,396,0,392,4,03-27-2020
+United States,Mississippi,579,0,571,8,03-27-2020
+United States,Missouri,666,0,657,9,03-27-2020
+United States,Montana,109,0,108,1,03-27-2020
+United States,Nebraska,82,0,82,0,03-27-2020
+United States,Nevada,536,0,526,10,03-27-2020
+United States,New Hampshire,158,0,157,1,03-27-2020
+United States,New Jersey,8825,0,8717,108,03-27-2020
+United States,New Mexico,136,0,135,1,03-27-2020
+United States,New York,44876,0,44349,527,03-27-2020
+United States,North Carolina,887,0,883,4,03-27-2020
+United States,North Dakota,68,0,67,1,03-27-2020
+United States,Northern Mariana Islands,0,0,0,0,03-27-2020
+United States,Ohio,1137,0,1118,19,03-27-2020
+United States,Oklahoma,322,0,314,8,03-27-2020
+United States,Oregon,416,0,404,12,03-27-2020
+United States,Pennsylvania,2345,0,2323,22,03-27-2020
+United States,Puerto Rico,79,0,76,3,03-27-2020
+United States,Recovered,0,869,-869,0,03-27-2020
+United States,Rhode Island,203,0,203,0,03-27-2020
+United States,South Carolina,542,0,529,13,03-27-2020
+United States,South Dakota,58,0,57,1,03-27-2020
+United States,Tennessee,1318,0,1312,6,03-27-2020
+United States,Texas,1937,0,1911,26,03-27-2020
+United States,Utah,472,0,471,1,03-27-2020
+United States,Vermont,184,0,174,10,03-27-2020
+United States,Virgin Islands,19,0,19,0,03-27-2020
+United States,Virginia,607,0,597,10,03-27-2020
+United States,Washington,3477,0,3320,157,03-27-2020
+United States,West Virginia,76,0,76,0,03-27-2020
+United States,Wisconsin,926,0,912,14,03-27-2020
+United States,Wyoming,70,0,70,0,03-27-2020
+Afghanistan,,110,2,104,4,03-27-2020
+Albania,,186,31,147,8,03-27-2020
+Algeria,,409,29,354,26,03-27-2020
+Andorra,,267,1,263,3,03-27-2020
+Angola,,4,0,4,0,03-27-2020
+Antigua and Barbuda,,7,0,7,0,03-27-2020
+Argentina,,589,72,504,13,03-27-2020
+Armenia,,329,28,300,1,03-27-2020
+Australia,,3143,194,2936,13,03-27-2020
+Austria,,7657,225,7374,58,03-27-2020
+Azerbaijan,,165,15,147,3,03-27-2020
+Bahamas,,10,1,9,0,03-27-2020
+Bahrain,,466,227,235,4,03-27-2020
+Bangladesh,,48,11,32,5,03-27-2020
+Barbados,,24,0,24,0,03-27-2020
+Belarus,,94,32,62,0,03-27-2020
+Belgium,,7284,858,6137,289,03-27-2020
+Belize,,2,0,2,0,03-27-2020
+Benin,,6,0,6,0,03-27-2020
+Bhutan,,3,0,3,0,03-27-2020
+Bolivia,,61,0,61,0,03-27-2020
+Bosnia and Herzegovina,,237,5,228,4,03-27-2020
+Brazil,,3417,6,3319,92,03-27-2020
+Brunei,,115,11,104,0,03-27-2020
+Bulgaria,,293,9,281,3,03-27-2020
+Burkina Faso,,180,12,159,9,03-27-2020
+Burma,,8,0,8,0,03-27-2020
+Cape Verde,,5,0,4,1,03-27-2020
+Cambodia,,99,11,88,0,03-27-2020
+Cameroon,,91,2,87,2,03-27-2020
+Canada,,4682,256,0,53,03-27-2020
+Central African Republic,,3,0,3,0,03-27-2020
+Chad,,3,0,3,0,03-27-2020
+Chile,,1610,43,1562,5,03-27-2020
+China,,81897,74720,3881,3296,03-27-2020
+Colombia,,539,10,523,6,03-27-2020
+Republic of the Congo,,4,0,4,0,03-27-2020
+Congo (Kinshasa),,51,2,46,3,03-27-2020
+Costa Rica,,263,3,258,2,03-27-2020
+Cote d'Ivoire,,101,3,98,0,03-27-2020
+Croatia,,586,37,546,3,03-27-2020
+Cuba,,80,4,74,2,03-27-2020
+Cyprus,,162,15,142,5,03-27-2020
+Czechia,,2279,11,2259,9,03-27-2020
+Denmark,,2200,57,2091,52,03-27-2020
+Djibouti,,12,0,12,0,03-27-2020
+Dominica,,11,0,11,0,03-27-2020
+Dominican Republic,,581,3,558,20,03-27-2020
+Ecuador,,1595,3,1556,36,03-27-2020
+Egypt,,536,116,390,30,03-27-2020
+El Salvador,,13,0,13,0,03-27-2020
+Equatorial Guinea,,12,0,12,0,03-27-2020
+Eritrea,,6,0,6,0,03-27-2020
+Estonia,,575,11,563,1,03-27-2020
+Eswatini,,9,0,9,0,03-27-2020
+Ethiopia,,16,0,16,0,03-27-2020
+Fiji,,5,0,5,0,03-27-2020
+Finland,,1041,10,1024,7,03-27-2020
+France,,33402,5707,25698,1997,03-27-2020
+Gabon,,7,0,6,1,03-27-2020
+Gambia,,3,0,2,1,03-27-2020
+Georgia,,83,14,69,0,03-27-2020
+Germany,,50871,6658,43871,342,03-27-2020
+Ghana,,137,2,131,4,03-27-2020
+Greece,,966,52,886,28,03-27-2020
+Grenada,,7,0,7,0,03-27-2020
+Guatemala,,28,4,23,1,03-27-2020
+Guinea,,8,0,8,0,03-27-2020
+Guinea-Bissau,,2,0,2,0,03-27-2020
+Guyana,,5,0,4,1,03-27-2020
+Haiti,,8,0,8,0,03-27-2020
+Holy See,,4,0,4,0,03-27-2020
+Honduras,,68,0,67,1,03-27-2020
+Hungary,,300,34,256,10,03-27-2020
+Iceland,,890,97,791,2,03-27-2020
+India,,887,73,794,20,03-27-2020
+Indonesia,,1046,46,913,87,03-27-2020
+Iran,,32332,11133,18821,2378,03-27-2020
+Iraq,,458,122,296,40,03-27-2020
+Ireland,,2121,5,2094,22,03-27-2020
+Israel,,3035,79,2944,12,03-27-2020
+Italy,,86498,10950,66414,9134,03-27-2020
+Jamaica,,26,2,23,1,03-27-2020
+Japan,,1468,372,1047,49,03-27-2020
+Jordan,,235,18,216,1,03-27-2020
+Kazakhstan,,150,3,146,1,03-27-2020
+Kenya,,31,1,29,1,03-27-2020
+South Korea,,9332,4528,4665,139,03-27-2020
+Kosovo,,86,1,84,1,03-27-2020
+Kuwait,,225,57,168,0,03-27-2020
+Kyrgyzstan,,58,0,58,0,03-27-2020
+Laos,,6,0,6,0,03-27-2020
+Latvia,,280,1,279,0,03-27-2020
+Lebanon,,391,27,356,8,03-27-2020
+Liberia,,3,0,3,0,03-27-2020
+Libya,,1,0,1,0,03-27-2020
+Liechtenstein,,56,0,56,0,03-27-2020
+Lithuania,,358,1,352,5,03-27-2020
+Luxembourg,,1605,40,1550,15,03-27-2020
+Madagascar,,26,0,26,0,03-27-2020
+Malaysia,,2161,259,1876,26,03-27-2020
+Maldives,,16,9,7,0,03-27-2020
+Mali,,11,0,11,0,03-27-2020
+Malta,,139,2,137,0,03-27-2020
+Mauritania,,3,0,3,0,03-27-2020
+Mauritius,,94,0,92,2,03-27-2020
+Mexico,,585,4,573,8,03-27-2020
+Moldova,,199,2,195,2,03-27-2020
+Monaco,,42,1,41,0,03-27-2020
+Mongolia,,11,0,11,0,03-27-2020
+Montenegro,,82,0,81,1,03-27-2020
+Morocco,,345,11,311,23,03-27-2020
+Mozambique,,7,0,7,0,03-27-2020
+Namibia,,8,2,6,0,03-27-2020
+Nepal,,4,1,3,0,03-27-2020
+Netherlands,,8647,6,8094,547,03-27-2020
+New Zealand,,368,37,331,0,03-27-2020
+Nicaragua,,2,0,1,1,03-27-2020
+Niger,,10,0,9,1,03-27-2020
+Nigeria,,70,3,66,1,03-27-2020
+North Macedonia,,219,3,213,3,03-27-2020
+Norway,,3755,6,3730,19,03-27-2020
+Oman,,131,23,108,0,03-27-2020
+Pakistan,,1373,23,1339,11,03-27-2020
+Panama,,674,2,663,9,03-27-2020
+Papua New Guinea,,1,0,1,0,03-27-2020
+Paraguay,,52,1,48,3,03-27-2020
+Peru,,635,16,608,11,03-27-2020
+Philippines,,803,31,718,54,03-27-2020
+Poland,,1389,7,1366,16,03-27-2020
+Portugal,,4268,43,4149,76,03-27-2020
+Qatar,,562,43,519,0,03-27-2020
+Romania,,1292,115,1151,26,03-27-2020
+Russia,,1036,45,987,4,03-27-2020
+Rwanda,,54,0,54,0,03-27-2020
+Saint Kitts and Nevis,,2,0,2,0,03-27-2020
+Saint Lucia,,3,1,2,0,03-27-2020
+Saint Vincent and the Grenadines,,1,0,1,0,03-27-2020
+San Marino,,223,4,198,21,03-27-2020
+Saudi Arabia,,1104,35,1066,3,03-27-2020
+Senegal,,119,11,108,0,03-27-2020
+Serbia,,457,0,456,1,03-27-2020
+Seychelles,,7,0,7,0,03-27-2020
+Singapore,,732,183,547,2,03-27-2020
+Slovakia,,269,2,267,0,03-27-2020
+Slovenia,,632,10,613,9,03-27-2020
+Somalia,,3,0,3,0,03-27-2020
+South Africa,,1170,31,1138,1,03-27-2020
+Spain,,65719,9357,51224,5138,03-27-2020
+Sri Lanka,,106,7,99,0,03-27-2020
+Sudan,,3,0,2,1,03-27-2020
+Suriname,,8,0,8,0,03-27-2020
+Sweden,,3069,16,2948,105,03-27-2020
+Switzerland,,12928,1530,11167,231,03-27-2020
+Syria,,5,0,5,0,03-27-2020
+Taiwan,,267,29,236,2,03-27-2020
+Tanzania,,13,1,12,0,03-27-2020
+Thailand,,1136,97,1034,5,03-27-2020
+Timor-Leste,,1,0,1,0,03-27-2020
+Togo,,25,1,23,1,03-27-2020
+Trinidad and Tobago,,66,1,63,2,03-27-2020
+Tunisia,,227,2,219,6,03-27-2020
+Turkey,,5698,42,5564,92,03-27-2020
+United States,,101608,869,99158,1581,03-27-2020
+Uganda,,23,0,23,0,03-27-2020
+Ukraine,,310,5,300,5,03-27-2020
+United Arab Emirates,,405,52,351,2,03-27-2020
+United Kingdom,,14745,151,13833,761,03-27-2020
+Uruguay,,238,0,238,0,03-27-2020
+Uzbekistan,,88,5,82,1,03-27-2020
+Venezuela,,107,31,75,1,03-27-2020
+Vietnam,,163,20,143,0,03-27-2020
+West Bank and Gaza,,91,17,73,1,03-27-2020
+Zambia,,22,0,22,0,03-27-2020
+Zimbabwe,,5,0,4,1,03-27-2020
+United States,Alabama,694,0,690,4,03-28-2020
+United States,Alaska,85,0,83,2,03-28-2020
+United States,American Samoa,0,0,0,0,03-28-2020
+United States,Arizona,773,0,758,15,03-28-2020
+United States,Arkansas,409,0,404,5,03-28-2020
+United States,California,5095,0,4985,110,03-28-2020
+United States,Colorado,1740,0,1709,31,03-28-2020
+United States,Connecticut,1524,0,1491,33,03-28-2020
+United States,Delaware,214,0,209,5,03-28-2020
+United States,District of Columbia,304,0,300,4,03-28-2020
+United States,Florida,3763,0,3709,54,03-28-2020
+United States,Georgia,2366,0,2297,69,03-28-2020
+United States,Grand Princess,103,0,100,3,03-28-2020
+United States,Guam,55,0,54,1,03-28-2020
+United States,Hawaii,149,0,149,0,03-28-2020
+United States,Idaho,234,0,230,4,03-28-2020
+United States,Illinois,3491,0,3444,47,03-28-2020
+United States,Indiana,1233,0,1202,31,03-28-2020
+United States,Iowa,298,0,295,3,03-28-2020
+United States,Kansas,266,0,262,4,03-28-2020
+United States,Kentucky,380,0,371,9,03-28-2020
+United States,Louisiana,3315,0,3178,137,03-28-2020
+United States,Maine,211,0,210,1,03-28-2020
+United States,Maryland,995,0,990,5,03-28-2020
+United States,Massachusetts,4257,0,4213,44,03-28-2020
+United States,Michigan,4650,0,4539,111,03-28-2020
+United States,Minnesota,441,0,436,5,03-28-2020
+United States,Mississippi,663,0,650,13,03-28-2020
+United States,Missouri,836,0,826,10,03-28-2020
+United States,Montana,129,0,128,1,03-28-2020
+United States,Nebraska,96,0,94,2,03-28-2020
+United States,Nevada,626,0,616,10,03-28-2020
+United States,New Hampshire,187,0,185,2,03-28-2020
+United States,New Jersey,11124,0,10984,140,03-28-2020
+United States,New Mexico,208,0,207,1,03-28-2020
+United States,New York,52410,0,51682,728,03-28-2020
+United States,North Carolina,1020,0,1015,5,03-28-2020
+United States,North Dakota,94,0,93,1,03-28-2020
+United States,Northern Mariana Islands,0,0,0,0,03-28-2020
+United States,Ohio,1406,0,1381,25,03-28-2020
+United States,Oklahoma,377,0,362,15,03-28-2020
+United States,Oregon,479,0,466,13,03-28-2020
+United States,Pennsylvania,2845,0,2811,34,03-28-2020
+United States,Puerto Rico,100,0,97,3,03-28-2020
+United States,Recovered,0,1072,-1072,0,03-28-2020
+United States,Rhode Island,239,0,237,2,03-28-2020
+United States,South Carolina,660,0,645,15,03-28-2020
+United States,South Dakota,68,0,67,1,03-28-2020
+United States,Tennessee,1511,0,1504,7,03-28-2020
+United States,Texas,2455,0,2425,30,03-28-2020
+United States,Utah,602,0,601,1,03-28-2020
+United States,Vermont,211,0,199,12,03-28-2020
+United States,Virgin Islands,22,0,22,0,03-28-2020
+United States,Virginia,740,0,727,13,03-28-2020
+United States,Washington,4030,0,3842,188,03-28-2020
+United States,West Virginia,96,0,96,0,03-28-2020
+United States,Wisconsin,1055,0,1038,17,03-28-2020
+United States,Wyoming,82,0,82,0,03-28-2020
+Afghanistan,,110,2,104,4,03-28-2020
+Albania,,197,31,156,10,03-28-2020
+Algeria,,454,31,394,29,03-28-2020
+Andorra,,308,1,304,3,03-28-2020
+Angola,,5,0,5,0,03-28-2020
+Antigua and Barbuda,,7,0,7,0,03-28-2020
+Argentina,,690,72,600,18,03-28-2020
+Armenia,,407,30,376,1,03-28-2020
+Australia,,3640,244,3382,14,03-28-2020
+Austria,,8271,225,7978,68,03-28-2020
+Azerbaijan,,182,15,163,4,03-28-2020
+Bahamas,,10,1,9,0,03-28-2020
+Bahrain,,476,265,207,4,03-28-2020
+Bangladesh,,48,15,28,5,03-28-2020
+Barbados,,26,0,26,0,03-28-2020
+Belarus,,94,32,62,0,03-28-2020
+Belgium,,9134,1063,7718,353,03-28-2020
+Belize,,2,0,2,0,03-28-2020
+Benin,,6,0,6,0,03-28-2020
+Bhutan,,3,0,3,0,03-28-2020
+Bolivia,,74,0,74,0,03-28-2020
+Bosnia and Herzegovina,,258,5,248,5,03-28-2020
+Brazil,,3904,6,3787,111,03-28-2020
+Brunei,,120,25,94,1,03-28-2020
+Bulgaria,,331,11,313,7,03-28-2020
+Burkina Faso,,207,21,175,11,03-28-2020
+Burma,,8,0,8,0,03-28-2020
+Cape Verde,,5,0,4,1,03-28-2020
+Cambodia,,99,13,86,0,03-28-2020
+Cameroon,,91,2,87,2,03-28-2020
+Canada,,5576,466,0,60,03-28-2020
+Central African Republic,,3,0,3,0,03-28-2020
+Chad,,3,0,3,0,03-28-2020
+Chile,,1909,61,1842,6,03-28-2020
+China,,81999,75100,3600,3299,03-28-2020
+Colombia,,608,10,592,6,03-28-2020
+Republic of the Congo,,4,0,4,0,03-28-2020
+Congo (Kinshasa),,65,2,57,6,03-28-2020
+Costa Rica,,295,3,290,2,03-28-2020
+Cote d'Ivoire,,101,3,98,0,03-28-2020
+Croatia,,657,45,607,5,03-28-2020
+Cuba,,119,4,112,3,03-28-2020
+Cyprus,,179,15,159,5,03-28-2020
+Czechia,,2631,11,2609,11,03-28-2020
+Denmark,,2366,57,2244,65,03-28-2020
+Djibouti,,14,0,14,0,03-28-2020
+Dominica,,11,0,11,0,03-28-2020
+Dominican Republic,,719,3,688,28,03-28-2020
+Ecuador,,1823,3,1772,48,03-28-2020
+Egypt,,576,121,419,36,03-28-2020
+El Salvador,,19,0,19,0,03-28-2020
+Equatorial Guinea,,12,0,12,0,03-28-2020
+Eritrea,,6,0,6,0,03-28-2020
+Estonia,,645,20,624,1,03-28-2020
+Eswatini,,9,0,9,0,03-28-2020
+Ethiopia,,16,1,15,0,03-28-2020
+Fiji,,5,0,5,0,03-28-2020
+Finland,,1167,10,1148,9,03-28-2020
+France,,38105,5724,30064,2317,03-28-2020
+Gabon,,7,0,6,1,03-28-2020
+Gambia,,3,0,2,1,03-28-2020
+Georgia,,90,14,76,0,03-28-2020
+Germany,,57695,8481,48781,433,03-28-2020
+Ghana,,141,2,134,5,03-28-2020
+Greece,,1061,52,977,32,03-28-2020
+Grenada,,7,0,7,0,03-28-2020
+Guatemala,,34,10,23,1,03-28-2020
+Guinea,,8,0,8,0,03-28-2020
+Guinea-Bissau,,2,0,2,0,03-28-2020
+Guyana,,8,0,7,1,03-28-2020
+Haiti,,8,0,8,0,03-28-2020
+Holy See,,6,0,6,0,03-28-2020
+Honduras,,95,3,91,1,03-28-2020
+Hungary,,343,34,298,11,03-28-2020
+Iceland,,963,114,847,2,03-28-2020
+India,,987,84,879,24,03-28-2020
+Indonesia,,1155,59,994,102,03-28-2020
+Iran,,35408,11679,21212,2517,03-28-2020
+Iraq,,506,131,333,42,03-28-2020
+Ireland,,2415,5,2374,36,03-28-2020
+Israel,,3619,89,3518,12,03-28-2020
+Italy,,92472,12384,70065,10023,03-28-2020
+Jamaica,,30,2,27,1,03-28-2020
+Japan,,1693,404,1237,52,03-28-2020
+Jordan,,246,18,227,1,03-28-2020
+Kazakhstan,,228,16,211,1,03-28-2020
+Kenya,,38,1,36,1,03-28-2020
+South Korea,,9478,4811,4523,144,03-28-2020
+Kosovo,,91,1,89,1,03-28-2020
+Kuwait,,235,64,171,0,03-28-2020
+Kyrgyzstan,,58,0,58,0,03-28-2020
+Laos,,8,0,8,0,03-28-2020
+Latvia,,305,1,304,0,03-28-2020
+Lebanon,,412,30,374,8,03-28-2020
+Liberia,,3,0,3,0,03-28-2020
+Libya,,3,0,3,0,03-28-2020
+Liechtenstein,,56,0,56,0,03-28-2020
+Lithuania,,394,1,386,7,03-28-2020
+Luxembourg,,1831,40,1773,18,03-28-2020
+MS Zaandam,,2,0,2,0,03-28-2020
+Madagascar,,26,0,26,0,03-28-2020
+Malaysia,,2320,320,1973,27,03-28-2020
+Maldives,,16,9,7,0,03-28-2020
+Mali,,18,0,18,0,03-28-2020
+Malta,,149,2,147,0,03-28-2020
+Mauritania,,5,0,5,0,03-28-2020
+Mauritius,,102,0,100,2,03-28-2020
+Mexico,,717,4,701,12,03-28-2020
+Moldova,,231,2,227,2,03-28-2020
+Monaco,,42,1,41,0,03-28-2020
+Mongolia,,12,0,12,0,03-28-2020
+Montenegro,,84,0,83,1,03-28-2020
+Morocco,,402,11,366,25,03-28-2020
+Mozambique,,8,0,8,0,03-28-2020
+Namibia,,8,2,6,0,03-28-2020
+Nepal,,5,1,4,0,03-28-2020
+Netherlands,,9819,6,9173,640,03-28-2020
+New Zealand,,451,50,401,0,03-28-2020
+Nicaragua,,4,0,3,1,03-28-2020
+Niger,,10,0,9,1,03-28-2020
+Nigeria,,89,3,85,1,03-28-2020
+North Macedonia,,241,3,234,4,03-28-2020
+Norway,,4015,7,3985,23,03-28-2020
+Oman,,152,23,129,0,03-28-2020
+Pakistan,,1495,29,1454,12,03-28-2020
+Panama,,786,2,770,14,03-28-2020
+Papua New Guinea,,1,0,1,0,03-28-2020
+Paraguay,,56,1,52,3,03-28-2020
+Peru,,671,16,639,16,03-28-2020
+Philippines,,1075,35,972,68,03-28-2020
+Poland,,1638,7,1613,18,03-28-2020
+Portugal,,5170,43,5027,100,03-28-2020
+Qatar,,590,45,544,1,03-28-2020
+Romania,,1452,139,1276,37,03-28-2020
+Russia,,1264,49,1211,4,03-28-2020
+Rwanda,,60,0,60,0,03-28-2020
+Saint Kitts and Nevis,,2,0,2,0,03-28-2020
+Saint Lucia,,3,1,2,0,03-28-2020
+Saint Vincent and the Grenadines,,1,1,0,0,03-28-2020
+San Marino,,224,6,196,22,03-28-2020
+Saudi Arabia,,1203,37,1162,4,03-28-2020
+Senegal,,130,18,112,0,03-28-2020
+Serbia,,659,0,649,10,03-28-2020
+Seychelles,,8,0,8,0,03-28-2020
+Singapore,,802,198,602,2,03-28-2020
+Slovakia,,292,2,290,0,03-28-2020
+Slovenia,,684,10,665,9,03-28-2020
+Somalia,,3,0,3,0,03-28-2020
+South Africa,,1187,31,1155,1,03-28-2020
+Spain,,73235,12285,54968,5982,03-28-2020
+Sri Lanka,,113,9,103,1,03-28-2020
+Sudan,,5,0,4,1,03-28-2020
+Suriname,,8,0,8,0,03-28-2020
+Sweden,,3447,16,3326,105,03-28-2020
+Switzerland,,14076,1530,12282,264,03-28-2020
+Syria,,5,0,5,0,03-28-2020
+Taiwan,,283,30,251,2,03-28-2020
+Tanzania,,14,1,13,0,03-28-2020
+Thailand,,1245,97,1142,6,03-28-2020
+Timor-Leste,,1,0,1,0,03-28-2020
+Togo,,25,1,23,1,03-28-2020
+Trinidad and Tobago,,74,1,70,3,03-28-2020
+Tunisia,,278,2,268,8,03-28-2020
+Turkey,,7402,70,7224,108,03-28-2020
+United States,,121416,1072,118318,2026,03-28-2020
+Uganda,,30,0,30,0,03-28-2020
+Ukraine,,356,5,342,9,03-28-2020
+United Arab Emirates,,468,52,414,2,03-28-2020
+United Kingdom,,17312,151,16140,1021,03-28-2020
+Uruguay,,274,0,274,0,03-28-2020
+Uzbekistan,,104,5,97,2,03-28-2020
+Venezuela,,119,39,78,2,03-28-2020
+Vietnam,,174,21,153,0,03-28-2020
+West Bank and Gaza,,98,18,79,1,03-28-2020
+Zambia,,28,0,28,0,03-28-2020
+Zimbabwe,,7,0,6,1,03-28-2020
+United States,Alabama,825,0,815,10,03-29-2020
+United States,Alaska,102,0,100,2,03-29-2020
+United States,American Samoa,0,0,0,0,03-29-2020
+United States,Arizona,919,0,902,17,03-29-2020
+United States,Arkansas,426,0,420,6,03-29-2020
+United States,California,5852,0,5728,124,03-29-2020
+United States,Colorado,2307,0,2260,47,03-29-2020
+United States,Connecticut,1993,0,1959,34,03-29-2020
+United States,Delaware,232,0,226,6,03-29-2020
+United States,District of Columbia,342,0,337,5,03-29-2020
+United States,Florida,4246,0,4190,56,03-29-2020
+United States,Georgia,2651,0,2571,80,03-29-2020
+United States,Grand Princess,103,0,100,3,03-29-2020
+United States,Guam,56,0,55,1,03-29-2020
+United States,Hawaii,149,0,149,0,03-29-2020
+United States,Idaho,281,0,276,5,03-29-2020
+United States,Illinois,4596,0,4530,66,03-29-2020
+United States,Indiana,1513,0,1481,32,03-29-2020
+United States,Iowa,336,0,332,4,03-29-2020
+United States,Kansas,330,0,323,7,03-29-2020
+United States,Kentucky,438,0,429,9,03-29-2020
+United States,Louisiana,3540,0,3389,151,03-29-2020
+United States,Maine,253,0,250,3,03-29-2020
+United States,Maryland,1239,0,1229,10,03-29-2020
+United States,Massachusetts,4955,0,4907,48,03-29-2020
+United States,Michigan,5488,0,5356,132,03-29-2020
+United States,Minnesota,503,0,494,9,03-29-2020
+United States,Mississippi,759,0,745,14,03-29-2020
+United States,Missouri,915,0,902,13,03-29-2020
+United States,Montana,154,0,153,1,03-29-2020
+United States,Nebraska,108,0,106,2,03-29-2020
+United States,Nevada,920,0,905,15,03-29-2020
+United States,New Hampshire,214,0,212,2,03-29-2020
+United States,New Jersey,13386,0,13225,161,03-29-2020
+United States,New Mexico,237,0,235,2,03-29-2020
+United States,New York,59648,0,58683,965,03-29-2020
+United States,North Carolina,1191,0,1184,7,03-29-2020
+United States,North Dakota,98,0,97,1,03-29-2020
+United States,Northern Mariana Islands,0,0,0,0,03-29-2020
+United States,Ohio,1653,0,1624,29,03-29-2020
+United States,Oklahoma,429,0,413,16,03-29-2020
+United States,Oregon,548,0,535,13,03-29-2020
+United States,Pennsylvania,3432,0,3391,41,03-29-2020
+United States,Puerto Rico,127,0,124,3,03-29-2020
+United States,Recovered,0,2665,-2665,0,03-29-2020
+United States,Rhode Island,294,0,291,3,03-29-2020
+United States,South Carolina,774,0,758,16,03-29-2020
+United States,South Dakota,90,0,89,1,03-29-2020
+United States,Tennessee,1720,0,1712,8,03-29-2020
+United States,Texas,2792,0,2755,37,03-29-2020
+United States,Utah,720,0,718,2,03-29-2020
+United States,Vermont,235,0,223,12,03-29-2020
+United States,Virgin Islands,23,0,23,0,03-29-2020
+United States,Virginia,890,0,870,20,03-29-2020
+United States,Washington,4465,0,4267,198,03-29-2020
+United States,West Virginia,113,0,113,0,03-29-2020
+United States,Wisconsin,1164,0,1146,18,03-29-2020
+United States,Wyoming,86,0,86,0,03-29-2020
+Afghanistan,,120,2,114,4,03-29-2020
+Albania,,212,33,169,10,03-29-2020
+Algeria,,511,31,449,31,03-29-2020
+Andorra,,334,1,327,6,03-29-2020
+Angola,,7,0,5,2,03-29-2020
+Antigua and Barbuda,,7,0,7,0,03-29-2020
+Argentina,,745,72,654,19,03-29-2020
+Armenia,,424,30,391,3,03-29-2020
+Australia,,3984,244,3724,16,03-29-2020
+Austria,,8788,479,8223,86,03-29-2020
+Azerbaijan,,209,15,190,4,03-29-2020
+Bahamas,,11,1,10,0,03-29-2020
+Bahrain,,499,272,223,4,03-29-2020
+Bangladesh,,48,15,28,5,03-29-2020
+Barbados,,33,0,33,0,03-29-2020
+Belarus,,94,32,62,0,03-29-2020
+Belgium,,10836,1359,9046,431,03-29-2020
+Belize,,2,0,2,0,03-29-2020
+Benin,,6,0,6,0,03-29-2020
+Bhutan,,4,0,4,0,03-29-2020
+Bolivia,,81,0,80,1,03-29-2020
+Bosnia and Herzegovina,,323,8,309,6,03-29-2020
+Brazil,,4256,6,4114,136,03-29-2020
+Brunei,,126,34,91,1,03-29-2020
+Bulgaria,,346,14,324,8,03-29-2020
+Burkina Faso,,222,23,187,12,03-29-2020
+Burma,,10,0,10,0,03-29-2020
+Cape Verde,,6,0,5,1,03-29-2020
+Cambodia,,103,21,82,0,03-29-2020
+Cameroon,,139,5,128,6,03-29-2020
+Canada,,6280,466,0,63,03-29-2020
+Central African Republic,,3,0,3,0,03-29-2020
+Chad,,3,0,3,0,03-29-2020
+Chile,,2139,75,2057,7,03-29-2020
+China,,82122,75582,3236,3304,03-29-2020
+Colombia,,702,10,682,10,03-29-2020
+Republic of the Congo,,19,0,19,0,03-29-2020
+Congo (Kinshasa),,65,2,57,6,03-29-2020
+Costa Rica,,314,3,309,2,03-29-2020
+Cote d'Ivoire,,165,4,160,1,03-29-2020
+Croatia,,713,52,655,6,03-29-2020
+Cuba,,139,4,132,3,03-29-2020
+Cyprus,,214,15,194,5,03-29-2020
+Czechia,,2817,11,2790,16,03-29-2020
+Denmark,,2564,73,2419,72,03-29-2020
+Djibouti,,18,0,18,0,03-29-2020
+Dominica,,11,0,11,0,03-29-2020
+Dominican Republic,,859,3,817,39,03-29-2020
+Ecuador,,1924,3,1863,58,03-29-2020
+Egypt,,609,132,437,40,03-29-2020
+El Salvador,,24,0,24,0,03-29-2020
+Equatorial Guinea,,12,0,12,0,03-29-2020
+Eritrea,,12,0,12,0,03-29-2020
+Estonia,,679,20,656,3,03-29-2020
+Eswatini,,9,0,9,0,03-29-2020
+Ethiopia,,21,1,20,0,03-29-2020
+Fiji,,5,0,5,0,03-29-2020
+Finland,,1240,10,1219,11,03-29-2020
+France,,40708,7226,30871,2611,03-29-2020
+Gabon,,7,0,6,1,03-29-2020
+Gambia,,4,0,3,1,03-29-2020
+Georgia,,91,18,73,0,03-29-2020
+Germany,,62095,9211,52351,533,03-29-2020
+Ghana,,152,2,145,5,03-29-2020
+Greece,,1156,52,1066,38,03-29-2020
+Grenada,,9,0,9,0,03-29-2020
+Guatemala,,34,10,23,1,03-29-2020
+Guinea,,16,0,16,0,03-29-2020
+Guinea-Bissau,,2,0,2,0,03-29-2020
+Guyana,,8,0,7,1,03-29-2020
+Haiti,,15,1,14,0,03-29-2020
+Holy See,,6,0,6,0,03-29-2020
+Honduras,,110,3,104,3,03-29-2020
+Hungary,,408,34,361,13,03-29-2020
+Iceland,,1020,135,883,2,03-29-2020
+India,,1024,95,902,27,03-29-2020
+Indonesia,,1285,64,1107,114,03-29-2020
+Iran,,38309,12391,23278,2640,03-29-2020
+Iraq,,547,143,362,42,03-29-2020
+Ireland,,2615,5,2564,46,03-29-2020
+Israel,,4247,132,4100,15,03-29-2020
+Italy,,97689,13030,73880,10779,03-29-2020
+Jamaica,,32,2,29,1,03-29-2020
+Japan,,1866,424,1388,54,03-29-2020
+Jordan,,259,18,238,3,03-29-2020
+Kazakhstan,,284,20,263,1,03-29-2020
+Kenya,,42,1,40,1,03-29-2020
+South Korea,,9583,5033,4398,152,03-29-2020
+Kosovo,,94,1,92,1,03-29-2020
+Kuwait,,255,67,188,0,03-29-2020
+Kyrgyzstan,,84,0,84,0,03-29-2020
+Laos,,8,0,8,0,03-29-2020
+Latvia,,347,1,346,0,03-29-2020
+Lebanon,,438,30,398,10,03-29-2020
+Liberia,,3,0,3,0,03-29-2020
+Libya,,8,0,8,0,03-29-2020
+Liechtenstein,,56,0,56,0,03-29-2020
+Lithuania,,460,1,452,7,03-29-2020
+Luxembourg,,1950,40,1889,21,03-29-2020
+MS Zaandam,,2,0,2,0,03-29-2020
+Madagascar,,39,0,39,0,03-29-2020
+Malaysia,,2470,388,2047,35,03-29-2020
+Maldives,,17,13,4,0,03-29-2020
+Mali,,18,0,17,1,03-29-2020
+Malta,,151,2,149,0,03-29-2020
+Mauritania,,5,2,3,0,03-29-2020
+Mauritius,,107,0,104,3,03-29-2020
+Mexico,,848,4,828,16,03-29-2020
+Moldova,,263,2,259,2,03-29-2020
+Monaco,,46,1,44,1,03-29-2020
+Mongolia,,12,0,12,0,03-29-2020
+Montenegro,,85,0,84,1,03-29-2020
+Morocco,,479,13,440,26,03-29-2020
+Mozambique,,8,0,8,0,03-29-2020
+Namibia,,11,2,9,0,03-29-2020
+Nepal,,5,1,4,0,03-29-2020
+Netherlands,,10930,253,9905,772,03-29-2020
+New Zealand,,514,56,457,1,03-29-2020
+Nicaragua,,4,0,3,1,03-29-2020
+Niger,,18,0,17,1,03-29-2020
+Nigeria,,111,3,107,1,03-29-2020
+North Macedonia,,259,3,250,6,03-29-2020
+Norway,,4284,7,4252,25,03-29-2020
+Oman,,167,23,144,0,03-29-2020
+Pakistan,,1597,29,1554,14,03-29-2020
+Panama,,901,4,880,17,03-29-2020
+Papua New Guinea,,1,0,1,0,03-29-2020
+Paraguay,,59,1,55,3,03-29-2020
+Peru,,852,16,818,18,03-29-2020
+Philippines,,1418,42,1305,71,03-29-2020
+Poland,,1862,7,1833,22,03-29-2020
+Portugal,,5962,43,5800,119,03-29-2020
+Qatar,,634,48,585,1,03-29-2020
+Romania,,1815,206,1566,43,03-29-2020
+Russia,,1534,64,1462,8,03-29-2020
+Rwanda,,70,0,70,0,03-29-2020
+Saint Kitts and Nevis,,2,0,2,0,03-29-2020
+Saint Lucia,,9,1,8,0,03-29-2020
+Saint Vincent and the Grenadines,,1,1,0,0,03-29-2020
+San Marino,,224,6,196,22,03-29-2020
+Saudi Arabia,,1299,66,1225,8,03-29-2020
+Senegal,,142,27,115,0,03-29-2020
+Serbia,,741,0,728,13,03-29-2020
+Seychelles,,8,0,8,0,03-29-2020
+Singapore,,844,212,629,3,03-29-2020
+Slovakia,,314,2,312,0,03-29-2020
+Slovenia,,730,10,709,11,03-29-2020
+Somalia,,3,0,3,0,03-29-2020
+South Africa,,1280,31,1247,2,03-29-2020
+Spain,,80110,14709,58598,6803,03-29-2020
+Sri Lanka,,117,11,105,1,03-29-2020
+Sudan,,6,0,5,1,03-29-2020
+Suriname,,8,0,8,0,03-29-2020
+Sweden,,3700,16,3574,110,03-29-2020
+Switzerland,,14829,1595,12934,300,03-29-2020
+Syria,,9,0,8,1,03-29-2020
+Taiwan,,298,30,266,2,03-29-2020
+Tanzania,,14,1,13,0,03-29-2020
+Thailand,,1388,97,1284,7,03-29-2020
+Timor-Leste,,1,0,1,0,03-29-2020
+Togo,,25,1,23,1,03-29-2020
+Trinidad and Tobago,,78,1,74,3,03-29-2020
+Tunisia,,312,2,302,8,03-29-2020
+Turkey,,9217,105,8981,131,03-29-2020
+United States,,140860,2665,135728,2467,03-29-2020
+Uganda,,33,0,33,0,03-29-2020
+Ukraine,,475,6,459,10,03-29-2020
+United Arab Emirates,,570,58,509,3,03-29-2020
+United Kingdom,,19780,151,18398,1231,03-29-2020
+Uruguay,,304,0,303,1,03-29-2020
+Uzbekistan,,144,7,135,2,03-29-2020
+Venezuela,,119,39,78,2,03-29-2020
+Vietnam,,188,25,163,0,03-29-2020
+West Bank and Gaza,,109,18,90,1,03-29-2020
+Zambia,,29,0,29,0,03-29-2020
+Zimbabwe,,7,0,6,1,03-29-2020
+United States,Alabama,899,0,889,10,03-30-2020
+United States,Alaska,114,0,111,3,03-30-2020
+United States,American Samoa,0,0,0,0,03-30-2020
+United States,Arizona,1157,0,1137,20,03-30-2020
+United States,Arkansas,473,0,466,7,03-30-2020
+United States,California,7138,0,6992,146,03-30-2020
+United States,Colorado,2311,0,2264,47,03-30-2020
+United States,Connecticut,2571,0,2535,36,03-30-2020
+United States,Delaware,264,0,258,6,03-30-2020
+United States,District of Columbia,401,0,392,9,03-30-2020
+United States,Florida,5473,0,5410,63,03-30-2020
+United States,Georgia,2808,0,2721,87,03-30-2020
+United States,Grand Princess,103,0,100,3,03-30-2020
+United States,Guam,58,0,57,1,03-30-2020
+United States,Hawaii,175,0,175,0,03-30-2020
+United States,Idaho,340,0,334,6,03-30-2020
+United States,Illinois,5056,0,4983,73,03-30-2020
+United States,Indiana,1786,0,1751,35,03-30-2020
+United States,Iowa,424,0,418,6,03-30-2020
+United States,Kansas,372,0,364,8,03-30-2020
+United States,Kentucky,479,0,468,11,03-30-2020
+United States,Louisiana,4025,0,3840,185,03-30-2020
+United States,Maine,275,0,272,3,03-30-2020
+United States,Maryland,1413,0,1398,15,03-30-2020
+United States,Massachusetts,5752,0,5696,56,03-30-2020
+United States,Michigan,6498,0,6314,184,03-30-2020
+United States,Minnesota,576,0,566,10,03-30-2020
+United States,Mississippi,847,0,831,16,03-30-2020
+United States,Missouri,1051,0,1038,13,03-30-2020
+United States,Montana,171,0,166,5,03-30-2020
+United States,Nebraska,145,0,143,2,03-30-2020
+United States,Nevada,1012,0,997,15,03-30-2020
+United States,New Hampshire,314,0,311,3,03-30-2020
+United States,New Jersey,16636,0,16438,198,03-30-2020
+United States,New Mexico,237,0,235,2,03-30-2020
+United States,New York,66663,0,65445,1218,03-30-2020
+United States,North Carolina,1313,0,1306,7,03-30-2020
+United States,North Dakota,109,0,107,2,03-30-2020
+United States,Northern Mariana Islands,0,0,0,0,03-30-2020
+United States,Ohio,1933,0,1893,40,03-30-2020
+United States,Oklahoma,481,0,465,16,03-30-2020
+United States,Oregon,606,0,590,16,03-30-2020
+United States,Pennsylvania,4155,0,4105,50,03-30-2020
+United States,Puerto Rico,174,0,168,6,03-30-2020
+United States,Recovered,0,5644,-5644,0,03-30-2020
+United States,Rhode Island,408,0,404,4,03-30-2020
+United States,South Carolina,925,0,907,18,03-30-2020
+United States,South Dakota,101,0,100,1,03-30-2020
+United States,Tennessee,1917,0,1903,14,03-30-2020
+United States,Texas,3147,0,3102,45,03-30-2020
+United States,Utah,798,0,794,4,03-30-2020
+United States,Vermont,256,0,244,12,03-30-2020
+United States,Virgin Islands,30,0,30,0,03-30-2020
+United States,Virginia,1020,0,1005,15,03-30-2020
+United States,Washington,4923,0,4718,205,03-30-2020
+United States,West Virginia,145,0,144,1,03-30-2020
+United States,Wisconsin,1230,0,1210,20,03-30-2020
+United States,Wyoming,94,0,94,0,03-30-2020
+Afghanistan,,170,2,164,4,03-30-2020
+Albania,,223,44,168,11,03-30-2020
+Algeria,,584,37,512,35,03-30-2020
+Andorra,,370,10,352,8,03-30-2020
+Angola,,7,0,5,2,03-30-2020
+Antigua and Barbuda,,7,0,7,0,03-30-2020
+Argentina,,820,228,569,23,03-30-2020
+Armenia,,482,30,449,3,03-30-2020
+Australia,,4361,257,4087,17,03-30-2020
+Austria,,9618,636,8874,108,03-30-2020
+Azerbaijan,,273,26,243,4,03-30-2020
+Bahamas,,14,1,13,0,03-30-2020
+Bahrain,,515,279,232,4,03-30-2020
+Bangladesh,,49,19,25,5,03-30-2020
+Barbados,,33,0,33,0,03-30-2020
+Belarus,,152,32,120,0,03-30-2020
+Belgium,,11899,1527,9859,513,03-30-2020
+Belize,,3,0,3,0,03-30-2020
+Benin,,6,0,6,0,03-30-2020
+Bhutan,,4,0,4,0,03-30-2020
+Bolivia,,97,0,93,4,03-30-2020
+Bosnia and Herzegovina,,368,17,341,10,03-30-2020
+Botswana,,3,0,3,0,03-30-2020
+Brazil,,4579,120,4300,159,03-30-2020
+Brunei,,127,38,88,1,03-30-2020
+Bulgaria,,359,17,334,8,03-30-2020
+Burkina Faso,,246,31,203,12,03-30-2020
+Burma,,14,0,14,0,03-30-2020
+Cape Verde,,6,0,5,1,03-30-2020
+Cambodia,,107,21,86,0,03-30-2020
+Cameroon,,139,5,128,6,03-30-2020
+Canada,,7398,466,0,79,03-30-2020
+Central African Republic,,3,0,3,0,03-30-2020
+Chad,,5,0,5,0,03-30-2020
+Chile,,2449,156,2285,8,03-30-2020
+China,,82198,75923,2967,3308,03-30-2020
+Colombia,,798,15,771,12,03-30-2020
+Republic of the Congo,,19,0,19,0,03-30-2020
+Congo (Kinshasa),,81,2,71,8,03-30-2020
+Costa Rica,,330,4,324,2,03-30-2020
+Cote d'Ivoire,,168,6,161,1,03-30-2020
+Croatia,,790,67,717,6,03-30-2020
+Cuba,,170,4,162,4,03-30-2020
+Cyprus,,230,22,201,7,03-30-2020
+Czechia,,3001,25,2953,23,03-30-2020
+Denmark,,2755,73,2605,77,03-30-2020
+Djibouti,,18,0,18,0,03-30-2020
+Dominica,,11,0,11,0,03-30-2020
+Dominican Republic,,901,4,855,42,03-30-2020
+Ecuador,,1962,3,1899,60,03-30-2020
+Egypt,,656,150,465,41,03-30-2020
+El Salvador,,30,0,30,0,03-30-2020
+Equatorial Guinea,,12,0,12,0,03-30-2020
+Eritrea,,12,0,12,0,03-30-2020
+Estonia,,715,20,692,3,03-30-2020
+Eswatini,,9,0,9,0,03-30-2020
+Ethiopia,,23,4,19,0,03-30-2020
+Fiji,,5,0,5,0,03-30-2020
+Finland,,1352,10,1329,13,03-30-2020
+France,,45170,7964,34176,3030,03-30-2020
+Gabon,,7,0,6,1,03-30-2020
+Gambia,,4,0,3,1,03-30-2020
+Georgia,,103,20,83,0,03-30-2020
+Germany,,66885,13500,52740,645,03-30-2020
+Ghana,,152,2,145,5,03-30-2020
+Greece,,1212,52,1117,43,03-30-2020
+Grenada,,9,0,9,0,03-30-2020
+Guatemala,,36,10,25,1,03-30-2020
+Guinea,,22,0,22,0,03-30-2020
+Guinea-Bissau,,8,0,8,0,03-30-2020
+Guyana,,8,0,7,1,03-30-2020
+Haiti,,15,1,14,0,03-30-2020
+Holy See,,6,0,6,0,03-30-2020
+Honduras,,139,3,129,7,03-30-2020
+Hungary,,447,34,398,15,03-30-2020
+Iceland,,1086,157,927,2,03-30-2020
+India,,1251,102,1117,32,03-30-2020
+Indonesia,,1414,75,1217,122,03-30-2020
+Iran,,41495,13911,24827,2757,03-30-2020
+Iraq,,630,152,432,46,03-30-2020
+Ireland,,2910,5,2851,54,03-30-2020
+Israel,,4695,161,4518,16,03-30-2020
+Italy,,101739,14620,75528,11591,03-30-2020
+Jamaica,,36,2,33,1,03-30-2020
+Japan,,1866,424,1388,54,03-30-2020
+Jordan,,268,26,237,5,03-30-2020
+Kazakhstan,,302,21,280,1,03-30-2020
+Kenya,,50,1,48,1,03-30-2020
+South Korea,,9661,5228,4275,158,03-30-2020
+Kosovo,,94,1,92,1,03-30-2020
+Kuwait,,266,72,194,0,03-30-2020
+Kyrgyzstan,,94,3,91,0,03-30-2020
+Laos,,8,0,8,0,03-30-2020
+Latvia,,376,1,375,0,03-30-2020
+Lebanon,,446,35,400,11,03-30-2020
+Liberia,,3,0,3,0,03-30-2020
+Libya,,8,0,8,0,03-30-2020
+Liechtenstein,,62,0,62,0,03-30-2020
+Lithuania,,491,7,477,7,03-30-2020
+Luxembourg,,1988,40,1926,22,03-30-2020
+MS Zaandam,,2,0,2,0,03-30-2020
+Madagascar,,43,0,43,0,03-30-2020
+Malaysia,,2626,479,2110,37,03-30-2020
+Maldives,,17,13,4,0,03-30-2020
+Mali,,25,0,23,2,03-30-2020
+Malta,,156,2,154,0,03-30-2020
+Mauritania,,5,2,2,1,03-30-2020
+Mauritius,,128,0,125,3,03-30-2020
+Mexico,,993,35,938,20,03-30-2020
+Moldova,,298,15,281,2,03-30-2020
+Monaco,,49,1,47,1,03-30-2020
+Mongolia,,12,2,10,0,03-30-2020
+Montenegro,,91,0,90,1,03-30-2020
+Morocco,,556,15,508,33,03-30-2020
+Mozambique,,8,0,8,0,03-30-2020
+Namibia,,11,2,9,0,03-30-2020
+Nepal,,5,1,4,0,03-30-2020
+Netherlands,,11817,253,10699,865,03-30-2020
+New Zealand,,589,63,525,1,03-30-2020
+Nicaragua,,4,0,3,1,03-30-2020
+Niger,,27,0,24,3,03-30-2020
+Nigeria,,131,8,121,2,03-30-2020
+North Macedonia,,285,12,266,7,03-30-2020
+Norway,,4445,12,4401,32,03-30-2020
+Oman,,179,29,150,0,03-30-2020
+Pakistan,,1717,76,1620,21,03-30-2020
+Panama,,989,4,961,24,03-30-2020
+Papua New Guinea,,1,0,1,0,03-30-2020
+Paraguay,,64,1,60,3,03-30-2020
+Peru,,950,53,873,24,03-30-2020
+Philippines,,1546,42,1426,78,03-30-2020
+Poland,,2055,7,2017,31,03-30-2020
+Portugal,,6408,43,6225,140,03-30-2020
+Qatar,,693,51,641,1,03-30-2020
+Romania,,2109,209,1835,65,03-30-2020
+Russia,,1836,66,1761,9,03-30-2020
+Rwanda,,70,0,70,0,03-30-2020
+Saint Kitts and Nevis,,7,0,7,0,03-30-2020
+Saint Lucia,,9,1,8,0,03-30-2020
+Saint Vincent and the Grenadines,,1,1,0,0,03-30-2020
+San Marino,,230,13,192,25,03-30-2020
+Saudi Arabia,,1453,115,1330,8,03-30-2020
+Senegal,,162,27,135,0,03-30-2020
+Serbia,,785,0,769,16,03-30-2020
+Seychelles,,8,0,8,0,03-30-2020
+Singapore,,879,228,648,3,03-30-2020
+Slovakia,,336,7,329,0,03-30-2020
+Slovenia,,756,10,735,11,03-30-2020
+Somalia,,3,0,3,0,03-30-2020
+South Africa,,1326,31,1292,3,03-30-2020
+Spain,,87956,16780,63460,7716,03-30-2020
+Sri Lanka,,122,15,105,2,03-30-2020
+Sudan,,6,0,4,2,03-30-2020
+Suriname,,8,0,8,0,03-30-2020
+Sweden,,4028,16,3866,146,03-30-2020
+Switzerland,,15922,1823,13740,359,03-30-2020
+Syria,,10,0,8,2,03-30-2020
+Taiwan,,306,39,262,5,03-30-2020
+Tanzania,,19,1,18,0,03-30-2020
+Thailand,,1524,229,1286,9,03-30-2020
+Timor-Leste,,1,0,1,0,03-30-2020
+Togo,,30,1,28,1,03-30-2020
+Trinidad and Tobago,,82,1,78,3,03-30-2020
+Tunisia,,312,3,301,8,03-30-2020
+Turkey,,10827,162,10497,168,03-30-2020
+United States,,161782,5644,153160,2978,03-30-2020
+Uganda,,33,0,33,0,03-30-2020
+Ukraine,,548,8,527,13,03-30-2020
+United Arab Emirates,,611,61,545,5,03-30-2020
+United Kingdom,,22453,171,20871,1411,03-30-2020
+Uruguay,,310,0,309,1,03-30-2020
+Uzbekistan,,149,7,140,2,03-30-2020
+Venezuela,,135,39,93,3,03-30-2020
+Vietnam,,203,55,148,0,03-30-2020
+West Bank and Gaza,,116,18,97,1,03-30-2020
+Zambia,,35,0,35,0,03-30-2020
+Zimbabwe,,7,0,6,1,03-30-2020
+United States,Alabama,987,0,964,23,03-31-2020
+United States,Alaska,119,0,116,3,03-31-2020
+United States,Arizona,1289,0,1265,24,03-31-2020
+United States,Arkansas,523,0,515,8,03-31-2020
+United States,California,8210,0,8037,173,03-31-2020
+United States,Colorado,2966,0,2897,69,03-31-2020
+United States,Connecticut,3128,0,3059,69,03-31-2020
+United States,Delaware,319,0,309,10,03-31-2020
+United States,District of Columbia,495,0,486,9,03-31-2020
+United States,Florida,6741,0,6656,85,03-31-2020
+United States,Georgia,3929,0,3818,111,03-31-2020
+United States,Grand Princess,103,0,100,3,03-31-2020
+United States,Guam,69,0,67,2,03-31-2020
+United States,Hawaii,204,0,204,0,03-31-2020
+United States,Idaho,515,0,507,8,03-31-2020
+United States,Illinois,5994,0,5895,99,03-31-2020
+United States,Indiana,2158,0,2109,49,03-31-2020
+United States,Iowa,497,0,490,7,03-31-2020
+United States,Kansas,434,0,425,9,03-31-2020
+United States,Kentucky,628,0,617,11,03-31-2020
+United States,Louisiana,5237,0,4998,239,03-31-2020
+United States,Maine,303,0,298,5,03-31-2020
+United States,Maryland,1660,0,1642,18,03-31-2020
+United States,Massachusetts,6620,0,6531,89,03-31-2020
+United States,Michigan,7615,0,7356,259,03-31-2020
+United States,Minnesota,629,0,617,12,03-31-2020
+United States,Mississippi,937,0,917,20,03-31-2020
+United States,Missouri,1357,0,1342,15,03-31-2020
+United States,Montana,198,0,193,5,03-31-2020
+United States,Nebraska,172,0,169,3,03-31-2020
+United States,Nevada,1114,0,1088,26,03-31-2020
+United States,New Hampshire,357,0,354,3,03-31-2020
+United States,New Jersey,18696,0,18429,267,03-31-2020
+United States,New Mexico,315,0,311,4,03-31-2020
+United States,New York,75833,0,74283,1550,03-31-2020
+United States,North Carolina,1535,0,1523,12,03-31-2020
+United States,North Dakota,122,0,119,3,03-31-2020
+United States,Northern Mariana Islands,2,0,2,0,03-31-2020
+United States,Ohio,2199,0,2144,55,03-31-2020
+United States,Oklahoma,568,0,545,23,03-31-2020
+United States,Oregon,690,0,672,18,03-31-2020
+United States,Pennsylvania,4963,0,4900,63,03-31-2020
+United States,Puerto Rico,239,0,231,8,03-31-2020
+United States,Recovered,0,7024,-7024,0,03-31-2020
+United States,Rhode Island,488,0,480,8,03-31-2020
+United States,South Carolina,1083,0,1061,22,03-31-2020
+United States,South Dakota,108,0,107,1,03-31-2020
+United States,Tennessee,2391,0,2368,23,03-31-2020
+United States,Texas,3809,0,3755,54,03-31-2020
+United States,Utah,888,0,883,5,03-31-2020
+United States,Vermont,293,0,280,13,03-31-2020
+United States,Virgin Islands,30,0,30,0,03-31-2020
+United States,Virginia,1249,0,1222,27,03-31-2020
+United States,Washington,5432,0,5207,225,03-31-2020
+United States,West Virginia,162,0,161,1,03-31-2020
+United States,Wisconsin,1412,0,1387,25,03-31-2020
+United States,Wyoming,109,0,109,0,03-31-2020
+Afghanistan,,174,5,165,4,03-31-2020
+Albania,,243,52,176,15,03-31-2020
+Algeria,,716,46,626,44,03-31-2020
+Andorra,,376,10,354,12,03-31-2020
+Angola,,7,1,4,2,03-31-2020
+Antigua and Barbuda,,7,0,7,0,03-31-2020
+Argentina,,1054,240,787,27,03-31-2020
+Armenia,,532,30,499,3,03-31-2020
+Australia,,4559,358,4183,18,03-31-2020
+Austria,,10180,1095,8957,128,03-31-2020
+Azerbaijan,,298,26,267,5,03-31-2020
+Bahamas,,14,1,13,0,03-31-2020
+Bahrain,,567,295,268,4,03-31-2020
+Bangladesh,,51,25,21,5,03-31-2020
+Barbados,,34,0,34,0,03-31-2020
+Belarus,,152,47,104,1,03-31-2020
+Belgium,,12775,1696,10374,705,03-31-2020
+Belize,,3,0,3,0,03-31-2020
+Benin,,9,1,8,0,03-31-2020
+Bhutan,,4,0,4,0,03-31-2020
+Bolivia,,107,0,101,6,03-31-2020
+Bosnia and Herzegovina,,420,17,390,13,03-31-2020
+Botswana,,4,0,3,1,03-31-2020
+Brazil,,5717,127,5389,201,03-31-2020
+Brunei,,129,45,83,1,03-31-2020
+Bulgaria,,399,17,374,8,03-31-2020
+Burkina Faso,,261,32,215,14,03-31-2020
+Burma,,15,0,14,1,03-31-2020
+Burundi,,2,0,2,0,03-31-2020
+Cape Verde,,6,0,5,1,03-31-2020
+Cambodia,,109,23,86,0,03-31-2020
+Cameroon,,193,5,182,6,03-31-2020
+Canada,,8527,1592,0,100,03-31-2020
+Central African Republic,,3,0,3,0,03-31-2020
+Chad,,7,0,7,0,03-31-2020
+Chile,,2738,156,2570,12,03-31-2020
+China,,82279,76206,2764,3309,03-31-2020
+Colombia,,906,31,859,16,03-31-2020
+Republic of the Congo,,19,0,19,0,03-31-2020
+Congo (Kinshasa),,98,2,88,8,03-31-2020
+Costa Rica,,347,4,341,2,03-31-2020
+Cote d'Ivoire,,179,7,171,1,03-31-2020
+Croatia,,867,67,794,6,03-31-2020
+Cuba,,186,8,172,6,03-31-2020
+Cyprus,,262,23,231,8,03-31-2020
+Czechia,,3308,45,3232,31,03-31-2020
+Denmark,,3039,77,2872,90,03-31-2020
+Djibouti,,30,0,30,0,03-31-2020
+Dominica,,12,0,12,0,03-31-2020
+Dominican Republic,,1109,5,1053,51,03-31-2020
+Ecuador,,2240,54,2111,75,03-31-2020
+Egypt,,710,157,507,46,03-31-2020
+El Salvador,,32,0,31,1,03-31-2020
+Equatorial Guinea,,12,1,11,0,03-31-2020
+Eritrea,,15,0,15,0,03-31-2020
+Estonia,,745,26,715,4,03-31-2020
+Eswatini,,9,0,9,0,03-31-2020
+Ethiopia,,26,2,24,0,03-31-2020
+Fiji,,5,0,5,0,03-31-2020
+Finland,,1418,10,1391,17,03-31-2020
+France,,52827,9513,39782,3532,03-31-2020
+Gabon,,16,0,15,1,03-31-2020
+Gambia,,4,0,3,1,03-31-2020
+Georgia,,110,21,89,0,03-31-2020
+Germany,,71808,16100,54933,775,03-31-2020
+Ghana,,161,31,125,5,03-31-2020
+Greece,,1314,52,1213,49,03-31-2020
+Grenada,,9,0,9,0,03-31-2020
+Guatemala,,38,12,25,1,03-31-2020
+Guinea,,22,0,22,0,03-31-2020
+Guinea-Bissau,,8,0,8,0,03-31-2020
+Guyana,,12,0,10,2,03-31-2020
+Haiti,,15,1,14,0,03-31-2020
+Holy See,,6,0,6,0,03-31-2020
+Honduras,,141,3,131,7,03-31-2020
+Hungary,,492,37,439,16,03-31-2020
+Iceland,,1135,198,935,2,03-31-2020
+India,,1397,123,1239,35,03-31-2020
+Indonesia,,1528,81,1311,136,03-31-2020
+Iran,,44605,14656,27051,2898,03-31-2020
+Iraq,,694,170,474,50,03-31-2020
+Ireland,,3235,5,3159,71,03-31-2020
+Israel,,5358,224,5114,20,03-31-2020
+Italy,,105792,15729,77635,12428,03-31-2020
+Jamaica,,36,2,33,1,03-31-2020
+Japan,,1953,424,1473,56,03-31-2020
+Jordan,,274,30,239,5,03-31-2020
+Kazakhstan,,343,24,317,2,03-31-2020
+Kenya,,59,1,57,1,03-31-2020
+South Korea,,9786,5408,4216,162,03-31-2020
+Kosovo,,112,6,105,1,03-31-2020
+Kuwait,,289,73,216,0,03-31-2020
+Kyrgyzstan,,107,3,104,0,03-31-2020
+Laos,,9,0,9,0,03-31-2020
+Latvia,,398,1,397,0,03-31-2020
+Lebanon,,470,37,421,12,03-31-2020
+Liberia,,3,0,3,0,03-31-2020
+Libya,,10,1,9,0,03-31-2020
+Liechtenstein,,68,0,68,0,03-31-2020
+Lithuania,,537,7,522,8,03-31-2020
+Luxembourg,,2178,80,2075,23,03-31-2020
+MS Zaandam,,2,0,2,0,03-31-2020
+Madagascar,,57,0,57,0,03-31-2020
+Malaysia,,2766,537,2186,43,03-31-2020
+Maldives,,18,13,5,0,03-31-2020
+Mali,,28,0,26,2,03-31-2020
+Malta,,169,2,167,0,03-31-2020
+Mauritania,,6,2,3,1,03-31-2020
+Mauritius,,143,0,138,5,03-31-2020
+Mexico,,1094,35,1031,28,03-31-2020
+Moldova,,353,18,331,4,03-31-2020
+Monaco,,52,2,49,1,03-31-2020
+Mongolia,,12,2,10,0,03-31-2020
+Montenegro,,109,0,107,2,03-31-2020
+Morocco,,617,24,557,36,03-31-2020
+Mozambique,,8,0,8,0,03-31-2020
+Namibia,,11,2,9,0,03-31-2020
+Nepal,,5,1,4,0,03-31-2020
+Netherlands,,12667,253,11374,1040,03-31-2020
+New Zealand,,647,74,572,1,03-31-2020
+Nicaragua,,5,0,4,1,03-31-2020
+Niger,,27,0,24,3,03-31-2020
+Nigeria,,135,8,125,2,03-31-2020
+North Macedonia,,329,12,308,9,03-31-2020
+Norway,,4641,13,4589,39,03-31-2020
+Oman,,192,34,157,1,03-31-2020
+Pakistan,,1938,76,1836,26,03-31-2020
+Panama,,1181,9,1142,30,03-31-2020
+Papua New Guinea,,1,0,1,0,03-31-2020
+Paraguay,,65,1,61,3,03-31-2020
+Peru,,1065,394,641,30,03-31-2020
+Philippines,,2084,49,1947,88,03-31-2020
+Poland,,2311,7,2271,33,03-31-2020
+Portugal,,7443,43,7240,160,03-31-2020
+Qatar,,781,62,717,2,03-31-2020
+Romania,,2245,220,1943,82,03-31-2020
+Russia,,2337,121,2199,17,03-31-2020
+Rwanda,,75,0,75,0,03-31-2020
+Saint Kitts and Nevis,,8,0,8,0,03-31-2020
+Saint Lucia,,13,1,12,0,03-31-2020
+Saint Vincent and the Grenadines,,1,1,0,0,03-31-2020
+San Marino,,236,13,197,26,03-31-2020
+Saudi Arabia,,1563,165,1388,10,03-31-2020
+Senegal,,175,40,135,0,03-31-2020
+Serbia,,900,0,884,16,03-31-2020
+Seychelles,,10,0,10,0,03-31-2020
+Sierra Leone,,1,0,1,0,03-31-2020
+Singapore,,926,240,683,3,03-31-2020
+Slovakia,,363,3,360,0,03-31-2020
+Slovenia,,802,10,777,15,03-31-2020
+Somalia,,5,1,4,0,03-31-2020
+South Africa,,1353,31,1317,5,03-31-2020
+Spain,,95923,19259,68200,8464,03-31-2020
+Sri Lanka,,143,17,124,2,03-31-2020
+Sudan,,7,1,4,2,03-31-2020
+Suriname,,9,0,9,0,03-31-2020
+Sweden,,4435,16,4239,180,03-31-2020
+Switzerland,,16605,1823,14349,433,03-31-2020
+Syria,,10,0,8,2,03-31-2020
+Taiwan,,322,39,278,5,03-31-2020
+Tanzania,,19,1,17,1,03-31-2020
+Thailand,,1651,342,1299,10,03-31-2020
+Timor-Leste,,1,0,1,0,03-31-2020
+Togo,,34,10,23,1,03-31-2020
+Trinidad and Tobago,,87,1,83,3,03-31-2020
+Tunisia,,394,3,381,10,03-31-2020
+Turkey,,13531,243,13074,214,03-31-2020
+United States,,188123,7024,177226,3873,03-31-2020
+Uganda,,44,0,44,0,03-31-2020
+Ukraine,,645,10,618,17,03-31-2020
+United Arab Emirates,,664,61,597,6,03-31-2020
+United Kingdom,,25481,179,23509,1793,03-31-2020
+Uruguay,,338,41,296,1,03-31-2020
+Uzbekistan,,172,7,163,2,03-31-2020
+Venezuela,,135,39,93,3,03-31-2020
+Vietnam,,212,58,154,0,03-31-2020
+West Bank and Gaza,,119,18,100,1,03-31-2020
+Zambia,,35,0,35,0,03-31-2020
+Zimbabwe,,8,0,7,1,03-31-2020
+United States,Alabama,1060,0,1033,27,04-01-2020
+United States,Alaska,132,0,129,3,04-01-2020
+United States,Arizona,1530,0,1501,29,04-01-2020
+United States,Arkansas,584,0,574,10,04-01-2020
+United States,California,9399,0,9200,199,04-01-2020
+United States,Colorado,2982,0,2913,69,04-01-2020
+United States,Connecticut,3557,0,3472,85,04-01-2020
+United States,Delaware,368,0,357,11,04-01-2020
+United States,District of Columbia,586,0,577,9,04-01-2020
+United States,Florida,6956,0,6869,87,04-01-2020
+United States,Georgia,4638,0,4499,139,04-01-2020
+United States,Grand Princess,103,0,100,3,04-01-2020
+United States,Guam,77,0,74,3,04-01-2020
+United States,Hawaii,224,0,223,1,04-01-2020
+United States,Idaho,566,0,557,9,04-01-2020
+United States,Illinois,6980,0,6839,141,04-01-2020
+United States,Indiana,2564,0,2499,65,04-01-2020
+United States,Iowa,547,0,538,9,04-01-2020
+United States,Kansas,485,0,475,10,04-01-2020
+United States,Kentucky,632,0,614,18,04-01-2020
+United States,Louisiana,6424,0,6151,273,04-01-2020
+United States,Maine,303,0,298,5,04-01-2020
+United States,Maryland,1986,0,1955,31,04-01-2020
+United States,Massachusetts,7738,0,7616,122,04-01-2020
+United States,Michigan,9315,0,8980,335,04-01-2020
+United States,Minnesota,689,0,672,17,04-01-2020
+United States,Mississippi,1073,0,1051,22,04-01-2020
+United States,Missouri,1613,0,1595,18,04-01-2020
+United States,Montana,208,0,202,6,04-01-2020
+United States,Nebraska,210,0,206,4,04-01-2020
+United States,Nevada,1279,0,1248,31,04-01-2020
+United States,New Hampshire,367,0,364,3,04-01-2020
+United States,New Jersey,22255,0,21900,355,04-01-2020
+United States,New Mexico,340,0,335,5,04-01-2020
+United States,New York,83948,0,82007,1941,04-01-2020
+United States,North Carolina,1675,0,1661,14,04-01-2020
+United States,North Dakota,142,0,139,3,04-01-2020
+United States,Northern Mariana Islands,6,0,5,1,04-01-2020
+United States,Ohio,2547,0,2482,65,04-01-2020
+United States,Oklahoma,721,0,691,30,04-01-2020
+United States,Oregon,736,0,717,19,04-01-2020
+United States,Pennsylvania,6009,0,5935,74,04-01-2020
+United States,Puerto Rico,286,0,275,11,04-01-2020
+United States,Recovered,0,8474,-8474,0,04-01-2020
+United States,Rhode Island,566,0,556,10,04-01-2020
+United States,South Carolina,1293,0,1267,26,04-01-2020
+United States,South Dakota,129,0,127,2,04-01-2020
+United States,Tennessee,2933,0,2909,24,04-01-2020
+United States,Texas,4355,0,4289,66,04-01-2020
+United States,Utah,888,0,883,5,04-01-2020
+United States,Vermont,321,0,305,16,04-01-2020
+United States,Virgin Islands,30,0,30,0,04-01-2020
+United States,Virginia,1483,0,1449,34,04-01-2020
+United States,Washington,5608,0,5374,234,04-01-2020
+United States,West Virginia,191,0,190,1,04-01-2020
+United States,Wisconsin,1556,0,1529,27,04-01-2020
+United States,Wyoming,130,0,130,0,04-01-2020
+Afghanistan,,237,5,228,4,04-01-2020
+Albania,,259,67,177,15,04-01-2020
+Algeria,,847,61,728,58,04-01-2020
+Andorra,,390,10,366,14,04-01-2020
+Angola,,8,1,5,2,04-01-2020
+Antigua and Barbuda,,7,0,7,0,04-01-2020
+Argentina,,1054,248,778,28,04-01-2020
+Armenia,,571,31,536,4,04-01-2020
+Australia,,4862,422,4420,20,04-01-2020
+Austria,,10711,1436,9129,146,04-01-2020
+Azerbaijan,,359,26,328,5,04-01-2020
+Bahamas,,21,1,19,1,04-01-2020
+Bahrain,,569,337,228,4,04-01-2020
+Bangladesh,,54,25,23,6,04-01-2020
+Barbados,,34,0,34,0,04-01-2020
+Belarus,,163,53,108,2,04-01-2020
+Belgium,,13964,2132,11004,828,04-01-2020
+Belize,,3,0,3,0,04-01-2020
+Benin,,13,1,12,0,04-01-2020
+Bhutan,,4,0,4,0,04-01-2020
+Bolivia,,115,1,107,7,04-01-2020
+Bosnia and Herzegovina,,459,19,427,13,04-01-2020
+Botswana,,4,0,3,1,04-01-2020
+Brazil,,6836,127,6469,240,04-01-2020
+Brunei,,131,52,78,1,04-01-2020
+Bulgaria,,422,20,392,10,04-01-2020
+Burkina Faso,,282,46,220,16,04-01-2020
+Burma,,15,0,14,1,04-01-2020
+Burundi,,2,0,2,0,04-01-2020
+Cape Verde,,6,0,5,1,04-01-2020
+Cambodia,,109,25,84,0,04-01-2020
+Cameroon,,233,10,217,6,04-01-2020
+Canada,,9560,1324,0,108,04-01-2020
+Central African Republic,,3,0,3,0,04-01-2020
+Chad,,7,0,7,0,04-01-2020
+Chile,,3031,234,2781,16,04-01-2020
+China,,82361,76405,2640,3316,04-01-2020
+Colombia,,1065,39,1009,17,04-01-2020
+Republic of the Congo,,19,0,19,0,04-01-2020
+Congo (Kinshasa),,109,3,97,9,04-01-2020
+Costa Rica,,375,4,369,2,04-01-2020
+Cote d'Ivoire,,190,9,180,1,04-01-2020
+Croatia,,963,73,884,6,04-01-2020
+Cuba,,212,12,194,6,04-01-2020
+Cyprus,,320,28,283,9,04-01-2020
+Czechia,,3508,61,3408,39,04-01-2020
+Denmark,,3290,971,2215,104,04-01-2020
+Djibouti,,33,0,33,0,04-01-2020
+Dominica,,12,0,12,0,04-01-2020
+Dominican Republic,,1284,9,1218,57,04-01-2020
+Ecuador,,2748,58,2597,93,04-01-2020
+Egypt,,779,179,548,52,04-01-2020
+El Salvador,,32,0,31,1,04-01-2020
+Equatorial Guinea,,15,1,14,0,04-01-2020
+Eritrea,,15,0,15,0,04-01-2020
+Estonia,,779,33,741,5,04-01-2020
+Eswatini,,9,0,9,0,04-01-2020
+Ethiopia,,29,2,27,0,04-01-2020
+Fiji,,5,0,5,0,04-01-2020
+Finland,,1446,10,1419,17,04-01-2020
+France,,57749,11053,42653,4043,04-01-2020
+Gabon,,18,0,17,1,04-01-2020
+Gambia,,4,2,1,1,04-01-2020
+Georgia,,117,23,94,0,04-01-2020
+Germany,,77872,18700,58252,920,04-01-2020
+Ghana,,195,31,159,5,04-01-2020
+Greece,,1415,52,1313,50,04-01-2020
+Grenada,,9,0,9,0,04-01-2020
+Guatemala,,39,12,26,1,04-01-2020
+Guinea,,30,0,30,0,04-01-2020
+Guinea-Bissau,,9,0,9,0,04-01-2020
+Guyana,,19,0,17,2,04-01-2020
+Haiti,,16,1,15,0,04-01-2020
+Holy See,,6,0,6,0,04-01-2020
+Honduras,,172,3,159,10,04-01-2020
+Hungary,,525,40,465,20,04-01-2020
+Iceland,,1220,225,993,2,04-01-2020
+India,,1998,148,1792,58,04-01-2020
+Indonesia,,1677,103,1417,157,04-01-2020
+Iran,,47593,15473,29084,3036,04-01-2020
+Iraq,,728,182,494,52,04-01-2020
+Ireland,,3447,5,3357,85,04-01-2020
+Israel,,6092,241,5825,26,04-01-2020
+Italy,,110574,16847,80572,13155,04-01-2020
+Jamaica,,44,2,39,3,04-01-2020
+Japan,,2178,472,1649,57,04-01-2020
+Jordan,,278,36,237,5,04-01-2020
+Kazakhstan,,380,26,351,3,04-01-2020
+Kenya,,81,3,77,1,04-01-2020
+South Korea,,9887,5567,4155,165,04-01-2020
+Kosovo,,125,10,114,1,04-01-2020
+Kuwait,,317,80,237,0,04-01-2020
+Kyrgyzstan,,111,3,108,0,04-01-2020
+Laos,,10,0,10,0,04-01-2020
+Latvia,,446,1,445,0,04-01-2020
+Lebanon,,479,43,422,14,04-01-2020
+Liberia,,6,0,6,0,04-01-2020
+Libya,,10,0,10,0,04-01-2020
+Liechtenstein,,68,0,68,0,04-01-2020
+Lithuania,,581,7,566,8,04-01-2020
+Luxembourg,,2319,80,2210,29,04-01-2020
+MS Zaandam,,9,0,7,2,04-01-2020
+Madagascar,,57,0,57,0,04-01-2020
+Malaysia,,2908,645,2218,45,04-01-2020
+Maldives,,19,13,6,0,04-01-2020
+Mali,,31,0,28,3,04-01-2020
+Malta,,188,2,186,0,04-01-2020
+Mauritania,,6,2,3,1,04-01-2020
+Mauritius,,161,0,155,6,04-01-2020
+Mexico,,1215,35,1151,29,04-01-2020
+Moldova,,423,23,395,5,04-01-2020
+Monaco,,55,2,52,1,04-01-2020
+Mongolia,,14,2,12,0,04-01-2020
+Montenegro,,123,0,121,2,04-01-2020
+Morocco,,654,29,586,39,04-01-2020
+Mozambique,,10,0,10,0,04-01-2020
+Namibia,,14,2,12,0,04-01-2020
+Nepal,,5,1,4,0,04-01-2020
+Netherlands,,13696,260,12261,1175,04-01-2020
+New Zealand,,708,83,624,1,04-01-2020
+Nicaragua,,5,0,4,1,04-01-2020
+Niger,,74,0,69,5,04-01-2020
+Nigeria,,174,9,163,2,04-01-2020
+North Macedonia,,354,17,326,11,04-01-2020
+Norway,,4863,13,4806,44,04-01-2020
+Oman,,210,34,175,1,04-01-2020
+Pakistan,,2118,94,1997,27,04-01-2020
+Panama,,1181,9,1142,30,04-01-2020
+Papua New Guinea,,1,0,1,0,04-01-2020
+Paraguay,,69,1,65,3,04-01-2020
+Peru,,1323,394,891,38,04-01-2020
+Philippines,,2311,50,2165,96,04-01-2020
+Poland,,2554,47,2464,43,04-01-2020
+Portugal,,8251,43,8021,187,04-01-2020
+Qatar,,835,71,762,2,04-01-2020
+Romania,,2460,252,2116,92,04-01-2020
+Russia,,2777,190,2563,24,04-01-2020
+Rwanda,,82,0,82,0,04-01-2020
+Saint Kitts and Nevis,,8,0,8,0,04-01-2020
+Saint Lucia,,13,1,12,0,04-01-2020
+Saint Vincent and the Grenadines,,1,1,0,0,04-01-2020
+San Marino,,236,13,197,26,04-01-2020
+Saudi Arabia,,1720,264,1440,16,04-01-2020
+Senegal,,190,45,144,1,04-01-2020
+Serbia,,1060,0,1032,28,04-01-2020
+Seychelles,,10,0,10,0,04-01-2020
+Sierra Leone,,2,0,2,0,04-01-2020
+Singapore,,1000,245,752,3,04-01-2020
+Slovakia,,400,3,396,1,04-01-2020
+Slovenia,,841,10,816,15,04-01-2020
+Somalia,,5,1,4,0,04-01-2020
+South Africa,,1380,50,1325,5,04-01-2020
+Spain,,104118,22647,72084,9387,04-01-2020
+Sri Lanka,,146,21,122,3,04-01-2020
+Sudan,,7,2,3,2,04-01-2020
+Suriname,,10,0,10,0,04-01-2020
+Sweden,,4947,103,4605,239,04-01-2020
+Switzerland,,17768,2967,14313,488,04-01-2020
+Syria,,10,0,8,2,04-01-2020
+Taiwan,,329,39,285,5,04-01-2020
+Tanzania,,20,1,18,1,04-01-2020
+Thailand,,1771,505,1254,12,04-01-2020
+Timor-Leste,,1,0,1,0,04-01-2020
+Togo,,36,10,24,2,04-01-2020
+Trinidad and Tobago,,90,1,84,5,04-01-2020
+Tunisia,,423,5,406,12,04-01-2020
+Turkey,,15679,333,15069,277,04-01-2020
+United States,,213323,8474,200092,4757,04-01-2020
+Uganda,,44,0,44,0,04-01-2020
+Ukraine,,794,13,761,20,04-01-2020
+United Arab Emirates,,814,61,745,8,04-01-2020
+United Kingdom,,29865,179,27329,2357,04-01-2020
+Uruguay,,338,41,295,2,04-01-2020
+Uzbekistan,,181,12,167,2,04-01-2020
+Venezuela,,143,41,99,3,04-01-2020
+Vietnam,,218,63,155,0,04-01-2020
+West Bank and Gaza,,134,18,115,1,04-01-2020
+Zambia,,36,0,36,0,04-01-2020
+Zimbabwe,,8,0,7,1,04-01-2020
+United States,Alabama,1233,0,1201,32,04-02-2020
+United States,Alaska,143,0,140,3,04-02-2020
+United States,Arizona,1715,0,1683,32,04-02-2020
+United States,Arkansas,643,0,631,12,04-02-2020
+United States,California,10773,0,10535,238,04-02-2020
+United States,Colorado,3342,0,3262,80,04-02-2020
+United States,Connecticut,3824,0,3712,112,04-02-2020
+United States,Delaware,393,0,381,12,04-02-2020
+United States,District of Columbia,653,0,641,12,04-02-2020
+United States,Florida,9008,0,8844,164,04-02-2020
+United States,Georgia,5348,0,5185,163,04-02-2020
+United States,Grand Princess,103,0,100,3,04-02-2020
+United States,Guam,82,0,79,3,04-02-2020
+United States,Hawaii,256,0,255,1,04-02-2020
+United States,Idaho,776,0,767,9,04-02-2020
+United States,Illinois,7695,0,7532,163,04-02-2020
+United States,Indiana,3038,0,2960,78,04-02-2020
+United States,Iowa,614,0,603,11,04-02-2020
+United States,Kansas,553,0,541,12,04-02-2020
+United States,Kentucky,770,0,739,31,04-02-2020
+United States,Louisiana,9149,0,8839,310,04-02-2020
+United States,Maine,376,0,369,7,04-02-2020
+United States,Maryland,2331,0,2295,36,04-02-2020
+United States,Massachusetts,8966,0,8812,154,04-02-2020
+United States,Michigan,10791,0,10374,417,04-02-2020
+United States,Minnesota,742,0,724,18,04-02-2020
+United States,Mississippi,1177,0,1151,26,04-02-2020
+United States,Missouri,1857,0,1835,22,04-02-2020
+United States,Montana,241,0,235,6,04-02-2020
+United States,Nebraska,246,0,241,5,04-02-2020
+United States,Nevada,1463,0,1425,38,04-02-2020
+United States,New Hampshire,316,0,313,3,04-02-2020
+United States,New Jersey,25590,0,25053,537,04-02-2020
+United States,New Mexico,388,0,382,6,04-02-2020
+United States,New York,92506,0,90133,2373,04-02-2020
+United States,North Carolina,1977,0,1956,21,04-02-2020
+United States,North Dakota,159,0,156,3,04-02-2020
+United States,Northern Mariana Islands,6,0,5,1,04-02-2020
+United States,Ohio,2901,0,2820,81,04-02-2020
+United States,Oklahoma,881,0,847,34,04-02-2020
+United States,Oregon,826,0,805,21,04-02-2020
+United States,Pennsylvania,7268,0,7178,90,04-02-2020
+United States,Puerto Rico,316,0,304,12,04-02-2020
+United States,Recovered,0,9001,-9001,0,04-02-2020
+United States,Rhode Island,645,0,633,12,04-02-2020
+United States,South Carolina,1554,0,1523,31,04-02-2020
+United States,South Dakota,165,0,163,2,04-02-2020
+United States,Tennessee,3013,0,2977,36,04-02-2020
+United States,Texas,5069,0,4992,77,04-02-2020
+United States,Utah,1092,0,1085,7,04-02-2020
+United States,Vermont,338,0,321,17,04-02-2020
+United States,Virgin Islands,30,0,30,0,04-02-2020
+United States,Virginia,1706,0,1665,41,04-02-2020
+United States,Washington,6389,0,6118,271,04-02-2020
+United States,West Virginia,216,0,214,2,04-02-2020
+United States,Wisconsin,1748,0,1710,38,04-02-2020
+United States,Wyoming,150,0,150,0,04-02-2020
+Afghanistan,,273,10,257,6,04-02-2020
+Albania,,277,76,185,16,04-02-2020
+Algeria,,986,61,839,86,04-02-2020
+Andorra,,428,10,403,15,04-02-2020
+Angola,,8,1,5,2,04-02-2020
+Antigua and Barbuda,,9,0,9,0,04-02-2020
+Argentina,,1133,256,841,36,04-02-2020
+Armenia,,663,33,623,7,04-02-2020
+Australia,,5116,520,4572,24,04-02-2020
+Austria,,11129,1749,9222,158,04-02-2020
+Azerbaijan,,400,26,369,5,04-02-2020
+Bahamas,,24,1,22,1,04-02-2020
+Bahrain,,643,381,258,4,04-02-2020
+Bangladesh,,56,25,25,6,04-02-2020
+Barbados,,46,0,46,0,04-02-2020
+Belarus,,304,53,247,4,04-02-2020
+Belgium,,15348,2495,11842,1011,04-02-2020
+Belize,,3,0,3,0,04-02-2020
+Benin,,13,1,12,0,04-02-2020
+Bhutan,,5,1,4,0,04-02-2020
+Bolivia,,123,1,114,8,04-02-2020
+Bosnia and Herzegovina,,533,20,497,16,04-02-2020
+Botswana,,4,0,3,1,04-02-2020
+Brazil,,8044,127,7593,324,04-02-2020
+Brunei,,133,56,76,1,04-02-2020
+Bulgaria,,457,25,422,10,04-02-2020
+Burkina Faso,,288,50,222,16,04-02-2020
+Burma,,20,0,19,1,04-02-2020
+Burundi,,3,0,3,0,04-02-2020
+Cape Verde,,6,0,5,1,04-02-2020
+Cambodia,,110,34,76,0,04-02-2020
+Cameroon,,306,10,289,7,04-02-2020
+Canada,,11284,1735,0,138,04-02-2020
+Central African Republic,,3,0,3,0,04-02-2020
+Chad,,8,0,8,0,04-02-2020
+Chile,,3404,335,3051,18,04-02-2020
+China,,82432,76565,2545,3322,04-02-2020
+Colombia,,1161,55,1087,19,04-02-2020
+Republic of the Congo,,22,2,18,2,04-02-2020
+Congo (Kinshasa),,134,3,118,13,04-02-2020
+Costa Rica,,396,6,388,2,04-02-2020
+Cote d'Ivoire,,194,15,178,1,04-02-2020
+Croatia,,1011,88,916,7,04-02-2020
+Cuba,,233,13,214,6,04-02-2020
+Cyprus,,356,28,318,10,04-02-2020
+Czechia,,3858,67,3747,44,04-02-2020
+Denmark,,3573,1172,2278,123,04-02-2020
+Djibouti,,40,0,40,0,04-02-2020
+Dominica,,12,0,12,0,04-02-2020
+Dominican Republic,,1380,16,1304,60,04-02-2020
+Ecuador,,3163,65,2978,120,04-02-2020
+Egypt,,865,201,606,58,04-02-2020
+El Salvador,,41,0,39,2,04-02-2020
+Equatorial Guinea,,15,1,14,0,04-02-2020
+Eritrea,,22,0,22,0,04-02-2020
+Estonia,,858,45,802,11,04-02-2020
+Eswatini,,9,0,9,0,04-02-2020
+Ethiopia,,29,3,26,0,04-02-2020
+Fiji,,7,0,7,0,04-02-2020
+Finland,,1518,300,1199,19,04-02-2020
+France,,59929,12548,41983,5398,04-02-2020
+Gabon,,21,0,20,1,04-02-2020
+Gambia,,4,2,1,1,04-02-2020
+Georgia,,134,26,108,0,04-02-2020
+Germany,,84794,22440,61247,1107,04-02-2020
+Ghana,,204,31,168,5,04-02-2020
+Greece,,1544,61,1430,53,04-02-2020
+Grenada,,10,0,10,0,04-02-2020
+Guatemala,,47,12,34,1,04-02-2020
+Guinea,,52,0,52,0,04-02-2020
+Guinea-Bissau,,9,0,9,0,04-02-2020
+Guyana,,19,0,15,4,04-02-2020
+Haiti,,16,1,15,0,04-02-2020
+Holy See,,7,0,7,0,04-02-2020
+Honduras,,219,3,202,14,04-02-2020
+Hungary,,585,42,522,21,04-02-2020
+Iceland,,1319,284,1031,4,04-02-2020
+India,,2543,191,2280,72,04-02-2020
+Indonesia,,1790,112,1508,170,04-02-2020
+Iran,,50468,16711,30597,3160,04-02-2020
+Iraq,,772,202,516,54,04-02-2020
+Ireland,,3849,5,3746,98,04-02-2020
+Israel,,6857,338,6483,36,04-02-2020
+Italy,,115242,18278,83049,13915,04-02-2020
+Jamaica,,47,2,42,3,04-02-2020
+Japan,,2495,472,1961,62,04-02-2020
+Jordan,,299,45,249,5,04-02-2020
+Kazakhstan,,435,27,405,3,04-02-2020
+Kenya,,110,4,103,3,04-02-2020
+South Korea,,9976,5828,3979,169,04-02-2020
+Kosovo,,125,10,114,1,04-02-2020
+Kuwait,,342,81,261,0,04-02-2020
+Kyrgyzstan,,116,5,111,0,04-02-2020
+Laos,,10,0,10,0,04-02-2020
+Latvia,,458,31,427,0,04-02-2020
+Lebanon,,494,46,432,16,04-02-2020
+Liberia,,6,0,6,0,04-02-2020
+Libya,,11,0,10,1,04-02-2020
+Liechtenstein,,75,0,75,0,04-02-2020
+Lithuania,,649,7,633,9,04-02-2020
+Luxembourg,,2487,80,2377,30,04-02-2020
+MS Zaandam,,9,0,7,2,04-02-2020
+Madagascar,,59,0,59,0,04-02-2020
+Malawi,,3,0,3,0,04-02-2020
+Malaysia,,3116,767,2299,50,04-02-2020
+Maldives,,19,13,6,0,04-02-2020
+Mali,,36,0,33,3,04-02-2020
+Malta,,196,2,194,0,04-02-2020
+Mauritania,,6,2,3,1,04-02-2020
+Mauritius,,169,0,162,7,04-02-2020
+Mexico,,1378,35,1306,37,04-02-2020
+Moldova,,505,23,476,6,04-02-2020
+Monaco,,60,2,57,1,04-02-2020
+Mongolia,,14,2,12,0,04-02-2020
+Montenegro,,144,0,142,2,04-02-2020
+Morocco,,708,31,633,44,04-02-2020
+Mozambique,,10,0,10,0,04-02-2020
+Namibia,,14,3,11,0,04-02-2020
+Nepal,,6,1,5,0,04-02-2020
+Netherlands,,14788,260,13187,1341,04-02-2020
+New Zealand,,797,92,704,1,04-02-2020
+Nicaragua,,5,0,4,1,04-02-2020
+Niger,,98,0,93,5,04-02-2020
+Nigeria,,184,20,162,2,04-02-2020
+North Macedonia,,384,17,356,11,04-02-2020
+Norway,,5147,32,5065,50,04-02-2020
+Oman,,231,57,173,1,04-02-2020
+Pakistan,,2421,125,2262,34,04-02-2020
+Panama,,1317,9,1276,32,04-02-2020
+Papua New Guinea,,1,0,1,0,04-02-2020
+Paraguay,,77,2,72,3,04-02-2020
+Peru,,1414,537,822,55,04-02-2020
+Philippines,,2633,51,2475,107,04-02-2020
+Poland,,2946,56,2833,57,04-02-2020
+Portugal,,9034,68,8757,209,04-02-2020
+Qatar,,949,72,874,3,04-02-2020
+Romania,,2738,267,2356,115,04-02-2020
+Russia,,3548,235,3283,30,04-02-2020
+Rwanda,,84,0,84,0,04-02-2020
+Saint Kitts and Nevis,,9,0,9,0,04-02-2020
+Saint Lucia,,13,1,12,0,04-02-2020
+Saint Vincent and the Grenadines,,2,1,1,0,04-02-2020
+San Marino,,245,21,194,30,04-02-2020
+Saudi Arabia,,1885,328,1536,21,04-02-2020
+Senegal,,195,55,139,1,04-02-2020
+Serbia,,1171,0,1140,31,04-02-2020
+Seychelles,,10,0,10,0,04-02-2020
+Sierra Leone,,2,0,2,0,04-02-2020
+Singapore,,1049,266,779,4,04-02-2020
+Slovakia,,426,5,420,1,04-02-2020
+Slovenia,,897,70,810,17,04-02-2020
+Somalia,,5,1,4,0,04-02-2020
+South Africa,,1462,50,1407,5,04-02-2020
+Spain,,112065,26743,74974,10348,04-02-2020
+Sri Lanka,,151,21,126,4,04-02-2020
+Sudan,,8,2,4,2,04-02-2020
+Suriname,,10,0,10,0,04-02-2020
+Sweden,,5568,103,5157,308,04-02-2020
+Switzerland,,18827,4013,14278,536,04-02-2020
+Syria,,16,0,14,2,04-02-2020
+Taiwan,,339,45,289,5,04-02-2020
+Tanzania,,20,2,17,1,04-02-2020
+Thailand,,1875,505,1355,15,04-02-2020
+Timor-Leste,,1,0,1,0,04-02-2020
+Togo,,39,17,20,2,04-02-2020
+Trinidad and Tobago,,94,1,88,5,04-02-2020
+Tunisia,,455,5,436,14,04-02-2020
+Turkey,,18135,415,17364,356,04-02-2020
+United States,,243550,9001,228623,5926,04-02-2020
+Uganda,,45,0,45,0,04-02-2020
+Ukraine,,897,19,856,22,04-02-2020
+United Arab Emirates,,1024,96,920,8,04-02-2020
+United Kingdom,,34173,192,31055,2926,04-02-2020
+Uruguay,,350,62,284,4,04-02-2020
+Uzbekistan,,205,25,178,2,04-02-2020
+Venezuela,,146,43,98,5,04-02-2020
+Vietnam,,233,75,158,0,04-02-2020
+West Bank and Gaza,,161,18,142,1,04-02-2020
+Zambia,,39,0,38,1,04-02-2020
+Zimbabwe,,9,0,8,1,04-02-2020
+United States,Alabama,1495,0,1457,38,04-03-2020
+United States,Alaska,157,0,154,3,04-03-2020
+United States,Arizona,1937,0,1896,41,04-03-2020
+United States,Arkansas,704,0,692,12,04-03-2020
+United States,California,12004,0,11739,265,04-03-2020
+United States,Colorado,3742,0,3645,97,04-03-2020
+United States,Connecticut,4914,0,4783,131,04-03-2020
+United States,Delaware,450,0,436,14,04-03-2020
+United States,District of Columbia,757,0,742,15,04-03-2020
+United States,Florida,10268,0,10098,170,04-03-2020
+United States,Georgia,5831,0,5647,184,04-03-2020
+United States,Grand Princess,103,0,100,3,04-03-2020
+United States,Guam,84,0,80,4,04-03-2020
+United States,Hawaii,319,0,316,3,04-03-2020
+United States,Idaho,891,0,882,9,04-03-2020
+United States,Illinois,8904,0,8694,210,04-03-2020
+United States,Indiana,3437,0,3335,102,04-03-2020
+United States,Iowa,699,0,688,11,04-03-2020
+United States,Kansas,629,0,611,18,04-03-2020
+United States,Kentucky,770,0,736,34,04-03-2020
+United States,Louisiana,10297,0,9927,370,04-03-2020
+United States,Maine,432,0,423,9,04-03-2020
+United States,Maryland,2758,0,2715,43,04-03-2020
+United States,Massachusetts,10402,0,10210,192,04-03-2020
+United States,Michigan,12744,0,12265,479,04-03-2020
+United States,Minnesota,788,0,766,22,04-03-2020
+United States,Mississippi,1358,0,1329,29,04-03-2020
+United States,Missouri,1864,0,1839,25,04-03-2020
+United States,Montana,243,0,238,5,04-03-2020
+United States,Nebraska,279,0,273,6,04-03-2020
+United States,Nevada,1514,0,1471,43,04-03-2020
+United States,New Hampshire,479,0,474,5,04-03-2020
+United States,New Jersey,29895,0,29249,646,04-03-2020
+United States,New Mexico,534,0,524,10,04-03-2020
+United States,New York,102987,0,100052,2935,04-03-2020
+United States,North Carolina,2251,0,2224,27,04-03-2020
+United States,North Dakota,173,0,170,3,04-03-2020
+United States,Northern Mariana Islands,8,0,7,1,04-03-2020
+United States,Ohio,3312,0,3221,91,04-03-2020
+United States,Oklahoma,990,0,952,38,04-03-2020
+United States,Oregon,899,0,877,22,04-03-2020
+United States,Pennsylvania,8570,0,8468,102,04-03-2020
+United States,Puerto Rico,316,0,301,15,04-03-2020
+United States,Recovered,0,9707,-9707,0,04-03-2020
+United States,Rhode Island,711,0,697,14,04-03-2020
+United States,South Carolina,1700,0,1666,34,04-03-2020
+United States,South Dakota,187,0,185,2,04-03-2020
+United States,Tennessee,3067,0,3026,41,04-03-2020
+United States,Texas,5734,0,5634,100,04-03-2020
+United States,Utah,1255,0,1248,7,04-03-2020
+United States,Vermont,389,0,372,17,04-03-2020
+United States,Virgin Islands,37,0,37,0,04-03-2020
+United States,Virginia,2012,0,1966,46,04-03-2020
+United States,Washington,6846,0,6555,291,04-03-2020
+United States,West Virginia,237,0,235,2,04-03-2020
+United States,Wisconsin,2012,0,1961,51,04-03-2020
+United States,Wyoming,162,0,162,0,04-03-2020
+Afghanistan,,281,10,265,6,04-03-2020
+Albania,,304,89,198,17,04-03-2020
+Algeria,,1171,62,1004,105,04-03-2020
+Andorra,,439,16,407,16,04-03-2020
+Angola,,8,1,5,2,04-03-2020
+Antigua and Barbuda,,15,0,15,0,04-03-2020
+Argentina,,1265,266,960,39,04-03-2020
+Armenia,,736,43,686,7,04-03-2020
+Australia,,5330,649,4653,28,04-03-2020
+Austria,,11524,2022,9334,168,04-03-2020
+Azerbaijan,,443,32,406,5,04-03-2020
+Bahamas,,24,1,22,1,04-03-2020
+Bahrain,,672,382,286,4,04-03-2020
+Bangladesh,,61,26,29,6,04-03-2020
+Barbados,,51,0,51,0,04-03-2020
+Belarus,,351,53,294,4,04-03-2020
+Belgium,,16770,2872,12755,1143,04-03-2020
+Belize,,4,0,4,0,04-03-2020
+Benin,,16,2,14,0,04-03-2020
+Bhutan,,5,2,3,0,04-03-2020
+Bolivia,,132,1,122,9,04-03-2020
+Bosnia and Herzegovina,,579,27,535,17,04-03-2020
+Botswana,,4,0,3,1,04-03-2020
+Brazil,,9056,127,8570,359,04-03-2020
+Brunei,,134,65,68,1,04-03-2020
+Bulgaria,,485,30,441,14,04-03-2020
+Burkina Faso,,302,50,236,16,04-03-2020
+Burma,,20,0,19,1,04-03-2020
+Burundi,,3,0,3,0,04-03-2020
+Cape Verde,,6,0,5,1,04-03-2020
+Cambodia,,114,35,79,0,04-03-2020
+Cameroon,,509,17,484,8,04-03-2020
+Canada,,12437,2175,0,178,04-03-2020
+Central African Republic,,8,0,8,0,04-03-2020
+Chad,,8,0,8,0,04-03-2020
+Chile,,3737,427,3288,22,04-03-2020
+China,,82511,76760,2425,3326,04-03-2020
+Colombia,,1267,55,1187,25,04-03-2020
+Republic of the Congo,,22,2,18,2,04-03-2020
+Congo (Kinshasa),,134,3,118,13,04-03-2020
+Costa Rica,,416,11,403,2,04-03-2020
+Cote d'Ivoire,,218,19,198,1,04-03-2020
+Croatia,,1079,92,979,8,04-03-2020
+Cuba,,269,15,248,6,04-03-2020
+Cyprus,,396,28,357,11,04-03-2020
+Czechia,,4091,72,3966,53,04-03-2020
+Denmark,,3946,1287,2520,139,04-03-2020
+Djibouti,,49,8,41,0,04-03-2020
+Dominica,,12,0,12,0,04-03-2020
+Dominican Republic,,1488,16,1404,68,04-03-2020
+Ecuador,,3368,65,3158,145,04-03-2020
+Egypt,,985,216,703,66,04-03-2020
+El Salvador,,46,0,44,2,04-03-2020
+Equatorial Guinea,,16,1,15,0,04-03-2020
+Eritrea,,22,0,22,0,04-03-2020
+Estonia,,961,48,901,12,04-03-2020
+Eswatini,,9,0,9,0,04-03-2020
+Ethiopia,,35,3,32,0,04-03-2020
+Fiji,,7,0,7,0,04-03-2020
+Finland,,1615,300,1295,20,04-03-2020
+France,,65202,14135,44547,6520,04-03-2020
+Gabon,,21,1,19,1,04-03-2020
+Gambia,,4,2,1,1,04-03-2020
+Georgia,,155,28,127,0,04-03-2020
+Germany,,91159,24575,65309,1275,04-03-2020
+Ghana,,205,31,169,5,04-03-2020
+Greece,,1613,78,1472,63,04-03-2020
+Grenada,,12,0,12,0,04-03-2020
+Guatemala,,50,12,37,1,04-03-2020
+Guinea,,73,2,71,0,04-03-2020
+Guinea-Bissau,,15,0,15,0,04-03-2020
+Guyana,,23,0,19,4,04-03-2020
+Haiti,,18,1,17,0,04-03-2020
+Holy See,,7,0,7,0,04-03-2020
+Honduras,,222,3,204,15,04-03-2020
+Hungary,,623,43,554,26,04-03-2020
+Iceland,,1364,309,1051,4,04-03-2020
+India,,2567,192,2303,72,04-03-2020
+Indonesia,,1986,134,1671,181,04-03-2020
+Iran,,53183,17935,31954,3294,04-03-2020
+Iraq,,820,226,540,54,04-03-2020
+Ireland,,4273,5,4148,120,04-03-2020
+Israel,,7428,403,6985,40,04-03-2020
+Italy,,119827,19758,85388,14681,04-03-2020
+Jamaica,,47,2,42,3,04-03-2020
+Japan,,2617,514,2040,63,04-03-2020
+Jordan,,310,58,247,5,04-03-2020
+Kazakhstan,,464,29,429,6,04-03-2020
+Kenya,,122,4,114,4,04-03-2020
+South Korea,,10062,6021,3867,174,04-03-2020
+Kosovo,,126,10,115,1,04-03-2020
+Kuwait,,417,82,335,0,04-03-2020
+Kyrgyzstan,,130,6,123,1,04-03-2020
+Laos,,10,0,10,0,04-03-2020
+Latvia,,493,1,491,1,04-03-2020
+Lebanon,,508,50,441,17,04-03-2020
+Liberia,,7,0,7,0,04-03-2020
+Libya,,11,0,10,1,04-03-2020
+Liechtenstein,,75,0,75,0,04-03-2020
+Lithuania,,696,7,680,9,04-03-2020
+Luxembourg,,2612,500,2081,31,04-03-2020
+MS Zaandam,,9,0,7,2,04-03-2020
+Madagascar,,70,0,70,0,04-03-2020
+Malawi,,3,0,3,0,04-03-2020
+Malaysia,,3333,827,2453,53,04-03-2020
+Maldives,,19,13,6,0,04-03-2020
+Mali,,39,0,36,3,04-03-2020
+Malta,,202,2,200,0,04-03-2020
+Mauritania,,6,2,3,1,04-03-2020
+Mauritius,,186,0,179,7,04-03-2020
+Mexico,,1510,633,827,50,04-03-2020
+Moldova,,591,26,557,8,04-03-2020
+Monaco,,64,3,60,1,04-03-2020
+Mongolia,,14,2,12,0,04-03-2020
+Montenegro,,174,1,171,2,04-03-2020
+Morocco,,791,57,686,48,04-03-2020
+Mozambique,,10,0,10,0,04-03-2020
+Namibia,,14,3,11,0,04-03-2020
+Nepal,,6,1,5,0,04-03-2020
+Netherlands,,15821,260,14071,1490,04-03-2020
+New Zealand,,868,103,764,1,04-03-2020
+Nicaragua,,5,0,4,1,04-03-2020
+Niger,,120,0,115,5,04-03-2020
+Nigeria,,210,25,181,4,04-03-2020
+North Macedonia,,430,20,398,12,04-03-2020
+Norway,,5370,32,5279,59,04-03-2020
+Oman,,252,57,194,1,04-03-2020
+Pakistan,,2686,126,2520,40,04-03-2020
+Panama,,1475,10,1428,37,04-03-2020
+Papua New Guinea,,1,0,1,0,04-03-2020
+Paraguay,,92,6,83,3,04-03-2020
+Peru,,1595,537,997,61,04-03-2020
+Philippines,,3018,52,2830,136,04-03-2020
+Poland,,3383,56,3256,71,04-03-2020
+Portugal,,9886,68,9572,246,04-03-2020
+Qatar,,1075,93,979,3,04-03-2020
+Romania,,3183,283,2767,133,04-03-2020
+Russia,,4149,281,3834,34,04-03-2020
+Rwanda,,89,0,89,0,04-03-2020
+Saint Kitts and Nevis,,9,0,9,0,04-03-2020
+Saint Lucia,,13,1,12,0,04-03-2020
+Saint Vincent and the Grenadines,,3,1,2,0,04-03-2020
+San Marino,,245,21,194,30,04-03-2020
+Saudi Arabia,,2039,351,1663,25,04-03-2020
+Senegal,,207,66,140,1,04-03-2020
+Serbia,,1476,0,1437,39,04-03-2020
+Seychelles,,10,0,10,0,04-03-2020
+Sierra Leone,,2,0,2,0,04-03-2020
+Singapore,,1114,282,827,5,04-03-2020
+Slovakia,,450,10,439,1,04-03-2020
+Slovenia,,934,70,844,20,04-03-2020
+Somalia,,7,1,6,0,04-03-2020
+South Africa,,1505,95,1401,9,04-03-2020
+Spain,,119199,30513,77488,11198,04-03-2020
+Sri Lanka,,159,24,131,4,04-03-2020
+Sudan,,10,2,6,2,04-03-2020
+Suriname,,10,0,9,1,04-03-2020
+Sweden,,6131,205,5568,358,04-03-2020
+Switzerland,,19606,4846,14169,591,04-03-2020
+Syria,,16,0,14,2,04-03-2020
+Taiwan,,348,50,293,5,04-03-2020
+Tanzania,,20,3,16,1,04-03-2020
+Thailand,,1978,612,1347,19,04-03-2020
+Timor-Leste,,1,0,1,0,04-03-2020
+Togo,,40,17,20,3,04-03-2020
+Trinidad and Tobago,,98,1,91,6,04-03-2020
+Tunisia,,495,5,472,18,04-03-2020
+Turkey,,20921,484,20012,425,04-03-2020
+United States,,275537,9707,258743,7087,04-03-2020
+Uganda,,48,0,48,0,04-03-2020
+Ukraine,,1072,22,1023,27,04-03-2020
+United Arab Emirates,,1264,108,1147,9,04-03-2020
+United Kingdom,,38689,208,34870,3611,04-03-2020
+Uruguay,,369,68,297,4,04-03-2020
+Uzbekistan,,227,25,200,2,04-03-2020
+Venezuela,,153,52,94,7,04-03-2020
+Vietnam,,237,85,152,0,04-03-2020
+West Bank and Gaza,,194,21,172,1,04-03-2020
+Zambia,,39,2,36,1,04-03-2020
+Zimbabwe,,9,0,8,1,04-03-2020
+United States,Alabama,1614,0,1570,44,04-04-2020
+United States,Alaska,171,0,166,5,04-04-2020
+United States,Arizona,2187,0,2135,52,04-04-2020
+United States,Arkansas,743,0,729,14,04-04-2020
+United States,California,12837,0,12548,289,04-04-2020
+United States,Colorado,4188,0,4077,111,04-04-2020
+United States,Connecticut,5276,0,5111,165,04-04-2020
+United States,Delaware,593,0,579,14,04-04-2020
+United States,District of Columbia,902,0,881,21,04-04-2020
+United States,Florida,11537,0,11342,195,04-04-2020
+United States,Georgia,6160,0,5959,201,04-04-2020
+United States,Grand Princess,103,0,100,3,04-04-2020
+United States,Guam,93,0,89,4,04-04-2020
+United States,Hawaii,351,0,348,3,04-04-2020
+United States,Idaho,1022,0,1012,10,04-04-2020
+United States,Illinois,10357,0,10113,244,04-04-2020
+United States,Indiana,3953,0,3837,116,04-04-2020
+United States,Iowa,787,0,773,14,04-04-2020
+United States,Kansas,698,0,677,21,04-04-2020
+United States,Kentucky,917,0,877,40,04-04-2020
+United States,Louisiana,12496,0,12087,409,04-04-2020
+United States,Maine,456,0,446,10,04-04-2020
+United States,Maryland,3125,0,3071,54,04-04-2020
+United States,Massachusetts,11736,0,11520,216,04-04-2020
+United States,Michigan,14225,0,13685,540,04-04-2020
+United States,Minnesota,865,0,841,24,04-04-2020
+United States,Mississippi,1455,0,1420,35,04-04-2020
+United States,Missouri,2310,0,2277,33,04-04-2020
+United States,Montana,265,0,259,6,04-04-2020
+United States,Nebraska,321,0,315,6,04-04-2020
+United States,Nevada,1742,0,1696,46,04-04-2020
+United States,New Hampshire,540,0,533,7,04-04-2020
+United States,New Jersey,34124,0,33278,846,04-04-2020
+United States,New Mexico,534,0,524,10,04-04-2020
+United States,New York,113833,0,110268,3565,04-04-2020
+United States,North Carolina,2486,0,2452,34,04-04-2020
+United States,North Dakota,186,0,183,3,04-04-2020
+United States,Northern Mariana Islands,8,0,7,1,04-04-2020
+United States,Ohio,3739,0,3637,102,04-04-2020
+United States,Oklahoma,1161,0,1119,42,04-04-2020
+United States,Oregon,899,0,877,22,04-04-2020
+United States,Pennsylvania,10444,0,10308,136,04-04-2020
+United States,Puerto Rico,452,0,434,18,04-04-2020
+United States,Recovered,0,14652,-14652,0,04-04-2020
+United States,Rhode Island,806,0,789,17,04-04-2020
+United States,South Carolina,1917,0,1877,40,04-04-2020
+United States,South Dakota,212,0,210,2,04-04-2020
+United States,Tennessee,3322,0,3272,50,04-04-2020
+United States,Texas,6567,0,6451,116,04-04-2020
+United States,Utah,1435,0,1427,8,04-04-2020
+United States,Vermont,461,0,441,20,04-04-2020
+United States,Virgin Islands,40,0,40,0,04-04-2020
+United States,Virginia,2407,0,2355,52,04-04-2020
+United States,Washington,7247,0,6932,315,04-04-2020
+United States,West Virginia,282,0,280,2,04-04-2020
+United States,Wisconsin,2030,0,1976,54,04-04-2020
+United States,Wyoming,187,0,187,0,04-04-2020
+Afghanistan,,299,10,282,7,04-04-2020
+Albania,,333,99,214,20,04-04-2020
+Algeria,,1251,90,1031,130,04-04-2020
+Andorra,,466,21,428,17,04-04-2020
+Angola,,10,2,6,2,04-04-2020
+Antigua and Barbuda,,15,0,15,0,04-04-2020
+Argentina,,1451,279,1129,43,04-04-2020
+Armenia,,770,43,720,7,04-04-2020
+Australia,,5550,701,4819,30,04-04-2020
+Austria,,11781,2507,9088,186,04-04-2020
+Azerbaijan,,521,32,484,5,04-04-2020
+Bahamas,,28,0,24,4,04-04-2020
+Bahrain,,688,423,261,4,04-04-2020
+Bangladesh,,70,30,32,8,04-04-2020
+Barbados,,52,0,52,0,04-04-2020
+Belarus,,440,53,382,5,04-04-2020
+Belgium,,18431,3247,13901,1283,04-04-2020
+Belize,,4,0,4,0,04-04-2020
+Benin,,16,2,14,0,04-04-2020
+Bhutan,,5,2,3,0,04-04-2020
+Bolivia,,139,1,128,10,04-04-2020
+Bosnia and Herzegovina,,624,30,573,21,04-04-2020
+Botswana,,4,0,3,1,04-04-2020
+Brazil,,10360,127,9788,445,04-04-2020
+Brunei,,135,66,68,1,04-04-2020
+Bulgaria,,503,34,452,17,04-04-2020
+Burkina Faso,,318,66,236,16,04-04-2020
+Burma,,21,0,20,1,04-04-2020
+Burundi,,3,0,3,0,04-04-2020
+Cape Verde,,7,0,6,1,04-04-2020
+Cambodia,,114,50,64,0,04-04-2020
+Cameroon,,555,17,529,9,04-04-2020
+Canada,,12978,2577,0,217,04-04-2020
+Central African Republic,,8,0,8,0,04-04-2020
+Chad,,9,0,9,0,04-04-2020
+Chile,,4161,528,3606,27,04-04-2020
+China,,82543,76946,2267,3330,04-04-2020
+Colombia,,1406,85,1289,32,04-04-2020
+Republic of the Congo,,22,2,18,2,04-04-2020
+Congo (Kinshasa),,154,3,133,18,04-04-2020
+Costa Rica,,435,13,420,2,04-04-2020
+Cote d'Ivoire,,245,25,219,1,04-04-2020
+Croatia,,1126,119,995,12,04-04-2020
+Cuba,,288,15,267,6,04-04-2020
+Cyprus,,426,33,382,11,04-04-2020
+Czechia,,4472,78,4335,59,04-04-2020
+Denmark,,4269,1379,2729,161,04-04-2020
+Djibouti,,50,8,42,0,04-04-2020
+Dominica,,14,0,14,0,04-04-2020
+Dominican Republic,,1488,16,1404,68,04-04-2020
+Ecuador,,3465,100,3193,172,04-04-2020
+Egypt,,1070,241,758,71,04-04-2020
+El Salvador,,56,2,51,3,04-04-2020
+Equatorial Guinea,,16,1,15,0,04-04-2020
+Eritrea,,29,0,29,0,04-04-2020
+Estonia,,1039,59,967,13,04-04-2020
+Eswatini,,9,0,9,0,04-04-2020
+Ethiopia,,38,4,34,0,04-04-2020
+Fiji,,12,0,12,0,04-04-2020
+Finland,,1882,300,1557,25,04-04-2020
+France,,90848,15572,67702,7574,04-04-2020
+Gabon,,21,1,19,1,04-04-2020
+Gambia,,4,2,1,1,04-04-2020
+Georgia,,162,36,125,1,04-04-2020
+Germany,,96092,26400,68248,1444,04-04-2020
+Ghana,,205,31,169,5,04-04-2020
+Greece,,1673,78,1527,68,04-04-2020
+Grenada,,12,0,12,0,04-04-2020
+Guatemala,,61,15,44,2,04-04-2020
+Guinea,,111,5,106,0,04-04-2020
+Guinea-Bissau,,18,0,18,0,04-04-2020
+Guyana,,23,0,19,4,04-04-2020
+Haiti,,20,1,19,0,04-04-2020
+Holy See,,7,0,7,0,04-04-2020
+Honduras,,264,3,246,15,04-04-2020
+Hungary,,678,58,588,32,04-04-2020
+Iceland,,1417,396,1017,4,04-04-2020
+India,,3082,229,2767,86,04-04-2020
+Indonesia,,2092,150,1751,191,04-04-2020
+Iran,,55743,19736,32555,3452,04-04-2020
+Iraq,,878,259,563,56,04-04-2020
+Ireland,,4604,25,4442,137,04-04-2020
+Israel,,7851,427,7380,44,04-04-2020
+Italy,,124632,20996,88274,15362,04-04-2020
+Jamaica,,53,7,43,3,04-04-2020
+Japan,,3139,514,2548,77,04-04-2020
+Jordan,,323,74,244,5,04-04-2020
+Kazakhstan,,531,36,490,5,04-04-2020
+Kenya,,126,4,118,4,04-04-2020
+South Korea,,10156,6325,3654,177,04-04-2020
+Kosovo,,135,16,118,1,04-04-2020
+Kuwait,,479,93,385,1,04-04-2020
+Kyrgyzstan,,144,9,134,1,04-04-2020
+Laos,,10,0,10,0,04-04-2020
+Latvia,,509,1,507,1,04-04-2020
+Lebanon,,520,54,449,17,04-04-2020
+Liberia,,10,3,6,1,04-04-2020
+Libya,,18,0,17,1,04-04-2020
+Liechtenstein,,77,0,76,1,04-04-2020
+Lithuania,,771,7,753,11,04-04-2020
+Luxembourg,,2729,500,2198,31,04-04-2020
+MS Zaandam,,9,0,7,2,04-04-2020
+Madagascar,,70,0,70,0,04-04-2020
+Malawi,,4,0,4,0,04-04-2020
+Malaysia,,3483,915,2511,57,04-04-2020
+Maldives,,19,13,6,0,04-04-2020
+Mali,,41,1,37,3,04-04-2020
+Malta,,213,2,211,0,04-04-2020
+Mauritania,,6,2,3,1,04-04-2020
+Mauritius,,196,7,182,7,04-04-2020
+Mexico,,1688,633,995,60,04-04-2020
+Moldova,,752,29,711,12,04-04-2020
+Monaco,,66,3,62,1,04-04-2020
+Mongolia,,14,2,12,0,04-04-2020
+Montenegro,,201,1,198,2,04-04-2020
+Morocco,,919,66,794,59,04-04-2020
+Mozambique,,10,1,9,0,04-04-2020
+Namibia,,14,3,11,0,04-04-2020
+Nepal,,9,1,8,0,04-04-2020
+Netherlands,,16727,262,14809,1656,04-04-2020
+New Zealand,,950,127,822,1,04-04-2020
+Nicaragua,,5,0,4,1,04-04-2020
+Niger,,144,0,136,8,04-04-2020
+Nigeria,,214,25,185,4,04-04-2020
+North Macedonia,,483,20,446,17,04-04-2020
+Norway,,5550,32,5456,62,04-04-2020
+Oman,,277,61,214,2,04-04-2020
+Pakistan,,2818,131,2646,41,04-04-2020
+Panama,,1673,13,1619,41,04-04-2020
+Papua New Guinea,,1,0,1,0,04-04-2020
+Paraguay,,96,12,81,3,04-04-2020
+Peru,,1746,914,759,73,04-04-2020
+Philippines,,3094,57,2893,144,04-04-2020
+Poland,,3627,116,3432,79,04-04-2020
+Portugal,,10524,75,10183,266,04-04-2020
+Qatar,,1325,109,1213,3,04-04-2020
+Romania,,3613,329,3138,146,04-04-2020
+Russia,,4731,333,4355,43,04-04-2020
+Rwanda,,102,0,102,0,04-04-2020
+Saint Kitts and Nevis,,9,0,9,0,04-04-2020
+Saint Lucia,,14,1,13,0,04-04-2020
+Saint Vincent and the Grenadines,,7,1,6,0,04-04-2020
+San Marino,,259,27,200,32,04-04-2020
+Saudi Arabia,,2179,420,1730,29,04-04-2020
+Senegal,,219,72,145,2,04-04-2020
+Serbia,,1624,0,1580,44,04-04-2020
+Seychelles,,10,0,10,0,04-04-2020
+Sierra Leone,,4,0,4,0,04-04-2020
+Singapore,,1189,297,886,6,04-04-2020
+Slovakia,,471,10,460,1,04-04-2020
+Slovenia,,977,79,876,22,04-04-2020
+Somalia,,7,1,6,0,04-04-2020
+South Africa,,1585,95,1481,9,04-04-2020
+Spain,,126168,34219,80002,11947,04-04-2020
+Sri Lanka,,166,27,134,5,04-04-2020
+Sudan,,10,2,6,2,04-04-2020
+Suriname,,10,0,9,1,04-04-2020
+Sweden,,6443,205,5865,373,04-04-2020
+Switzerland,,20505,6415,13424,666,04-04-2020
+Syria,,16,2,12,2,04-04-2020
+Taiwan,,355,50,300,5,04-04-2020
+Tanzania,,20,3,16,1,04-04-2020
+Thailand,,2067,674,1373,20,04-04-2020
+Timor-Leste,,1,0,1,0,04-04-2020
+Togo,,41,17,21,3,04-04-2020
+Trinidad and Tobago,,103,1,96,6,04-04-2020
+Tunisia,,553,5,530,18,04-04-2020
+Turkey,,23934,786,22647,501,04-04-2020
+United States,,308804,14652,285745,8407,04-04-2020
+Uganda,,48,0,48,0,04-04-2020
+Ukraine,,1225,25,1168,32,04-04-2020
+United Arab Emirates,,1505,125,1370,10,04-04-2020
+United Kingdom,,42477,215,37942,4320,04-04-2020
+Uruguay,,400,93,302,5,04-04-2020
+Uzbekistan,,266,25,239,2,04-04-2020
+Venezuela,,155,52,96,7,04-04-2020
+Vietnam,,240,90,150,0,04-04-2020
+West Bank and Gaza,,217,21,195,1,04-04-2020
+Zambia,,39,2,36,1,04-04-2020
+Zimbabwe,,9,0,8,1,04-04-2020
+United States,Alabama,1765,0,1720,45,04-05-2020
+United States,Alaska,185,0,179,6,04-05-2020
+United States,Arizona,2486,0,2422,64,04-05-2020
+United States,Arkansas,837,0,821,16,04-05-2020
+United States,California,15034,0,14686,348,04-05-2020
+United States,Colorado,4950,0,4810,140,04-05-2020
+United States,Connecticut,5675,0,5486,189,04-05-2020
+United States,Delaware,673,0,659,14,04-05-2020
+United States,District of Columbia,1002,0,980,22,04-05-2020
+United States,Florida,12350,0,12129,221,04-05-2020
+United States,Georgia,6647,0,6436,211,04-05-2020
+United States,Grand Princess,103,0,100,3,04-05-2020
+United States,Guam,112,0,108,4,04-05-2020
+United States,Hawaii,371,0,367,4,04-05-2020
+United States,Idaho,1078,0,1068,10,04-05-2020
+United States,Illinois,11259,0,10985,274,04-05-2020
+United States,Indiana,4411,0,4284,127,04-05-2020
+United States,Iowa,869,0,851,18,04-05-2020
+United States,Kansas,751,0,729,22,04-05-2020
+United States,Kentucky,955,0,910,45,04-05-2020
+United States,Louisiana,13010,0,12533,477,04-05-2020
+United States,Maine,470,0,460,10,04-05-2020
+United States,Maryland,3617,0,3550,67,04-05-2020
+United States,Massachusetts,12500,0,12269,231,04-05-2020
+United States,Michigan,15718,0,15101,617,04-05-2020
+United States,Minnesota,935,0,906,29,04-05-2020
+United States,Mississippi,1638,0,1595,43,04-05-2020
+United States,Missouri,2347,0,2303,44,04-05-2020
+United States,Montana,286,0,280,6,04-05-2020
+United States,Nebraska,364,0,356,8,04-05-2020
+United States,Nevada,1855,0,1809,46,04-05-2020
+United States,New Hampshire,621,0,612,9,04-05-2020
+United States,New Jersey,37505,0,36588,917,04-05-2020
+United States,New Mexico,670,0,658,12,04-05-2020
+United States,New York,123160,0,119001,4159,04-05-2020
+United States,North Carolina,2649,0,2611,38,04-05-2020
+United States,North Dakota,207,0,204,3,04-05-2020
+United States,Northern Mariana Islands,8,0,7,1,04-05-2020
+United States,Ohio,4043,0,3924,119,04-05-2020
+United States,Oklahoma,1254,0,1208,46,04-05-2020
+United States,Oregon,1068,0,1041,27,04-05-2020
+United States,Pennsylvania,11589,0,11438,151,04-05-2020
+United States,Puerto Rico,475,0,455,20,04-05-2020
+United States,Recovered,0,17448,-17448,0,04-05-2020
+United States,Rhode Island,922,0,897,25,04-05-2020
+United States,South Carolina,2049,0,2005,44,04-05-2020
+United States,South Dakota,240,0,238,2,04-05-2020
+United States,Tennessee,3633,0,3580,53,04-05-2020
+United States,Texas,7209,0,7073,136,04-05-2020
+United States,Utah,1608,0,1600,8,04-05-2020
+United States,Vermont,512,0,490,22,04-05-2020
+United States,Virgin Islands,42,0,41,1,04-05-2020
+United States,Virginia,2640,0,2588,52,04-05-2020
+United States,Washington,7825,0,7489,336,04-05-2020
+United States,West Virginia,324,0,321,3,04-05-2020
+United States,Wisconsin,2320,0,2246,74,04-05-2020
+United States,Wyoming,197,0,197,0,04-05-2020
+Afghanistan,,349,15,327,7,04-05-2020
+Albania,,361,104,237,20,04-05-2020
+Algeria,,1320,90,1078,152,04-05-2020
+Andorra,,501,26,457,18,04-05-2020
+Angola,,14,2,10,2,04-05-2020
+Antigua and Barbuda,,15,0,15,0,04-05-2020
+Argentina,,1451,280,1127,44,04-05-2020
+Armenia,,822,57,758,7,04-05-2020
+Australia,,5687,757,4895,35,04-05-2020
+Austria,,12051,2998,8849,204,04-05-2020
+Azerbaijan,,584,32,545,7,04-05-2020
+Bahamas,,28,0,24,4,04-05-2020
+Bahrain,,700,431,265,4,04-05-2020
+Bangladesh,,88,33,46,9,04-05-2020
+Barbados,,56,6,49,1,04-05-2020
+Belarus,,562,52,502,8,04-05-2020
+Belgium,,19691,3751,14493,1447,04-05-2020
+Belize,,5,0,5,0,04-05-2020
+Benin,,22,5,17,0,04-05-2020
+Bhutan,,5,2,3,0,04-05-2020
+Bolivia,,157,2,145,10,04-05-2020
+Bosnia and Herzegovina,,654,30,601,23,04-05-2020
+Botswana,,6,0,5,1,04-05-2020
+Brazil,,11130,127,10517,486,04-05-2020
+Brunei,,135,73,61,1,04-05-2020
+Bulgaria,,531,37,474,20,04-05-2020
+Burkina Faso,,345,90,238,17,04-05-2020
+Burma,,21,0,20,1,04-05-2020
+Burundi,,3,0,3,0,04-05-2020
+Cape Verde,,7,0,6,1,04-05-2020
+Cambodia,,114,50,64,0,04-05-2020
+Cameroon,,650,17,624,9,04-05-2020
+Canada,,15756,3012,0,258,04-05-2020
+Central African Republic,,8,0,8,0,04-05-2020
+Chad,,9,0,9,0,04-05-2020
+Chile,,4471,618,3819,34,04-05-2020
+China,,82602,77207,2062,3333,04-05-2020
+Colombia,,1485,88,1362,35,04-05-2020
+Republic of the Congo,,45,2,38,5,04-05-2020
+Congo (Kinshasa),,154,3,133,18,04-05-2020
+Costa Rica,,454,16,436,2,04-05-2020
+Cote d'Ivoire,,261,37,221,3,04-05-2020
+Croatia,,1182,125,1042,15,04-05-2020
+Cuba,,320,15,297,8,04-05-2020
+Cyprus,,446,37,400,9,04-05-2020
+Czechia,,4587,96,4424,67,04-05-2020
+Denmark,,4561,1429,2953,179,04-05-2020
+Djibouti,,59,9,50,0,04-05-2020
+Dominica,,14,0,14,0,04-05-2020
+Dominican Republic,,1745,17,1646,82,04-05-2020
+Ecuador,,3646,100,3366,180,04-05-2020
+Egypt,,1173,247,848,78,04-05-2020
+El Salvador,,62,2,57,3,04-05-2020
+Equatorial Guinea,,16,1,15,0,04-05-2020
+Eritrea,,29,0,29,0,04-05-2020
+Estonia,,1097,62,1020,15,04-05-2020
+Eswatini,,9,0,9,0,04-05-2020
+Ethiopia,,43,4,37,2,04-05-2020
+Fiji,,12,0,12,0,04-05-2020
+Finland,,1927,300,1599,28,04-05-2020
+France,,93773,16349,69331,8093,04-05-2020
+Gabon,,21,1,19,1,04-05-2020
+Gambia,,4,2,1,1,04-05-2020
+Georgia,,174,36,136,2,04-05-2020
+Germany,,100123,28700,69839,1584,04-05-2020
+Ghana,,214,31,178,5,04-05-2020
+Greece,,1735,78,1584,73,04-05-2020
+Grenada,,12,0,12,0,04-05-2020
+Guatemala,,61,15,44,2,04-05-2020
+Guinea,,121,5,116,0,04-05-2020
+Guinea-Bissau,,18,0,18,0,04-05-2020
+Guyana,,24,0,20,4,04-05-2020
+Haiti,,21,1,19,1,04-05-2020
+Holy See,,7,0,7,0,04-05-2020
+Honduras,,268,6,240,22,04-05-2020
+Hungary,,733,66,633,34,04-05-2020
+Iceland,,1486,428,1054,4,04-05-2020
+India,,3588,229,3260,99,04-05-2020
+Indonesia,,2273,164,1911,198,04-05-2020
+Iran,,58226,19736,34887,3603,04-05-2020
+Iraq,,961,279,621,61,04-05-2020
+Ireland,,4994,25,4811,158,04-05-2020
+Israel,,8430,477,7904,49,04-05-2020
+Italy,,128948,21815,91246,15887,04-05-2020
+Jamaica,,58,8,47,3,04-05-2020
+Japan,,3139,514,2548,77,04-05-2020
+Jordan,,345,110,230,5,04-05-2020
+Kazakhstan,,584,42,536,6,04-05-2020
+Kenya,,142,4,134,4,04-05-2020
+South Korea,,10237,6463,3591,183,04-05-2020
+Kosovo,,145,23,121,1,04-05-2020
+Kuwait,,556,99,456,1,04-05-2020
+Kyrgyzstan,,147,9,137,1,04-05-2020
+Laos,,11,0,11,0,04-05-2020
+Latvia,,533,1,531,1,04-05-2020
+Lebanon,,527,54,455,18,04-05-2020
+Liberia,,13,3,7,3,04-05-2020
+Libya,,18,0,17,1,04-05-2020
+Liechtenstein,,77,0,76,1,04-05-2020
+Lithuania,,811,7,791,13,04-05-2020
+Luxembourg,,2804,500,2268,36,04-05-2020
+MS Zaandam,,9,0,7,2,04-05-2020
+Madagascar,,72,2,70,0,04-05-2020
+Malawi,,4,0,4,0,04-05-2020
+Malaysia,,3662,1005,2596,61,04-05-2020
+Maldives,,19,13,6,0,04-05-2020
+Mali,,45,1,39,5,04-05-2020
+Malta,,227,5,222,0,04-05-2020
+Mauritania,,6,2,3,1,04-05-2020
+Mauritius,,227,7,213,7,04-05-2020
+Mexico,,1890,633,1178,79,04-05-2020
+Moldova,,864,30,819,15,04-05-2020
+Monaco,,73,3,69,1,04-05-2020
+Mongolia,,14,2,12,0,04-05-2020
+Montenegro,,214,1,211,2,04-05-2020
+Morocco,,1021,76,875,70,04-05-2020
+Mozambique,,10,1,9,0,04-05-2020
+Namibia,,16,3,13,0,04-05-2020
+Nepal,,9,1,8,0,04-05-2020
+Netherlands,,17953,257,15925,1771,04-05-2020
+New Zealand,,1039,156,882,1,04-05-2020
+Nicaragua,,6,0,5,1,04-05-2020
+Niger,,184,13,161,10,04-05-2020
+Nigeria,,232,33,194,5,04-05-2020
+North Macedonia,,555,23,514,18,04-05-2020
+Norway,,5687,32,5584,71,04-05-2020
+Oman,,298,61,235,2,04-05-2020
+Pakistan,,3157,211,2899,47,04-05-2020
+Panama,,1801,13,1742,46,04-05-2020
+Papua New Guinea,,1,0,1,0,04-05-2020
+Paraguay,,104,12,89,3,04-05-2020
+Peru,,2281,989,1209,83,04-05-2020
+Philippines,,3246,64,3030,152,04-05-2020
+Poland,,4102,134,3874,94,04-05-2020
+Portugal,,11278,75,10908,295,04-05-2020
+Qatar,,1604,123,1477,4,04-05-2020
+Romania,,3864,374,3339,151,04-05-2020
+Russia,,5389,355,4989,45,04-05-2020
+Rwanda,,104,4,100,0,04-05-2020
+Saint Kitts and Nevis,,10,0,10,0,04-05-2020
+Saint Lucia,,14,1,13,0,04-05-2020
+Saint Vincent and the Grenadines,,7,1,6,0,04-05-2020
+San Marino,,266,35,199,32,04-05-2020
+Saudi Arabia,,2402,488,1880,34,04-05-2020
+Senegal,,222,82,138,2,04-05-2020
+Serbia,,1908,0,1857,51,04-05-2020
+Seychelles,,10,0,10,0,04-05-2020
+Sierra Leone,,6,0,6,0,04-05-2020
+Singapore,,1309,320,983,6,04-05-2020
+Slovakia,,485,10,474,1,04-05-2020
+Slovenia,,997,79,890,28,04-05-2020
+Somalia,,7,1,6,0,04-05-2020
+South Africa,,1655,95,1549,11,04-05-2020
+South Sudan,,1,0,1,0,04-05-2020
+Spain,,131646,38080,80925,12641,04-05-2020
+Sri Lanka,,176,33,138,5,04-05-2020
+Sudan,,12,2,8,2,04-05-2020
+Suriname,,10,0,9,1,04-05-2020
+Sweden,,6830,205,6224,401,04-05-2020
+Switzerland,,21100,6415,13970,715,04-05-2020
+Syria,,19,2,15,2,04-05-2020
+Taiwan,,363,50,308,5,04-05-2020
+Tanzania,,22,3,18,1,04-05-2020
+Thailand,,2169,793,1353,23,04-05-2020
+Timor-Leste,,1,0,1,0,04-05-2020
+Togo,,44,20,21,3,04-05-2020
+Trinidad and Tobago,,104,1,96,7,04-05-2020
+Tunisia,,574,5,547,22,04-05-2020
+Turkey,,27069,1042,25453,574,04-05-2020
+United States,,337023,17448,309956,9619,04-05-2020
+Uganda,,52,0,52,0,04-05-2020
+Ukraine,,1308,28,1243,37,04-05-2020
+United Arab Emirates,,1799,144,1645,10,04-05-2020
+United Kingdom,,48436,229,43264,4943,04-05-2020
+Uruguay,,400,93,302,5,04-05-2020
+Uzbekistan,,342,30,310,2,04-05-2020
+Venezuela,,159,52,100,7,04-05-2020
+Vietnam,,241,90,151,0,04-05-2020
+West Bank and Gaza,,237,25,211,1,04-05-2020
+Western Sahara,,4,0,4,0,04-05-2020
+Zambia,,39,3,35,1,04-05-2020
+Zimbabwe,,9,0,8,1,04-05-2020
+United States,Alabama,1952,0,1903,49,04-06-2020
+United States,Alaska,190,0,184,6,04-06-2020
+United States,Arizona,2732,0,2667,65,04-06-2020
+United States,Arkansas,875,0,859,16,04-06-2020
+United States,California,16019,0,15639,380,04-06-2020
+United States,Colorado,5183,0,5033,150,04-06-2020
+United States,Connecticut,6906,0,6700,206,04-06-2020
+United States,Delaware,783,0,768,15,04-06-2020
+United States,District of Columbia,1097,0,1073,24,04-06-2020
+United States,Florida,13324,0,13088,236,04-06-2020
+United States,Georgia,7314,0,7085,229,04-06-2020
+United States,Grand Princess,103,0,100,3,04-06-2020
+United States,Guam,113,0,109,4,04-06-2020
+United States,Hawaii,387,0,382,5,04-06-2020
+United States,Idaho,1101,0,1091,10,04-06-2020
+United States,Illinois,12262,0,11955,307,04-06-2020
+United States,Indiana,4956,0,4813,143,04-06-2020
+United States,Iowa,946,0,921,25,04-06-2020
+United States,Kansas,849,0,824,25,04-06-2020
+United States,Kentucky,955,0,910,45,04-06-2020
+United States,Louisiana,14867,0,14355,512,04-06-2020
+United States,Maine,499,0,489,10,04-06-2020
+United States,Maryland,4045,0,3954,91,04-06-2020
+United States,Massachusetts,13837,0,13577,260,04-06-2020
+United States,Michigan,17221,0,16494,727,04-06-2020
+United States,Minnesota,986,0,956,30,04-06-2020
+United States,Mississippi,1738,0,1687,51,04-06-2020
+United States,Missouri,2736,0,2689,47,04-06-2020
+United States,Montana,299,0,293,6,04-06-2020
+United States,Nebraska,417,0,408,9,04-06-2020
+United States,Nevada,1953,0,1907,46,04-06-2020
+United States,New Hampshire,715,0,706,9,04-06-2020
+United States,New Jersey,41090,0,40087,1003,04-06-2020
+United States,New Mexico,757,0,745,12,04-06-2020
+United States,New York,131815,0,127117,4698,04-06-2020
+United States,North Carolina,2962,0,2917,45,04-06-2020
+United States,North Dakota,225,0,222,3,04-06-2020
+United States,Northern Mariana Islands,8,0,7,1,04-06-2020
+United States,Ohio,4453,0,4311,142,04-06-2020
+United States,Oklahoma,1329,0,1278,51,04-06-2020
+United States,Oregon,1068,0,1041,27,04-06-2020
+United States,Pennsylvania,13127,0,12948,179,04-06-2020
+United States,Puerto Rico,513,0,492,21,04-06-2020
+United States,Recovered,0,19581,-19581,0,04-06-2020
+United States,Rhode Island,1082,0,1055,27,04-06-2020
+United States,South Carolina,2232,0,2184,48,04-06-2020
+United States,South Dakota,288,0,284,4,04-06-2020
+United States,Tennessee,3802,0,3737,65,04-06-2020
+United States,Texas,8043,0,7893,150,04-06-2020
+United States,Utah,1685,0,1672,13,04-06-2020
+United States,Vermont,543,0,520,23,04-06-2020
+United States,Virgin Islands,43,0,42,1,04-06-2020
+United States,Virginia,2878,0,2812,66,04-06-2020
+United States,Washington,8311,0,7930,381,04-06-2020
+United States,West Virginia,345,0,341,4,04-06-2020
+United States,Wisconsin,2449,0,2371,78,04-06-2020
+United States,Wyoming,210,0,210,0,04-06-2020
+Afghanistan,,367,18,338,11,04-06-2020
+Albania,,377,116,240,21,04-06-2020
+Algeria,,1423,90,1160,173,04-06-2020
+Andorra,,525,31,473,21,04-06-2020
+Angola,,16,2,12,2,04-06-2020
+Antigua and Barbuda,,15,0,15,0,04-06-2020
+Argentina,,1554,325,1181,48,04-06-2020
+Armenia,,833,62,763,8,04-06-2020
+Australia,,5797,1080,4677,40,04-06-2020
+Austria,,12297,3463,8614,220,04-06-2020
+Azerbaijan,,641,44,590,7,04-06-2020
+Bahamas,,29,4,20,5,04-06-2020
+Bahrain,,756,458,294,4,04-06-2020
+Bangladesh,,123,33,78,12,04-06-2020
+Barbados,,60,6,52,2,04-06-2020
+Belarus,,700,53,634,13,04-06-2020
+Belgium,,20814,3986,15196,1632,04-06-2020
+Belize,,7,0,6,1,04-06-2020
+Benin,,26,5,20,1,04-06-2020
+Bhutan,,5,2,3,0,04-06-2020
+Bolivia,,183,2,170,11,04-06-2020
+Bosnia and Herzegovina,,674,47,598,29,04-06-2020
+Botswana,,6,0,5,1,04-06-2020
+Brazil,,12161,127,11470,564,04-06-2020
+Brunei,,135,82,52,1,04-06-2020
+Bulgaria,,549,39,488,22,04-06-2020
+Burkina Faso,,364,108,238,18,04-06-2020
+Burma,,22,0,21,1,04-06-2020
+Burundi,,3,0,3,0,04-06-2020
+Cape Verde,,7,1,5,1,04-06-2020
+Cambodia,,114,53,61,0,04-06-2020
+Cameroon,,658,17,632,9,04-06-2020
+Canada,,16563,3256,0,338,04-06-2020
+Central African Republic,,8,0,8,0,04-06-2020
+Chad,,9,0,9,0,04-06-2020
+Chile,,4815,728,4050,37,04-06-2020
+China,,82665,77310,2020,3335,04-06-2020
+Colombia,,1579,88,1445,46,04-06-2020
+Republic of the Congo,,45,2,38,5,04-06-2020
+Congo (Kinshasa),,161,5,138,18,04-06-2020
+Costa Rica,,467,18,447,2,04-06-2020
+Cote d'Ivoire,,323,41,279,3,04-06-2020
+Croatia,,1222,130,1076,16,04-06-2020
+Cuba,,350,18,323,9,04-06-2020
+Cyprus,,465,45,411,9,04-06-2020
+Czechia,,4822,121,4623,78,04-06-2020
+Denmark,,4875,1489,3199,187,04-06-2020
+Djibouti,,90,9,81,0,04-06-2020
+Dominica,,15,1,14,0,04-06-2020
+Dominican Republic,,1828,33,1709,86,04-06-2020
+Ecuador,,3747,100,3456,191,04-06-2020
+Egypt,,1322,259,978,85,04-06-2020
+El Salvador,,69,5,60,4,04-06-2020
+Equatorial Guinea,,16,3,13,0,04-06-2020
+Eritrea,,31,0,31,0,04-06-2020
+Estonia,,1108,62,1027,19,04-06-2020
+Eswatini,,10,4,6,0,04-06-2020
+Ethiopia,,44,4,38,2,04-06-2020
+Fiji,,14,0,14,0,04-06-2020
+Finland,,2176,300,1849,27,04-06-2020
+France,,98963,17428,72609,8926,04-06-2020
+Gabon,,24,1,22,1,04-06-2020
+Gambia,,4,2,1,1,04-06-2020
+Georgia,,188,39,147,2,04-06-2020
+Germany,,103374,28700,72864,1810,04-06-2020
+Ghana,,214,31,178,5,04-06-2020
+Greece,,1755,269,1407,79,04-06-2020
+Grenada,,12,0,12,0,04-06-2020
+Guatemala,,70,15,52,3,04-06-2020
+Guinea,,128,5,123,0,04-06-2020
+Guinea-Bissau,,18,0,18,0,04-06-2020
+Guyana,,31,8,19,4,04-06-2020
+Haiti,,24,0,23,1,04-06-2020
+Holy See,,7,0,7,0,04-06-2020
+Honduras,,298,6,270,22,04-06-2020
+Hungary,,744,67,639,38,04-06-2020
+Iceland,,1562,460,1096,6,04-06-2020
+India,,4778,375,4267,136,04-06-2020
+Indonesia,,2491,192,2090,209,04-06-2020
+Iran,,60500,24236,32525,3739,04-06-2020
+Iraq,,1031,344,623,64,04-06-2020
+Ireland,,5364,25,5165,174,04-06-2020
+Israel,,8904,585,8262,57,04-06-2020
+Italy,,132547,22837,93187,16523,04-06-2020
+Jamaica,,58,8,47,3,04-06-2020
+Japan,,3654,575,2994,85,04-06-2020
+Jordan,,349,126,217,6,04-06-2020
+Kazakhstan,,662,46,610,6,04-06-2020
+Kenya,,158,4,148,6,04-06-2020
+South Korea,,10284,6598,3500,186,04-06-2020
+Kosovo,,145,23,121,1,04-06-2020
+Kuwait,,665,103,561,1,04-06-2020
+Kyrgyzstan,,216,33,179,4,04-06-2020
+Laos,,12,0,12,0,04-06-2020
+Latvia,,542,16,525,1,04-06-2020
+Lebanon,,541,60,462,19,04-06-2020
+Liberia,,14,3,8,3,04-06-2020
+Libya,,19,1,17,1,04-06-2020
+Liechtenstein,,77,55,21,1,04-06-2020
+Lithuania,,843,8,820,15,04-06-2020
+Luxembourg,,2843,500,2302,41,04-06-2020
+MS Zaandam,,9,0,7,2,04-06-2020
+Madagascar,,82,2,80,0,04-06-2020
+Malawi,,5,0,5,0,04-06-2020
+Malaysia,,3793,1241,2490,62,04-06-2020
+Maldives,,19,13,6,0,04-06-2020
+Mali,,47,9,33,5,04-06-2020
+Malta,,241,5,236,0,04-06-2020
+Mauritania,,6,2,3,1,04-06-2020
+Mauritius,,244,7,230,7,04-06-2020
+Mexico,,2143,633,1416,94,04-06-2020
+Moldova,,965,37,909,19,04-06-2020
+Monaco,,77,4,72,1,04-06-2020
+Mongolia,,15,2,13,0,04-06-2020
+Montenegro,,233,1,230,2,04-06-2020
+Morocco,,1120,81,959,80,04-06-2020
+Mozambique,,10,1,9,0,04-06-2020
+Namibia,,16,3,13,0,04-06-2020
+Nepal,,9,1,8,0,04-06-2020
+Netherlands,,18926,258,16794,1874,04-06-2020
+New Zealand,,1106,176,929,1,04-06-2020
+Nicaragua,,6,0,5,1,04-06-2020
+Niger,,253,26,217,10,04-06-2020
+Nigeria,,238,35,198,5,04-06-2020
+North Macedonia,,570,30,517,23,04-06-2020
+Norway,,5865,32,5757,76,04-06-2020
+Oman,,331,61,268,2,04-06-2020
+Pakistan,,3766,259,3454,53,04-06-2020
+Panama,,1988,13,1921,54,04-06-2020
+Papua New Guinea,,2,0,2,0,04-06-2020
+Paraguay,,113,12,96,5,04-06-2020
+Peru,,2561,997,1472,92,04-06-2020
+Philippines,,3660,73,3424,163,04-06-2020
+Poland,,4413,162,4144,107,04-06-2020
+Portugal,,11730,140,11279,311,04-06-2020
+Qatar,,1832,131,1697,4,04-06-2020
+Romania,,4057,406,3475,176,04-06-2020
+Russia,,6343,406,5890,47,04-06-2020
+Rwanda,,105,4,101,0,04-06-2020
+Saint Kitts and Nevis,,10,0,10,0,04-06-2020
+Saint Lucia,,14,1,13,0,04-06-2020
+Saint Vincent and the Grenadines,,7,1,6,0,04-06-2020
+San Marino,,266,35,199,32,04-06-2020
+Sao Tome and Principe,,4,0,4,0,04-06-2020
+Saudi Arabia,,2605,551,2016,38,04-06-2020
+Senegal,,226,92,132,2,04-06-2020
+Serbia,,2200,0,2142,58,04-06-2020
+Seychelles,,11,0,11,0,04-06-2020
+Sierra Leone,,6,0,6,0,04-06-2020
+Singapore,,1375,344,1025,6,04-06-2020
+Slovakia,,534,8,524,2,04-06-2020
+Slovenia,,1021,102,889,30,04-06-2020
+Somalia,,7,1,6,0,04-06-2020
+South Africa,,1686,95,1579,12,04-06-2020
+South Sudan,,1,0,1,0,04-06-2020
+Spain,,136675,40437,82897,13341,04-06-2020
+Sri Lanka,,178,38,135,5,04-06-2020
+Sudan,,12,2,8,2,04-06-2020
+Suriname,,10,0,9,1,04-06-2020
+Sweden,,7206,205,6524,477,04-06-2020
+Switzerland,,21657,8056,12836,765,04-06-2020
+Syria,,19,2,15,2,04-06-2020
+Taiwan,,373,57,311,5,04-06-2020
+Tanzania,,24,3,20,1,04-06-2020
+Thailand,,2220,793,1401,26,04-06-2020
+Timor-Leste,,1,0,1,0,04-06-2020
+Togo,,58,23,32,3,04-06-2020
+Trinidad and Tobago,,105,1,96,8,04-06-2020
+Tunisia,,596,5,569,22,04-06-2020
+Turkey,,30217,1326,28242,649,04-06-2020
+United States,,366618,19581,336254,10783,04-06-2020
+Uganda,,52,0,52,0,04-06-2020
+Ukraine,,1319,28,1253,38,04-06-2020
+United Arab Emirates,,2076,167,1898,11,04-06-2020
+United Kingdom,,52279,287,46607,5385,04-06-2020
+Uruguay,,406,104,296,6,04-06-2020
+Uzbekistan,,457,30,425,2,04-06-2020
+Venezuela,,165,65,93,7,04-06-2020
+Vietnam,,245,95,150,0,04-06-2020
+West Bank and Gaza,,254,24,229,1,04-06-2020
+Western Sahara,,4,0,4,0,04-06-2020
+Zambia,,39,5,33,1,04-06-2020
+Zimbabwe,,10,0,9,1,04-06-2020
+United States,Alabama,2169,0,2105,64,04-07-2020
+United States,Alaska,213,0,207,6,04-07-2020
+United States,Arizona,2870,0,2797,73,04-07-2020
+United States,Arkansas,946,0,928,18,04-07-2020
+United States,California,17351,0,16919,432,04-07-2020
+United States,Colorado,5429,0,5250,179,04-07-2020
+United States,Connecticut,7781,0,7504,277,04-07-2020
+United States,Delaware,928,0,912,16,04-07-2020
+United States,District of Columbia,1211,0,1189,22,04-07-2020
+United States,Florida,14545,0,14262,283,04-07-2020
+United States,Georgia,8822,0,8493,329,04-07-2020
+United States,Grand Princess,103,0,100,3,04-07-2020
+United States,Guam,121,0,117,4,04-07-2020
+United States,Hawaii,410,0,405,5,04-07-2020
+United States,Idaho,1170,0,1157,13,04-07-2020
+United States,Illinois,12271,0,11963,308,04-07-2020
+United States,Indiana,5510,0,5337,173,04-07-2020
+United States,Iowa,1046,0,1021,25,04-07-2020
+United States,Kansas,912,0,883,29,04-07-2020
+United States,Kentucky,1149,0,1084,65,04-07-2020
+United States,Louisiana,16284,0,15702,582,04-07-2020
+United States,Maine,519,0,507,12,04-07-2020
+United States,Maryland,4371,0,4268,103,04-07-2020
+United States,Massachusetts,15202,0,14846,356,04-07-2020
+United States,Michigan,18970,0,18125,845,04-07-2020
+United States,Minnesota,1069,0,1035,34,04-07-2020
+United States,Mississippi,1915,0,1855,60,04-07-2020
+United States,Missouri,3130,0,3065,65,04-07-2020
+United States,Montana,319,0,313,6,04-07-2020
+United States,Nebraska,447,0,437,10,04-07-2020
+United States,Nevada,2124,0,2052,72,04-07-2020
+United States,New Hampshire,715,0,706,9,04-07-2020
+United States,New Jersey,44416,0,43184,1232,04-07-2020
+United States,New Mexico,876,0,863,13,04-07-2020
+United States,New York,139875,0,134386,5489,04-07-2020
+United States,North Carolina,3299,0,3246,53,04-07-2020
+United States,North Dakota,237,0,233,4,04-07-2020
+United States,Northern Mariana Islands,8,0,6,2,04-07-2020
+United States,Ohio,4782,0,4615,167,04-07-2020
+United States,Oklahoma,1474,0,1407,67,04-07-2020
+United States,Oregon,1132,0,1103,29,04-07-2020
+United States,Pennsylvania,14853,0,14606,247,04-07-2020
+United States,Puerto Rico,573,0,550,23,04-07-2020
+United States,Recovered,0,21763,-21763,0,04-07-2020
+United States,Rhode Island,1229,0,1199,30,04-07-2020
+United States,South Carolina,2417,0,2366,51,04-07-2020
+United States,South Dakota,320,0,314,6,04-07-2020
+United States,Tennessee,4139,0,4067,72,04-07-2020
+United States,Texas,8925,0,8765,160,04-07-2020
+United States,Utah,1746,0,1733,13,04-07-2020
+United States,Vermont,575,0,552,23,04-07-2020
+United States,Virgin Islands,43,0,42,1,04-07-2020
+United States,Virginia,3335,0,3269,66,04-07-2020
+United States,Washington,8692,0,8292,400,04-07-2020
+United States,West Virginia,412,0,408,4,04-07-2020
+United States,Wisconsin,2578,0,2486,92,04-07-2020
+United States,Wyoming,216,0,216,0,04-07-2020
+Afghanistan,,423,18,391,14,04-07-2020
+Albania,,383,131,230,22,04-07-2020
+Algeria,,1468,113,1162,193,04-07-2020
+Andorra,,545,39,484,22,04-07-2020
+Angola,,17,2,13,2,04-07-2020
+Antigua and Barbuda,,19,0,18,1,04-07-2020
+Argentina,,1628,338,1234,56,04-07-2020
+Armenia,,853,87,758,8,04-07-2020
+Australia,,5895,1080,4770,45,04-07-2020
+Austria,,12639,4046,8350,243,04-07-2020
+Azerbaijan,,717,44,665,8,04-07-2020
+Bahamas,,33,5,22,6,04-07-2020
+Bahrain,,811,458,348,5,04-07-2020
+Bangladesh,,164,33,114,17,04-07-2020
+Barbados,,63,6,54,3,04-07-2020
+Belarus,,861,54,794,13,04-07-2020
+Belgium,,22194,4157,16002,2035,04-07-2020
+Belize,,7,0,6,1,04-07-2020
+Benin,,26,5,20,1,04-07-2020
+Bhutan,,5,2,3,0,04-07-2020
+Bolivia,,194,2,178,14,04-07-2020
+Bosnia and Herzegovina,,764,68,663,33,04-07-2020
+Botswana,,6,0,5,1,04-07-2020
+Brazil,,14034,127,13221,686,04-07-2020
+Brunei,,135,85,49,1,04-07-2020
+Bulgaria,,577,42,512,23,04-07-2020
+Burkina Faso,,384,127,238,19,04-07-2020
+Burma,,22,0,21,1,04-07-2020
+Burundi,,3,0,3,0,04-07-2020
+Cape Verde,,7,1,5,1,04-07-2020
+Cambodia,,115,58,57,0,04-07-2020
+Cameroon,,658,43,606,9,04-07-2020
+Canada,,17872,3791,0,374,04-07-2020
+Central African Republic,,8,0,8,0,04-07-2020
+Chad,,10,2,8,0,04-07-2020
+Chile,,5116,898,4175,43,04-07-2020
+China,,82718,77410,1973,3335,04-07-2020
+Colombia,,1780,100,1630,50,04-07-2020
+Republic of the Congo,,45,2,38,5,04-07-2020
+Congo (Kinshasa),,180,9,153,18,04-07-2020
+Costa Rica,,483,24,457,2,04-07-2020
+Cote d'Ivoire,,349,41,305,3,04-07-2020
+Croatia,,1282,167,1097,18,04-07-2020
+Cuba,,396,27,358,11,04-07-2020
+Cyprus,,494,47,438,9,04-07-2020
+Czechia,,5017,172,4757,88,04-07-2020
+Denmark,,5266,1621,3442,203,04-07-2020
+Djibouti,,90,9,81,0,04-07-2020
+Dominica,,15,1,14,0,04-07-2020
+Dominican Republic,,1956,36,1822,98,04-07-2020
+Ecuador,,3747,100,3456,191,04-07-2020
+Egypt,,1450,276,1080,94,04-07-2020
+El Salvador,,78,5,69,4,04-07-2020
+Equatorial Guinea,,16,3,13,0,04-07-2020
+Eritrea,,31,0,31,0,04-07-2020
+Estonia,,1149,69,1059,21,04-07-2020
+Eswatini,,10,4,6,0,04-07-2020
+Ethiopia,,52,4,46,2,04-07-2020
+Fiji,,15,0,15,0,04-07-2020
+Finland,,2308,300,1974,34,04-07-2020
+France,,110065,19523,80199,10343,04-07-2020
+Gabon,,30,1,28,1,04-07-2020
+Gambia,,4,2,1,1,04-07-2020
+Georgia,,196,46,147,3,04-07-2020
+Germany,,107663,36081,69566,2016,04-07-2020
+Ghana,,287,31,251,5,04-07-2020
+Greece,,1832,269,1482,81,04-07-2020
+Grenada,,12,0,12,0,04-07-2020
+Guatemala,,77,17,57,3,04-07-2020
+Guinea,,144,5,139,0,04-07-2020
+Guinea-Bissau,,33,0,33,0,04-07-2020
+Guyana,,33,8,20,5,04-07-2020
+Haiti,,25,0,24,1,04-07-2020
+Holy See,,7,0,7,0,04-07-2020
+Honduras,,305,6,277,22,04-07-2020
+Hungary,,817,71,699,47,04-07-2020
+Iceland,,1586,559,1021,6,04-07-2020
+India,,5311,421,4740,150,04-07-2020
+Indonesia,,2738,204,2313,221,04-07-2020
+Iran,,62589,27039,31678,3872,04-07-2020
+Iraq,,1122,373,684,65,04-07-2020
+Ireland,,5709,25,5474,210,04-07-2020
+Israel,,9248,770,8413,65,04-07-2020
+Italy,,135586,24392,94067,17127,04-07-2020
+Jamaica,,63,8,52,3,04-07-2020
+Japan,,3906,592,3222,92,04-07-2020
+Jordan,,353,138,209,6,04-07-2020
+Kazakhstan,,697,51,640,6,04-07-2020
+Kenya,,172,7,159,6,04-07-2020
+South Korea,,10331,6694,3445,192,04-07-2020
+Kosovo,,170,24,142,4,04-07-2020
+Kuwait,,743,105,637,1,04-07-2020
+Kyrgyzstan,,228,33,191,4,04-07-2020
+Laos,,14,0,14,0,04-07-2020
+Latvia,,548,16,530,2,04-07-2020
+Lebanon,,548,62,467,19,04-07-2020
+Liberia,,14,3,8,3,04-07-2020
+Libya,,20,1,18,1,04-07-2020
+Liechtenstein,,78,55,22,1,04-07-2020
+Lithuania,,880,8,857,15,04-07-2020
+Luxembourg,,2970,500,2426,44,04-07-2020
+MS Zaandam,,9,0,7,2,04-07-2020
+Madagascar,,88,7,81,0,04-07-2020
+Malawi,,8,0,7,1,04-07-2020
+Malaysia,,3963,1321,2579,63,04-07-2020
+Maldives,,19,13,6,0,04-07-2020
+Mali,,56,12,39,5,04-07-2020
+Malta,,293,5,288,0,04-07-2020
+Mauritania,,6,2,3,1,04-07-2020
+Mauritius,,268,8,253,7,04-07-2020
+Mexico,,2439,633,1681,125,04-07-2020
+Moldova,,1056,40,994,22,04-07-2020
+Monaco,,79,4,74,1,04-07-2020
+Mongolia,,15,4,11,0,04-07-2020
+Montenegro,,241,4,235,2,04-07-2020
+Morocco,,1184,93,1001,90,04-07-2020
+Mozambique,,10,1,9,0,04-07-2020
+Namibia,,16,3,13,0,04-07-2020
+Nepal,,9,1,8,0,04-07-2020
+Netherlands,,19709,272,17329,2108,04-07-2020
+New Zealand,,1160,241,918,1,04-07-2020
+Nicaragua,,6,0,5,1,04-07-2020
+Niger,,278,26,241,11,04-07-2020
+Nigeria,,254,44,204,6,04-07-2020
+North Macedonia,,599,30,543,26,04-07-2020
+Norway,,6086,32,5965,89,04-07-2020
+Oman,,371,67,302,2,04-07-2020
+Pakistan,,4035,429,3549,57,04-07-2020
+Panama,,2100,14,2031,55,04-07-2020
+Papua New Guinea,,2,0,2,0,04-07-2020
+Paraguay,,115,15,95,5,04-07-2020
+Peru,,2954,1301,1546,107,04-07-2020
+Philippines,,3764,84,3503,177,04-07-2020
+Poland,,4848,191,4528,129,04-07-2020
+Portugal,,12442,184,11913,345,04-07-2020
+Qatar,,2057,150,1901,6,04-07-2020
+Romania,,4417,460,3760,197,04-07-2020
+Russia,,7497,494,6945,58,04-07-2020
+Rwanda,,105,7,98,0,04-07-2020
+Saint Kitts and Nevis,,11,0,11,0,04-07-2020
+Saint Lucia,,14,1,13,0,04-07-2020
+Saint Vincent and the Grenadines,,8,1,7,0,04-07-2020
+San Marino,,279,40,205,34,04-07-2020
+Sao Tome and Principe,,4,0,4,0,04-07-2020
+Saudi Arabia,,2795,615,2139,41,04-07-2020
+Senegal,,237,105,130,2,04-07-2020
+Serbia,,2447,0,2386,61,04-07-2020
+Seychelles,,11,0,11,0,04-07-2020
+Sierra Leone,,6,0,6,0,04-07-2020
+Singapore,,1481,377,1098,6,04-07-2020
+Slovakia,,581,13,566,2,04-07-2020
+Slovenia,,1059,102,921,36,04-07-2020
+Somalia,,8,1,7,0,04-07-2020
+South Africa,,1749,95,1641,13,04-07-2020
+South Sudan,,2,0,2,0,04-07-2020
+Spain,,141942,43208,84689,14045,04-07-2020
+Sri Lanka,,185,42,137,6,04-07-2020
+Sudan,,14,2,10,2,04-07-2020
+Suriname,,10,0,9,1,04-07-2020
+Sweden,,7693,205,6897,591,04-07-2020
+Switzerland,,22253,8704,12728,821,04-07-2020
+Syria,,19,3,14,2,04-07-2020
+Taiwan,,376,57,314,5,04-07-2020
+Tanzania,,24,5,18,1,04-07-2020
+Thailand,,2258,888,1343,27,04-07-2020
+Timor-Leste,,1,0,1,0,04-07-2020
+Togo,,65,23,39,3,04-07-2020
+Trinidad and Tobago,,107,1,98,8,04-07-2020
+Tunisia,,623,25,575,23,04-07-2020
+Turkey,,34109,1582,31802,725,04-07-2020
+United States,,396174,21763,361689,12722,04-07-2020
+Uganda,,52,0,52,0,04-07-2020
+Ukraine,,1462,28,1389,45,04-07-2020
+United Arab Emirates,,2359,186,2161,12,04-07-2020
+United Kingdom,,55949,325,49453,6171,04-07-2020
+Uruguay,,424,150,267,7,04-07-2020
+Uzbekistan,,520,30,488,2,04-07-2020
+Venezuela,,165,65,93,7,04-07-2020
+Vietnam,,249,123,126,0,04-07-2020
+West Bank and Gaza,,261,42,218,1,04-07-2020
+Western Sahara,,4,0,4,0,04-07-2020
+Zambia,,39,7,31,1,04-07-2020
+Zimbabwe,,11,0,9,2,04-07-2020
+United States,Alabama,2328,0,2262,66,04-08-2020
+United States,Alaska,226,0,219,7,04-08-2020
+United States,Arizona,3036,0,2956,80,04-08-2020
+United States,Arkansas,1000,0,982,18,04-08-2020
+United States,California,18897,0,18402,495,04-08-2020
+United States,Colorado,5655,0,5462,193,04-08-2020
+United States,Connecticut,7781,0,7455,326,04-08-2020
+United States,Delaware,1116,0,1097,19,04-08-2020
+United States,District of Columbia,1440,0,1413,27,04-08-2020
+United States,Florida,15456,0,15147,309,04-08-2020
+United States,Georgia,9901,0,9539,362,04-08-2020
+United States,Grand Princess,103,0,100,3,04-08-2020
+United States,Guam,121,0,117,4,04-08-2020
+United States,Hawaii,410,0,405,5,04-08-2020
+United States,Idaho,1210,0,1195,15,04-08-2020
+United States,Illinois,15078,0,14616,462,04-08-2020
+United States,Indiana,5943,0,5740,203,04-08-2020
+United States,Iowa,1145,0,1118,27,04-08-2020
+United States,Kansas,1046,0,1012,34,04-08-2020
+United States,Kentucky,1149,0,1084,65,04-08-2020
+United States,Louisiana,17030,0,16378,652,04-08-2020
+United States,Maine,537,0,523,14,04-08-2020
+United States,Maryland,5529,0,5405,124,04-08-2020
+United States,Massachusetts,16790,0,16357,433,04-08-2020
+United States,Michigan,20346,0,19387,959,04-08-2020
+United States,Minnesota,1154,0,1115,39,04-08-2020
+United States,Mississippi,2003,0,1936,67,04-08-2020
+United States,Missouri,3209,0,3123,86,04-08-2020
+United States,Montana,332,0,326,6,04-08-2020
+United States,Nebraska,519,0,507,12,04-08-2020
+United States,Nevada,2259,0,2187,72,04-08-2020
+United States,New Hampshire,747,0,734,13,04-08-2020
+United States,New Jersey,47437,0,45933,1504,04-08-2020
+United States,New Mexico,902,0,889,13,04-08-2020
+United States,New York,151061,0,144793,6268,04-08-2020
+United States,North Carolina,3499,0,3433,66,04-08-2020
+United States,North Dakota,251,0,247,4,04-08-2020
+United States,Northern Mariana Islands,11,0,9,2,04-08-2020
+United States,Ohio,5148,0,4955,193,04-08-2020
+United States,Oklahoma,1526,0,1447,79,04-08-2020
+United States,Oregon,1181,0,1148,33,04-08-2020
+United States,Pennsylvania,16631,0,16313,318,04-08-2020
+United States,Puerto Rico,620,0,596,24,04-08-2020
+United States,Recovered,0,23559,-23559,0,04-08-2020
+United States,Rhode Island,1450,0,1415,35,04-08-2020
+United States,South Carolina,2417,0,2366,51,04-08-2020
+United States,South Dakota,393,0,387,6,04-08-2020
+United States,Tennessee,4363,0,4283,80,04-08-2020
+United States,Texas,9777,0,9588,189,04-08-2020
+United States,Utah,1855,0,1842,13,04-08-2020
+United States,Vermont,605,0,582,23,04-08-2020
+United States,Virgin Islands,45,0,44,1,04-08-2020
+United States,Virginia,3645,0,3579,66,04-08-2020
+United States,Washington,9276,0,8850,426,04-08-2020
+United States,West Virginia,483,0,479,4,04-08-2020
+United States,Wisconsin,2710,0,2610,100,04-08-2020
+United States,Wyoming,221,0,221,0,04-08-2020
+Afghanistan,,444,29,401,14,04-08-2020
+Albania,,400,154,224,22,04-08-2020
+Algeria,,1572,237,1130,205,04-08-2020
+Andorra,,564,52,489,23,04-08-2020
+Angola,,19,2,15,2,04-08-2020
+Antigua and Barbuda,,19,0,17,2,04-08-2020
+Argentina,,1715,358,1294,63,04-08-2020
+Armenia,,881,114,758,9,04-08-2020
+Australia,,6010,1080,4880,50,04-08-2020
+Austria,,12942,4512,8157,273,04-08-2020
+Azerbaijan,,822,63,751,8,04-08-2020
+Bahamas,,40,5,28,7,04-08-2020
+Bahrain,,823,477,341,5,04-08-2020
+Bangladesh,,218,33,165,20,04-08-2020
+Barbados,,63,8,52,3,04-08-2020
+Belarus,,1066,77,976,13,04-08-2020
+Belgium,,23403,4681,16482,2240,04-08-2020
+Belize,,8,0,7,1,04-08-2020
+Benin,,26,5,20,1,04-08-2020
+Bhutan,,5,2,3,0,04-08-2020
+Bolivia,,210,2,193,15,04-08-2020
+Bosnia and Herzegovina,,804,79,691,34,04-08-2020
+Botswana,,6,0,5,1,04-08-2020
+Brazil,,16170,127,15224,819,04-08-2020
+Brunei,,135,91,43,1,04-08-2020
+Bulgaria,,593,42,527,24,04-08-2020
+Burkina Faso,,414,134,257,23,04-08-2020
+Burma,,22,0,19,3,04-08-2020
+Burundi,,3,0,3,0,04-08-2020
+Cape Verde,,7,1,5,1,04-08-2020
+Cambodia,,117,63,54,0,04-08-2020
+Cameroon,,730,60,660,10,04-08-2020
+Canada,,19141,4154,0,406,04-08-2020
+Central African Republic,,8,0,8,0,04-08-2020
+Chad,,10,2,8,0,04-08-2020
+Chile,,5546,1115,4383,48,04-08-2020
+China,,82809,77567,1905,3337,04-08-2020
+Colombia,,2054,123,1877,54,04-08-2020
+Republic of the Congo,,45,2,38,5,04-08-2020
+Congo (Kinshasa),,180,9,153,18,04-08-2020
+Costa Rica,,502,29,470,3,04-08-2020
+Cote d'Ivoire,,384,48,333,3,04-08-2020
+Croatia,,1343,179,1145,19,04-08-2020
+Cuba,,457,27,418,12,04-08-2020
+Cyprus,,526,52,465,9,04-08-2020
+Czechia,,5312,233,4980,99,04-08-2020
+Denmark,,5597,1763,3616,218,04-08-2020
+Djibouti,,135,25,110,0,04-08-2020
+Dominica,,15,1,14,0,04-08-2020
+Dominican Republic,,2111,50,1953,108,04-08-2020
+Ecuador,,4450,140,4068,242,04-08-2020
+Egypt,,1560,305,1152,103,04-08-2020
+El Salvador,,93,9,79,5,04-08-2020
+Equatorial Guinea,,18,3,15,0,04-08-2020
+Eritrea,,33,0,33,0,04-08-2020
+Estonia,,1185,72,1089,24,04-08-2020
+Eswatini,,12,7,5,0,04-08-2020
+Ethiopia,,55,4,49,2,04-08-2020
+Fiji,,15,0,15,0,04-08-2020
+Finland,,2487,300,2147,40,04-08-2020
+France,,113959,21452,81620,10887,04-08-2020
+Gabon,,34,1,32,1,04-08-2020
+Gambia,,4,2,1,1,04-08-2020
+Georgia,,211,50,158,3,04-08-2020
+Germany,,113296,46300,64647,2349,04-08-2020
+Ghana,,313,34,273,6,04-08-2020
+Greece,,1884,269,1532,83,04-08-2020
+Grenada,,12,0,12,0,04-08-2020
+Guatemala,,87,17,67,3,04-08-2020
+Guinea,,164,5,159,0,04-08-2020
+Guinea-Bissau,,33,0,33,0,04-08-2020
+Guyana,,37,8,23,6,04-08-2020
+Haiti,,27,0,26,1,04-08-2020
+Holy See,,8,2,6,0,04-08-2020
+Honduras,,312,6,284,22,04-08-2020
+Hungary,,895,94,743,58,04-08-2020
+Iceland,,1616,633,977,6,04-08-2020
+India,,5916,506,5232,178,04-08-2020
+Indonesia,,2956,222,2494,240,04-08-2020
+Iran,,64586,29812,30781,3993,04-08-2020
+Iraq,,1202,452,681,69,04-08-2020
+Ireland,,6074,25,5814,235,04-08-2020
+Israel,,9404,801,8530,73,04-08-2020
+Italy,,139422,26491,95262,17669,04-08-2020
+Jamaica,,63,10,49,4,04-08-2020
+Japan,,4257,622,3542,93,04-08-2020
+Jordan,,358,150,202,6,04-08-2020
+Kazakhstan,,727,54,666,7,04-08-2020
+Kenya,,179,9,164,6,04-08-2020
+South Korea,,10384,6776,3408,200,04-08-2020
+Kosovo,,184,30,149,5,04-08-2020
+Kuwait,,855,111,743,1,04-08-2020
+Kyrgyzstan,,270,33,233,4,04-08-2020
+Laos,,15,0,15,0,04-08-2020
+Latvia,,577,16,559,2,04-08-2020
+Lebanon,,576,62,495,19,04-08-2020
+Liberia,,31,3,24,4,04-08-2020
+Libya,,21,8,12,1,04-08-2020
+Liechtenstein,,78,55,22,1,04-08-2020
+Lithuania,,912,8,889,15,04-08-2020
+Luxembourg,,3034,500,2488,46,04-08-2020
+MS Zaandam,,9,0,7,2,04-08-2020
+Madagascar,,93,11,82,0,04-08-2020
+Malawi,,8,0,7,1,04-08-2020
+Malaysia,,4119,1487,2567,65,04-08-2020
+Maldives,,19,13,6,0,04-08-2020
+Mali,,59,16,36,7,04-08-2020
+Malta,,299,16,282,1,04-08-2020
+Mauritania,,6,2,3,1,04-08-2020
+Mauritius,,273,19,247,7,04-08-2020
+Mexico,,2785,633,2011,141,04-08-2020
+Moldova,,1174,40,1107,27,04-08-2020
+Monaco,,81,4,76,1,04-08-2020
+Mongolia,,16,4,12,0,04-08-2020
+Montenegro,,248,4,242,2,04-08-2020
+Morocco,,1275,97,1085,93,04-08-2020
+Mozambique,,17,1,16,0,04-08-2020
+Namibia,,16,3,13,0,04-08-2020
+Nepal,,9,1,8,0,04-08-2020
+Netherlands,,20682,272,18155,2255,04-08-2020
+New Zealand,,1210,282,927,1,04-08-2020
+Nicaragua,,6,0,5,1,04-08-2020
+Niger,,342,28,303,11,04-08-2020
+Nigeria,,276,44,226,6,04-08-2020
+North Macedonia,,617,35,553,29,04-08-2020
+Norway,,6086,32,5953,101,04-08-2020
+Oman,,419,72,345,2,04-08-2020
+Pakistan,,4263,467,3735,61,04-08-2020
+Panama,,2249,16,2174,59,04-08-2020
+Papua New Guinea,,2,0,2,0,04-08-2020
+Paraguay,,119,15,99,5,04-08-2020
+Peru,,4342,1333,2888,121,04-08-2020
+Philippines,,3870,96,3592,182,04-08-2020
+Poland,,5205,222,4824,159,04-08-2020
+Portugal,,13141,196,12565,380,04-08-2020
+Qatar,,2210,178,2026,6,04-08-2020
+Romania,,4761,528,4013,220,04-08-2020
+Russia,,8672,580,8029,63,04-08-2020
+Rwanda,,110,7,103,0,04-08-2020
+Saint Kitts and Nevis,,11,0,11,0,04-08-2020
+Saint Lucia,,14,1,13,0,04-08-2020
+Saint Vincent and the Grenadines,,8,1,7,0,04-08-2020
+San Marino,,279,40,205,34,04-08-2020
+Sao Tome and Principe,,4,0,4,0,04-08-2020
+Saudi Arabia,,2932,631,2260,41,04-08-2020
+Senegal,,244,113,129,2,04-08-2020
+Serbia,,2666,0,2601,65,04-08-2020
+Seychelles,,11,0,11,0,04-08-2020
+Sierra Leone,,7,0,7,0,04-08-2020
+Singapore,,1623,406,1211,6,04-08-2020
+Slovakia,,682,16,664,2,04-08-2020
+Slovenia,,1091,120,931,40,04-08-2020
+Somalia,,12,1,10,1,04-08-2020
+South Africa,,1845,95,1732,18,04-08-2020
+South Sudan,,2,0,2,0,04-08-2020
+Spain,,148220,48021,85407,14792,04-08-2020
+Sri Lanka,,189,44,138,7,04-08-2020
+Sudan,,14,2,10,2,04-08-2020
+Suriname,,10,3,6,1,04-08-2020
+Sweden,,8419,205,7527,687,04-08-2020
+Switzerland,,23280,9800,12585,895,04-08-2020
+Syria,,19,4,13,2,04-08-2020
+Taiwan,,379,61,313,5,04-08-2020
+Tanzania,,25,5,19,1,04-08-2020
+Thailand,,2369,888,1451,30,04-08-2020
+Timor-Leste,,1,0,1,0,04-08-2020
+Togo,,70,23,44,3,04-08-2020
+Trinidad and Tobago,,107,1,98,8,04-08-2020
+Tunisia,,628,25,579,24,04-08-2020
+Turkey,,38226,1846,35568,812,04-08-2020
+United States,,429003,23559,390749,14695,04-08-2020
+Uganda,,53,0,53,0,04-08-2020
+Ukraine,,1668,35,1581,52,04-08-2020
+United Arab Emirates,,2659,239,2408,12,04-08-2020
+United Kingdom,,61474,345,54018,7111,04-08-2020
+Uruguay,,424,150,267,7,04-08-2020
+Uzbekistan,,545,30,512,3,04-08-2020
+Venezuela,,167,65,93,9,04-08-2020
+Vietnam,,251,126,125,0,04-08-2020
+West Bank and Gaza,,263,44,218,1,04-08-2020
+Western Sahara,,4,0,4,0,04-08-2020
+Zambia,,39,7,31,1,04-08-2020
+Zimbabwe,,11,0,8,3,04-08-2020
+United States,Alabama,2703,0,2633,70,04-09-2020
+United States,Alaska,235,0,228,7,04-09-2020
+United States,Arizona,3018,0,2929,89,04-09-2020
+United States,Arkansas,1119,0,1098,21,04-09-2020
+United States,California,19710,0,19166,544,04-09-2020
+United States,Colorado,5655,0,5462,193,04-09-2020
+United States,Connecticut,9784,0,9404,380,04-09-2020
+United States,Delaware,1209,0,1186,23,04-09-2020
+United States,District of Columbia,1523,0,1491,32,04-09-2020
+United States,Florida,16364,0,16010,354,04-09-2020
+United States,Georgia,10566,0,10187,379,04-09-2020
+United States,Grand Princess,103,0,100,3,04-09-2020
+United States,Guam,128,0,124,4,04-09-2020
+United States,Hawaii,442,0,436,6,04-09-2020
+United States,Idaho,1232,0,1214,18,04-09-2020
+United States,Illinois,15079,0,14617,462,04-09-2020
+United States,Indiana,6351,0,6106,245,04-09-2020
+United States,Iowa,1270,0,1241,29,04-09-2020
+United States,Kansas,1116,0,1074,42,04-09-2020
+United States,Kentucky,1341,0,1268,73,04-09-2020
+United States,Louisiana,18283,0,17581,702,04-09-2020
+United States,Maine,560,0,544,16,04-09-2020
+United States,Maryland,6185,0,6047,138,04-09-2020
+United States,Massachusetts,18941,0,18438,503,04-09-2020
+United States,Michigan,21504,0,20428,1076,04-09-2020
+United States,Minnesota,1240,0,1190,50,04-09-2020
+United States,Mississippi,2260,0,2184,76,04-09-2020
+United States,Missouri,3432,0,3339,93,04-09-2020
+United States,Montana,354,0,348,6,04-09-2020
+United States,Nebraska,568,0,554,14,04-09-2020
+United States,Nevada,2456,0,2375,81,04-09-2020
+United States,New Hampshire,819,0,798,21,04-09-2020
+United States,New Jersey,51027,0,49318,1709,04-09-2020
+United States,New Mexico,865,0,849,16,04-09-2020
+United States,New York,161779,0,154712,7067,04-09-2020
+United States,North Carolina,3736,0,3660,76,04-09-2020
+United States,North Dakota,269,0,264,5,04-09-2020
+United States,Northern Mariana Islands,11,0,9,2,04-09-2020
+United States,Ohio,5512,0,5299,213,04-09-2020
+United States,Oklahoma,1686,0,1606,80,04-09-2020
+United States,Oregon,1321,0,1277,44,04-09-2020
+United States,Pennsylvania,18300,0,17955,345,04-09-2020
+United States,Puerto Rico,683,0,650,33,04-09-2020
+United States,Recovered,0,25410,-25410,0,04-09-2020
+United States,Rhode Island,1727,0,1684,43,04-09-2020
+United States,South Carolina,2793,0,2726,67,04-09-2020
+United States,South Dakota,447,0,441,6,04-09-2020
+United States,Tennessee,4634,0,4540,94,04-09-2020
+United States,Texas,11208,0,10998,210,04-09-2020
+United States,Utah,1856,0,1843,13,04-09-2020
+United States,Vermont,628,0,605,23,04-09-2020
+United States,Virgin Islands,45,0,44,1,04-09-2020
+United States,Virginia,4042,0,3933,109,04-09-2020
+United States,Washington,9639,0,9183,456,04-09-2020
+United States,West Virginia,514,0,509,5,04-09-2020
+United States,Wisconsin,2886,0,2775,111,04-09-2020
+United States,Wyoming,230,0,230,0,04-09-2020
+Afghanistan,,484,32,437,15,04-09-2020
+Albania,,409,165,221,23,04-09-2020
+Algeria,,1666,347,1084,235,04-09-2020
+Andorra,,583,58,500,25,04-09-2020
+Angola,,19,2,15,2,04-09-2020
+Antigua and Barbuda,,19,0,17,2,04-09-2020
+Argentina,,1795,365,1358,72,04-09-2020
+Armenia,,921,138,773,10,04-09-2020
+Australia,,6108,1472,4585,51,04-09-2020
+Austria,,13244,5240,7709,295,04-09-2020
+Azerbaijan,,926,101,816,9,04-09-2020
+Bahamas,,41,5,28,8,04-09-2020
+Bahrain,,887,519,363,5,04-09-2020
+Bangladesh,,330,33,276,21,04-09-2020
+Barbados,,66,11,52,3,04-09-2020
+Belarus,,1486,139,1331,16,04-09-2020
+Belgium,,24983,5164,17296,2523,04-09-2020
+Belize,,9,0,8,1,04-09-2020
+Benin,,26,5,20,1,04-09-2020
+Bhutan,,5,2,3,0,04-09-2020
+Bolivia,,264,2,244,18,04-09-2020
+Bosnia and Herzegovina,,858,101,722,35,04-09-2020
+Botswana,,13,0,12,1,04-09-2020
+Brazil,,18092,173,16969,950,04-09-2020
+Brunei,,135,92,42,1,04-09-2020
+Bulgaria,,618,48,546,24,04-09-2020
+Burkina Faso,,443,146,273,24,04-09-2020
+Burma,,23,2,18,3,04-09-2020
+Burundi,,3,0,3,0,04-09-2020
+Cape Verde,,7,1,5,1,04-09-2020
+Cambodia,,119,62,57,0,04-09-2020
+Cameroon,,730,60,660,10,04-09-2020
+Canada,,20654,5162,0,502,04-09-2020
+Central African Republic,,8,0,8,0,04-09-2020
+Chad,,11,2,9,0,04-09-2020
+Chile,,5972,1274,4641,57,04-09-2020
+China,,82883,77679,1865,3339,04-09-2020
+Colombia,,2223,174,1980,69,04-09-2020
+Republic of the Congo,,60,5,50,5,04-09-2020
+Congo (Kinshasa),,180,9,153,18,04-09-2020
+Costa Rica,,539,30,506,3,04-09-2020
+Cote d'Ivoire,,444,52,389,3,04-09-2020
+Croatia,,1407,219,1168,20,04-09-2020
+Cuba,,515,28,472,15,04-09-2020
+Cyprus,,564,53,501,10,04-09-2020
+Czechia,,5569,301,5156,112,04-09-2020
+Denmark,,5830,1883,3710,237,04-09-2020
+Djibouti,,135,25,110,0,04-09-2020
+Dominica,,15,1,14,0,04-09-2020
+Dominican Republic,,2349,80,2151,118,04-09-2020
+Ecuador,,4965,339,4354,272,04-09-2020
+Egypt,,1699,348,1233,118,04-09-2020
+El Salvador,,103,14,83,6,04-09-2020
+Equatorial Guinea,,18,3,15,0,04-09-2020
+Eritrea,,33,0,33,0,04-09-2020
+Estonia,,1207,83,1100,24,04-09-2020
+Eswatini,,12,7,5,0,04-09-2020
+Ethiopia,,56,4,50,2,04-09-2020
+Fiji,,15,0,15,0,04-09-2020
+Finland,,2605,300,2263,42,04-09-2020
+France,,118781,23413,83140,12228,04-09-2020
+Gabon,,44,1,42,1,04-09-2020
+Gambia,,4,2,1,1,04-09-2020
+Georgia,,218,51,164,3,04-09-2020
+Germany,,118181,52407,63167,2607,04-09-2020
+Ghana,,378,3,369,6,04-09-2020
+Greece,,1955,269,1599,87,04-09-2020
+Grenada,,12,0,12,0,04-09-2020
+Guatemala,,95,17,75,3,04-09-2020
+Guinea,,194,11,183,0,04-09-2020
+Guinea-Bissau,,36,0,36,0,04-09-2020
+Guyana,,37,8,23,6,04-09-2020
+Haiti,,30,0,28,2,04-09-2020
+Holy See,,8,2,6,0,04-09-2020
+Honduras,,343,6,314,23,04-09-2020
+Hungary,,980,96,818,66,04-09-2020
+Iceland,,1648,688,954,6,04-09-2020
+India,,6725,620,5879,226,04-09-2020
+Indonesia,,3293,252,2761,280,04-09-2020
+Iran,,66220,32309,29801,4110,04-09-2020
+Iraq,,1232,496,667,69,04-09-2020
+Ireland,,6574,25,6286,263,04-09-2020
+Israel,,9968,1011,8871,86,04-09-2020
+Italy,,143626,28470,96877,18279,04-09-2020
+Jamaica,,63,12,47,4,04-09-2020
+Japan,,4667,632,3941,94,04-09-2020
+Jordan,,372,161,204,7,04-09-2020
+Kazakhstan,,781,60,713,8,04-09-2020
+Kenya,,184,12,165,7,04-09-2020
+South Korea,,10423,6973,3246,204,04-09-2020
+Kosovo,,184,30,149,5,04-09-2020
+Kuwait,,910,111,798,1,04-09-2020
+Kyrgyzstan,,280,35,241,4,04-09-2020
+Laos,,16,0,16,0,04-09-2020
+Latvia,,589,16,570,3,04-09-2020
+Lebanon,,582,67,496,19,04-09-2020
+Liberia,,31,3,24,4,04-09-2020
+Libya,,24,8,15,1,04-09-2020
+Liechtenstein,,78,55,22,1,04-09-2020
+Lithuania,,955,8,931,16,04-09-2020
+Luxembourg,,3115,500,2563,52,04-09-2020
+MS Zaandam,,9,0,7,2,04-09-2020
+Madagascar,,93,11,82,0,04-09-2020
+Malawi,,8,0,7,1,04-09-2020
+Malaysia,,4228,1608,2553,67,04-09-2020
+Maldives,,19,13,6,0,04-09-2020
+Mali,,74,22,45,7,04-09-2020
+Malta,,337,16,319,2,04-09-2020
+Mauritania,,7,2,4,1,04-09-2020
+Mauritius,,314,23,284,7,04-09-2020
+Mexico,,3181,633,2374,174,04-09-2020
+Moldova,,1289,50,1210,29,04-09-2020
+Monaco,,84,5,78,1,04-09-2020
+Mongolia,,16,4,12,0,04-09-2020
+Montenegro,,252,4,246,2,04-09-2020
+Morocco,,1374,109,1168,97,04-09-2020
+Mozambique,,17,1,16,0,04-09-2020
+Namibia,,16,3,13,0,04-09-2020
+Nepal,,9,1,8,0,04-09-2020
+Netherlands,,21903,278,19222,2403,04-09-2020
+New Zealand,,1239,317,921,1,04-09-2020
+Nicaragua,,7,0,6,1,04-09-2020
+Niger,,410,40,359,11,04-09-2020
+Nigeria,,288,51,230,7,04-09-2020
+North Macedonia,,663,37,596,30,04-09-2020
+Norway,,6211,32,6071,108,04-09-2020
+Oman,,457,109,345,3,04-09-2020
+Pakistan,,4489,572,3852,65,04-09-2020
+Panama,,2528,16,2449,63,04-09-2020
+Papua New Guinea,,2,0,2,0,04-09-2020
+Paraguay,,124,18,101,5,04-09-2020
+Peru,,5256,1438,3680,138,04-09-2020
+Philippines,,4076,124,3749,203,04-09-2020
+Poland,,5575,284,5117,174,04-09-2020
+Portugal,,13956,205,13342,409,04-09-2020
+Qatar,,2376,206,2164,6,04-09-2020
+Romania,,5202,647,4307,248,04-09-2020
+Russia,,10131,698,9357,76,04-09-2020
+Rwanda,,110,7,103,0,04-09-2020
+Saint Kitts and Nevis,,11,0,11,0,04-09-2020
+Saint Lucia,,14,1,13,0,04-09-2020
+Saint Vincent and the Grenadines,,12,1,11,0,04-09-2020
+San Marino,,333,49,250,34,04-09-2020
+Sao Tome and Principe,,4,0,4,0,04-09-2020
+Saudi Arabia,,3287,666,2577,44,04-09-2020
+Senegal,,250,123,125,2,04-09-2020
+Serbia,,2867,0,2801,66,04-09-2020
+Seychelles,,11,0,11,0,04-09-2020
+Sierra Leone,,7,0,7,0,04-09-2020
+Singapore,,1910,460,1444,6,04-09-2020
+Slovakia,,701,23,676,2,04-09-2020
+Slovenia,,1124,128,953,43,04-09-2020
+Somalia,,12,1,10,1,04-09-2020
+South Africa,,1934,95,1821,18,04-09-2020
+South Sudan,,3,0,3,0,04-09-2020
+Spain,,153222,52165,85610,15447,04-09-2020
+Sri Lanka,,190,49,134,7,04-09-2020
+Sudan,,15,2,11,2,04-09-2020
+Suriname,,10,4,5,1,04-09-2020
+Sweden,,9141,205,8143,793,04-09-2020
+Switzerland,,24051,10600,12503,948,04-09-2020
+Syria,,19,4,13,2,04-09-2020
+Taiwan,,380,67,308,5,04-09-2020
+Tanzania,,25,5,19,1,04-09-2020
+Thailand,,2423,940,1451,32,04-09-2020
+Timor-Leste,,1,0,1,0,04-09-2020
+Togo,,73,24,46,3,04-09-2020
+Trinidad and Tobago,,109,1,100,8,04-09-2020
+Tunisia,,643,25,593,25,04-09-2020
+Turkey,,42282,2142,39232,908,04-09-2020
+United States,,461388,25410,419500,16478,04-09-2020
+Uganda,,53,0,53,0,04-09-2020
+Ukraine,,1892,45,1790,57,04-09-2020
+United Arab Emirates,,2990,268,2708,14,04-09-2020
+United Kingdom,,65872,359,57520,7993,04-09-2020
+Uruguay,,456,192,257,7,04-09-2020
+Uzbekistan,,582,38,541,3,04-09-2020
+Venezuela,,171,84,78,9,04-09-2020
+Vietnam,,255,128,127,0,04-09-2020
+West Bank and Gaza,,263,44,218,1,04-09-2020
+Western Sahara,,4,0,4,0,04-09-2020
+Zambia,,39,24,14,1,04-09-2020
+Zimbabwe,,11,0,8,3,04-09-2020

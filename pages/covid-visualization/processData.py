@@ -1,6 +1,10 @@
+# coding=utf-8
+
+import os
 
 path = '../../../../COVID-19/csse_covid_19_data\csse_covid_19_daily_reports/'
-
+# if os.getenv("JHU_GIT"):
+#   path = os.getenv("JHU_GIT")
 
 stateTranslation = [
   ['Arizona', 'AZ'],
@@ -61,6 +65,13 @@ for el in stateTranslation:
   stateDict[ el[1] ] = el[0]
 
 
+def apply_us_active_cases(row):
+  country = row['Country_Region']
+  if country == "United States":
+    row['Active'] = row['Confirmed'] - row['Recovered'] - row['Deaths']
+  return row
+
+
 def translateState(row):
   state = str(row["Province_State"]).strip()
   if ("," in state):
@@ -84,6 +95,7 @@ def processDate(date):
     })
 
   df = df[ df['Province_State'].str.contains('Diamond Princess') != True ]
+  df = df[ df['Country_Region'].str.contains('Diamond Princess') != True ]
 
   df = df.apply( translateState, axis=1 )
 
@@ -160,6 +172,9 @@ for key in stateReplacement:
 
 # == Add Population ==
 df = df.astype({"Confirmed": "int32", "Recovered": "int32", "Active": "int32", "Deaths": "int32"})
+df = df.apply(apply_us_active_cases, axis=1)
+
+
 
 #print(df)
 df.to_csv('jhu-data.csv', index=False)

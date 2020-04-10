@@ -4,6 +4,14 @@ header, footer {
   padding: 20px;
 }
 
+html {
+  background-color: hsla(199, 100%, 6%, 1);
+}
+
+body > div {
+  background-attachment: white;
+}
+
 header, header a, header a:hover { color: #eee; }
 footer { color: hsla(199, 40%, 40%, 1); }
 footer a { color: hsla(199, 40%, 50%, 1); }
@@ -52,7 +60,7 @@ a {
   font-family: 'Roboto', sans-serif;
 }
 
-.card {
+div.card {
   font-family: 'Montserrat', sans-serif;
   text-align: center;
   font-weight: bold;

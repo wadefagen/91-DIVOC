@@ -14,6 +14,7 @@ title: An interactive visualization of the exponential spread of COVID-19
 </header>
 
 <link rel="stylesheet" href="css.css">
+<style>.data-scale-float { float: right; padding-bottom: 3px; }</style>
 
 <div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1);">
   <div class="container lead">
@@ -28,13 +29,6 @@ title: An interactive visualization of the exponential spread of COVID-19
     A few interesting bits I found interesting to explore:
     <ul>
       <li>
-        In nearly every country in the world, when the virus reaches 100 people the number of cases begins to increase by 35% daily. <i>(Dashed black line.)</i>
-        <ul>
-          <li>At that rate, a country would reach 1,000,000 cases just 31 days after reaching 100 cases.</li>
-          <li>The curve flattens with social distancing -- check out Japan, South Korea, and China over time.</li>
-        </ul>
-      </li>
-      <li>
         There are two different ways to view the exact same data:
         <ul>
           <li>The <b>logarithmic scale</b> shows a great comparison of the magnitude of growth between countries, but less of the human impact.</li>
@@ -43,11 +37,15 @@ title: An interactive visualization of the exponential spread of COVID-19
         </ul>
       </li>
       <li>
-        Finally, these graphs are not just images.  <b>Hover over any data point</b> to see the data behind it.
+        These graphs are not just images.  <b>Hover over any data point</b> to see the data behind it.
+      </li>
+      <li>
+        April 10 Feature Update: Dynamic trendlines! [<a href="changes.html" style="color: hsla(199, 100%, 40%, 1);">View all updates</a>]
       </li>
     </ul>
 
     This visualization is <b>updated daily</b> with the Johns Hopkins CSSE data, which is typically released around 7:00pm Central.
+    <i id="jhu-updated"></i>
   </div>
 
   <div id="sizer"></div>
@@ -59,31 +57,9 @@ title: An interactive visualization of the exponential spread of COVID-19
     <div class="text-center" style="height: 500px;"><b>Loading Data...</b></div>
   </div>
   <div class="chart-footer">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Highlight:</span>
-          </div>
-          <select class="form-control" id="highlight-chart-countries">
-          </select>
-        </div>
-
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Show:</span>
-          </div>
-          <select class="form-control filter-select" id="filter-chart-countries" data-chart="countries">
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50" selected>50</option>
-            <option value="9999">All</option>
-          </select>
-        </div> 
-      </div>
-
-      <div class="col-md-6 text-right">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+    <div>
+      <div class="data-scale-float">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <div class="input-group-prepend">
             <span class="input-group-text">Data:</span>
           </div>
@@ -92,21 +68,66 @@ title: An interactive visualization of the exponential spread of COVID-19
             <option value="cases" selected>Confirmed Cases</option>
             <option value="cases-daily">New Cases /Day</option>
             <option value="deaths">Deaths</option>
+            <option value="deaths-daily">New Deaths /Day</option>
             <option value="recovered">Recovered </option>
-          </select>
+          </select>          
         </div>
 
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <div class="input-group-prepend">
             <span class="input-group-text">Scale:</span>
           </div>          
           <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="countries">
-            <input type="radio" name="scale" autocomplete="off" checked> Log Scale
+            <input type="radio" name="scale" autocomplete="off" checked> Log
           </label>
           <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="countries">
-            <input type="radio" name="scale" autocomplete="off"> Linear Scale
+            <input type="radio" name="scale" autocomplete="off"> Linear
           </label>
         </div>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Highlight:</span>
+        </div>
+        <select class="form-control" id="highlight-chart-countries">
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Show:</span>
+        </div>
+        <select class="form-control filter-select" id="filter-chart-countries" data-chart="countries">
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50" selected>50</option>
+          <option value="9999">All</option>
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Y-Axis:</span>
+        </div>
+        <select class="form-control yaxis-select" data-chart="countries">
+          <option value="log">Fixed</option>
+          <option value="highlight">Scale to Highlight</option>
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Trendline:</span>
+        </div>
+        <select class="form-control trendline-select" data-chart="countries">
+          <option value="default">Default</option>
+          <option value="35">Only 35% growth</option>
+          <option value="highlight-1week">One week trend</option>
+          <option value="highlight-3day">Three-day trend</option>
+          <option value="highlight-1day">One day trend</option>
+          <option value="all">All trendlines</option>
+        </select>
       </div>
     </div>
   </div>
@@ -118,31 +139,9 @@ title: An interactive visualization of the exponential spread of COVID-19
     <div class="text-center" style="height: 500px;"><b>Loading Data...</b></div>
   </div>
   <div class="chart-footer">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Highlight:</span>
-          </div>
-          <select class="form-control" id="highlight-chart-states">
-          </select>
-        </div>
-
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Show:</span>
-          </div>
-          <select class="form-control filter-select" id="filter-chart-states" data-chart="states">
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="9999" selected>All</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="col-md-6 text-right">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+    <div>
+      <div class="data-scale-float">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <div class="input-group-prepend">
             <span class="input-group-text">Data:</span>
           </div>
@@ -151,7 +150,8 @@ title: An interactive visualization of the exponential spread of COVID-19
             <option value="cases" selected>Confirmed Cases</option>
             <option value="cases-daily">New Cases /Day</option>
             <option value="deaths">Deaths</option>
-            <option value="recovered">Recovered </option>
+            <option value="deaths-daily">New Deaths /Day</option>
+            <option value="recovered">Recovered</option>
           </select>
         </div>
 
@@ -160,15 +160,64 @@ title: An interactive visualization of the exponential spread of COVID-19
             <span class="input-group-text">Scale:</span>
           </div>          
           <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="states">
-            <input type="radio" name="scale" autocomplete="off" checked> Log Scale
+            <input type="radio" name="scale" autocomplete="off" checked> Log
           </label>
           <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="states">
-            <input type="radio" name="scale" autocomplete="off"> Linear Scale
+            <input type="radio" name="scale" autocomplete="off"> Linear
           </label>
         </div>
       </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Highlight:</span>
+        </div>
+        <select class="form-control" id="highlight-chart-states">
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Show:</span>
+        </div>
+        <select class="form-control filter-select" id="filter-chart-states" data-chart="states">
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="9999" selected>All</option>
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Y-Axis:</span>
+        </div>
+        <select class="form-control yaxis-select" data-chart="states">
+          <option value="log">Fixed</option>
+          <option value="highlight">Scale to Highlight</option>
+        </select>
+      </div>        
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Trendline:</span>
+        </div>
+        <select class="form-control trendline-select" data-chart="states">
+          <option value="default">Default</option>
+          <option value="35">Only 35% growth</option>
+          <option value="highlight-1week">One week trend</option>
+          <option value="highlight-3day">Three-day trend</option>
+          <option value="highlight-1day">One day trend</option>
+          <option value="all">All trendlines</option>
+        </select>
+      </div>
+
     </div>
   </div>
+
+  <div class="card" style="margin-top: 15px;">
+    <a href="../covid-by-your-locations/">91-DIVOC #02: See US county-level data for locations that matter most to you &gt;&gt;</a>
+  </div>  
 </div>
 
 <div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1); margin-top: 15px;">
@@ -195,31 +244,9 @@ title: An interactive visualization of the exponential spread of COVID-19
     <div class="text-center" style="height: 500px;"><b>Loading Data...</b></div>
   </div>
   <div class="chart-footer">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Highlight:</span>
-          </div>
-          <select class="form-control" id="highlight-chart-countries-normalized">
-          </select>
-        </div>
-
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Show:</span>
-          </div>
-          <select class="form-control filter-select" id="filter-chart-countries-normalized" data-chart="countries-normalized">
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50" selected>50</option>
-            <option value="9999">All</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="col-md-6 text-right">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+    <div>
+      <div class="data-scale-float">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <div class="input-group-prepend">
             <span class="input-group-text">Data:</span>
           </div>
@@ -228,22 +255,69 @@ title: An interactive visualization of the exponential spread of COVID-19
             <option value="cases" selected>Confirmed Cases</option>
             <option value="cases-daily">New Cases /Day</option>
             <option value="deaths">Deaths</option>
+            <option value="deaths-daily">New Deaths /Day</option>            
             <option value="recovered">Recovered </option>
           </select>
         </div>
 
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <div class="input-group-prepend">
             <span class="input-group-text">Scale:</span>
           </div>          
           <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="countries-normalized">
-            <input type="radio" name="scale" autocomplete="off" checked> Log Scale
+            <input type="radio" name="scale" autocomplete="off" checked> Log
           </label>
           <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="countries-normalized">
-            <input type="radio" name="scale" autocomplete="off"> Linear Scale
+            <input type="radio" name="scale" autocomplete="off"> Linear
           </label>
         </div>
       </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px; padding-left: 10px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Highlight:</span>
+        </div>
+        <select class="form-control" id="highlight-chart-countries-normalized">
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Show:</span>
+        </div>
+        <select class="form-control filter-select" id="filter-chart-countries-normalized" data-chart="countries-normalized">
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50" selected>50</option>
+          <option value="9999">All</option>
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Y-Axis:</span>
+        </div>
+        <select class="form-control yaxis-select" data-chart="countries-normalized">
+          <option value="log">Fixed</option>
+          <option value="highlight">Scale to Highlight</option>
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Trendline:</span>
+        </div>
+        <select class="form-control trendline-select" data-chart="countries-normalized">
+          <option value="default">Default</option>
+          <option value="35">Only 35% growth</option>
+          <option value="highlight-1week">One week trend</option>
+          <option value="highlight-3day">Three-day trend</option>
+          <option value="highlight-1day">One day trend</option>
+          <option value="all">All trendlines</option>
+        </select>
+      </div>
+      
+
     </div>
   </div>
   <!-- -->
@@ -254,31 +328,9 @@ title: An interactive visualization of the exponential spread of COVID-19
     <div class="text-center" style="height: 500px;"><b>Loading Data...</b></div>
   </div>
   <div class="chart-footer">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Highlight:</span>
-          </div>
-          <select class="form-control" id="highlight-chart-states-normalized">
-          </select>
-        </div>
-
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Show:</span>
-          </div>
-          <select class="form-control filter-select" id="filter-chart-states-normalized" data-chart="states-normalized">
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="9999" selected>All</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="col-md-6 text-right">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+    <div>
+      <div class="data-scale-float">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <div class="input-group-prepend">
             <span class="input-group-text">Data:</span>
           </div>
@@ -287,24 +339,75 @@ title: An interactive visualization of the exponential spread of COVID-19
             <option value="cases" selected>Confirmed Cases</option>
             <option value="cases-daily">New Cases /Day</option>
             <option value="deaths">Deaths</option>
+            <option value="deaths-daily">New Deaths /Day</option>
             <option value="recovered">Recovered </option>
           </select>
         </div>
                 
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <div class="input-group-prepend">
             <span class="input-group-text">Scale:</span>
           </div>          
           <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="states-normalized">
-            <input type="radio" name="scale" autocomplete="off" checked> Log Scale
+            <input type="radio" name="scale" autocomplete="off" checked> Log
           </label>
           <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="states-normalized">
-            <input type="radio" name="scale" autocomplete="off"> Linear Scale
+            <input type="radio" name="scale" autocomplete="off"> Linear
           </label>
         </div>
       </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Highlight:</span>
+        </div>
+        <select class="form-control" id="highlight-chart-states-normalized">
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Show:</span>
+        </div>
+        <select class="form-control filter-select" id="filter-chart-states-normalized" data-chart="states-normalized">
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="9999" selected>All</option>
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Y-Axis:</span>
+        </div>
+        <select class="form-control yaxis-select" data-chart="states-normalized">
+          <option value="log">Fixed</option>
+          <option value="highlight">Scale to Highlight</option>
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Trendline:</span>
+        </div>
+        <select class="form-control trendline-select" data-chart="states-normalized">
+          <option value="default">Default</option>
+          <option value="35">Only 35% growth</option>
+          <option value="highlight-1week">One week trend</option>
+          <option value="highlight-3day">Three-day trend</option>
+          <option value="highlight-1day">One day trend</option>
+          <option value="all">All trendlines</option>
+        </select>
+      </div>
+
     </div>
   </div>
+
+  <div class="card" style="margin-top: 15px;">
+    <a href="../covid-by-your-locations/">91-DIVOC #02: See US county-level data for locations that matter most to you &gt;&gt;</a>
+  </div>  
+
   <!-- -->
   
 </div>
@@ -350,9 +453,10 @@ title: An interactive visualization of the exponential spread of COVID-19
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js" integrity="sha256-VeNaFBVDhoX3H+gJ37DpT/nTuZTdjYro9yBruHjVmoQ=" crossorigin="anonymous"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="d3-tip.js"></script>
+<script src="../jhu-updated.js"></script>
 <script src="vis.js?v=20200323"></script>
