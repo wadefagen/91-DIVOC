@@ -14,7 +14,6 @@ title: An interactive visualization of the exponential spread of COVID-19
 </header>
 
 <link rel="stylesheet" href="css.css">
-<style>.data-scale-float { float: right; padding-bottom: 3px; }</style>
 
 <div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1);">
   <div class="container lead">
@@ -40,7 +39,7 @@ title: An interactive visualization of the exponential spread of COVID-19
         These graphs are not just images.  <b>Hover over any data point</b> to see the data behind it.
       </li>
       <li>
-        April 10 Feature Update: Dynamic trendlines! [<a href="changes.html" style="color: hsla(199, 100%, 40%, 1);">View all updates</a>]
+        April 11 Feature Update: &quot;Show&quot; option updates, including showing only a single country/state [<a href="changes.html" style="color: hsla(199, 100%, 40%, 1);">View all updates</a>]
       </li>
     </ul>
 
@@ -69,8 +68,8 @@ title: An interactive visualization of the exponential spread of COVID-19
             <option value="cases-daily">New Cases /Day</option>
             <option value="deaths">Deaths</option>
             <option value="deaths-daily">New Deaths /Day</option>
-            <option value="recovered">Recovered </option>
-          </select>          
+            <option value="recovered">Recovered</option>
+          </select>
         </div>
 
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -90,7 +89,7 @@ title: An interactive visualization of the exponential spread of COVID-19
         <div class="input-group-prepend">
           <span class="input-group-text">Highlight:</span>
         </div>
-        <select class="form-control" id="highlight-chart-countries">
+        <select class="form-control highlight-select" id="highlight-chart-countries" data-chart="countries">
         </select>
       </div>
 
@@ -99,10 +98,9 @@ title: An interactive visualization of the exponential spread of COVID-19
           <span class="input-group-text">Show:</span>
         </div>
         <select class="form-control filter-select" id="filter-chart-countries" data-chart="countries">
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50" selected>50</option>
-          <option value="9999">All</option>
+          <option value="highlight-only">Highlight Only</option>
+          <option value="50" selected>Top 50</option>
+          <option value="all">All</option>
         </select>
       </div>
 
@@ -122,13 +120,13 @@ title: An interactive visualization of the exponential spread of COVID-19
         </div>
         <select class="form-control trendline-select" data-chart="countries">
           <option value="default">Default</option>
-          <option value="35">Only 35% growth</option>
+          <option value="none">None</option>
           <option value="highlight-1week">One week trend</option>
           <option value="highlight-3day">Three-day trend</option>
           <option value="highlight-1day">One day trend</option>
           <option value="all">All trendlines</option>
         </select>
-      </div>
+      </div>      
     </div>
   </div>
   <!-- -->
@@ -172,7 +170,7 @@ title: An interactive visualization of the exponential spread of COVID-19
         <div class="input-group-prepend">
           <span class="input-group-text">Highlight:</span>
         </div>
-        <select class="form-control" id="highlight-chart-states">
+        <select class="form-control highlight-select" id="highlight-chart-states" data-chart="states">
         </select>
       </div>
 
@@ -181,10 +179,9 @@ title: An interactive visualization of the exponential spread of COVID-19
           <span class="input-group-text">Show:</span>
         </div>
         <select class="form-control filter-select" id="filter-chart-states" data-chart="states">
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="9999" selected>All</option>
+          <option value="highlight-only">Highlight Only</option>
+          <option value="50">Top 50</option>
+          <option value="all" selected>All</option>
         </select>
       </div>
 
@@ -204,7 +201,7 @@ title: An interactive visualization of the exponential spread of COVID-19
         </div>
         <select class="form-control trendline-select" data-chart="states">
           <option value="default">Default</option>
-          <option value="35">Only 35% growth</option>
+          <option value="none">None</option>
           <option value="highlight-1week">One week trend</option>
           <option value="highlight-3day">Three-day trend</option>
           <option value="highlight-1day">One day trend</option>
@@ -263,7 +260,7 @@ title: An interactive visualization of the exponential spread of COVID-19
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <div class="input-group-prepend">
             <span class="input-group-text">Scale:</span>
-          </div>          
+          </div>
           <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="countries-normalized">
             <input type="radio" name="scale" autocomplete="off" checked> Log
           </label>
@@ -277,7 +274,7 @@ title: An interactive visualization of the exponential spread of COVID-19
         <div class="input-group-prepend">
           <span class="input-group-text">Highlight:</span>
         </div>
-        <select class="form-control" id="highlight-chart-countries-normalized">
+        <select class="form-control highlight-select" id="highlight-chart-countries-normalized" data-chart="countries-normalized">
         </select>
       </div>
 
@@ -286,10 +283,9 @@ title: An interactive visualization of the exponential spread of COVID-19
           <span class="input-group-text">Show:</span>
         </div>
         <select class="form-control filter-select" id="filter-chart-countries-normalized" data-chart="countries-normalized">
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50" selected>50</option>
-          <option value="9999">All</option>
+          <option value="highlight-only">Highlight Only</option>
+          <option value="50" selected>Top 50</option>
+          <option value="all">All</option>
         </select>
       </div>
 
@@ -309,7 +305,7 @@ title: An interactive visualization of the exponential spread of COVID-19
         </div>
         <select class="form-control trendline-select" data-chart="countries-normalized">
           <option value="default">Default</option>
-          <option value="35">Only 35% growth</option>
+          <option value="none">None</option>
           <option value="highlight-1week">One week trend</option>
           <option value="highlight-3day">Three-day trend</option>
           <option value="highlight-1day">One day trend</option>
@@ -361,7 +357,7 @@ title: An interactive visualization of the exponential spread of COVID-19
         <div class="input-group-prepend">
           <span class="input-group-text">Highlight:</span>
         </div>
-        <select class="form-control" id="highlight-chart-states-normalized">
+        <select class="form-control highlight-select" id="highlight-chart-states-normalized" data-chart="states-normalized">
         </select>
       </div>
 
@@ -370,10 +366,9 @@ title: An interactive visualization of the exponential spread of COVID-19
           <span class="input-group-text">Show:</span>
         </div>
         <select class="form-control filter-select" id="filter-chart-states-normalized" data-chart="states-normalized">
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="9999" selected>All</option>
+          <option value="highlight-only">Highlight Only</option>
+          <option value="50">Top 50</option>
+          <option value="all" selected>All</option>
         </select>
       </div>
 
@@ -393,7 +388,7 @@ title: An interactive visualization of the exponential spread of COVID-19
         </div>
         <select class="form-control trendline-select" data-chart="states-normalized">
           <option value="default">Default</option>
-          <option value="35">Only 35% growth</option>
+          <option value="none">None</option>
           <option value="highlight-1week">One week trend</option>
           <option value="highlight-3day">Three-day trend</option>
           <option value="highlight-1day">One day trend</option>

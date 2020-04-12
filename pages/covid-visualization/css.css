@@ -68,7 +68,8 @@ i {
   color: #aaa;
 }
 
-
+.data-scale-float { float: right; text-align: right; }
+.data-scale-float > div { padding-bottom: 3px; }
 
 
 /* == https://rawgit.com/Caged/d3-tip/master/examples/example-styles.css ==  */

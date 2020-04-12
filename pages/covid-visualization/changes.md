@@ -17,6 +17,14 @@ desc: This change log lists the major changes made to "An interactive visualizat
   <a href="/pages/covid-visualization/">An interactive visualization of the exponential spread of COVID-19 &gt;&gt;</a>
 </div>
 
+### April 11 &ndash; "Highlight Only" View (and Mobile Improvements)
+
+- The "Show" UI options has been redesigned, allowing you to "Show: Highlight Only" to view only one country.
+- All countries in the dataset are now listed in "Highlight" and the "Show" will move to "All" if needed when in "Top 50" view.
+- Several layout improvements specifically to remove some text overlap on mobile.
+ 
+
+
 ### April 10 &ndash; Dynamic Trendlines
 
 - Added logic to create dynamic trendlines from a highlighted country, allowing a visual indication of future progress at current growth rates.
