@@ -187,10 +187,8 @@ var prep_data = function(chart) {
 
   // ensure highlighted country shows when new page load with cookie
   if (_intial_load && countries.indexOf(chart.highlight) == -1) {
-    chart.show = 9999;
     caseData = chart.fullData;
     countries = _.map(caseData, 'country').sort();
-    $("#filter-" + chart.id).val(9999);
   }
 
   var $highlight = $("#highlight-" + chart.id);
