@@ -107,6 +107,7 @@ var charts = {
     dataSelection_y0: { 'active': 100, 'cases': 100, 'deaths': 10, 'recovered': 100, 'new-cases': 1 },
     yAxisScale: 'fixed',
     xMax: null, yMax: null, data: null,
+    init: false,
     trendline: "default"
   },
   'states': {
@@ -123,6 +124,7 @@ var charts = {
     dataSelection_y0: { 'active': 20, 'cases': 20, 'deaths': 5, 'recovered': 20 },
     yAxisScale: 'fixed',
     xMax: null, yMax: null, data: null,
+    init: false,
     trendline: "default"
   },
 
@@ -140,6 +142,7 @@ var charts = {
     dataSelection_y0: { 'active': 1, 'cases': 1, 'deaths': 1, 'recovered': 1 },
     yAxisScale: 'fixed',
     xMax: null, yMax: null, data: null,
+    init: false,
     trendline: "default"
   },
   'states-normalized': {
@@ -156,6 +159,7 @@ var charts = {
     dataSelection_y0: { 'active': 1, 'cases': 1, 'deaths': 1, 'recovered': 1 },
     yAxisScale: 'fixed',
     xMax: null, yMax: null, data: null,
+    init: false,
     trendline: "default"
   },
 };
@@ -337,10 +341,15 @@ var populationData_promise = d3.csv("wikipedia-population.csv", function (row) {
 
 var _dataReady = false, _pageReady = false;
 
+var init_selects = function (chart) {
+  $('#' + chart.id).next('div.chart-footer').find('select').each(function () {$(this).change()});
+  chart.init = true;
+}
 
 var tryRender = function () {
   if (_dataReady && _pageReady) {
     process_data(_rawData, charts["countries"]);
+    init_selects(charts["countries"]);
     render(charts["countries"]);
     setTimeout(initialRender2, 100);
   }
@@ -348,12 +357,15 @@ var tryRender = function () {
 
 var initialRender2 = function() {
   process_data(_rawData, charts["states"]);
+  init_selects(charts["states"]);
   render(charts["states"]);
   
   process_data(_rawData, charts["countries-normalized"]);
+  init_selects(charts["countries-normalized"]);
   render(charts["countries-normalized"]);
 
   process_data(_rawData, charts["states-normalized"]);
+  init_selects(charts["states-normalized"]);
   render(charts["states-normalized"]);
 
   _intial_load = false;
@@ -506,7 +518,11 @@ var tip_html = function(chart) {
   }
 };
 
+
 var render = function(chart) {
+  if (!chart.init){
+    return;
+  }
   data_y0 = chart.y0;
   gData = undefined;
   var f = _.find(chart.data, function (e) { return e.country == chart.highlight })
