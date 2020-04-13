@@ -19,7 +19,7 @@ layout: home
 
 <p>
   A lot of people had amazing suggestions on the COVID-19 visualization and I implemented many of them to make the visualization as useful to as
-  many people as possible.  One specific suggestion -- to allow the visualization to "remember" you previous choice -- was added with a quick bit
+  many people as possible.  One specific suggestion -- to allow the visualization to "remember" your previous choice -- was added with a quick bit
   of code to use a cookie to remember your previously selected county and state.
 </p>
 
