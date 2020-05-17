@@ -132,3 +132,23 @@ i {
   top: 50%;
   left: 100%;
 }
+
+.query-string {
+  display: none;
+  border-top: dashed 1px #aaa;
+}
+
+
+@media (min-width: 501px) {
+  .divoc-graph-loading { height: 555px; }
+  .divoc-graph-loading > .spinner-border { margin-top: 250px; }
+}
+
+@media (max-width: 500px) {
+  .divoc-graph-loading { height: 355px; }
+  .divoc-graph-loading > .spinner-border { margin-top: 150px; }
+}
+
+
+
+

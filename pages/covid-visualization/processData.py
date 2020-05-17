@@ -2,7 +2,8 @@
 
 import os
 
-path = '../../../../COVID-19/csse_covid_19_data\csse_covid_19_daily_reports/'
+path = '../../../../COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/'
+path_data2 = '../../../../COVID-19/csse_covid_19_data/csse_covid_19_daily_reports_us/'
 # if os.getenv("JHU_GIT"):
 #   path = os.getenv("JHU_GIT")
 
@@ -115,6 +116,15 @@ def processDate(date):
 
   return df
 
+def processUSDailyReport(date):
+  print("US - " + date)
+  df = pd.read_csv(path_data2 + date + ".csv")
+
+  df = df[ ["Province_State", "People_Tested", "People_Hospitalized"] ] 
+  df["Date"] = date
+
+  return df
+
 
 
 import pandas as pd
@@ -122,10 +132,19 @@ import os
 
 df = pd.DataFrame()
 for filename in os.listdir(path):
+   if not filename.endswith(".csv"): continue
+   date = filename[0:10]
+
+   df = df.append(processDate(date))
+
+
+df2 = pd.DataFrame()
+for filename in os.listdir(path_data2):
   if not filename.endswith(".csv"): continue
   date = filename[0:10]
 
-  df = df.append(processDate(date))
+  df2 = df2.append(processUSDailyReport(date))
+
 
 
 # == Replace Data to Match Population ==
@@ -170,10 +189,12 @@ for key in stateReplacement:
   df["Province_State"] = df["Province_State"].replace(old, new)
 
 
-# == Add Population ==
+# == Apply Active Cases ==
 df = df.astype({"Confirmed": "int32", "Recovered": "int32", "Active": "int32", "Deaths": "int32"})
 df = df.apply(apply_us_active_cases, axis=1)
 
+# == Add US Hospitalization Data ==
+df = df.merge(df2, how='left', on=['Province_State', 'Date'])
 
 
 #print(df)

@@ -1,0 +1,95 @@
+<div class="chart-header" style="margin-top: 20px;" id="states-normalized">
+  <h2>New COVID-19 Cases by US States/Territories per Day, normalized by population</h2>
+</div>
+<div id="chart-states-normalized" class="chart-viz">
+  <div class="text-center divoc-graph-loading"><b>Loading Data...</b></div>
+</div>
+<div class="chart-footer">
+  <div>
+    <div class="data-scale-float">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Data:</span>
+        </div>
+        <select class="form-control data-select" data-chart="states-normalized">
+          <option value="active">Active Cases</option>
+          <option value="hospitalized">Hospitalized Cases</option>
+          <option value="tests">Total COVID-19 Tests</option>
+          <option value="tests-daily">New Tests /Day</option>
+          <option value="tests-daily-7">New Tests, 1 Wk. Avg.</option>
+          <option value="cases">Total Confirmed Cases</option>
+          <option value="cases-daily">New Cases /Day</option>
+          <option value="cases-daily-7" selected>New Cases, 1 Wk. Avg.</option>
+          <option value="deaths">Total Deaths</option>
+          <option value="deaths-daily">New Deaths /Day</option>
+          <option value="deaths-daily-7">New Deaths, 1 Wk. Avg.</option>
+        </select>
+      </div>
+              
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Scale:</span>
+        </div>          
+        <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="states-normalized">
+          <input type="radio" name="scale" autocomplete="off" checked> Log
+        </label>
+        <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="states-normalized">
+          <input type="radio" name="scale" autocomplete="off"> Linear
+        </label>
+      </div>
+    </div>
+
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Highlight:</span>
+      </div>
+      <select class="form-control highlight-select" id="highlight-chart-states-normalized" data-chart="states-normalized">
+      </select>
+    </div>
+
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Show:</span>
+      </div>
+      <select class="form-control filter-select" id="filter-chart-states-normalized" data-chart="states-normalized">
+        <option value="highlight-only">Highlight Only</option>
+        <option value="-10">Lowest 10</option>
+        <option value="-25">Lowest 25</option>
+        <option value="10">Top 10</option>
+        <option value="25">Top 25</option>
+        <option value="50">Top 50</option>
+        <option value="all" selected>All</option>
+      </select>
+    </div>
+
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Y-Axis:</span>
+      </div>
+      <select class="form-control yaxis-select" data-chart="states-normalized">
+        <option value="log">Fixed</option>
+        <option value="highlight">Scale to Highlight</option>
+      </select>
+    </div>
+
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Trendline:</span>
+      </div>
+      <select class="form-control trendline-select" data-chart="states-normalized">
+        <option value="default">Default</option>
+        <option value="none">None</option>
+        <option value="highlight-1week">One week trend</option>
+        <option value="highlight-3day">Three-day trend</option>
+        <option value="highlight-1day">One day trend</option>
+        <option value="all">All trendlines</option>
+      </select>
+    </div>
+
+  </div>
+</div>
+<div class="chart-footer" style="border-top: 0px; font-size: 10px;">
+  <div class="extra-highlights" data-chart="states-normalized"></div>
+  <a href="#" class="add-highlight" data-chart="states-normalized">+ Add Additional Highlight</a>
+  <div class="query-string" data-chart="states-normalized"></div>
+</div>

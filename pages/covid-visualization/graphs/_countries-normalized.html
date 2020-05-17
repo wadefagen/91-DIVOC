@@ -1,0 +1,89 @@
+<div class="chart-header" style="margin-top: 20px;" id="countries-normalized">
+  <h2>New COVID-19 Cases by Country per Day, normalized by country population</h2>
+</div>
+<div id="chart-countries-normalized" class="chart-viz">
+  <div class="text-center divoc-graph-loading"><b>Loading Data...</b></div>
+</div>
+<div class="chart-footer">
+  <div>
+    <div class="data-scale-float">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Data:</span>
+        </div>
+        <select class="form-control data-select" data-chart="countries-normalized">
+          <option value="active">Total Active Cases</option>
+          <option value="cases">Total Confirmed Cases</option>
+          <option value="cases-daily">New Cases /Day</option>
+          <option value="cases-daily-7" selected>New Cases, 1 Wk. Avg.</option>
+          <option value="deaths">Total Deaths</option>
+          <option value="deaths-daily">New Deaths /Day</option>
+          <option value="deaths-daily-7">New Deaths, 1 Wk. Avg.</option>
+          <option value="recovered">Total Recovered</option>
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Scale:</span>
+        </div>
+        <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="countries-normalized">
+          <input type="radio" name="scale" autocomplete="off" checked> Log
+        </label>
+        <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="countries-normalized">
+          <input type="radio" name="scale" autocomplete="off"> Linear
+        </label>
+      </div>
+    </div>
+
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Highlight:</span>
+      </div>
+      <select class="form-control highlight-select" id="highlight-chart-countries-normalized" data-chart="countries-normalized">
+      </select>
+    </div>
+
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Show:</span>
+      </div>
+      <select class="form-control filter-select" id="filter-chart-countries-normalized" data-chart="countries-normalized">
+        <option value="highlight-only">Highlight Only</option>
+        <option value="10">Top 10 over 10m pop.</option>
+        <option value="25" selected>Top 25 over 10m pop.</option>
+        <option value="50">Top 50 over 10m pop.</option>
+        <option value="all">All</option>
+      </select>
+    </div>
+
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Y-Axis:</span>
+      </div>
+      <select class="form-control yaxis-select" data-chart="countries-normalized">
+        <option value="log">Fixed</option>
+        <option value="highlight">Scale to Highlight</option>
+      </select>
+    </div>
+
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Trendline:</span>
+      </div>
+      <select class="form-control trendline-select" data-chart="countries-normalized">
+        <option value="default">Default</option>
+        <option value="none">None</option>
+        <option value="highlight-1week">One week trend</option>
+        <option value="highlight-3day">Three-day trend</option>
+        <option value="highlight-1day">One day trend</option>
+        <option value="all">All trendlines</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="chart-footer" style="border-top: 0px; font-size: 10px;">
+  <div class="extra-highlights" data-chart="countries-normalized"></div>
+  <a href="#" class="add-highlight" data-chart="countries-normalized">+ Add Additional Highlight</a>
+  <div class="query-string" data-chart="countries-normalized"></div>
+</div>  
