@@ -1,0 +1,76 @@
+.viz svg {
+  height: 40px;
+  margin-right: 2px;
+  stroke: solid 1px black;
+}
+
+
+.persons {
+  margin-top: -10px;
+  margin-bottom: 30px;
+}
+
+.persons-sm {
+  margin-top: -10px;
+}
+
+.persons-sm-text {
+  font-size: 12px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.persons div:nth-of-type(2n-1) {
+  padding-bottom: 7px;
+}
+
+
+#svg-person path {
+  stroke: black;
+}
+
+div.person-unknown, .color-unknown { fill: lightblue; color: #358eac; }
+span.person-unknown { background-color: lightblue; }
+b.person-unknown { color: #358eac; }
+
+
+div.person-tested-neg, .color-neg { fill: lightyellow; color: darkgoldenrod; }
+span.person-tested-neg { background-color: lightyellow; }
+b.person-tested-neg { color: darkgoldenrod; }
+
+div.person-tested-pos, .color-pos { fill: lightcoral; color: lightcoral; }
+span.person-tested-pos { background-color: lightcoral; }
+b.person-tested-pos { color: lightcoral; }
+
+div.person-recovered, .color-recovered { fill: aquamarine; color: #008f5f; }
+b.person-recovered { color: #008f5f; }
+span.person-recovered { background-color: aquamarine; }
+
+
+
+div.person-died, .color-death { fill: black; }
+span.person-died { background-color: black; color: white; }
+
+.viz h5 span {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.frac {
+  overflow: hidden;
+  display: inline-block;
+  
+}
+
+.frac-1 { overflow: hidden; width: 10px; display: inline-block; }
+
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+.autocomplete-group { padding: 2px 5px; }
+.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+
+.loading { min-height: 800px; margin-top: 30px; }
+
+.innertext { position: relative; top: -15px; font-weight: bold; }

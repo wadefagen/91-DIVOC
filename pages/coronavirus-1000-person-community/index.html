@@ -1,0 +1,248 @@
+---
+layout: bare
+
+social-img: https://91-divoc.com/pages/coronavirus-1000-person-community/img.png
+title: Coronavirus visualized as a 1,000-person community. Updated daily.
+---
+
+<div class="content-wrapper">
+<header class="container-fluid header-small">
+  <div class="container">
+    <h1>
+      <a href="/">91-DIVOC</a>
+    </h1>
+  </div>
+</header>
+
+<link rel="stylesheet" href="css.css">
+<noscript>
+  <style>.social-hide { display: none; }</style>
+  <img class="social-hide" itemprop="image" src="img.png">
+</noscript>
+
+<div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1);">
+  <div class="container lead">
+    <h2>Coronavirus Visualized as a 1,000-Person Community</h2>
+    Exploring COVID-19 data as members of a small community.  Updated daily.
+  </div>
+</div>
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none;">
+  <defs>
+    <g transform="translate(-341.01781,-490)" id="svg-person">
+      <g transform="matrix(1.25,0,0,-1.25,359.06468,506.51275)">
+        <path d="m 0,0 c 3.334,0 6.037,2.703 6.037,6.037 0,3.334 -2.703,6.037 -6.037,6.037 -3.334,0 -6.036,-2.703 -6.036,-6.037 C -6.036,2.703 -3.334,0 0,0" />
+      </g>
+      <g transform="matrix(1.25,0,0,-1.25,367.39906,508.44512)">
+        <path d="m 0,0 c 4.271,0 7.769,-3.464 7.769,-7.733 l 0,-18.722 c 0,-1.46 -1.147,-2.643 -2.607,-2.643 -1.46,0 -2.645,1.183 -2.645,2.643 l 0,16.88 -1.361,0 0,-46.969 c 0,-1.958 -1.6,-3.542 -3.556,-3.542 -1.957,0 -3.542,1.584 -3.542,3.542 l 0,27.273 -1.452,0 0,-27.273 c 0,-1.958 -1.586,-3.542 -3.541,-3.542 -1.956,0 -3.542,1.584 -3.542,3.542 0,2.895 -0.031,46.969 -0.031,46.969 l -1.346,0 0,-16.88 c 0,-1.46 -1.183,-2.643 -2.643,-2.643 -1.461,0 -2.608,1.183 -2.608,2.643 l 0,18.722 c 0,4.269 3.498,7.733 7.769,7.733 L 0,0 z" />
+      </g>
+    </g>    
+  </defs>
+</svg>
+
+<div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1); margin-bottom: 10px; padding-top: 20px; padding-bottom: 20px;">
+<div class="container viz">
+  <div class="text-center">
+    <div class="btn-group" style="width: 100%; max-width: 600px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text" style="border: 0px; background-color: transparent;">Your Community:</span>
+      </div>
+      <input type="text" class="form-control" id="locationSelection" placeholder="United States">
+    </div>
+    <div style="font-size: 12px;">
+      Use any US state as your community, or use the United States as a whole.<br>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container loading text-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<div class="container viz content" style="display: none; margin-top: 20px;">
+  <h3>Our Community</h3>
+  <p>
+    In <span data-field="location-b"></span>, we have a current population of ~<span data-field="population"></span>.  This visualization explores <span data-field="location"></span>
+    as <b>a community of <span data-field="factor"></span> people</b> &mdash; you can think of this as each <svg style="height: 18px;" viewBox="0 0 37 95"><use xlink:href="#svg-person"></use></svg>
+    as representing ~<span data-field="population_1k"></span> people in <span data-field="location"></span>.
+  </p>
+  <div style="font-size: 12px; margin-top: -15px;">
+    <ul>
+      <li>Tap or mouseover any number to view the underlying data.</li>
+      <li>This visualization is <b>updated daily</b> around midnight CDT.  You are viewing the latest data, including all data reported through the end of <span data-field="date"></span>.</li>
+      <li>All data provided by <a href="https://systems.jhu.edu/" target="_blank">Johns Hopkins University's Center for Systems Science and Engineering</a>.</li>
+    </ul>
+  </div>
+
+  <h5 class="mt-4"><span class="person-tested-pos">Confirmed COVID-19 Infections</span></h5>
+  <p>
+    In our <span data-field="factor"></span> person community, we have confirmed that <b class="person-tested-pos"></b> of us has or have had COVID-19.
+    There may be more of us who have immunity but were unable or did not get tested.
+  </p>
+  <div class="persons text-center">
+    <div style="display: inline;" class="person-tested-pos" title="Confirmed Positive for COVID-19"></div>
+    <span class="innertext">+</span>
+
+    <span class="has-recovered-data">
+      <div style="display: inline;" class="person-recovered" title="Confirmed Recovered from COVID-19"></div>
+      <span class="innertext">+</span>
+    </span>
+    <div style="display: inline;" class="person-died" title="Died from COVID-19"></div>
+  </div>
+
+  <h5><span class="person-died">Deceased due to COVID-19</span></h5>
+  <p>
+    Our community of <span data-field="factor"></span> lost <b class="person-died"></b> members as a direct result of the virus.
+    This makes the current <b>mortality rate</b> of confirmed cases in our community <b data-field="mortality-rate"></b>.
+  </p>
+  <div class="persons text-center">
+    <div style="display: inline-block;" class="person-died" title="Died from COVID-19"></div>
+  </div>
+
+  <span class="has-recovered-data">
+    <h5><span class="person-recovered">Recovered from COVID-19</span></h5>
+    <p>
+      The good news is that, so far, <b class="person-recovered"></b> of the confirmed infections have recovered.
+    </p>
+    <div class="persons text-center">
+      <div style="display: inline-block;" class="person-recovered" title="Confirmed Recovered from COVID-19"></div>
+    </div>
+  </span>
+
+  <h5><span class="person-tested-neg">Negative Test for COVID-19</span></h5>
+  <p>
+    Our community is testing for COVID-19 and, assuming everyone only gets tested once, a total of <b class="person-tested-neg">50.4</b> of us has tested negative for COVID-19.
+    This means the <b>test positivity rate</b> is <b data-field="test-positivity"></b> in our community. <i>(In reality, the number of people may be lower as there may some of
+    us who have gotten tested twice.  However, data on the number of unique people tested is not widely available from every state.)</i>
+  </p>
+  <div class="persons person-tested-neg text-center" title="Negative Test for COVID-19"></div>  
+
+  <h5><span class="person-unknown">Untested &amp; Unconfirmed</span></h5>
+  <p>
+    This leaves <b class="person-unknown">940.7</b> of us who are untested and unconfirmed.  Most of us have likely never been exposed to COVID-19 and may never need
+    to be tested.  Some may have already survived COVID-19 but never got tested.  A few may be a carrier (asymptomatic or otherwise), particularly if
+    we have ongoing community transmission of coronavirus within our community.
+  </p>
+  <p>
+    Here's our full <span data-field="factor"></span>-person community:
+  </p>
+  <div class="persons text-center">
+    <div style="display: inline;" class="person-unknown" title="Untested/Unconfirmed Person"></div>
+    <div style="display: inline;" class="person-tested-pos" title="Confirmed Positive for COVID-19"></div>
+    <span class="has-recovered-data"><div style="display: inline;" class="person-recovered" title="Confirmed Recovered from COVID-19"></div></span>
+    <div style="display: inline;" class="person-tested-neg" title="Negative Test for COVID-19"></div>
+    <div style="display: inline;" class="person-died" title="Died due to COVID-19"></div>
+  </div>
+
+  <h3>Changes over the Past Week</h3>
+  <p>
+    This visualization is updated daily.  In the past seven days, here's how our community of <span data-field="factor"></span> people changed:
+  </p>
+  <div class="persons-sm text-center mt-4">
+    <div style="display: inline;" class="color-unknown person-newTesting" title="Untested/Unconfirmed Person"></div>
+    <span class="innertext">&rArr;</span>
+    <div style="display: inline;" class="color-pos person-newCases" title="Confirmed Positive for COVID-19"></div>
+    <span class="innertext">+</span>
+    <div style="display: inline;" class="color-neg person-newNeg" title="Negative Test for COVID-19"></div>
+  </div>
+  <p class="persons-sm-text">
+    Since <b data-field="dWeek-date"></b>, our testing has resulted in <b class="color-pos" data-field="new-pos"></b> more confirmed cases of COVID-19 in our community
+    and <b class="color-neg" data-field="new-neg"></b> of us recently received a negative test result.
+  </p>
+
+
+  <div class="persons-sm text-center">
+    <div style="display: inline;" class="color-pos person-newRecoveredOrDied" title="Confirmed Positive for COVID-19"></div>
+    <span class="innertext">&rArr;</span>
+    <span class="has-recovered-data">
+      <div style="display: inline;" class="color-recovered person-newRecovered" title="Confirmed Recovered from COVID-19"></div>
+      <span class="innertext">+</span>
+    </span>
+    <div style="display: inline;" class="color-death person-newDeaths" title="Died from COVID-19"></div>
+  </div>
+  <p class="persons-sm-text">
+    Among the infected, 
+    <span class="has-recovered-data">
+      <b class="color-recovered" data-field="new-recovered"></b> confirmed recovery and
+    </span>
+    and <b data-field="new-dead"></b> died from COVID-19 since <span data-field="dWeek-date"></span>.
+  </p>
+</div>
+
+<div class="container-fluid" style="border-top: dashed 1px hsla(199, 100%, 6%, 1); margin-top: 10px; padding-top: 30px;">
+  <div class="container viz">
+    <h4>Explore More...</h4>
+    <ul>
+      <li><a href="#">Return to the top of this page</a> to select a new community, (eg: a state like New York, California, Texas, Illinois, etc)</li>
+      <li>
+        Explore the other 91-DIVOC visualizations:
+        <ul style="font-size: 14px;">
+          <li>91-DIVOC-01: <a href="../covid-visualization/">"An interactive visualization of the exponential spread of COVID-19"</a></li>
+          <li>91-DIVOC-02: <a href="../covid-by-your-locations/">"COVID-19 Data for Locations of People You Love"</a></li>
+        </ul>        
+      </li>
+      <li>
+        Thanks for taking your time to check this out, stay healthy + safe!
+        <ul style="font-size: 14px;">
+          <li class="easteregg">
+            A bonus feature for reading this: <a href="#" onclick="updateFactor(10000);">Reload this visualization, but as a 10,000-person community.</a>  <i>Will be really slow to render, just a fun easter egg! :) </i>
+          </li>
+          <li class="easteregg-1" style="display: none;">
+            <b>Note</b>: Refresh this page to return to the original 1,000-person community. &#x1F338;
+          </li>
+          <li>
+            If you enjoy data and visualization, you can find links at the very bottom of this page to follow me on your favorite social network.
+            It'd be great to see you there! :)
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<footer class="container-fluid mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12" style="text-align: right;">
+        <div style="color: #ddd;">&ndash; wade</div>
+        <div style="font-size: 12px;">
+          <a href="https://waf.cs.illinois.edu" style="color: white;">https://waf.cs.illinois.edu/</a><br> 
+ 
+          Follow for Updates:
+          <a href="https://www.twitter.com/profwade_/">Twitter</a> |
+          <a href="https://www.linkedin.com/in/profwade/">LinkedIn</a> |
+          <a href="https://www.instagram.com/profwade/">Instagram</a> |
+          <a href="https://www.github.com/wadefagen/">GitHub</a>
+          <div style="font-size: 12px; float: left;">
+            <a href="https://creativecommons.org/licenses/by/4.0/">(CC) BY 4.0</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
+
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js" integrity="sha256-VeNaFBVDhoX3H+gJ37DpT/nTuZTdjYro9yBruHjVmoQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.9/jquery.csv.min.js"></script>
+
+<script src="../jhu-updated.js"></script>
+-->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.9/jquery.csv.min.js"></script>
+
+<script src="vis.js"></script>

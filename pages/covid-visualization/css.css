@@ -1,3 +1,47 @@
+svg {
+  background-color:hsla(270, 30%, 99%, 1);  
+}
+
+.lesser-used-options .input-group-text {
+  background-color: hsla(295, 100%, 95%, 1);
+}
+
+.input-group-prepend .input-group-text  {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.form-control {
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+
+}
+
+.svg-hover-highlight {
+  opacity: 1 !important;
+}
+
+path.svg-hover-highlight {
+  stroke-width: 2px;
+}
+
+circle.svg-hover-highlight {
+  stroke: black;
+  stroke-width: 0.5px;
+  /* display: inline !important; */
+}
+
+text.C_highlight {
+  stroke: black;
+  stroke-width: 0.3px;
+}
+
+text.svg-hover-highlight {
+  font-size: 15px;
+  stroke: black;
+  stroke-width: 0.3px;
+}
+
 .chart-viz {
   background-color:hsla(270, 30%, 99%, 1);
   border-left: solid 1px #ccc;
@@ -5,19 +49,13 @@
   border-top: solid 1px #ccc;
 }
 
-.chart-header {
-  
-  /* border: solid 1px #ccc; */
-  border-bottom-width: 0px;
-  padding: 0px;
-}
-
-.chart-header h2 {
+.chart-header, .chart-header h2  {
   text-align: left;
   font-family: 'Roboto', sans-serif;
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: bold;
-  padding: 0px;
+  padding: 0px;  
+  border-bottom-width: 0px;
 }
 
 .chart-footer {

@@ -17,6 +17,59 @@ desc: This change log lists the major changes made to "An interactive visualizat
   <a href="/pages/covid-visualization/">An interactive visualization of the exponential spread of COVID-19 &gt;&gt;</a>
 </div>
 
+### May 26
+
+- Fixed an UI bug where the "scale to highlight" message appeared even when no highlighted data was displayed.
+- Released [91-DIVOC #03: Coronavirus Visualized as a 1,000-Person Community](../coronavirus-1000-person-community/)
+
+
+### May 24 - Test Positivity Rate
+
+- Added "Test Positivity Data" to graph of US States.
+- Added a small note below the graph when all highlighted data appears only in the lowest 1/3rd of the graph to suggest scaling y-axis to highlight.
+- Changed default view of states to "US States" instead of "All" (hiding territories by default).
+
+### May 22
+
+- Mobile-specific fix: Y-axis labels for values over 1,000,000 no longer get cut off.
+
+
+### May 21 - Saving Image
+
+- Added "Save Current Image" to save the image as a PNG or SVG file.
+- Copy/Paste: Fixed "Direct Link w/ Your Options" link for countries with spaces in their name.
+
+
+### May 19 - Easy Multi-Selection on Desktop
+
+- On Desktop (or any device with shift), a "shift-click" action will now add the country as an additional highlight.
+- Added this feature as small text on the bottom of non-mobile tooltips.
+- Added several options for "Show" on US state graphs.
+  - Region-based categories are based on the [Census Bureau-designated regions and divisions](https://en.wikipedia.org/wiki/List_of_regions_of_the_United_States#Census_Bureau-designated_regions_and_divisions).
+
+
+### May 18 - Animation
+
+- Added an "Animation" button to animate the graph through the full data set.
+  - Try it with "Y-Axis": "Scale to Highlight" for a really interesting visualization!
+- Re-added the bottom of the tooltip showing geometric growth rates that was unintentionally removed yesterday.
+
+
+### May 16+17 - Right-align by Date
+
+- Added "X-Axis" selection allowing you to select to right-align data by the number of days ago.
+- Added a light highlight for the most recent two weeks when viewing "right-align".
+- Added a "Remove" option for additional highlights.
+- Highlights full data on mouseover/tap in addition to the tooltip.
+- Added "days ago" to the mouseover tooltip.
+- Removed trendline option from the UI.
+- Improved layout of "Data" selector by grouping data types together and adding dividers.
+- Added "New Hospitalized /Day" and "New Hospitalized /Day, 1 Week Average" as "Data" options for US States.
+- Added "New Recoveries /Day" and "New Recoveries /Day, 1 Week Average" as "Data" option for countries.
+- Browser-specific fix: Added `dominant-baseline` for label positioning on Firefox.
+- Mobile-specific fix: Added decimal point to non-exact y-axis labels (ex: "1k" -> "1.2k").
+- Fixed various render failures and JavaScript errors related to selecting "(None)" as the highlight.
+
 
 ### May 12
 

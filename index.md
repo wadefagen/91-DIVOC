@@ -6,12 +6,46 @@ layout: home
 
 <ul>
   <li>
+    #01: <a href="pages/covid-visualization/">An interactive visualization of the exponential spread of COVID-19</a>
+  </li>
+  <li>
     #02: <a href="pages/covid-by-your-locations/">COVID-19 Data for Locations of People You Love</a>
   </li>
   <li>
-    #01: <a href="pages/covid-visualization/">An interactive visualization of the exponential spread of COVID-19</a>
+    #03: <a href="pages/coronavirus-1000-person-community/">Coronavirus Visualized as a 1,000-Person Community</a>
   </li>
 </ul>
+
+<hr>
+
+<h3>#03 - The Human Factor - May 26, 2020</h3>
+
+<p>
+  It feels like both a decade ago and just yesterday that the first 91-DIVOC visualization was released.  It has been a humbling and rewarding
+  experience to have millions view it and, to this date, I still find it the best way to nerd out with the data.  It's been fantastic to also
+  see some building spin-offs of it to use it for other datasets!
+</p>
+
+<p>
+  There has been so many amazing COVID-19 visualizations -- but I have yet to see one that puts all of the case data that's available
+  in real <b>human</b> terms?  So much of the data is bar charts, line charts, and just charts, charts, and charts.
+</p>
+
+<p>
+  This visualization is one of the simplest in terms of elements, just a single person, but rendered in a way
+  that expresses the human impact and human scale of COVID-19.  In some ways it's a simpler view of 91-DIVOC-01, but in other ways
+  it's so much more powerful:
+</p>
+
+<div class="card">
+  <a href="pages/coronavirus-1000-person-community/">Coronavirus Visualized as a 1,000-Person Community &gt;&gt;</a>
+</div>
+
+<p>
+  The SVG image was slightly modified, public domain image I found on Wikipedia and served as part of the inspiration for this work.
+  Limiting the entire visualization to a single graphic was both challenging but rewarding, and something I hope you'd try out!  Go
+  start creating something &ndash; it only takes on graphic to make something great! :)
+</p>
 
 <hr>
 

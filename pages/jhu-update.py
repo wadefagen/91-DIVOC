@@ -24,6 +24,7 @@ os.chdir(start_cwd)
 # Update JHU git repo:
 os.chdir(jhu_git)
 os.system("git pull")
+#exit(0)
 
 # 91-DIVOC #1
 os.chdir(start_cwd)
