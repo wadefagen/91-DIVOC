@@ -36,6 +36,12 @@ os.chdir(start_cwd)
 os.chdir("./covid-by-your-locations/")
 os.system("python processData.py")
 
+# 91-DIVOC #3
+os.chdir(start_cwd)
+os.chdir("./coronavirus-1000-person-community/")
+os.system("python processData.py")
+
+
 # Write js
 os.chdir(start_cwd)
 js = f'_dateUpdated = "{date_str}";\n' +\

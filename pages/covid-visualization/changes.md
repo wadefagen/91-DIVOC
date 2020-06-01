@@ -17,6 +17,14 @@ desc: This change log lists the major changes made to "An interactive visualizat
   <a href="/pages/covid-visualization/">An interactive visualization of the exponential spread of COVID-19 &gt;&gt;</a>
 </div>
 
+### May 27 - Cumulative Mortality Rate
+
+- Added "Cumulative Mortality Rate" to all graphs, allowing you to view the current mortality rate for every country/state.
+- Added "Test Positivity" to the normalized graphs (which is identical in display to the non-normalized graphs).
+- UI Fix: The display of "X Days Ago" should only show a whole number.
+- Redesigned the "Explore 91-DIVOC" box between the visualizations.
+
+
 ### May 26
 
 - Fixed an UI bug where the "scale to highlight" message appeared even when no highlighted data was displayed.

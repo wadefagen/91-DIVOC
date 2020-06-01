@@ -14,7 +14,25 @@ title: An interactive visualization of the exponential spread of COVID-19
 </header>
 
 <link rel="stylesheet" href="css.css?v=2">
-<style> div.card { background-color: #cfe; } div.card > a { color: #064; } </style>
+<style>
+.explore-more {
+  border: solid 1px hsla(199, 100%, 6%, 1);
+  background-color: hsla(199, 100%, 98%, 1);
+  padding: 2px;
+  padding-left: 6px;
+  border-left-width: 10px;
+}
+.explore-more > h6 {
+  margin-bottom: 0px;
+}
+
+.explore-more ul {
+  font-size: 14px;
+  margin-bottom: 0px;;
+}
+
+div.card { background-color: #cfe; } div.card > a { color: #064; }
+</style>
 
 <div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1);">
   <div class="container lead">
@@ -45,7 +63,7 @@ title: An interactive visualization of the exponential spread of COVID-19
         </ul>
       </li>
       <li>
-        Latest Enhancement: <i>(May 26)</i> The helper "scale to highlight message" no longer appears with no highlighted data.  Also, 91-DIVOC #03 is out! :)  [<a href="changes.html" style="color: hsla(199, 100%, 40%, 1);">See full change log</a>]
+        Latest Enhancement: <i>(May 27)</i> Added "Cumulative Mortality Rate" to all graphs as an option under "Data".  [<a href="changes.html" style="color: hsla(199, 100%, 40%, 1);">See full change log</a>]
         <!--
         Finally, <a href="changes.html" style="color: hsla(199, 100%, 40%, 1);">the change log</a> documents all major changes and improvements made to this visualization.
         -->
@@ -61,8 +79,12 @@ title: An interactive visualization of the exponential spread of COVID-19
   {% include_relative graphs/_states.html %}
 
   <div class="container">
-    <div class="card" style="margin-top: 15px;">
-      <a href="../coronavirus-1000-person-community/">New Release &mdash; 91-DIVOC #03: See the US and Every State at a 1,000-person community &gt;&gt;</a>
+    <div class="explore-more" style="margin-top: 15px;">
+      <h6>Explore More 91-DIVOC</h6>
+      <ul>
+        <li><a href="../covid-by-your-locations/"><b>91-DIVOC #02</b>: COVID-19 Data for Locations of People You Love</a></li>
+        <li><a href="../coronavirus-1000-person-community/"><b>91-DIVOC #03</b>: Coronavirus Visualized as a 1,000-Person Community</a></li>
+      </ul>      
     </div>  
   </div>
   
@@ -85,9 +107,15 @@ title: An interactive visualization of the exponential spread of COVID-19
   {% include_relative graphs/_countries-normalized.html %}
   {% include_relative graphs/_states-normalized.html %}
 
-  <div class="card" style="margin-top: 15px;">
-    <a href="../coronavirus-1000-person-community/">New Release &mdash; 91-DIVOC #03: See the US and Every State at a 1,000-person community &gt;&gt;</a>
-  </div>  
+  <div class="container">
+    <div class="explore-more" style="margin-top: 15px;">
+      <h6>Explore More 91-DIVOC</h6>
+      <ul>
+        <li><a href="../covid-by-your-locations/"><b>91-DIVOC #02</b>: COVID-19 Data for Locations of People You Love</a></li>
+        <li><a href="../coronavirus-1000-person-community/"><b>91-DIVOC #03</b>: Coronavirus Visualized as a 1,000-Person Community</a></li>
+      </ul>      
+    </div>  
+  </div>
 
   <!-- -->
   

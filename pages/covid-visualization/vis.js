@@ -108,7 +108,7 @@ var charts = {
     dataSelection: 'cases',
     showDelta: true,
     avgData: 7,
-    dataSelection_y0: { 'active': 100, 'cases': 100, 'deaths': 10, 'recovered': 100, 'new-cases': 1},
+    dataSelection_y0: { 'active': 100, 'cases': 100, 'deaths': 10, 'recovered': 100, 'new-cases': 1, 'mortalityRate': 10},
     yAxisScale: 'fixed',
     xMax: null, yMax: null, data: null,
     trendline: "default",
@@ -129,7 +129,7 @@ var charts = {
     y0: 20,
     scale: "log",
 
-    dataSelection_y0: { 'active': 20, 'cases': 20, 'deaths': 5, 'recovered': 20, 'hospitalized': 1, 'tests': 1, 'testPositivity': 10},
+    dataSelection_y0: { 'active': 20, 'cases': 20, 'deaths': 5, 'recovered': 20, 'hospitalized': 1, 'tests': 1, 'testPositivity': 10, 'mortalityRate': 5},
     yAxisScale: 'fixed',
 
     xMax: null, yMax: null, data: null,
@@ -152,7 +152,7 @@ var charts = {
     dataSelection: 'cases',
     showDelta: true,
     avgData: 7,
-    dataSelection_y0: { 'active': 1, 'cases': 1, 'deaths': 1, 'recovered': 1 },
+    dataSelection_y0: { 'active': 1, 'cases': 1, 'deaths': 1, 'recovered': 1, 'mortalityRate': 10 },
     yAxisScale: 'fixed',
     xMax: null, yMax: null, data: null,
     trendline: "default",
@@ -172,7 +172,7 @@ var charts = {
     dataSelection: 'cases',
     showDelta: true,
     avgData: 7,
-    dataSelection_y0: { 'active': 1, 'cases': 1, 'deaths': 1, 'recovered': 1, 'hospitalized': 1, 'tests': 1 },
+    dataSelection_y0: { 'active': 1, 'cases': 1, 'deaths': 1, 'recovered': 1, 'hospitalized': 1, 'tests': 1, 'testPositivity': 10, 'mortalityRate': 10 },
     yAxisScale: 'fixed',
     xMax: null, yMax: null, data: null,
     trendline: "default",
@@ -339,13 +339,7 @@ var process_data = function(data, chart) {
     popData = _popData["state"];
   }
 
-  let isRatio = false;
-  switch (chart.dataSelection) {
-    case 'testPositivity':
-      isRatio = true;
-      break;
-  };
-
+  let isRatio = chart.isRatio;
 
   let fetchCasesValue, fetchRawCasesValue, fetchCasesDelta;
 
@@ -367,6 +361,23 @@ var process_data = function(data, chart) {
       }
       break;
 
+      case 'mortalityRate':
+        fetchCasesValue = function (country, date) {
+          if (agg[country][date]['cases'] == 0) { return 0; }
+          return (agg[country][date]['deaths'] / agg[country][date]['cases']);
+        };
+  
+        fetchRawCasesValue = function (country, date) {
+          return agg[country][date]['deaths'];
+        };
+  
+        fetchCasesDelta = function(country, date_cur, date_prev) {
+          if ((agg[country][date_cur]['cases'] - agg[country][date_prev]['cases']) == 0) { return 0; }
+          return (agg[country][date_cur]['deaths'] - agg[country][date_prev]['deaths']) /
+                 (agg[country][date_cur]['cases'] - agg[country][date_prev]['cases']);
+        }
+        break;
+  
     default:
       fetchCasesValue = fetchRawCasesValue = function(country, date) {
         return agg[country][date][chart.dataSelection];
@@ -402,6 +413,8 @@ var process_data = function(data, chart) {
       let dateParts = date.split("-");
       let dateObj = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
       let daysAgo = (_dateObj_today_time - dateObj.getTime()) / (1000 * 3600 * 24);
+      // TODO: 
+      daysAgo = Math.ceil(daysAgo);
   
       // Start counting days only after the first day w/ 100 cases:
       //console.log(agg[country][date]);
@@ -419,7 +432,7 @@ var process_data = function(data, chart) {
         }
       }
 
-      if (chart.normalizePopulation) {
+      if (chart.normalizePopulation && !chart.isRatio) {
         cases = (cases / popSize) * 1e6;
         rawCaseValue = (rawCaseValue / popSize) * 1e6;
       }
@@ -456,9 +469,16 @@ var process_data = function(data, chart) {
             daysAgo: daysAgo
           };
 
-          if (chart.dataSelection == "testPositivity") {
-            record.n = agg[country][date]['cases'];
-            record.d = agg[country][date]['tests'];
+          switch (chart.dataSelection) {
+            case "testPositivity":
+              record.n = agg[country][date]['cases'];
+              record.d = agg[country][date]['tests'];
+              break;
+
+            case "mortalityRate":
+              record.n = agg[country][date]['deaths'];
+              record.d = agg[country][date]['cases'];
+              break;  
           }
 
           countryData.push(record);
@@ -496,7 +516,7 @@ var process_data = function(data, chart) {
   chart.fullData = caseData;
 
   chart.xMax = maxDayCounter;
-  if (chart.xMax > 90) { chart.xMax = 90; }
+  if (chart.xMax > 100) { chart.xMax = 100; }
 
   prep_data(chart);
 };
@@ -758,7 +778,6 @@ var generateUrl = function(chart) {
     chart: dataattr,
     highlight: chart.highlight,
     show: chart.show,
-    //trendline: chart.trendline,
     y: chart.yAxisScale,
     scale: chart.scale,
     data: (chart.dataRawSelection) ? chart.dataRawSelection : chart.dataSelection
@@ -857,7 +876,7 @@ var updateDataSelectionOptions = function(chart, value) {
   }
 
   chart.isRatio = false;
-  if (value == 'testPositivity') {
+  if (value == 'testPositivity' || value == 'mortalityRate') {
     chart.isRatio = true;
     chart.forceLinear = true;
 
@@ -1043,6 +1062,8 @@ var generateDataLabel = function(chart, title = false) {
     else if (chart.dataSelection == 'hospitalized') { dataLabel += "Total hospitalized with COVID-19"; }
     else if (chart.dataSelection == 'tests') { dataLabel += "COVID-19 Tests Performed"; }  
     else if (chart.dataSelection == 'testPositivity') { dataLabel += "COVID-19 Test Positivity Rate"; }  
+    else if (chart.dataSelection == 'mortalityRate') { dataLabel += "COVID-19 Confirmed Mortality Rate"; }  
+
 
     if (chart.showDelta) { dataLabel += " per Day"; }
 
@@ -1063,6 +1084,7 @@ var generateDataLabel = function(chart, title = false) {
     else if (chart.dataSelection == 'hospitalized') { dataLabel += "total hospitalizations"; }
     else if (chart.dataSelection == 'tests') { dataLabel += "COVID-19 tests performed"; }  
     else if (chart.dataSelection == 'testPositivity') { dataLabel += "test positivity"; }  
+    else if (chart.dataSelection == 'mortalityRate') { dataLabel += "mortality rate"; }  
   }
 
   return dataLabel;
@@ -1104,12 +1126,17 @@ var tip_html = function(chart) {
     }
 
     var s2 = "";
-    if (chart.normalizePopulation) { s2 = " per 1,000,000 people"; }
+    if (chart.normalizePopulation && !chart.isRatio) { s2 = " per 1,000,000 people"; }
 
     var dataLabel = generateDataLabel(chart);
+    var dataLabel_cutoff = dataLabel;
+    
+    if (chart.dataSelection == 'testPositivity') { dataLabel_cutoff = "tests"; }
+    else if (chart.dataSelection == 'mortalityRate') { dataLabel_cutoff = "deaths from COVID-19"; }  
+
     let daysSince = `(`;
     daysSince += `<b>${d.daysAgo}</b> day${(d.daysAgo != 1)?"s":""} ago and `;
-    daysSince += `<b>${d.dayCounter}</b> day${(d.dayCounter != 1)?"s":""} after reaching ${chart.y0} ${dataLabel}${s2})`;
+    daysSince += `<b>${d.dayCounter}</b> day${(d.dayCounter != 1)?"s":""} after reaching ${chart.y0} ${dataLabel_cutoff}${s2})`;
     if (chart.dataSelection == 'hospitalized' || chart.dataSelection == 'tests') {
       daysSince = "";
     }
@@ -1145,8 +1172,21 @@ var tip_html = function(chart) {
     s += `<div class="tip-details" style="border-bottom: solid 1px black; padding-bottom: 2px;"><b>${numberStr}</b> ${dataLabel}${s2} on ${dateStr}${d.date} ${daysSince}</div>`;
     if (d.rawcases) { s += "</i>"; }
 
-    if (chart.dataSelection == "testPositivity" && !chart.avgData) {
+    if (chart.isRatio && !chart.avgData) {
       let d_n = d.n, d_d = d.d;
+
+      let n_label, d_label;
+      switch (chart.dataSelection) {
+        case "testPositivity":
+          n_label = "cases";
+          d_label = "tests";
+          break;
+
+        case "mortalityRate":
+          n_label = "deaths";
+          d_label = "cases";
+          break;
+      }
       
       if (chart.showDelta) {
         if (i > 0) {
@@ -1157,12 +1197,12 @@ var tip_html = function(chart) {
           d_d = d_cur.d - d_prev.d;
 
           s += `<div class="tip-details" style="padding-bottom: 2px;"><i>` +
-            `<b>${d_n.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> new cases / <b>${d_d.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> new tests` +
+            `<b>${d_n.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> new ${n_label} / <b>${d_d.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> new ${d_label}` +
             `</i></div>`;
         }
       } else {
         s += `<div class="tip-details" style="padding-bottom: 2px;"><i>` +
-        `<b>${d_n.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> total cases / <b>${d_d.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> total tests` +
+        `<b>${d_n.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> total ${n_label} / <b>${d_d.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> total ${d_label}` +
         `</i></div>`;
       }
 
@@ -1346,6 +1386,7 @@ var doRender = function(chart) {
   let isRatio = false;
   switch (chart.dataSelection) {
     case 'testPositivity':
+    case 'mortalityRate':
       isRatio = true;
       break;
   }
@@ -1649,10 +1690,10 @@ var doRender = function(chart) {
   var xAxisLabel = `Days since ${chart.y0} `
   if (chart.dataSelection == 'cases') { xAxisLabel += "case"; if (chart.y0 != 1) { xAxisLabel += "s"; }}
   else if (chart.dataSelection == 'active') { xAxisLabel += "active case"; if (chart.y0 != 1) { xAxisLabel += "s"; }}
-  else if (chart.dataSelection == 'deaths') { xAxisLabel += "death"; if (chart.y0 != 1) { xAxisLabel += "s"; } }
+  else if (chart.dataSelection == 'deaths' || chart.dataSelection == 'mortalityRate') { xAxisLabel += "death"; if (chart.y0 != 1) { xAxisLabel += "s"; } }
   else if (chart.dataSelection == 'testPositivity') { xAxisLabel += "test"; if (chart.y0 != 1) { xAxisLabel += "s"; } }
   else if (chart.dataSelection == 'recovered') { xAxisLabel += "recover"; if (chart.y0 != 1) { xAxisLabel += "ies"; } else { xAxisLabel += "y"; }}
-  if (chart.normalizePopulation) { xAxisLabel += "/1m people"; }
+  if (chart.normalizePopulation && !chart.isRatio) { xAxisLabel += "/1m people"; }
 
   if (chart.dataSelection == 'tests') { xAxisLabel = "Days since Apr. 12"; }
   else if (chart.dataSelection == 'hospitalized') { xAxisLabel = "Days since Apr. 12"; }
@@ -1678,7 +1719,8 @@ var doRender = function(chart) {
   else if (chart.dataSelection == 'tests') { yAxisLabel += "COVID-19 Tests" }
   else if (chart.dataSelection == 'hospitalized') { yAxisLabel += "Hospitalizations of COVID-19" }
   else if (chart.dataSelection == 'testPositivity') { yAxisLabel += "Test Positivity Rate" }
-  if (chart.normalizePopulation) {
+  else if (chart.dataSelection == 'mortalityRate') { yAxisLabel += "Mortality Rate" }
+  if (chart.normalizePopulation && !chart.isRatio) {
     yAxisLabel += "/1m people";
   }
 
@@ -1908,7 +1950,7 @@ var doRender = function(chart) {
     else if (chart.dataSelection == 'active') { desc += "active case"; if (chart.y0 != 1) { desc += "s"; }}
     else if (chart.dataSelection == 'deaths') { desc += "death"; if (chart.y0 != 1) { desc += "s"; } }
     else if (chart.dataSelection == 'recovered') { desc += "recover"; if (chart.y0 != 1) { desc += "ies"; } else { desc += "y"; }}
-    if (chart.normalizePopulation) { desc += "/1m people"; }
+    if (chart.normalizePopulation && !chart.isRatio) { desc += "/1m people"; }
 
     $("#" + chart.id).append(`<div style="text-align: center;"><i><b>Note:</b> ${chart.highlight} has not reached ${desc}. No data is available to highlight.</i></div>`);
   }
