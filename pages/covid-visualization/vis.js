@@ -1430,7 +1430,14 @@ var doRender = function(chart) {
       var maxCases = -1;
       for (let d of highlights_data) {
         if (d.data.length > 0) {
-          var max = _.maxBy(d.data, 'cases').cases;
+          let dataInScope = [];
+          if (alignRight) {
+            dataInScope = _.filter(d.data, function (d) { return (d.daysAgo <= maxDayRendered) });
+          } else {
+            dataInScope = d.data;
+          }
+            
+          let max = _.maxBy(dataInScope, 'cases').cases;
           if (max > maxCases) { maxCases = max; }
         }
       }

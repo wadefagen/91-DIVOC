@@ -17,6 +17,12 @@ desc: This change log lists the major changes made to "An interactive visualizat
   <a href="/pages/covid-visualization/">An interactive visualization of the exponential spread of COVID-19 &gt;&gt;</a>
 </div>
 
+
+### June 1
+
+- Fixed [#46](https://github.com/wadefagen/91-DIVOC/issues/46): "Y-axis scale to highlight, takes into account out-of-window data #46"
+
+
 ### May 27 - Cumulative Mortality Rate
 
 - Added "Cumulative Mortality Rate" to all graphs, allowing you to view the current mortality rate for every country/state.
