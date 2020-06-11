@@ -2,6 +2,7 @@ Country,State,Population
 China,,1401855920
 India,,1360053900
 United States,,329488021
+United States,United States,329488021
 Indonesia,,266911900
 Pakistan,,219016520
 Brazil,,211283757
@@ -184,14 +185,14 @@ Barbados,,287025
 New Caledonia,,282200
 French Polynesia,,275918
 Abkhazia,,244832
-São Tomé and Príncipe,,201784
+Sï¿½o Tomï¿½ and Prï¿½ncipe,,201784
 Samoa,,200874
 Saint Lucia,,178696
 Guam,,172400
-Curaçao (Netherlands),,158665
+Curaï¿½aoï¿½(Netherlands),,158665
 rtsakh,,148000
 Kiribati,,120100
-Aruba (Netherlands),,112309
+Arubaï¿½(Netherlands),,112309
 Grenada,,112003
 Saint Vincent and the Grenadines,,110608
 Jersey,,106800
@@ -200,46 +201,46 @@ F.S. Micronesia,,104468
 Tonga,,100651
 Seychelles,,97625
 Antigua and Barbuda,,96453
-Isle of Man (UK),,83314
+Isle of Manï¿½(UK),,83314
 Andorra,,77543
 Dominica,,71808
-Cayman Islands (UK),,65813
-Bermuda (UK),,64027
+Cayman Islandsï¿½(UK),,65813
+Bermudaï¿½(UK),,64027
 Guernsey,,62792
-American Samoa (US),,56700
+American Samoaï¿½(US),,56700
 Greenland,,56081
-Northern Mariana Islands (US),,56200
+Northern Mariana Islandsï¿½(US),,56200
 Marshall Islands,,55500
 South Ossetia[v],,53532
 Saint Kitts and Nevis,,52823
-Faroe Islands (Denmark),,52124
-Turks and Caicos Islands (UK),,41369
-Sint Maarten (Netherlands),,40614
+Faroe Islandsï¿½(Denmark),,52124
+Turks and Caicos Islandsï¿½(UK),,41369
+Sint Maartenï¿½(Netherlands),,40614
 Liechtenstein,,38749
 Monaco,,38300
 Saint Martin,,35746
-Gibraltar (UK),,33701
+Gibraltarï¿½(UK),,33701
 San Marino,,33574
-British Virgin Islands (UK),,30030
-Åland Islands (Finland),,29885
+British Virgin Islandsï¿½(UK),,30030
+ï¿½land Islandsï¿½(Finland),,29885
 Palau,,17900
-Cook Islands (NZ),,15200
-Anguilla (UK),,14869
-Wallis and Futuna (France),,11700
+Cook Islandsï¿½(NZ),,15200
+Anguillaï¿½(UK),,14869
+Wallis and Futunaï¿½(France),,11700
 Nauru,,11000
 Tuvalu,,10200
-Saint Barthélemy (France),,9793
-Saint Pierre and Miquelon (France),,6008
+Saint Barthï¿½lemyï¿½(France),,9793
+Saint Pierre and Miquelonï¿½(France),,6008
 "Saint Helena, Ascension",,5633
-Montserrat (UK),,4989
-Falkland Islands (UK),,3198
-Christmas Island (Australia),,1928
-Norfolk Island (Australia),,1756
-Niue (NZ),,1520
-Tokelau (NZ),,1400
+Montserratï¿½(UK),,4989
+Falkland Islandsï¿½(UK),,3198
+Christmas Islandï¿½(Australia),,1928
+Norfolk Islandï¿½(Australia),,1756
+Niueï¿½(NZ),,1520
+Tokelauï¿½(NZ),,1400
 Holy See,,799
-Cocos (Keeling) Islands (Australia),,538
-Pitcairn Islands (UK),,50
+Cocos (Keeling) Islandsï¿½(Australia),,538
+Pitcairn Islandsï¿½(UK),,50
 ,California,39512223
 ,Texas,28995881
 ,Florida,21477737
@@ -297,3 +298,5 @@ Pitcairn Islands (UK),,50
 ,American Samoa,55641
 ,Northern Mariana Islands,55194
 Martinique,,376480
+Global,,7800000000
+Europe,,928919687

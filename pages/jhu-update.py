@@ -30,6 +30,7 @@ os.system("git pull")
 os.chdir(start_cwd)
 os.chdir("./covid-visualization/")
 os.system("python processData.py")
+os.system("python process-ctp.py")
 
 # 91-DIVOC #2
 os.chdir(start_cwd)

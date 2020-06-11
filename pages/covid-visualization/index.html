@@ -63,16 +63,32 @@ div.card { background-color: #cfe; } div.card > a { color: #064; }
         </ul>
       </li>
       <li>
-        Latest Enhancement: <i>(May 27)</i> Added "Cumulative Mortality Rate" to all graphs as an option under "Data".  [<a href="changes.html" style="color: hsla(199, 100%, 40%, 1);">See full change log</a>]
+        Latest Enhancement: <i>(June 10)</i>
+        Added a "Data Source" selection allowing you to select where the data is sourced for the visualization.
+        [<a href="changes.html" style="color: hsla(199, 100%, 40%, 1);">See full change log</a>]
         <!--
         Finally, <a href="changes.html" style="color: hsla(199, 100%, 40%, 1);">the change log</a> documents all major changes and improvements made to this visualization.
         -->
       </li>
+      <li>
+        This visualization is <b>updated daily</b> from multiple data sources.
+        <i id="jhu-updated"></i>
+      </li>
     </ul>
     <hr>
-    This visualization is <b>updated daily</b> with the Johns Hopkins CSSE data, typically released around midnight CDT.
-    <i id="jhu-updated"></i>
+    
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Data Source:</span>
+      </div>
+      <select class="form-control datasrc-select">
+        <option value="jhu">Johns Hopkins University CSSE</option>
+        <option value="ctp">The COVID Tracking Project (The Atlantic)</option>
+      </select>
+    </div>
   </div>
+
+
 
   <div id="sizer"></div>
   {% include_relative graphs/_countries.html %}
@@ -169,7 +185,4 @@ div.card { background-color: #cfe; } div.card > a { color: #064; }
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="d3-tip.js"></script>
 <script src="../jhu-updated.js"></script>
-<script src="vis.js?v=20200517"></script>
-
-<!--
--->
+<script src="vis.js?v=20200610"></script>

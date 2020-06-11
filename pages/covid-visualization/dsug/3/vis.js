@@ -61,27 +61,16 @@ var reducer_byCountry = function(result, value, key) {
 
 
 
-
-var localStorage = window.localStorage;
-
-var _storedValues = {};
-if (localStorage['91-DIVOC-01']) {
-  _storedValues = JSON.parse(localStorage['91-DIVOC-01']);
+// use a cookie to store country data
+// - src: https://www.w3schools.com/js/js_cookies.asp
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-var setStoredValue = function(key, value) {
-  _storedValues[key] = value;
-  localStorage['91-DIVOC-01'] = JSON.stringify(_storedValues);
-};
-
-var getStoredValue = function(key) {
-  return _storedValues[key];
-};
-
-
-// == Legacy ==
-function legacyFetchCookie(cname) {
-  // - src: https://www.w3schools.com/js/js_cookies.asp
+function getCookie(cname) {
   var name = cname + "=";
   var ca = document.cookie.split(';');
   for(var i = 0; i < ca.length; i++) {
@@ -89,28 +78,17 @@ function legacyFetchCookie(cname) {
     while (c.charAt(0) == ' ') { c = c.substring(1); }
     if (c.indexOf(name) == 0) { return c.substring(name.length, c.length); }
   }
-  return null;
+  return "";
 }
-
-if (!getStoredValue("state")) {
-  let v;
-  v = legacyFetchCookie("state");
-  if (v) { setStoredValue("state", v); }
-
-  v = legacyFetchCookie("country");
-  if (v) { setStoredValue("country", v); }
-}
-// == End Legacy ==
-
 
 // find default state value
 var stored;
 
 var defaultState = "New York";
-if ((stored = getStoredValue("state"))) { defaultState = stored; }
+if ((stored = getCookie("state")) != "") { defaultState = stored; }
 
 var defaultCountry = "United States";
-if ((stored = getStoredValue("country"))) { defaultCountry = stored; }
+if ((stored = getCookie("country")) != "") { defaultCountry = stored; }
 
 
 // chart metadata
@@ -207,28 +185,6 @@ var findNextExp = function(x) {
   return x * 1.3;
 };
 
-var transformToTrailingAverage2_ratio = function (data, period) {
-  var largest = -1;
-  var sum = 0, ct = 0;
-
-  for (var i = 0; i < data.length; i++) {
-    sum += data[i].n;
-    ct += data[i].d;
-
-    var j = i - period;
-    if (j >= 0) {
-      sum -= data[j].n;
-      ct -= data[j].d;
-    }
-
-    avg = sum / ct;
-    if (avg > largest) { largest = avg; }
-    data[i].cases = avg;
-  }
-
-  return largest;
-};
-
 
 var transformToTrailingAverage2 = function (data, period) {
   var largest = -1;
@@ -258,11 +214,7 @@ var transformToTrailingAverage2 = function (data, period) {
 
 var transformToTrailingAverage = function (casesData, period) {
   for (var countryData of casesData) {
-    if ('n' in countryData.data[0]) {
-      countryData.maxCases = transformToTrailingAverage2_ratio(countryData.data, period);
-    } else {
-      countryData.maxCases = transformToTrailingAverage2(countryData.data, period);
-    }
+    countryData.maxCases = transformToTrailingAverage2(countryData.data, period);
   }
 }
 
@@ -342,7 +294,7 @@ var prep_data = function(chart) {
 
     highlight_data = _.filter(caseData, function(d) { return highlights.indexOf(d.country) != -1; });
 
-    caseData = _.sortBy(caseData, function (d) { return -d.data[ d.data.length - 1 ].cases; });
+
     if (numShow > 0) { caseData = _.take(caseData, numShow); }
     else { caseData = _.takeRight(caseData, -numShow); }
     for (var hd of highlight_data) {
@@ -463,6 +415,10 @@ var process_data = function(data, chart) {
       let daysAgo = (_dateObj_today_time - dateObj.getTime()) / (1000 * 3600 * 24);
       // TODO: 
       daysAgo = Math.ceil(daysAgo);
+  
+      // Start counting days only after the first day w/ 100 cases:
+      //console.log(agg[country][date]);
+
 
       let cases = fetchCasesValue(country, date);
       var rawCaseValue = fetchRawCasesValue(country, date);
@@ -538,22 +494,18 @@ var process_data = function(data, chart) {
     }
 
     if (maxDay > 0) {
-      if (chart.self == "states" &&  country == "United States") {
-        // skip adding full "United States" to the "states" graph.
-      } else {
-        caseData.push({
-          pop: popSize,
-          country: country,
-          data: countryData,
-          maxCases: maxCases,
-          maxDay: maxDay,
-          totalDays: totalDays,
-          lastDayCases: lastDayCases
-        });
-      }
+      caseData.push({
+        pop: popSize,
+        country: country,
+        data: countryData,
+        maxCases: maxCases,
+        maxDay: maxDay,
+        totalDays: totalDays,
+        lastDayCases: lastDayCases
+      });
 
       if (dayCounter > maxDayCounter) {
-        maxDayCounter = dayCounter;
+        maxDayCounter = dayCounter + 4;
       }
     }
   }
@@ -564,22 +516,13 @@ var process_data = function(data, chart) {
   chart.fullData = caseData;
 
   chart.xMax = maxDayCounter;
-  //if (chart.xMax > 100) { chart.xMax = 100; }
+  if (chart.xMax > 100) { chart.xMax = 100; }
 
   prep_data(chart);
 };
 
 
-const urlParams = new URLSearchParams(window.location.search);
-let _data_src = urlParams.get("data-source");
-if (!_data_src) { _data_src = "jhu"; }
-
-
-
-
-var usa_country_rows = [];
-var covidData_promise = d3.csv("jhu-data.csv?d=" + _reqStr, function (row) {
-  if (row["Country_Region"] == "United States" && row['Province_State'] == "") { usa_country_rows.push(row); }
+var covidData_promise = d3.csv("../../jhu-data.csv?d=" + _reqStr, function (row) {
   row["Active"] = +row["Active"];
   row["Confirmed"] = +row["Confirmed"];
   row["Recovered"] = +row["Recovered"];
@@ -589,19 +532,7 @@ var covidData_promise = d3.csv("jhu-data.csv?d=" + _reqStr, function (row) {
   return row;
 });
 
-var ctp_promise = d3.csv("ctp-data.csv?d=" + _reqStr, function (row) {
-  //if (row["Country_Region"] == "United States" && row['Province_State'] == "") { usa_country_rows.push(row); }
-  row["Country_Region"] = "United States";
-  row["Active"] = +row["Active"];
-  row["Confirmed"] = +row["Confirmed"];
-  row["Recovered"] = +row["Recovered"];
-  row["Deaths"] = +row["Deaths"];
-  row["People_Tested"] = +row["People_Tested"];
-  row["People_Hospitalized"] = +row["People_Hospitalized"];
-  return row;
-});
-
-var populationData_promise = d3.csv("wikipedia-population.csv", function (row) {
+var populationData_promise = d3.csv("../../wikipedia-population.csv", function (row) {
   row["Population"] = (+row["Population"]);
   return row;
 });
@@ -612,7 +543,7 @@ var _dataReady = false, _pageReady = false, _chartIdFirst;
 
 var tryRender = function () {
   if (_dataReady && _pageReady) {
-    if (_intial_load) { process_query_string(); }
+    process_query_string();
     _chartIdFirst = Object.keys(charts)[0];
 
     process_data(_rawData, charts[_chartIdFirst]);
@@ -634,64 +565,48 @@ var initialRender2 = function() {
   _intial_load = false;
 };
 
-var doInitialDataLoad = function() {
-  let dataPromiseSource = [];
-  if (_data_src == "ctp") {
-    dataPromiseSource = [ctp_promise, populationData_promise];
-  } else {
-    dataPromiseSource = [covidData_promise, populationData_promise];
-  }
-  
-  Promise.all(dataPromiseSource)
-    .then(function(result) {
-      data = result[0];
-      populationData = result[1];
-  
-      for (let r of usa_country_rows) {
-        var clone = Object.assign({}, r);
-        clone['Province_State'] = 'United States';
-        data.push(clone);
-      }
-  
-      let dateParts = data[data.length - 1].Date.split("-");
-      _dateObj_today = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
-      _dateObj_today_time = _dateObj_today.getTime();
-      
-      _rawData = data;
-  
-      _popData = {country: {}, state: {}};
-      for (var pop of populationData) {
-        if (pop.Country) { _popData.country[pop.Country] = pop.Population; }
-        if (pop.State) { _popData.state[pop.State] = pop.Population; }
-      }
-  
-      _dataReady = true;
-      tryRender();
-    })
-    .catch(function (err) {
-      console.error(err);
-  
-      for (let chartid of Object.keys(charts)) {
-        $("#" + charts[chartid].id).html(`
-          <div class="alert alert-danger" style="margin: 20px; border: 1px solid red;">
-            <p><b>Failed to load COVID-19 data.</b></p>
-            <ul>
-              <li>This is usually caused by either your device losing internet or the 91-DIVOC server having problems.</li>
-              <li>You can try refreshing in a few seconds and it should work (I hope!).</li>
-              <li>If you continue to get the error, feel free to reach out and let me know about the error message below. Thanks! :)</li>
-            </ul>
-            <hr>
-            <pre>${err}</pre>
-          </div>
-        `);
-      }
-  
-      gtag("event", "data-loading-error");
-    });
-};
-doInitialDataLoad();
 
 
+Promise.all([covidData_promise, populationData_promise])
+  .then(function(result) {
+    data = result[0];
+    populationData = result[1];
+
+    let dateParts = data[data.length - 1].Date.split("-");
+    _dateObj_today = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
+    _dateObj_today_time = _dateObj_today.getTime();
+    
+    _rawData = data;
+
+    _popData = {country: {}, state: {}};
+    for (var pop of populationData) {
+      if (pop.Country) { _popData.country[pop.Country] = pop.Population; }
+      if (pop.State) { _popData.state[pop.State] = pop.Population; }
+    }
+
+    _dataReady = true;
+    tryRender();
+  })
+  .catch(function (err) {
+    console.error(err);
+
+    for (let chartid of Object.keys(charts)) {
+      $("#" + charts[chartid].id).html(`
+        <div class="alert alert-danger" style="margin: 20px; border: 1px solid red;">
+          <p><b>Failed to load COVID-19 data.</b></p>
+          <ul>
+            <li>This is usually caused by either your device losing internet or the 91-DIVOC server having problems.</li>
+            <li>You can try refreshing in a few seconds and it should work (I hope!).</li>
+            <li>If you continue to get the error, feel free to reach out and let me know about the error message below. Thanks! :)</li>
+          </ul>
+          <hr>
+          <pre>${err}</pre>
+        </div>
+      `);
+    }
+
+    gtag("event", "data-loading-error");
+  });
 
 
 var updateAdditionalHighlight = function(e) {
@@ -794,20 +709,16 @@ var saveAsPNG = function(chart) {
 };
 
 var _update_graph = function(chart, value, attr, selector) {
-  let chartSelector = "";
-  if (chart) {
-    chart[attr] = value;
-    chartSelector = `[data-chart="${chart.self}"]`;
-  }
+  chart[attr] = value;
 
   // UI Update:
   if (attr == "scale") {
-    $(`.${selector}${chartSelector}[data-scale="${value}"]`).click();
+    $(`.${selector}[data-chart="${chart.self}"][data-scale="${value}"]`).click();
   } else if (attr == "extraHighlights") {
     value = value.split(",");
     chart[attr] = value;
   } else {
-    let el = $(`.${selector}${chartSelector} option[value="${value}"]`);
+    let el = $(`.${selector}[data-chart="${chart.self}"] option[value="${value}"]`);
     el.prop('selected', true);
   }
 
@@ -843,9 +754,6 @@ var process_query_string_ui = function() {
 
 var process_query_string = function() {
   const urlParams = new URLSearchParams(window.location.search);
-
-  _qs_update_graph(null, urlParams, "data-source", null, "datasrc-select");
-
   
   let chartId = urlParams.get("chart");
   if (!chartId) { return; }
@@ -872,8 +780,7 @@ var generateUrl = function(chart) {
     show: chart.show,
     y: chart.yAxisScale,
     scale: chart.scale,
-    data: (chart.dataRawSelection) ? chart.dataRawSelection : chart.dataSelection,
-    'data-source': _data_src
+    data: (chart.dataRawSelection) ? chart.dataRawSelection : chart.dataSelection
   }
 
   if (chart.xaxis) { options.xaxis = chart.xaxis; }
@@ -1009,8 +916,8 @@ $(function() {
 
     chart.highlight = val;
 
-    if (chart.id.indexOf("countries") != -1) { setStoredValue('country', val, 30); }
-    if (chart.id.indexOf("states") != -1) { setStoredValue('state', val, 30); }
+    if (chart.id.indexOf("countries") != -1) { setCookie('country', val, 30); }
+    if (chart.id.indexOf("states") != -1) { setCookie('state', val, 30); }
 
     if ( chart.avgData || _.map(chart.data, "country").indexOf(val) == -1 ) {
       prep_data(chart);
@@ -1127,19 +1034,10 @@ $(function() {
     e.preventDefault();
   });
 
-  $(".animate-button").click(function (e) {
+  $(".animate-button"). click(function (e) {
     var chartId = $(e.target).data("chart");
     var chart = charts[chartId];
     animate(chart);
-  });
-
-  $(".datasrc-select").change(function (e) {
-    var value = $(e.target).val();
-    if (value != _data_src) {
-      _data_src = value;
-      showLoadingSpinner();
-      doInitialDataLoad();
-    }
   });
 
   _pageReady = true;
@@ -1348,13 +1246,9 @@ var textToClass = function (s) {
 };
 
 var showLoadingSpinner = function(chart) {
-  if (chart) {
-    $("#" + chart.id).html(`<div class="text-center divoc-graph-loading"><div class="spinner-border text-primary" role="status">
-      <span class="sr-only">Loading...</span>
-    </div></div>`);
-  } else {
-    for (let c in charts) { showLoadingSpinner(charts[c]); }
-  }
+  $("#" + chart.id).html(`<div class="text-center divoc-graph-loading"><div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div></div>`);
 }
 
 var cancelAnimation = function(chart) {
@@ -1374,17 +1268,11 @@ var render = function(chart) {
 
 var calculateMaxDayRendered = function(chart) {
   let maxDayRendered = chart.xMax;
-  let f = _.filter(chart.data, function (e) {
-    return e.country == chart.highlight || (chart.extraHighlights && chart.extraHighlights.indexOf(e.country) != -1);
-  });
-  if (f.length == 0) { f = null; }
+  let f = _.find(chart.data, function (e) { return e.country == chart.highlight })
 
   // xAxis
   if (chart.xaxis == "right") {
-    if (f) {
-      let totalDays = _.maxBy(f, 'totalDays').totalDays;
-      maxDayRendered = totalDays;
-    }
+    if (f) { maxDayRendered = f.totalDays; }
   } else if (chart.xaxis == "right-4wk") {
     maxDayRendered = 28;
   } else if (chart.xaxis == "right-8wk") {
@@ -1394,9 +1282,8 @@ var calculateMaxDayRendered = function(chart) {
     maxDayRendered = m.totalDays;
   } else {
     // left-align
-    if (f) {
-      let maxDay = _.maxBy(f, 'maxDay').maxDay;
-      maxDayRendered = Math.ceil(maxDay * 1.13);
+    if (f && f.maxDay > maxDayRendered) {
+      maxDayRendered = f.maxDay + 3;
     }
   }
 
@@ -1441,12 +1328,7 @@ var doAnimate = function(chart, filter = 0) {
 
 var doRender = function(chart) {
    if (chart.data.length == 0) {
-     let message;
-     if (_data_src == "ctp" && (chart.self == "countries" || chart.self == "countries-normalized")) {
-       message = "The COVID Tracking Project provides data only for the United States.  See US data below. :)"
-     } else {
-       message = "There is no data available to display for your selected options.";
-     }
+     let message = "There is no data available to display for your selected options.";
      
      if (chart.highlight == "(None)" && chart.show == "highlight-only") {
       message = "You are asking for the impossible, I like the way you think! :)<br><br>" +
@@ -1895,22 +1777,13 @@ var doRender = function(chart) {
   }
 
 
-  if (_data_src == "ctp") {
-    svg.append("text")
-    .attr("x", width)
-    .attr("y", height + 32)
-    .attr("class", "text-credits")
-    .attr("text-anchor", "end")
-    .text(`Data: The COVID Tracking Project; Updated: ${_dateUpdated}`);
-  } else {
-    svg.append("text")
+
+  svg.append("text")
     .attr("x", width)
     .attr("y", height + 32)
     .attr("class", "text-credits")
     .attr("text-anchor", "end")
     .text(`Data: Johns Hopkins CSSE; Updated: ${_dateUpdated}`);
-  }
-
 
 
   svg.append("a")
@@ -1962,14 +1835,6 @@ var doRender = function(chart) {
     }
 
     let lastDataPoint = countryData.data[countryData.data.length - 1];
-    if (!alignRight && lastDataPoint.dayCounter > maxDayRendered) {      
-      let foundLastDataPoint = _.find(countryData.data, function (e) {
-        return e.dayCounter >= maxDayRendered;
-      })
-
-      if (foundLastDataPoint) { lastDataPoint = foundLastDataPoint; }
-    }
-
     if (labelOffGrid) {
       countryText
         .attr("x", function() {
@@ -2004,10 +1869,10 @@ var doRender = function(chart) {
         .attr("alignment-baseline", "middle")
         .attr("dominant-baseline", "middle")
     } else {
-      // Off of left side of chart
       countryText
         .attr("x", daysScale(maxDayRendered) - 5 + textHeightAdjustment )
         .attr("y", function () {
+          
           if (lastDataPoint.cases < scale_y0) { return height + 5; }
           return casesScale(lastDataPoint.cases) - 5 + textHeightAdjustment;
         })
@@ -2065,10 +1930,12 @@ var doRender = function(chart) {
         return casesScale(d.cases);
       })
       .style("opacity", function (d) {
-        if (isHighlighted) { return 1; }        
+        if (isHighlighted) { return 1; }
         else { return (isSmall) ? 0.15 : 0.3; }
       })
       .attr("r", function (d) {
+        return d.dayCounter / 10;
+
         if (isHighlighted) { return 4; }
         else { return 3; }
       })
@@ -2135,7 +2002,7 @@ var doRender = function(chart) {
 
     $("#" + chart.id).append(
       `<div class="alert alert-secondary" style="margin-top: 10px; margin-bottom: 0px; text-align: center; font-size: 12px;">
-      <b>Note:</b> ${chart.highlight} has not reached ${desc} in the provided data.  Therefore, no data is available to highlight.
+      <b>Note:</b> ${chart.highlight} has not reached ${desc}. No data is available to highlight.
       </div>`);
   }
 

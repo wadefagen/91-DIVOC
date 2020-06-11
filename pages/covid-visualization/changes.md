@@ -17,6 +17,37 @@ desc: This change log lists the major changes made to "An interactive visualizat
   <a href="/pages/covid-visualization/">An interactive visualization of the exponential spread of COVID-19 &gt;&gt;</a>
 </div>
 
+### June 10 - Multiple Data Sources
+
+- Added a global "Data Source" selection allowing you to select your data source.
+- Refactored the use of [Johns Hopkins Data](https://github.com/CSSEGISandData/COVID-19) as a data source.
+- Added [The COVID Tracking Project](https://covidtracking.com/api) as a data source.
+- Added a new URL parameter (`data-source`) to store the data source logic.
+
+- Improved the "7-day average" for ratios (test positivity, mortality rate) to take 7 days of underlying data instead of averaging 7 one-day values.
+
+
+### June 9
+
+- Added "United States" on the normalized state data visualization to compare vs. United States as a whole.
+- Your previously selected state/country are now stored in local storage instead of an unnecessary cookie.
+
+
+### June 7 - Global and Europe
+
+- Added "Global" as a data point for the world visualizations
+- Added "Europe" based on the [World Health Organization EURO region](https://en.wikipedia.org/wiki/WHO_regions).
+- Improved label placement logic for countries outside of the range of the visualization (eg: "Global")
+- Improved additional highlight display logic (will now show the range of the longest highlight)
+- Fixed sorting of countries for "Top/Bottom X" on normalized graphs 
+
+
+### June 3
+
+- Modified the "align-right" labels to show off the right-side of the graph.
+- Modified labeling the "align-right" dates when two dates are extremely close (eg: June 1 and June 2).
+- Fix: US territories will now correctly highlight when "All States & DC" is selected.
+
 
 ### June 1
 
