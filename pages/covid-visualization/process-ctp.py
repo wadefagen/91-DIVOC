@@ -70,6 +70,36 @@ df = df.rename(columns={
 
 
 df = df.apply(format_rows_to_JHU, axis=1)
+
+
+df_allByDate = df.groupby(["Date"]).agg("sum").reset_index()
+df_allByDate["Province_State"] = "United States"
+df = pd.concat([df, df_allByDate])
+
+
+northeast = ["Connecticut", "Maine", "Massachusetts", "New Hampshire", "Rhode Island", "Vermont", "New Jersey", "New York", "Pennsylvania"];
+midwest = ["Illinois", "Indiana", "Michigan", "Ohio", "Wisconsin", "Iowa", "Kansas", "Minnesota", "Missouri", "Nebraska", "North Dakota", "South Dakota"];
+south = ["Delaware", "Florida", "Georgia", "Maryland", "North Carolina", "South Carolina", "Virginia", "District of Columbia", "West Virginia", "Alabama", "Kentucky", "Mississippi", "Tennessee", "Arkansas", "Louisiana", "Oklahoma", "Texas"];        
+west = ["Arizona", "Colorado", "Idaho", "Montana", "Nevada", "New Mexico", "Utah", "Wyoming", "Alaska", "California", "Hawaii", "Oregon", "Washington"];
+
+df_agg = df[ df["Province_State"].isin(northeast) ].groupby(["Date"]).agg("sum").reset_index()
+df_agg["Province_State"] = "US-Northeast"
+df = pd.concat([df, df_agg], sort=False)
+
+df_agg = df[ df["Province_State"].isin(midwest) ].groupby(["Date"]).agg("sum").reset_index()
+df_agg["Province_State"] = "US-Midwest"
+df = pd.concat([df, df_agg], sort=False)
+
+df_agg = df[ df["Province_State"].isin(south) ].groupby(["Date"]).agg("sum").reset_index()
+df_agg["Province_State"] = "US-South"
+df = pd.concat([df, df_agg], sort=False)
+
+df_agg = df[ df["Province_State"].isin(west) ].groupby(["Date"]).agg("sum").reset_index()
+df_agg["Province_State"] = "US-West"
+df = pd.concat([df, df_agg], sort=False)
+
+
+
 df = df.astype({"Confirmed": "int32", "Recovered": "int32", "People_Tested": "int32", "Deaths": "int32", "People_Hospitalized": "int32"})
 
 

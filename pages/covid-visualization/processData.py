@@ -105,8 +105,8 @@ def processDate(date):
       'Province/State': 'Province_State'
     })
 
-  df = df[ df['Province_State'].str.contains('Diamond Princess') != True ]
-  df = df[ df['Country_Region'].str.contains('Diamond Princess') != True ]
+  #df = df[ df['Province_State'].str.contains('Diamond Princess') != True ]
+  #df = df[ df['Country_Region'].str.contains('Diamond Princess') != True ]
 
   df = df.apply( translateState, axis=1 )
 
@@ -117,14 +117,14 @@ def processDate(date):
   countrydata = df.groupby(['Country_Region']).agg('sum').reset_index()
   countrydata['Province_State'] = ""
 
-  df = stateData.append( countrydata )
+  df = stateData.append( countrydata, sort=False )
   if 'Active' not in df:
     df['Active'] = df['Confirmed'] - df['Recovered'] - df['Deaths']
   df = df[ ["Country_Region", "Province_State", "Confirmed", "Recovered", "Active", "Deaths"] ] 
   df["Date"] = date
 
   # == Global ==
-  worldCount = df.sum()
+  worldCount = df[ df["Province_State"] == "" ].sum()
   worldCount['Country_Region'] = "Global"
   worldCount['Province_State'] = ""
   worldCount["Date"] = date
@@ -140,6 +140,17 @@ def processDate(date):
 
   europeCount = df[ df['Country_Region'].isin(who_europe) ].sum()
   europeCount['Country_Region'] = "Europe"
+  europeCount['Province_State'] = ""
+  europeCount["Date"] = date
+  df = df.append(europeCount, ignore_index = True)
+
+  # == EU ==
+  eu = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Czechia", "Denmark", "Estonia",
+        "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg",
+        "Malta", "Netherlands", "Poland", "Portugal", "Romania ", "Slovakia", "Slovenia", "Spain", "Sweden"]
+
+  europeCount = df[ df['Country_Region'].isin(eu) ].sum()
+  europeCount['Country_Region'] = "EU"
   europeCount['Province_State'] = ""
   europeCount["Date"] = date
   df = df.append(europeCount, ignore_index = True)
@@ -366,9 +377,50 @@ df['Recovered'] = df.apply(chooseXY_Recovered, axis=1)
 df = df.drop(['Recovered_x', 'Recovered_y'], axis=1)
 
 
+# == Create US-wide data ==
+print("Adding US-wide state data...")
+df_allByDate = df[ (df["Province_State"] != "") & (df["Country_Region"] == "United States") ].groupby(["Date"]).agg("sum").reset_index()
+df_allByDate["Province_State"] = "United States"
+df_allByDate["Country_Region"] = "United States"
+df = pd.concat([df, df_allByDate], sort=False)
+
+
+df_allByDate = df[ (df["Province_State"] != "") & (df["Country_Region"] == "United States") & \
+                   (df["Province_State"] != "New York") & (df["Province_State"] != "United States") & \
+                   (df["Province_State"] != "New Jersey") & (df["Province_State"] != "Connecticut") ].groupby(["Date"]).agg("sum").reset_index()
+df_allByDate["Province_State"] = "US-exclude-NY/NJ/CT"
+df_allByDate["Country_Region"] = "United States"
+df = pd.concat([df, df_allByDate], sort=False)
 
 
 
-#print(df)
+northeast = ["Connecticut", "Maine", "Massachusetts", "New Hampshire", "Rhode Island", "Vermont", "New Jersey", "New York", "Pennsylvania"]
+midwest = ["Illinois", "Indiana", "Michigan", "Ohio", "Wisconsin", "Iowa", "Kansas", "Minnesota", "Missouri", "Nebraska", "North Dakota", "South Dakota"]
+south = ["Delaware", "Florida", "Georgia", "Maryland", "North Carolina", "South Carolina", "Virginia", "District of Columbia", "West Virginia", "Alabama", "Kentucky", "Mississippi", "Tennessee", "Arkansas", "Louisiana", "Oklahoma", "Texas"]
+west = ["Arizona", "Colorado", "Idaho", "Montana", "Nevada", "New Mexico", "Utah", "Wyoming", "Alaska", "California", "Hawaii", "Oregon", "Washington"]
+
+df_agg = df[ df["Province_State"].isin(northeast) ].groupby(["Date"]).agg("sum").reset_index()
+df_agg["Province_State"] = "US-Northeast"
+df_agg["Country_Region"] = "United States"
+df = pd.concat([df, df_agg], sort=False)
+
+df_agg = df[ df["Province_State"].isin(midwest) ].groupby(["Date"]).agg("sum").reset_index()
+df_agg["Province_State"] = "US-Midwest"
+df_agg["Country_Region"] = "United States"
+df = pd.concat([df, df_agg], sort=False)
+
+df_agg = df[ df["Province_State"].isin(south) ].groupby(["Date"]).agg("sum").reset_index()
+df_agg["Province_State"] = "US-South"
+df_agg["Country_Region"] = "United States"
+df = pd.concat([df, df_agg], sort=False)
+
+df_agg = df[ df["Province_State"].isin(west) ].groupby(["Date"]).agg("sum").reset_index()
+df_agg["Province_State"] = "US-West"
+df_agg["Country_Region"] = "United States"
+df = pd.concat([df, df_agg], sort=False)
+
+
+
 df = df.astype({"Confirmed": "int32", "Recovered": "int32", "Active": "int32", "Deaths": "int32"})
+#print(df)
 df.to_csv('jhu-data.csv', index=False)

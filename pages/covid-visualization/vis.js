@@ -23,11 +23,11 @@ $(window).resize(function () {
 // reducers
 var reducer_sum_with_key = function(result, value, key) {
   if (!result[key]) { result[key] = {} }
+
   let obj = result[key];
-
   let date = value["Date"];
-
   if (!obj[date]) { obj[date] = { active: 0, recovered: 0, deaths: 0, cases: 0, tests: 0, hospitalized: 0 } }
+
   obj[date].active += value["Active"];
   obj[date].recovered += value["Recovered"];
   obj[date].deaths += value["Deaths"];
@@ -118,8 +118,7 @@ var charts = {
   'countries': {
     self: 'countries',
     reducer: reducer_byCountry,
-    reducer2: reducer_byUSstate,
-    scale: "log",
+    scale: "linear",
     highlight: defaultCountry,
     defaultHighlight: defaultCountry,
     y0: 100,
@@ -135,6 +134,10 @@ var charts = {
     xMax: null, yMax: null, data: null,
     trendline: "default",
     dataRawSelection: "cases-daily-7",
+    xaxis: "right",
+
+    subdata_reducer: reducer_byUSstate,
+    defaultSubHighlight: defaultState,
   },
   'states': {
     self: 'states',
@@ -149,21 +152,21 @@ var charts = {
     showDelta: true,
     avgData: 7,
     y0: 20,
-    scale: "log",
+    scale: "linear",
 
     dataSelection_y0: { 'active': 20, 'cases': 20, 'deaths': 5, 'recovered': 20, 'hospitalized': 1, 'tests': 1, 'testPositivity': 10, 'mortalityRate': 5},
     yAxisScale: 'fixed',
 
     xMax: null, yMax: null, data: null,
     trendline: "default",
-    dataRawSelection: "cases-daily-7"
+    dataRawSelection: "cases-daily-7",
+    xaxis: "right",
   },
 
   'countries-normalized': {
     self: 'countries-normalized',
     reducer: reducer_byCountry,
-    reducer2: reducer_byUSstate,
-    scale: "log",
+    scale: "linear",
     highlight: defaultCountry,
     defaultHighlight: defaultCountry,
     y0: 1,
@@ -178,12 +181,17 @@ var charts = {
     yAxisScale: 'fixed',
     xMax: null, yMax: null, data: null,
     trendline: "default",
-    dataRawSelection: "cases-daily-7"
+    dataRawSelection: "cases-daily-7",
+    xaxis: "right",
+
+    subdata_reducer: reducer_byUSstate,
+    defaultSubHighlight: defaultState,
+    subDataNormalizePopulation: "country",
   },
   'states-normalized': {
     self: 'states-normalized',
     reducer: reducer_byUSstate,
-    scale: "log",
+    scale: "linear",
     highlight: defaultState,
     defaultHighlight: defaultState,
     y0: 1,
@@ -198,13 +206,9 @@ var charts = {
     yAxisScale: 'fixed',
     xMax: null, yMax: null, data: null,
     trendline: "default",
-    dataRawSelection: "cases-daily-7"
+    dataRawSelection: "cases-daily-7",
+    xaxis: "right",
   },
-};
-
-
-var findNextExp = function(x) {
-  return x * 1.3;
 };
 
 var transformToTrailingAverage2_ratio = function (data, period) {
@@ -212,18 +216,41 @@ var transformToTrailingAverage2_ratio = function (data, period) {
   var sum = 0, ct = 0;
 
   for (var i = 0; i < data.length; i++) {
-    sum += data[i].n;
-    ct += data[i].d;
+    // Current Change
+    let dsum = data[i].n;
+    let dct = data[i].d;
+    if (i > 0) {
+      dsum -= data[i - 1].n;
+      dct -= data[i - 1].d;
+    }
 
+    if (dsum >= 0 && dct >= 0) {
+      sum += dsum;
+      ct += dct;
+    }
+
+    // Trailing Change
     var j = i - period;
     if (j >= 0) {
-      sum -= data[j].n;
-      ct -= data[j].d;
+      dsum = data[j].n;
+      dct = data[j].d;
+      if (j > 0) {
+        dsum -= data[j - 1].n;
+        dct -= data[j - 1].d;
+      }
+
+      if (dsum >= 0 && dct >= 0) {
+        sum -= dsum;
+        ct -= dct;
+      }
     }
 
     avg = sum / ct;
+    if (!isFinite(avg)) { avg = 0; }
     if (avg > largest) { largest = avg; }
     data[i].cases = avg;
+    data[i].sum_n = sum;
+    data[i].sum_d = ct;
   }
 
   return largest;
@@ -277,12 +304,42 @@ var getHTMLCountryOptionsToSelect = function(allCountries, selectedCountry) {
   return html;
 }
 
-var prep_data = function(chart) {
-  var caseData = chart.fullData;
+var prep_data = function(chart, resetReport = true) {
+  chart.displayData = {};
+  let origDataSelection = chart.dataRawSelection;
+
+  chart.data = chart.displayData[origDataSelection] = _prep_data(chart, chart.fullData);
+  if (chart.extraData) {
+    let originalShow = chart.show;
+    chart.show = "highlight-only";
+    for (let extraDataStr of chart.extraData) {
+
+      updateDataSelectionOptions(chart, extraDataStr, false);
+      chart.displayData[extraDataStr + "-extraData"] = _prep_data(chart, chart.cache[extraDataStr]);
+    }
+    chart.show = originalShow;
+  }
+
+  updateDataSelectionOptions(chart, origDataSelection, false);
+  if (resetReport) { doResetReport(chart); }
+};
+
+var _prep_data = function(chart, fullData) {
+  var caseData = fullData;
   var allCountries = _.map(caseData, 'country').sort();
   var highlights = [ chart.highlight ];
   if (chart.extraHighlights) { highlights = highlights.concat( chart.extraHighlights ); }
 
+  if (!chart.subdata && chart.extraHighlights && chart.subdata_reducer) {
+    process_data(_rawData, chart, true, true);
+  }
+
+  if (chart.subdata && chart.extraHighlights) {
+    let highlightedSubdata = _.filter(chart.subdata, function (d) {
+      return chart.extraHighlights.indexOf(d.country) != -1;
+    });
+    caseData = caseData.concat(highlightedSubdata);
+  }
 
   let retain = [], retain_f = null, exclude = [];
   switch (chart.show) {
@@ -322,7 +379,7 @@ var prep_data = function(chart) {
       break;
 
     case "us-states":
-      exclude = ["Puerto Rico", "Northern Mariana Islands", "Guam", "Virgin Islands"];
+      exclude = ["US-exclude-NY/NJ/CT", "US-West", "US-Northeast", "US-Midwest", "US-South", "United States", "Puerto Rico", "Northern Mariana Islands", "Guam", "Virgin Islands"];
       break;
   }
 
@@ -338,6 +395,18 @@ var prep_data = function(chart) {
 
     if (chart.id == "chart-countries-normalized") {
       caseData = _.filter(caseData, function(d) { return (d.pop > 1e7) || (highlights.indexOf(d.country) != -1); });
+    }
+
+    if (chart.self == "states" || chart.self == "states-normalized") {
+      exclude = ["US-West", "US-Northeast", "US-Midwest", "US-South", "United States", "US-exclude-NY/NJ/CT"];
+      caseData = _.filter(caseData, function(d) {
+        return (exclude.indexOf(d.country) == -1) || (highlights.indexOf(d.country) != -1);
+      });
+    } else {
+      exclude = ["Global"];
+      caseData = _.filter(caseData, function(d) {
+        return (exclude.indexOf(d.country) == -1) || (highlights.indexOf(d.country) != -1);
+      });
     }
 
     highlight_data = _.filter(caseData, function(d) { return highlights.indexOf(d.country) != -1; });
@@ -358,28 +427,74 @@ var prep_data = function(chart) {
   }
 
   if (chart.avgData && chart.avgData > 1) { transformToTrailingAverage(caseData, chart.avgData); }
-  chart.data = caseData;
-  
-  casesMax = _.sortBy(chart.data, function(d) { return -d.maxCases; } )[0];
-
-  if (casesMax) {
-    chart.yMax = findNextExp(casesMax.maxCases);
-  } else {
-    chart.yMax = -1;
-  }
-
-  return chart;
+  return caseData;
 };
 
 
-var process_data = function(data, chart) {
-  var agg = _.reduce(data, chart.reducer, {});
+var getDataCacheString = function(chart, dataSelection, isSubdata = false) {
+  let dataStr = dataSelection;
+  if (isSubdata) { dataStr += "-subdata"; }
+
+  return dataStr;  
+}
+
+var _process_data_verify = function(chart, dataSelection, isSubdata) {
+  let dataStr = getDataCacheString(chart, dataSelection, isSubdata);
+
+  if (!chart.cache) { chart.cache = {}; }
+  if (!chart.cache[dataStr]) {
+    updateDataSelectionOptions(chart, dataSelection, false);
+    chart.cache[dataStr] = do_process_data(_rawData, chart, isSubdata);
+  }
+
+  return chart.cache[dataStr];
+};
+
+var process_data2 = function(chart, isSubdata = false, noPrepData = false) {
+  process_data(_rawData, chart, isSubdata, noPrepData);
+};
+
+var process_data = function(data, chart, isSubdata = false, noPrepData = false) {
+  let origDataSelection = chart.dataRawSelection;
+  let processedData = _process_data_verify(chart, origDataSelection, isSubdata);
+
+  if (chart.extraData) {
+    for (let extraDataSrc of chart.extraData) {
+      _process_data_verify(chart, extraDataSrc, false);
+
+      if (chart.subdata) { _process_data_verify(chart, extraDataSrc, true); }
+    }
+  }
+
+  // Populate chart object (legacy)
+  updateDataSelectionOptions(chart, origDataSelection, false);
+  if (!isSubdata) { chart.fullData = processedData; }
+  else            { chart.subdata = processedData; }
+
+  if (!isSubdata && chart.subdata) { process_data(data, chart, true, true); }
+  if (!noPrepData) { prep_data(chart); }
+};
+
+
+var do_process_data = function(data, chart, isSubdata = false) {
+  var agg;
+
+  //console.log(`>> Processing Data (chart=${chart.self}, subdata=${isSubdata}, noPrep=${noPrepData})`);
+  
+  if (!isSubdata) { agg = _.reduce(data, chart.reducer, {}); }
+  else            { agg = _.reduce(data, chart.subdata_reducer, {}); }
+  
+  let y0_threshold = chart.y0;
+  if (chart.isRatio) { y0_threshold = 0; }
+  //if (isSubdata) { y0_threshold = 10; }
 
   var caseData = [];
   var maxDayCounter = 0;
 
   let popData;
-  if (chart.normalizePopulation) {
+  if (isSubdata) {
+    popData = _popData["state"];
+  } else if (chart.normalizePopulation) {
     popData = _popData[chart.normalizePopulation]; 
   } else if (chart.self == "countries") {
     popData = _popData["country"];
@@ -442,9 +557,11 @@ var process_data = function(data, chart) {
     var popSize = -1;
 
     popSize = popData[country];
+    /*
     if (!popSize && location.hostname === "localhost") {
       console.log("Missing " + chart.normalizePopulation + ": " + country);
     }
+    */
 
     dayCounter = -1;
     maxCases = 0;
@@ -461,7 +578,6 @@ var process_data = function(data, chart) {
       let dateParts = date.split("-");
       let dateObj = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
       let daysAgo = (_dateObj_today_time - dateObj.getTime()) / (1000 * 3600 * 24);
-      // TODO: 
       daysAgo = Math.ceil(daysAgo);
 
       let cases = fetchCasesValue(country, date);
@@ -538,19 +654,22 @@ var process_data = function(data, chart) {
     }
 
     if (maxDay > 0) {
-      if (chart.self == "states" &&  country == "United States") {
-        // skip adding full "United States" to the "states" graph.
-      } else {
-        caseData.push({
-          pop: popSize,
-          country: country,
-          data: countryData,
-          maxCases: maxCases,
-          maxDay: maxDay,
-          totalDays: totalDays,
-          lastDayCases: lastDayCases
-        });
+      var cData = {
+        pop: popSize,
+        country: country,
+        data: countryData,
+        maxCases: maxCases,
+        maxDay: maxDay,
+        totalDays: totalDays,
+        lastDayCases: lastDayCases,
+        dataSelection: chart.dataSelection
+      };
+
+      for (let d of countryData) {
+        d.src = cData;
       }
+      caseData.push(cData);
+
 
       if (dayCounter > maxDayCounter) {
         maxDayCounter = dayCounter;
@@ -561,12 +680,14 @@ var process_data = function(data, chart) {
   caseData = _.sortBy(caseData, function (d) {
     return -d.lastDayCases;
   });
-  chart.fullData = caseData;
 
-  chart.xMax = maxDayCounter;
-  //if (chart.xMax > 100) { chart.xMax = 100; }
+  if (!isSubdata) {
+    chart.xMax = maxDayCounter;
+  } else {
+    caseData = _.filter(caseData, function (d) { return d.country != "United States"; } )
+  }  
 
-  prep_data(chart);
+  return caseData;
 };
 
 
@@ -576,43 +697,54 @@ if (!_data_src) { _data_src = "jhu"; }
 
 
 
+var _data_sources = {
+  // Johns Hopkins:
+  "jhu": {
+    url: "../jhu.csv?d=" + _reqStr,
+    f: function (row) {
+      row["Active"] = +row["Active"];
+      row["Confirmed"] = +row["Confirmed"];
+      row["Recovered"] = +row["Recovered"];
+      row["Deaths"] = +row["Deaths"];
+      row["People_Tested"] = +row["People_Tested"];
+      row["People_Hospitalized"] = +row["People_Hospitalized"];
 
-var usa_country_rows = [];
-var covidData_promise = d3.csv("jhu-data.csv?d=" + _reqStr, function (row) {
-  if (row["Country_Region"] == "United States" && row['Province_State'] == "") { usa_country_rows.push(row); }
-  row["Active"] = +row["Active"];
-  row["Confirmed"] = +row["Confirmed"];
-  row["Recovered"] = +row["Recovered"];
-  row["Deaths"] = +row["Deaths"];
-  row["People_Tested"] = +row["People_Tested"];
-  row["People_Hospitalized"] = +row["People_Hospitalized"];
-  return row;
-});
+      if (row["Country_Region"] == "Georgia") { row["Country_Region"] = "Georgia (EU)"; }
+      return row;
+    },
+  },
 
-var ctp_promise = d3.csv("ctp-data.csv?d=" + _reqStr, function (row) {
-  //if (row["Country_Region"] == "United States" && row['Province_State'] == "") { usa_country_rows.push(row); }
-  row["Country_Region"] = "United States";
-  row["Active"] = +row["Active"];
-  row["Confirmed"] = +row["Confirmed"];
-  row["Recovered"] = +row["Recovered"];
-  row["Deaths"] = +row["Deaths"];
-  row["People_Tested"] = +row["People_Tested"];
-  row["People_Hospitalized"] = +row["People_Hospitalized"];
-  return row;
-});
+  // COVID Tracking Project
+  "ctp": {
+    url: "../ctp.csv?d=" + _reqStr,
+    f: function (row) {
+      row["Country_Region"] = "United States";
+      row["Active"] = +row["Active"];
+      row["Confirmed"] = +row["Confirmed"];
+      row["Recovered"] = +row["Recovered"];
+      row["Deaths"] = +row["Deaths"];
+      row["People_Tested"] = +row["People_Tested"];
+      row["People_Hospitalized"] = +row["People_Hospitalized"];
+      return row;
+    }
+  },
 
-var populationData_promise = d3.csv("wikipedia-population.csv", function (row) {
-  row["Population"] = (+row["Population"]);
-  return row;
-});
-
+  // Wikipedia Population
+  "wikipedia-pop": {
+    url: "wikipedia-population.csv",
+    f: function (row) {
+      row["Population"] = (+row["Population"]);
+      return row;    
+    }
+  }
+};
 
 var _dataReady = false, _pageReady = false, _chartIdFirst;
 
 
 var tryRender = function () {
   if (_dataReady && _pageReady) {
-    if (_intial_load) { process_query_string(); }
+    if (_intial_load) { process_ui_state(); process_query_string(); }
     _chartIdFirst = Object.keys(charts)[0];
 
     process_data(_rawData, charts[_chartIdFirst]);
@@ -634,24 +766,27 @@ var initialRender2 = function() {
   _intial_load = false;
 };
 
+var getDataPromise = function(dataSource) {
+  let src = _data_sources[dataSource];
+  return d3.csv(src.url, src.f);
+};
+
 var doInitialDataLoad = function() {
+  // clear cache
+  for (let chartKey in charts) { charts[chartKey].cache = {}; }
+
   let dataPromiseSource = [];
   if (_data_src == "ctp") {
-    dataPromiseSource = [ctp_promise, populationData_promise];
+    dataPromiseSource.push( getDataPromise("ctp") );
   } else {
-    dataPromiseSource = [covidData_promise, populationData_promise];
+    dataPromiseSource.push( getDataPromise("jhu") );
   }
+  dataPromiseSource.push( getDataPromise("wikipedia-pop") );
   
   Promise.all(dataPromiseSource)
     .then(function(result) {
       data = result[0];
       populationData = result[1];
-  
-      for (let r of usa_country_rows) {
-        var clone = Object.assign({}, r);
-        clone['Province_State'] = 'United States';
-        data.push(clone);
-      }
   
       let dateParts = data[data.length - 1].Date.split("-");
       _dateObj_today = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
@@ -694,7 +829,7 @@ doInitialDataLoad();
 
 
 
-var updateAdditionalHighlight = function(e) {
+var updateAdditionalHighlight = function(e, isSubdata=false) {
   var chartId = $(e.target).data("chart");
   var chart = charts[chartId];
 
@@ -708,13 +843,16 @@ var updateAdditionalHighlight = function(e) {
 };
 
 
+
 var _cssData = null;
 
 var saveGraphImage = function(format, e) {
   e.preventDefault();
   const chart = getChart(e.target);
 
-  if (!_cssData) {
+  if (format == "csv") {
+    saveAsCSV(chart);
+  } else if (!_cssData) {
     $.get("css.css", function (cssData) {
       _cssData = cssData;
 
@@ -733,6 +871,46 @@ var saveGraphImage = function(format, e) {
   gtag("event", "saveAs", {event_category: chart.self, event_label: format});
   return false;
 }
+
+var saveAsCSV = function(chart) {
+  let dates = {};
+  let dataByCountry = {};
+  for (let cData of chart.data) {
+    let country = cData.country;
+    
+    for (let dData of cData.data) {
+      let date = dData.date;
+      let cases = dData.cases;
+
+      dates[date] = 1;
+
+      if (!dataByCountry[country]) { dataByCountry[country] = {}; }
+      dataByCountry[country][date] = cases;
+    }
+  }
+
+  dates = Object.keys(dates);
+  dates.sort();
+
+  let csv = "location";
+  for (let date of dates) {
+    csv += "," + date;
+  }
+  csv += "\n";
+
+  for (let country of Object.keys(dataByCountry)) {
+    csv += country;
+    for (let date of dates) {
+      let d = dataByCountry[country][date];
+      if (d) { csv += "," + d; }
+      else   { csv += ","; }
+    }
+    csv += "\n";
+  }
+
+  var blob = new Blob([csv], {type: "text/plain;charset=utf-8"});
+  saveAs(blob, "91-DIVOC-" + chart.self + ".csv");
+};
 
 
 var saveAsSVG = function(chart) {
@@ -834,10 +1012,7 @@ var process_query_string_ui = function() {
   if (!chart) { return; }
 
   if (chart.extraHighlights) {
-    for (let selectedOption of chart.extraHighlights) {
-      ui_add_highlight(chart, chartId, _additionalHighlight_index, selectedOption);
-      _additionalHighlight_index++;
-    }
+    additionalHighlight_rerender(chart);
   }
 }
 
@@ -845,6 +1020,9 @@ var process_query_string = function() {
   const urlParams = new URLSearchParams(window.location.search);
 
   _qs_update_graph(null, urlParams, "data-source", null, "datasrc-select");
+  _qs_update_graph(null, urlParams, "xaxis", "xaxis", "xaxis-select");
+  _qs_update_graph(null, urlParams, "y", "yAxisScale", "yaxis-select");
+  _qs_update_graph(null, urlParams, "scale", "scale", "scaleSelection");
 
   
   let chartId = urlParams.get("chart");
@@ -853,14 +1031,62 @@ var process_query_string = function() {
   let chart = charts[chartId];
   if (!chart) { return; }
 
-  _qs_update_graph(chart, urlParams, "highlight", "highlight", "highlight-select");
-  _qs_update_graph(chart, urlParams, "show", "show", "filter-select");
-  _qs_update_graph(chart, urlParams, "xaxis", "xaxis", "xaxis-select");
-  _qs_update_graph(chart, urlParams, "y", "yAxisScale", "yaxis-select");
+  let otherChart;
+  if (chart.self == "states") { otherChart = chart["states-normalized"]; }
+  else if (chart.self == "states-normalized") { otherChart = chart["states"]; }
+  else if (chart.self == "countries") { otherChart = chart["countries-normalized"]; }
+  else if (chart.self == "countries-normalized") { otherChart = chart["countries"]; }
+
   _qs_update_graph(chart, urlParams, "data", "dataSelection", "data-select");
-  _qs_update_graph(chart, urlParams, "scale", "scale", "scaleSelection");
+  _qs_update_graph(chart, urlParams, "highlight", "highlight", "highlight-select");
   _qs_update_graph(chart, urlParams, "extra", "extraHighlights", "extra-highlights");
+  _qs_update_graph(chart, urlParams, "show", "show", "filter-select");
+
+  if (otherChart) {
+    _qs_update_graph(otherChart, urlParams, "data", "dataSelection", "data-select");
+    _qs_update_graph(otherChart, urlParams, "highlight", "highlight", "highlight-select");
+    _qs_update_graph(otherChart, urlParams, "extra", "extraHighlights", "extra-highlights");  
+    _qs_update_graph(otherChart, urlParams, "show", "show", "filter-select");
+  }
+
   updateQueryString(chart);
+};
+
+var _process_ui_state = function(chart, attr, selector) {
+  let sectionSelector = `section[data-chart="${chart.self}"]`;
+  let value;
+
+  if (attr == "scale") {
+    value = $(`${sectionSelector} .${selector}.active`).data("scale");
+  } else if (attr == "extraHighlights") {
+    // Not displayed on Chrome/Firefox so no need to process 
+    // value = $(`${sectionSelector} .${selector} :selected`).map( function() { return $(this).val(); } );
+  } else {
+    value = $(`${sectionSelector} .${selector} :selected`).val();
+  }
+
+  if (value) {
+
+    if (attr == "dataSelection") {
+      updateDataSelectionOptions(chart, value);
+    } else {
+      chart[attr] = value;
+    }
+  }
+};
+
+var process_ui_state = function() {
+  for (let chartid in charts) {
+    let chart = charts[chartid];
+
+    _process_ui_state(chart, "highlight", "highlight-select");
+    _process_ui_state(chart, "show", "filter-select");
+    _process_ui_state(chart, "xaxis", "xaxis-select");
+    _process_ui_state(chart, "yAxisScale", "yaxis-select");
+    _process_ui_state(chart, "dataSelection", "data-select");
+    _process_ui_state(chart, "scale", "scaleSelection");
+    //_process_ui_state(chart, "extraHighlights", "extra-highlights");
+  }
 };
 
 
@@ -888,12 +1114,29 @@ var generateUrl = function(chart) {
 };
 
 var additionalHighlight_rerender = function(chart) {
-  $(`.extra-highlights[data-chart="${chart.self}"]`).html("");
+  $(`section[data-chart="${chart.self}"] .extra-highlights`).html("");
   _additionalHighlight_index = 0;
+
   for (let selectedOption of chart.extraHighlights) {
-    ui_add_highlight(chart, chart.self, _additionalHighlight_index, selectedOption);
+    let isSubdata = false;
+    let selectedOptionData = _.find(chart.fullData, function (d) { return d.country == selectedOption; } );
+    if (!selectedOptionData) {
+      if (!chart.subdata && chart.subdata_reducer) {
+        process_data(_rawData, chart, true, true);
+      }
+
+      if (chart.subdata) {
+        selectedOptionData = _.find(chart.subdata, function (d) { return d.country == selectedOption; } );
+        if (selectedOptionData) {
+          isSubdata = true;
+        }
+      }
+    }
+
+    ui_add_highlight(chart, chart.self, _additionalHighlight_index, selectedOption, isSubdata);
     _additionalHighlight_index++;
   }
+   
 };
 
 
@@ -910,9 +1153,11 @@ var scaleToHighlight = function(e) {
 
 var additionalHighlightRemove = function(e) {
   let el = $(e.target);
-  let indexToRemove = el.data("index");
   let chartId = el.data("chart");
   let chart = charts[chartId];
+
+  let child = e.target.parentElement.parentElement.parentElement;
+  var indexToRemove = Array.prototype.indexOf.call(child.parentElement.children, child) / 2;
 
   chart.extraHighlights.splice(indexToRemove, 1);
   additionalHighlight_rerender(chart);
@@ -922,26 +1167,86 @@ var additionalHighlightRemove = function(e) {
   updateQueryString(chart);
 
   e.preventDefault();
+  gtag("event", "additional-highlight-remove", {event_category: chart.self});
+
   return false;
 }
 
-var ui_add_highlight = function(chart, chartId, index, selectedOption=null) {
-  var el_add = $(`.extra-highlights[data-chart="${chartId}"]`);
-  var allCountries = _.map(chart.fullData, 'country').sort();
-  if (!selectedOption) { selectedOption = chart.defaultHighlight; }
+var ui_add_highlight = function(chart, chartId, index, selectedOption=null, isSubdata=false) {
+  var el_add = $(`section[data-chart="${chartId}"] .extra-highlights`);
+  var allCountries = _.map((!isSubdata)?chart.fullData:chart.subdata, 'country').sort();
+  if (!selectedOption) { selectedOption = (!isSubdata)?chart.defaultHighlight:chart.defaultSubHighlight; }
+
+  let additionalText = "Additional Highlight";
+  if (isSubdata) { additionalText = "Additional State"; }
 
   var html =
     `<div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
         <div class="input-group-prepend">
-          <span class="input-group-text">[<a href="#" data-index="${index}" data-chart="${chartId}" onclick="additionalHighlightRemove(event)">X</a>] Additional Highlight:</span>
+          <span class="input-group-text">[<a href="#" data-index="${index}" data-chart="${chartId}" onclick="additionalHighlightRemove(event)">X</a>] ${additionalText}:</span>
         </div>
-        <select class="form-control additional-highlight-select" onchange="updateAdditionalHighlight(event)" data-chart="${chartId}">
+        <select class="form-control additional-highlight-select" onchange="updateAdditionalHighlight(event, ${isSubdata})" data-chart="${chartId}">
           ${getHTMLCountryOptionsToSelect(allCountries, selectedOption)}
         </select>
       </div><br>`;
 
   el_add.append( html );
 };
+
+var _add_data_onchange = function (chart) {
+  let el = $(`section[data-chart="${chart.self}"] .additional-data-select`);
+  chart.extraData = _.map( el.toArray(), function (e) { return $(e).val(); } )
+
+  el = $(`section[data-chart="${chart.self}"] .additional-data-select-scale`);
+  chart.extraDataScale = _.map( el.toArray(), function (e) { return $(e).val(); } )
+
+  process_data2(chart);
+  render(chart);
+  updateQueryString(chart);
+}
+
+var add_data_onchange = function (e) {
+  const chart = getChart(e.target);
+  _add_data_onchange(chart);
+
+  gtag("event", "add-data-changed", {event_category: chart.self, event_label: JSON.stringify(chart.extraData)});
+};
+
+var add_data_onremove = function (e) {
+  e.preventDefault();
+  const chart = getChart(e.target);
+
+  let child = e.target.parentElement.parentElement.parentElement.parentElement;
+  $(child).remove();
+  _add_data_onchange(chart);
+
+  gtag("event", "add-data-remove", {event_category: chart.self, event_label: JSON.stringify(chart.extraData)});
+};
+
+var ui_add_data = function (chart, scale="graph") {
+  let el_add = $(`section[data-chart="${chart.self}"] .extra-data`);
+  let el_dataSelection = $(`section[data-chart="${chart.self}"] .data-select`);
+  
+  let scale_selected = { graph: "", separately: "" };
+  scale_selected[scale] = "selected";
+
+  let html =
+    `<div><div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text">[<a href="#" onclick="add_data_onremove(event)">X</a>] Additional Data:</span>
+      </div>
+      <select class="form-control additional-data-select" onchange="add_data_onchange(event)">
+        ${el_dataSelection.html()}
+      </select>
+      <select class="form-control additional-data-select-scale" onchange="add_data_onchange(event)">
+        <option value="graph"${scale_selected["graph"]}>Scale Using Graph Units</option>
+        <option value="separately"${scale_selected["separately"]}>Scale Separately</option>
+      </select>
+    </div></div>`;
+
+  el_add.append(html);
+};
+
 
 var updateQueryString = function(chart) {
   var dataattr = chart.id.substring(6);
@@ -951,7 +1256,36 @@ var updateQueryString = function(chart) {
   $(`.query-string[data-chart="${dataattr}"]`).html(html);
 };
 
-var updateDataSelectionOptions = function(chart, value) {
+var calculateDataOptions = function(value) {
+  let options = {
+    showDelta: false,
+    isRatio: false,
+    baseDataType: value,
+    forceLinear: false
+  };
+
+  let valuePieces = value.split('-');
+  if (valuePieces.length >= 2) {
+    // eg: cases-daily
+    options.baseDataType = valuePieces[0];
+    options.showDelta = true;
+
+    // eg: cases-daily-7
+    if (valuePieces.length == 3) {
+      options.avgData = parseInt(valuePieces[2]);
+    }
+  }
+
+
+  if (valuePieces[0] == 'testPositivity' || valuePieces[0] == 'mortalityRate') {
+    options.isRatio = true;
+    options.forceLinear = true;
+  }
+
+  return options;
+};
+
+var updateDataSelectionOptions = function(chart, value, apply_ui_changes = true) {
   chart.dataRawSelection = value;
   chart.showDelta = false;
   delete chart.avgData;
@@ -973,17 +1307,18 @@ var updateDataSelectionOptions = function(chart, value) {
     chart.isRatio = true;
     chart.forceLinear = true;
 
-    $(`section[data-chart="${chart.self}"] .scaleSelectionArea`).hide();
+    if (apply_ui_changes) { $(`section[data-chart="${chart.self}"] .scaleSelectionArea`).hide(); }
   } else if (chart.forceLinear) {
     chart.forceLinear = false;
-    $(`section[data-chart="${chart.self}"] .scaleSelectionArea`).show();    
+
+    if (apply_ui_changes) { $(`section[data-chart="${chart.self}"] .scaleSelectionArea`).show(); }
   }
 
 
   chart.dataSelection = value;
   chart.y0 = chart.dataSelection_y0[value];
 
-  $("#" + chart.id.substring(6)).html("<h2>" + generateDataLabel(chart, true) + "</h2>");
+  if (apply_ui_changes) { $("#" + chart.id.substring(6)).html("<h2>" + generateDataLabel(chart, true) + "</h2>"); }
 };
 
 var getChart = function (el) {
@@ -1000,7 +1335,6 @@ $(function() {
       delete charts[chartid];
     }
   }
-
 
   $(".highlight-select").change(function (e) {
     var chartId = $(e.target).data("chart");
@@ -1064,7 +1398,8 @@ $(function() {
 
     if (chart && chart.scale != value) {
       chart.scale = value;
-      render(chart);
+
+      if (!_intial_load) { render(chart); }
     }
 
     updateQueryString(chart);
@@ -1091,28 +1426,48 @@ $(function() {
 
     updateDataSelectionOptions(chart, value);
 
-    process_data(_rawData, chart);
-    render(chart);
+    process_data_and_render(chart);
     updateQueryString(chart);
     gtag("event", "change-data", {event_category: chartId, event_label: value});
+  });
+
+  $(".add-data").click(function (e) {
+    e.preventDefault();
+
+    const chart = getChart(e.target);
+
+    let chart_dType = calculateDataOptions(chart.dataRawSelection);
+
+    if (chart_dType.isRatio) { ui_add_data(chart, "separately"); }
+    else                     { ui_add_data(chart); }
+    
+    _add_data_onchange(chart);
+    gtag("event", "add-data", {event_category: chart.self});
   });
 
   $(".add-highlight").click(function (e) {
     e.preventDefault();
 
-    var chartId = $(e.target).data("chart");
-    var chart = charts[chartId];
+    const chart = getChart(e.target);
 
-    ui_add_highlight(chart, chartId, _additionalHighlight_index);
+    let isSubdata = false;
+    if ($(e.target).data("subdata")) {
+      isSubdata = true;
+      if (!chart.subdata) { process_data(_rawData, chart, true); }
+    }
+
+    ui_add_highlight(chart, chart.self, _additionalHighlight_index, null, isSubdata);
     _additionalHighlight_index++;
 
     if (!chart.extraHighlights) { chart.extraHighlights = []; }
-    chart.extraHighlights.push(chart.defaultHighlight);
+    if (isSubdata) { chart.extraHighlights.push(chart.defaultSubHighlight); }
+    else           { chart.extraHighlights.push(chart.defaultHighlight); }
+    
 
     prep_data(chart);
     render(chart);
     updateQueryString(chart);
-    gtag("event", "add-highlight", {event_category: chartId, event_label: chart.extraHighlights.length});
+    gtag("event", "add-highlight", {event_category: chart.self, event_label: chart.extraHighlights.length});
   });
 
   $(".show-lesser-used-options").click(function (e) {
@@ -1127,6 +1482,12 @@ $(function() {
     e.preventDefault();
   });
 
+  $(".report-button").click(function (e) {
+    const chart = getChart(e.target);
+    $(e.target).hide();
+    generateReport(chart);
+  });
+
   $(".animate-button").click(function (e) {
     var chartId = $(e.target).data("chart");
     var chart = charts[chartId];
@@ -1139,6 +1500,7 @@ $(function() {
       _data_src = value;
       showLoadingSpinner();
       doInitialDataLoad();
+      gtag("event", "change-data", {event_category: 'all', event_label: value});
     }
   });
 
@@ -1146,50 +1508,227 @@ $(function() {
   tryRender();
 });
 
+var addHighlightFromReport = function(e, country) {
+  const chart = getChart(e.target);
+  if (  
+    (chart.highlight == country) ||
+    (chart.extraHighlights && chart.extraHighlights.indexOf(country) != -1)
+  ) { return; }
 
-var generateDataLabel = function(chart, title = false) {
+
+  let isSubdata = false;
+  if ($(e.target).data("subdata")) {
+    isSubdata = true;
+    if (!chart.subdata) { process_data(_rawData, chart, true); }
+  }
+
+  ui_add_highlight(chart, chart.self, _additionalHighlight_index, country, isSubdata);
+  _additionalHighlight_index++;
+
+  if (!chart.extraHighlights) { chart.extraHighlights = []; }
+  if (isSubdata) { chart.extraHighlights.push(country); }
+  else           { chart.extraHighlights.push(country); }
+  
+
+  prep_data(chart, false);
+  render(chart);
+  updateQueryString(chart);
+  gtag("event", "add-highlight-from-report", {event_category: chart.self, event_label: country});
+};
+
+let _report_id = 1;
+var doResetReport = function (chart) {
+  if (_report_id != 1) {
+    $(`section[data-chart="${chart.self}"] .report`).html(`<h5>Visualization Updated</h5><span class="text-center">Your display options were changed and a new report can now be generated.</span>`);
+    $(`section[data-chart="${chart.self}"] .report-button`).show();
+  }
+}
+
+var generateReport = function (chart) {
+  let delta = 7;
+  let reportData = [];
+
+  for (let fData of chart.data) {
+    let country = fData.country;
+    let cData = fData.data;
+
+    let dToday = cData[cData.length - 1];
+    if (cData.length - 1 - delta < 0) { continue; }
+    let dPrev = cData[cData.length - 1 - 7];
+
+    if (dPrev.cases != 0) {
+      let rawIncrease = dToday.cases - dPrev.cases;
+      let pctIncrease = rawIncrease / dPrev.cases;
+      reportData.push({
+        country: country,
+        raw: rawIncrease,
+        pct: pctIncrease
+      });
+    }
+  }
+
+  let report = "";
+  let timePeriodStr = "one week ago";
+
+  let generateListElements = function(data, isPct) {
+    let report = "";
+    let ct = 0;
+    for (let r of data) {
+      let num;
+      if (isPct) {
+        num = (100 * r.pct).toLocaleString("en-US", {maximumFractionDigits: 2}) + "%";
+        if (r.pct >= 0) { num = "+" + num; }
+        num = "<b>" + num + "</b>";
+        num += " change";
+      } else {
+        let sigDigits = 0;
+        let dAbs = Math.abs(r.raw);
+
+        if (chart.isRatio) { dAbs *= 100; }
+
+        if (dAbs < 10) { sigDigits = 2; }
+        if (dAbs < 0.1) { sigDigits = 4; }
+        if (dAbs < 0.001) { sigDigits = 6; }
+
+        if (chart.isRatio) { num = (100 * r.raw).toLocaleString("en-US", {maximumFractionDigits: sigDigits}); }
+        else               { num = (r.raw).toLocaleString("en-US", {maximumFractionDigits: sigDigits}); }
+        if (r.raw >= 0) { num = "+" + num; }
+        num = "<b>" + num + "</b>";
+
+        if (chart.isRatio) { num += "%"; }
+        num += ` ${generateDataLabel(chart)}`;
+
+        if (chart.normalizePopulation && !chart.isRatio) {
+          num += ` /1m`;
+        }
+      }
+
+      report += `<li><a href="#${chart.self}" onclick="addHighlightFromReport(event, '${r.country}');">${r.country}</a>: ${num}</li>`
+      ct++;
+
+      if (ct == 5) {
+        let href = "r" + _report_id++;
+
+        report += `<a href="#${href}" style="font-size: 12px; font-style: italic;" onclick="$('#${href}').show(); event.preventDefault(); $(this).hide();">[Show all ${data.length}]</a>`;
+        report += `<div id="${href}" class="collapse">`;
+      }
+    }
+
+    if (ct >= 5) {
+      report += `</div>`;
+    }
+
+    return report;
+  };
+
+
+  report += `<div class="report" style="margin: 5px;">`;
+  report += `<h5>Detailed Data Report: ${generateDataLabel(chart, true)}</h5>`;
+  report += `This report is generated based entirely on the visualization options you have selected and includes <b>only</b> the data displayed above. `;
+  report += `As you change the chart options, you can regenerate the report with your new data selection. `;
+  report += `<i>(Click on any country in this report to add it as an additional highlight.)</i>`;
+  report += "<hr>";
+
+
+  report += `<div class="row">`;
+
+  report += `<div class="col-lg-6">`;
+  report += `Largest percent increases since ${timePeriodStr}:`;
+  report += "<ol>";
+  reportData = _.sortBy(reportData, "pct");
+  reportData.reverse();
+  report += generateListElements(reportData, true);
+  report += "</ol>";
+  report += `</div>`;
+
+  report += `<div class="col-lg-6">`;
+  report += `Largest raw increases since ${timePeriodStr}:`;
+  report += "<ol>";
+  reportData = _.sortBy(reportData, "raw");
+  reportData.reverse();
+  report += generateListElements(reportData, false);
+  report += "</ol>";
+  report += `</div>`;
+
+  report += `</div>`;
+
+  report += "<hr>";
+
+
+  report += `<div class="row">`;
+  
+  report += `<div class="col-lg-6">`;
+  report += `Largest percent decrease since ${timePeriodStr}:`;
+  report += "<ol>";
+  reportData = _.sortBy(reportData, "pct");
+  report += generateListElements(reportData, true);
+  report += "</ol>";
+  report += `</div>`;
+
+  report += `<div class="col-lg-6">`;
+  report += `Largest raw decrease since ${timePeriodStr}:`;
+  report += "<ol>";
+  reportData = _.sortBy(reportData, "raw");
+  report += generateListElements(reportData, false);
+  report += "</ol>";
+  report += `</div>`;
+
+  report += `</div>`;  
+
+  let el = $(`section[data-chart="${chart.self}"] .report`);
+  el.html(report);
+  el.show();
+
+  gtag("event", "create-report", {event_category: chart.self});
+};
+
+var generateDataLabel_v3 = function(chart, dType, title = false) {
   var dataLabel = "";
 
   if (title) {
-    if (chart.isRatio) {
-      if (chart.showDelta) { dataLabel = "Daily "; }
+    if (dType.isRatio) {
+      if (dType.showDelta) { dataLabel = "Daily "; }
       else { dataLabel = "Cumulative "; }      
     } 
-    else if (chart.showDelta) { dataLabel = "New "; }
+    else if (dType.showDelta) { dataLabel = "New "; }
 
-    if (chart.dataSelection == 'cases') { dataLabel += "Confirmed COVID-19 Cases"; }
-    else if (chart.dataSelection == 'active') { dataLabel += "Active COVID-19 Cases"; }
-    else if (chart.dataSelection == 'deaths') { dataLabel += "Deaths from COVID-19"; }
-    else if (chart.dataSelection == 'recovered') { dataLabel += "Recoveries from COVID-19"; }
-    else if (chart.dataSelection == 'hospitalized') { dataLabel += "Total hospitalized with COVID-19"; }
-    else if (chart.dataSelection == 'tests') { dataLabel += "COVID-19 Tests Performed"; }  
-    else if (chart.dataSelection == 'testPositivity') { dataLabel += "COVID-19 Test Positivity Rate"; }  
-    else if (chart.dataSelection == 'mortalityRate') { dataLabel += "COVID-19 Confirmed Mortality Rate"; }  
+    if (dType.baseDataType == 'cases') { dataLabel += "Confirmed COVID-19 Cases"; }
+    else if (dType.baseDataType == 'active') { dataLabel += "Active COVID-19 Cases"; }
+    else if (dType.baseDataType == 'deaths') { dataLabel += "Deaths from COVID-19"; }
+    else if (dType.baseDataType == 'recovered') { dataLabel += "Recoveries from COVID-19"; }
+    else if (dType.baseDataType == 'hospitalized') { dataLabel += "Total hospitalized with COVID-19"; }
+    else if (dType.baseDataType == 'tests') { dataLabel += "COVID-19 Tests Performed"; }  
+    else if (dType.baseDataType == 'testPositivity') { dataLabel += "COVID-19 Test Positivity Rate"; }  
+    else if (dType.baseDataType == 'mortalityRate') { dataLabel += "COVID-19 Confirmed Mortality Rate"; }  
 
 
-    if (chart.showDelta) { dataLabel += " per Day"; }
+    if (dType.showDelta) { dataLabel += " per Day"; }
 
     if (chart.id.indexOf("state") != -1) { dataLabel += " by US States/Territories"; }
     if (chart.normalizePopulation) { dataLabel += ", normalized by population"; }
 
 
   } else {
-    if (chart.isRatio) {
-      if (!chart.showDelta) { dataLabel = "cumulative "; }      
+    if (dType.isRatio) {
+      //if (!dType.showDelta) { dataLabel = "cumulative "; }      
     } 
-    else if (chart.showDelta) { dataLabel = "new "; }
+    else if (dType.showDelta) { dataLabel = "new "; }
 
-    if (chart.dataSelection == 'cases') { dataLabel += "confirmed cases"; }
-    else if (chart.dataSelection == 'active') { dataLabel += "active cases"; }
-    else if (chart.dataSelection == 'deaths') { dataLabel += "deaths from COVID-19"; }
-    else if (chart.dataSelection == 'recovered') { dataLabel += "recoveries"; }
-    else if (chart.dataSelection == 'hospitalized') { dataLabel += "total hospitalizations"; }
-    else if (chart.dataSelection == 'tests') { dataLabel += "COVID-19 tests performed"; }  
-    else if (chart.dataSelection == 'testPositivity') { dataLabel += "test positivity"; }  
-    else if (chart.dataSelection == 'mortalityRate') { dataLabel += "mortality rate"; }  
+    if (dType.baseDataType == 'cases') { dataLabel += "confirmed cases"; }
+    else if (dType.baseDataType == 'active') { dataLabel += "active cases"; }
+    else if (dType.baseDataType == 'deaths') { dataLabel += "deaths from COVID-19"; }
+    else if (dType.baseDataType == 'recovered') { dataLabel += "recoveries"; }
+    else if (dType.baseDataType == 'hospitalized') { dataLabel += "total hospitalizations"; }
+    else if (dType.baseDataType == 'tests') { dataLabel += "COVID-19 tests performed"; }  
+    else if (dType.baseDataType == 'testPositivity') { dataLabel += "test positivity"; }  
+    else if (dType.baseDataType == 'mortalityRate') { dataLabel += "mortality rate"; }  
   }
 
   return dataLabel;
+}
+
+var generateDataLabel = function(chart, title = false) {
+  return generateDataLabel_v3(chart, calculateDataOptions(chart.dataRawSelection), title);
 };
 
 
@@ -1202,7 +1741,9 @@ var tip_html = function(chart) {
     let alignRight = false;
     if (chart.xaxis && chart.xaxis.indexOf("right") != -1) { alignRight = true; }
 
-    var gData = _.find(chart.data, function (e) { return e.country == d.country }).data;
+    //var gData = _.find(chart.data, function (e) { return e.country == d.country }).data;
+    var gData = d.src.data;
+    var dType = calculateDataOptions(d.src.dataSelection);
 
     var geoGrowth = [];
     if (i >= 2) {
@@ -1228,18 +1769,18 @@ var tip_html = function(chart) {
     }
 
     var s2 = "";
-    if (chart.normalizePopulation && !chart.isRatio) { s2 = " per 1,000,000 people"; }
+    if (chart.normalizePopulation && !dType.isRatio) { s2 = " per 1,000,000 people"; }
 
-    var dataLabel = generateDataLabel(chart);
+    var dataLabel = generateDataLabel_v3(chart, dType);
     var dataLabel_cutoff = dataLabel;
     
-    if (chart.dataSelection == 'testPositivity') { dataLabel_cutoff = "tests"; }
-    else if (chart.dataSelection == 'mortalityRate') { dataLabel_cutoff = "deaths from COVID-19"; }  
+    if (dType.baseDataType == 'testPositivity') { dataLabel_cutoff = "tests"; }
+    else if (dType.baseDataType == 'mortalityRate') { dataLabel_cutoff = "deaths from COVID-19"; }  
 
     let daysSince = `(`;
     daysSince += `<b>${d.daysAgo}</b> day${(d.daysAgo != 1)?"s":""} ago and `;
     daysSince += `<b>${d.dayCounter}</b> day${(d.dayCounter != 1)?"s":""} after reaching ${chart.y0} ${dataLabel_cutoff}${s2})`;
-    if (chart.dataSelection == 'hospitalized' || chart.dataSelection == 'tests') {
+    if (dType.baseDataType == 'hospitalized' || dType.baseDataType == 'tests') {
       daysSince = "";
     }
 
@@ -1264,7 +1805,7 @@ var tip_html = function(chart) {
     }
 
     let numberStr;
-    if (chart.isRatio) {
+    if (dType.isRatio) {
       numberStr = (((d.rawcases)?d.rawcases:d.cases) * 100).toLocaleString("en-US", {maximumFractionDigits: 2}) + "%";
     } else {
       numberStr = ((d.rawcases)?d.rawcases:d.cases).toLocaleString("en-US", {maximumFractionDigits: 1})
@@ -1274,11 +1815,11 @@ var tip_html = function(chart) {
     s += `<div class="tip-details" style="border-bottom: solid 1px black; padding-bottom: 2px;"><b>${numberStr}</b> ${dataLabel}${s2} on ${dateStr}${d.date} ${daysSince}</div>`;
     if (d.rawcases) { s += "</i>"; }
 
-    if (chart.isRatio && !chart.avgData) {
+    if (dType.isRatio) {
       let d_n = d.n, d_d = d.d;
 
       let n_label, d_label;
-      switch (chart.dataSelection) {
+      switch (dType.baseDataType) {
         case "testPositivity":
           n_label = "cases";
           d_label = "tests";
@@ -1289,8 +1830,10 @@ var tip_html = function(chart) {
           d_label = "cases";
           break;
       }
+
       
-      if (chart.showDelta) {
+      
+      if (dType.showDelta) {
         if (i > 0) {
           let d_cur = gData[i];
           let d_prev = gData[i - 1];
@@ -1298,8 +1841,16 @@ var tip_html = function(chart) {
           d_n = d_cur.n - d_prev.n;
           d_d = d_cur.d - d_prev.d;
 
+
+          let avgString = "";
+          if (chart.avgData) {
+            avgString = `Past ${chart.avgData} days: `;
+            d_n = d_cur.sum_n;
+            d_d = d_cur.sum_d;
+          }
+
           s += `<div class="tip-details" style="padding-bottom: 2px;"><i>` +
-            `<b>${d_n.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> new ${n_label} / <b>${d_d.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> new ${d_label}` +
+            `${avgString}<b>${d_n.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> new ${n_label} / <b>${d_d.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> new ${d_label}` +
             `</i></div>`;
         }
       } else {
@@ -1311,8 +1862,8 @@ var tip_html = function(chart) {
       geoGrowth = [];
     }
 
-    if (d.rawcases) {
-      if (chart.isRatio) {
+    if (d.rawcases && d.cases) {
+      if (dType.isRatio) {
         numberStr = (d.cases * 100).toLocaleString("en-US", {maximumFractionDigits: 2}) + "%";
       } else {
         numberStr = (d.cases).toLocaleString("en-US", {maximumFractionDigits: 1})
@@ -1334,7 +1885,7 @@ var tip_html = function(chart) {
 
     if (!isSmall && !isHighlighted) {
       s += `<div class="tip-details" style="font-size: 10px; border-top: solid 1px black; padding-top: 1px; margin-top: 2px;">`;
-      s += `<i style="color: purple;">Shift-click to add as an additional highlight</i>`
+      s += `<i style="color: purple;">Shift-click to add as an additional highlight and to show all data circles.</i>`
       s += `</div>`;
     }
 
@@ -1347,11 +1898,12 @@ var textToClass = function (s) {
   return s.replace(/[\W_]+/g,"-");
 };
 
-var showLoadingSpinner = function(chart) {
+var showLoadingSpinner = function(chart, message = "") {
   if (chart) {
-    $("#" + chart.id).html(`<div class="text-center divoc-graph-loading"><div class="spinner-border text-primary" role="status">
-      <span class="sr-only">Loading...</span>
-    </div></div>`);
+    $("#" + chart.id).html(`<div class="text-center divoc-graph-loading">
+      <div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span> </div>
+      <div>${message}</div>
+    </div>`);
   } else {
     for (let c in charts) { showLoadingSpinner(charts[c]); }
   }
@@ -1366,9 +1918,26 @@ var cancelAnimation = function(chart) {
   }
 }
 
-var render = function(chart) {
+var process_data_and_render = function(chart) {
   cancelAnimation(chart);
-  showLoadingSpinner(chart);
+  showLoadingSpinner(chart, `Processing ${_rawData.length.toLocaleString("en-US", {maximumFractionDigits: 0})} data points...`);
+  setTimeout(function() {
+    process_data(_rawData, chart);
+    render(chart);
+  }, 0);
+};
+
+var render = function(chart) {
+  let countryCount = chart.data.length;
+
+  let dataPointCount = 0;
+  for (let d of chart.data) { dataPointCount += d.data.length; }
+
+  countryCount = countryCount.toLocaleString("en-US", {maximumFractionDigits: 0});
+  dataPointCount = dataPointCount.toLocaleString("en-US", {maximumFractionDigits: 0});
+
+  cancelAnimation(chart);
+  showLoadingSpinner(chart, `Rendering ${dataPointCount} data points from ${countryCount} locations...`);
   setTimeout(function() { doRender(chart) }, 0);
 };
 
@@ -1414,7 +1983,7 @@ var animate = function(chart) {
 
 var _animation_timeout = null;
 var doAnimate = function(chart, filter = 0) {
-  let chart_frame = JSON.parse(JSON.stringify(chart));
+  let chart_frame = _.cloneDeep(chart);
 
   let filterFunction;
   let maxDayRendered = calculateMaxDayRendered(chart);
@@ -1427,19 +1996,28 @@ var doAnimate = function(chart, filter = 0) {
   for (let chartData of chart_frame.data) {
     chartData.data = _.filter(chartData.data, filterFunction);
   }
-  doRender(chart_frame);
 
-  if (filter <= maxDayRendered && (filter == 0 || _animation_timeout)) {
-    _animation_timeout = setTimeout(function() { doAnimate(chart, filter + 1) }, 100);
-  } else {
+  let isLastAnimationFrame = !(filter <= maxDayRendered && (filter == 0 || _animation_timeout));
+
+  doRender(chart_frame, !isLastAnimationFrame);
+
+  if (isLastAnimationFrame) {
     _animation_timeout = null;
     $(`.animate-button[data-chart="${chart.self}"]`).html("&#9654; Animate");
+  } else {
+    _animation_timeout = setTimeout(function() { doAnimate(chart, filter + 1) }, 100);
   }
+
+  /*
+  if (filter <= maxDayRendered && (filter == 0 || _animation_timeout)) {
+  } else {
+  }
+  */
 };
 
 
 
-var doRender = function(chart) {
+var doRender = function(chart, isInAnimation = false) {
    if (chart.data.length == 0) {
      let message;
      if (_data_src == "ctp" && (chart.self == "countries" || chart.self == "countries-normalized")) {
@@ -1479,7 +2057,7 @@ var doRender = function(chart) {
     labelOffGrid = true;
   }
 
-  var margin = { top: 10, right: 20, bottom: 45, left: 60 };
+  var margin = { top: 10, right: 20, bottom: 45, left: 40 };
 
   var cur_width = $("#sizer").width();
   _client_width = cur_width;
@@ -1498,7 +2076,14 @@ var doRender = function(chart) {
     margin.right = 10;
   }
 
-  if (labelOffGrid) {
+  let future_date, future_time_added_right = 0;
+  //future_date = new Date("2020-11-21");
+
+  if (future_date) {
+    future_time_added_right = (future_date.getTime() - _dateObj_today_time) / (1000 * 3600 * 24);
+  }
+
+  if (labelOffGrid && future_time_added_right < 10) {
     let maxCountryLength = 0;
     for (let s of highlights) {
       maxCountryLength = Math.max(maxCountryLength, s.length);
@@ -1521,11 +2106,11 @@ var doRender = function(chart) {
   }
 
 
-  // X-axis scale (days)
+  // X-axis scale (days)  
   var daysScale = d3.scaleLinear();
   if (alignRight) {
-    daysScale.domain([-maxDayRendered, 0])
-      .range([0, width]);
+    daysScale.domain([-maxDayRendered, future_time_added_right])
+      .range([0, width]);      
   } else {
     daysScale.domain([0, maxDayRendered])
       .range([0, width]);
@@ -1541,41 +2126,91 @@ var doRender = function(chart) {
   if (chart.scale == "linear" || chart.forceLinear) { casesScale = d3.scaleLinear(); scale_y0 = 0; }
   else { casesScale = d3.scaleLog(); }
 
-  scale_yMax = chart.yMax;
-  if (isRatio) {
-    scale_y0 = 0;
-    scale_yMax = _.maxBy(chart.data, 'maxCases').maxCases;
-    if (scale_yMax > 1) { scale_yMax = 1; }
+  // Create scale_data including all data to consider for scaling...
+  let scale_data = chart.data;
+  if (chart.extraData) {
+    scale_data = [].concat(chart.data);
+    for (let i = 0; i < chart.extraData.length; i++) {
+      let extraDataScale = chart.extraDataScale[i];
+      if (extraDataScale == "graph") {
+        let extraDataStr = chart.extraData[i];
+        scale_data = scale_data.concat( chart.displayData[extraDataStr + "-extraData"] );
+      }
+    }
   }
 
-  if (chart.yAxisScale == "highlight") {
-    var highlights_data = _.filter(chart.data, function (d) { return highlights.indexOf(d.country) != -1; });
+  let scale_yMax;
 
-    if (highlights_data.length > 0) {
-      // Using gloabl `maxCases`:
-      //var maxCases = _.maxBy(highlights_data, 'maxCases').maxCases;
+  let _find_max_cases = function(data) {
+    var maxCases = -1;
+    for (let d of data) {
+      if (d.data.length > 0) {
+        let dataInScope = [];
+        if (alignRight) {
+          dataInScope = _.filter(d.data, function (d) { return (d.daysAgo <= maxDayRendered) });
+        } else {
+          dataInScope = d.data;
+        }
 
-      // Re-calculate
-      var maxCases = -1;
-      for (let d of highlights_data) {
-        if (d.data.length > 0) {
-          let dataInScope = [];
-          if (alignRight) {
-            dataInScope = _.filter(d.data, function (d) { return (d.daysAgo <= maxDayRendered) });
-          } else {
-            dataInScope = d.data;
-          }
-            
+        if (dataInScope.length > 0) {            
           let max = _.maxBy(dataInScope, 'cases').cases;
           if (max > maxCases) { maxCases = max; }
         }
       }
+    }
 
-      scale_yMax = maxCases * 1.05;
+    return maxCases;
+  };
+
+  let scale_y_highlight, scale_y_curMax;
+  if (chart.yAxisScale == "highlight" || chart.yAxisScale == "both" || chart.yAxisScale == "fixed") {
+    let highlights_data;
+    if (chart.yAxisScale == "highlight" || chart.yAxisScale == "both") {
+      highlights_data = _.filter(scale_data, function (d) { return highlights.indexOf(d.country) != -1; });
+    } else {
+      highlights_data = scale_data;
+    }
+
+    if (highlights_data.length > 0) {
+      let maxCases = _find_max_cases(highlights_data);
+      scale_y_highlight = scale_yMax = maxCases * 1.05;
+    }
+  }
+  
+  if (chart.yAxisScale == "currentMax" || chart.yAxisScale == "both") {
+    let maxCasesValue = 0;
+    for (let d of scale_data) {
+      let last;
+      if (d.data.length > 0) {
+        last = d.data[ d.data.length - 1 ];
+        if (!alignRight) {
+          if (last.dayCounter > maxDayRendered) {
+            last = _.find( d.data, function (d) { return d.dayCounter == maxDayRendered; });
+          }
+        }
+      }
+
+      if (last && last.cases > maxCasesValue) { maxCasesValue = last.cases; }
+    }
+
+    scale_y_curMax = scale_yMax = maxCasesValue * 1.05;
+  }
+
+  if (chart.yAxisScale == "both") {
+    if (scale_y_highlight && scale_y_curMax) {
+      scale_yMax = Math.max(scale_y_highlight, scale_y_curMax);
+    } else if (scale_y_highlight) {
+      scale_yMax = scale_y_highlight;
+    } else {
+      scale_yMax = scale_y_curMax;
     }
   }
 
-
+  if (isRatio) {
+    scale_y0 = 0;
+    scale_yMax = _.maxBy(scale_data, 'maxCases').maxCases;
+    if (scale_yMax > 1) { scale_yMax = 1; }
+  }
 
   casesScale.domain([scale_y0, scale_yMax]).range([height, 0]);
   
@@ -1625,8 +2260,9 @@ var doRender = function(chart) {
 
     // 
     let dateLines = [];
+    let endDate = (future_date) ? (future_date) : _dateObj_today;
     for (let relDate = new Date("2020-02-01 00:00:00");
-        relDate < _dateObj_today;
+        relDate < endDate;
         relDate = new Date(relDate.setMonth(relDate.getMonth()+1)))
     {
       let daysAgo = (_dateObj_today_time - relDate.getTime()) / (1000 * 3600 * 24);
@@ -1643,11 +2279,19 @@ var doRender = function(chart) {
       daysAgo: 0,
       dateLabel: _dateObj_today.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
       lineWidth: 3
-    });
+    });    
+
+    if (future_date) {      
+      dateLines.push({
+        daysAgo: -future_time_added_right,
+        dateLabel: future_date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        lineWidth: 3
+      });
+    }
 
     for (let dateLine of dateLines) {
       var showLabel = true;
-      if (dateLine.daysAgo > 0 && dateLine.daysAgo <= 10) {
+      if (dateLine.daysAgo > 0 && width - daysScale(-dateLine.daysAgo) <= 50) {
         showLabel = false;
       }
 
@@ -1714,9 +2358,6 @@ var doRender = function(chart) {
     } else {
       y_axis_tickFormat = d3.format(".0%");
     }
-    
-  } else if (!isSmall) {
-    y_axis_tickFormat = d3.format("0,");
   } else {
     y_axis_tickFormat = function (val) {
       var oom = Math.log10(val);
@@ -1769,7 +2410,7 @@ var doRender = function(chart) {
     if (cases < 1) { cases = 1; }
 
     var pctLine = [];
-    while (day <= scaleLineMeta.dEnd && cases <= chart.yMax * scaleLineMeta.gRate && cases >= 1) {
+    while (day <= scaleLineMeta.dEnd && cases <= scale_yMax * scaleLineMeta.gRate && cases >= 1) {
       if (day >= scaleLineMeta.dStart) {
         pctLine.push({
           dayCounter: day,
@@ -1859,40 +2500,45 @@ var doRender = function(chart) {
      .attr("text-anchor", "end")
      .text(xAxisLabel);
 
-
-  var yAxisLabel = "";
-  if (chart.showDelta) { yAxisLabel += "New Daily "; }
-  if (chart.dataSelection == 'cases') { yAxisLabel += "Confirmed Cases"; }
-  else if (chart.dataSelection == 'active') { yAxisLabel += "Active Cases"; }
-  else if (chart.dataSelection == 'deaths') { yAxisLabel += "COVID-19 Deaths"; }
-  else if (chart.dataSelection == 'recovered') { yAxisLabel += "Recoveries" }
-  else if (chart.dataSelection == 'tests') { yAxisLabel += "COVID-19 Tests" }
-  else if (chart.dataSelection == 'hospitalized') { yAxisLabel += "Hospitalizations of COVID-19" }
-  else if (chart.dataSelection == 'testPositivity') { yAxisLabel += "Test Positivity Rate" }
-  else if (chart.dataSelection == 'mortalityRate') { yAxisLabel += "Mortality Rate" }
-  if (chart.normalizePopulation && !chart.isRatio) {
-    yAxisLabel += "/1m people";
-  }
-
-  svg.append("text")
+  let _draw_yAxisLabel = function(g, dType) {
+    var yAxisLabel = "";
+    if (dType.showDelta) { yAxisLabel += "New Daily "; }
+    if (dType.baseDataType == 'cases') { yAxisLabel += "Confirmed Cases"; }
+    else if (dType.baseDataType == 'active') { yAxisLabel += "Active Cases"; }
+    else if (dType.baseDataType == 'deaths') { yAxisLabel += "COVID-19 Deaths"; }
+    else if (dType.baseDataType == 'recovered') { yAxisLabel += "Recoveries" }
+    else if (dType.baseDataType == 'tests') { yAxisLabel += "COVID-19 Tests" }
+    else if (dType.baseDataType == 'hospitalized') { yAxisLabel += "Hospitalizations of COVID-19" }
+    else if (dType.baseDataType == 'testPositivity') { yAxisLabel += "Test Positivity Rate" }
+    else if (dType.baseDataType == 'mortalityRate') { yAxisLabel += "Mortality Rate" }
+    if (chart.normalizePopulation && !dType.isRatio) {
+      yAxisLabel += "/1m people";
+    }
+  
+    g.append("text")
      .attr("transform", "rotate(-90)")
      .attr("x", -2)
      .attr("y", 15)
      .attr("class", "axis-title")
      .attr("text-anchor", "end")
      .text(yAxisLabel);
+  
+    if (dType.avgData) {
+      g.append("text")
+       .attr("transform", "rotate(-90)")
+       .attr("x", -2)
+       .attr("y", 28)
+       .attr("class", "axis-title")
+       .attr("text-anchor", "end")
+       .style("font-size", "12px")
+       .style("fill", "#888")
+       .text(`(${dType.avgData}-day Average)`);
+    }
+  };
 
-  if (chart.avgData) {
-    svg.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("x", -2)
-      .attr("y", 28)
-      .attr("class", "axis-title")
-      .attr("text-anchor", "end")
-      .style("font-size", "12px")
-      .style("fill", "#888")
-      .text(`(${chart.avgData}-day Average)`);
-  }
+  var yaxis_g = svg.append("g");
+  _draw_yAxisLabel(yaxis_g, calculateDataOptions(chart.dataRawSelection));
+
 
 
   if (_data_src == "ctp") {
@@ -1910,8 +2556,6 @@ var doRender = function(chart) {
     .attr("text-anchor", "end")
     .text(`Data: Johns Hopkins CSSE; Updated: ${_dateUpdated}`);
   }
-
-
 
   svg.append("a")
     .attr("href", "http://waf.cs.illinois.edu/")
@@ -1934,11 +2578,11 @@ var doRender = function(chart) {
     else { return 0; }
   });
 
-  var renderLineChartLabels = function (svg, i) {
-    var countryData = chart.data[i];
+  let labelOffGrid_x = daysScale(0) + 5;
+  var renderLineChartLabels = function (svg, i, data, dasharray) {
+    var countryData = data[i];
     if (!countryData.data[0]) { return; }
     var isHighlighted = (highlights.indexOf(countryData.country) != -1);
-    var maxDay = countryData.maxDay;
 
     var countryText = svg.append("text")
       .attr("fill", function (d) { return colorScale(countryData.data[0].country); })
@@ -1949,10 +2593,20 @@ var doRender = function(chart) {
         else { return 0.3; }
       })
       .style("font-size", function () {
-        if (isHighlighted) { return "15px"; }
+        if (isHighlighted) {
+          if (dasharray) { return "8px"; }
+          return "15px";
+        }
         else { return null; }
       })
-      .text(countryData.country);
+      .text( function () {
+        if (dasharray) {
+          let s = calculateDataOptions(countryData.data[0].src.dataSelection).baseDataType;
+          return s.charAt(0).toUpperCase() + s.slice(1);
+        } else {
+          return countryData.country;
+        }
+      });
 
     var textHeightAdjustment = 0;
     if (isSmall && isHighlighted && daysScale(countryData.maxDay) > (width * 3)/4 ) { textHeightAdjustment = -10; }
@@ -1973,7 +2627,7 @@ var doRender = function(chart) {
     if (labelOffGrid) {
       countryText
         .attr("x", function() {
-          return width + 5;
+          return labelOffGrid_x;
         })
         .attr("y", function () {
           if (lastDataPoint.cases < scale_y0) { return height + 5; }
@@ -2015,52 +2669,79 @@ var doRender = function(chart) {
     }
   };
 
-  var minHighlightHeight = 99999; 
+  var minHighlightHeight = 99999;
 
-  var renderLineChart = function(svg, i) {
-    var countryData = chart.data[i];
+  var renderLineChart = function(svg, i, data, dasharray) {
+    var countryData = data[i];
     if (!countryData.data[0]) { return; }
 
     var isHighlighted = (highlights.indexOf(countryData.country) != -1);
     var maxDay = countryData.maxDay;
 
-    svg.datum(countryData.data)
+    let line = svg.datum(countryData.data)
       .append("path")
       .attr("fill", "none")
       .attr("class", function (d) { return "C-" + textToClass(d[0].country); })
       .attr("stroke", function (d) { return colorScale(d[0].country); } )
       .attr("stroke-width", function (d) {
-        if (isHighlighted) { return 4; }
+        if (isHighlighted) {
+          if (dasharray) { return 2; }
+          return 4;
+        }
         else { return 1; }
       })
       .style("opacity", function (d) {
         if (isHighlighted) { return 1; }
         else { return (isSmall) ? 0.15 : 0.3; }
-      })      
+      })
       .attr("d", d3.line()
         .x(function (d) {
-          if (alignRight) {
-            return daysScale( -d.daysAgo );
-          }
+          if (alignRight) { return daysScale( -d.daysAgo ); }
+          if (d.alignedDayCounter) { return daysScale(d.alignedDayCounter); }
           return daysScale(d.dayCounter);
         })
-        .y(function (d) { return casesScale(d.cases); })
-        .defined(function (d, i, a) {
+        .y(function (d) {
+          if (!d.cases || Number.isNaN(d.cases)) { return height + 5; }
+          return casesScale(d.cases);
+        })
+        .defined(function (d) {
+          if (!d.cases || Number.isNaN(d.cases)) { return false; }
           return (d.cases >= scale_y0);
         })
       );
 
-    svg.selectAll("countries")
+    if (dasharray) {
+      line.attr("stroke-dasharray", dasharray);
+    }
+
+    
+    let countryCircles = svg.selectAll("countries")
       .data(countryData.data)
       .enter()
+      .filter(function (d, i) {
+        if (isHighlighted) { return true; }
+
+        if (alignRight) {
+          if (d.daysAgo > 60) { return (d.daysAgo % 3 == 0); }
+          if (d.daysAgo > 30) { return (d.daysAgo % 2 == 0); }  
+        } else {
+          let daysDelta = maxDayRendered - d.dayCounter;
+          if (d.daysAgo < daysDelta) { daysDelta = d.daysAgo; }
+
+          if (daysDelta > 60) { return (daysDelta % 3 == 0); }
+          if (daysDelta > 30) { return (daysDelta % 2 == 0); }  
+        }
+
+        return true;
+      })      
       .append("circle")
       .attr("cx", function (d) {
-        if (alignRight) {
-          return daysScale( -d.daysAgo );
-        }
+        if (alignRight) { return daysScale( -d.daysAgo ); }
+        if (d.alignedDayCounter) { return daysScale(d.alignedDayCounter); }
         return daysScale(d.dayCounter);
       })
       .attr("cy", function (d) {
+        if (!d.cases || Number.isNaN(d.cases)) { return height + 5; }
         if (d.cases < scale_y0) { return height + 5; }
         return casesScale(d.cases);
       })
@@ -2069,7 +2750,10 @@ var doRender = function(chart) {
         else { return (isSmall) ? 0.15 : 0.3; }
       })
       .attr("r", function (d) {
-        if (isHighlighted) { return 4; }
+        if (isHighlighted) {
+          if (dasharray) { return 2; }
+          return 4;
+        }
         else { return 3; }
       })
       .style("display", function (d) {
@@ -2083,45 +2767,120 @@ var doRender = function(chart) {
       })
       .attr("class", function (d) { return "C-" + textToClass(d.country); })
       .attr("fill", function (d) { return colorScale(d.country); })
-      .on('mouseover', function (d, i) {
-        tip.show(d, i);
 
-        let cssClass = ".C-" + textToClass(d.country);
-        svg.selectAll(cssClass)
-          .classed('svg-hover-highlight', true);
+    if (!isInAnimation) {
+      countryCircles.on('mouseover', function (d, i) {
+          tip.show(d, i);
 
-      })
-      .on('mouseout', function (d, i) {
-        tip.hide(d, i);
+          let cssClass = ".C-" + textToClass(d.country);
+          svg.selectAll(cssClass)
+            .classed('svg-hover-highlight', true);
 
-        let cssClass = ".C-" + textToClass(d.country);
-        svg.selectAll(cssClass)
-          .classed('svg-hover-highlight', false);
-      })
-      .on('click', function (d) {
-        if (d3.event.shiftKey) {
-          const chart = getChart(this);
+        })
+        .on('mouseout', function (d, i) {
+          tip.hide(d, i);
 
-          if (!chart.extraHighlights) { chart.extraHighlights = []; }
-          if (chart.highlight != d.country && chart.extraHighlights.indexOf(d.country) == -1) {
-            chart.extraHighlights.push(d.country);
-            additionalHighlight_rerender(chart);
-            tip.hide();
-            render(chart);
+          let cssClass = ".C-" + textToClass(d.country);
+          svg.selectAll(cssClass)
+            .classed('svg-hover-highlight', false);
+        })
+        .on('click', function (d) {
+          if (d3.event.shiftKey) {
+            const chart = getChart(this);
+
+            if (!chart.extraHighlights) { chart.extraHighlights = []; }
+            if (chart.highlight != d.country && chart.extraHighlights.indexOf(d.country) == -1) {
+              chart.extraHighlights.push(d.country);
+              additionalHighlight_rerender(chart);
+              tip.hide();
+              render(chart);
+            }
           }
-        }
-      });
+        });
+      }
   };
 
-  // Draw labels below circles/lines
-  for (var i = 0; i < chart.data.length; i++) {
-    renderLineChartLabels(svg, i);
+  var __render_line_chart = function(svg, data, dasharray = undefined) {
+    // Draw labels below circles/lines
+    for (var i = 0; i < data.length; i++) {
+      renderLineChartLabels(svg, i, data, dasharray);
+    }
+
+    // Draw circles last so they're on top for mouseovers
+    for (var i = 0; i < data.length; i++) {
+      renderLineChart(svg, i, data, dasharray);
+    }
+  };
+
+  __render_line_chart(svg, chart.data);
+  
+  if (chart.extraData) {
+    let dashPatterns = ["4", "1", "8", "2"];
+    let translateScale = 65;
+    for (let i = 0; i < chart.extraData.length; i++) {
+      let extraDataStr = chart.extraData[i];
+      let displayData = chart.displayData[extraDataStr + "-extraData"];
+
+      let extraDataScale = chart.extraDataScale[i];
+      if (extraDataScale == "separately") {
+        let maxCases = _find_max_cases(displayData);
+        casesScale.domain([scale_y0, maxCases * 1.05]).range([height, 0]);
+
+        let dType = calculateDataOptions(extraDataScale);
+        if (dType.isRatio) {
+          if ((maxCases * 1.05) <= 0.07) {
+            y_axis_tickFormat = d3.format(".1%");
+          } else {
+            y_axis_tickFormat = d3.format(".0%");
+          }
+        } else {
+          y_axis_tickFormat = function (val) {
+            var oom = Math.log10(val);
+      
+            let suffix = "";
+            let factor = 1;
+            
+            if (oom < 3) { return val; }
+            else if (oom < 6) { factor = 1e3; suffix = "k"; }
+            else if (oom < 9) { factor = 1e6; suffix = "m"; }
+      
+            if (val % factor < factor / 10) { return (val / factor).toFixed(0) + suffix; }
+            else { return (val / factor).toFixed(1) + suffix; }      
+          }
+        }
+      
+        let y_axis2 = d3.axisLeft(casesScale).tickFormat(y_axis_tickFormat);
+        
+        svg.append('g')
+          .attr("transform", `translate(${translateScale}, 0)`)
+          .style("opacity", "0.5")
+          .attr("class", "axis")
+          .call(y_axis2);
+
+        let y_axis2_g = svg.append('g')
+          .attr("transform", `translate(${translateScale}, 0)`)
+          .style("opacity", "0.5");
+
+        _draw_yAxisLabel(y_axis2_g, calculateDataOptions(extraDataStr));
+        translateScale += 60;
+      }
+
+      if (!alignRight) {
+        for (let countryData of displayData) {
+          let baseData = _.find(chart.data, function (e) { return e.country == countryData.country; } )
+          if (!baseData) { continue; }
+
+          for (let d of countryData.data) {
+            let d_base = _.find(baseData.data, function (bd) { return bd.date == d.date; });
+            if (d_base) { d.alignedDayCounter = d_base.dayCounter; }
+          }
+        }
+      }
+
+      __render_line_chart(svg, displayData, dashPatterns[ i % dashPatterns.length ]);
+    }
   }
 
-  // Draw circles last so they're on top for mouseovers
-  for (var i = 0; i < chart.data.length; i++) {
-    renderLineChart(svg, i);
-  }
 
   if (!f && chart.highlight != "(None)") {
     var desc = `${chart.y0} `

@@ -35,11 +35,11 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Scale:</span>
           </div>
-          <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="countries-normalized">
-            <input type="radio" name="scale" autocomplete="off" checked> Log
+          <label class="btn btn-info scaleSelection" data-scale="log" data-chart="countries-normalized">
+            <input type="radio" name="scale" autocomplete="off"> Log
           </label>
-          <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="countries-normalized">
-            <input type="radio" name="scale" autocomplete="off"> Linear
+          <label class="btn btn-info active scaleSelection" data-scale="linear" data-chart="countries-normalized">
+            <input type="radio" name="scale" autocomplete="off" checked> Linear
           </label>
         </div>
       </div>
@@ -83,8 +83,10 @@
           <span class="input-group-text">Y-Axis:</span>
         </div>
         <select class="form-control yaxis-select" data-chart="countries-normalized">
-          <option value="log">Fixed</option>
           <option value="highlight">Scale to Highlight</option>
+          <option value="currentMax">Scale to Current Max</option>
+          <option value="both" selected>Scale to Highlight and Cur. Max</option>
+          <option value="fixed">Scale to All-Time Max</option>
         </select>
       </div>
 
@@ -100,14 +102,30 @@
       <div style="clear: both;"></div>
     </div>
   </div>
-  <div class="chart-footer" style="border-top: 0px; font-size: 10px;">
+  <div class="chart-footer" style="border-top: 0px; font-size: 12px;">
     <span style="float: right;">
-      Save Current Image:
+      Save Current Image/Data:
       <a href="#" class="saveAs-png" onclick="saveGraphImage('png', event);">PNG</a> |
-      <a href="#" onclick="saveGraphImage('svg', event);">SVG</a>
+      <a href="#" onclick="saveGraphImage('svg', event);">SVG</a> |
+      <a href="#" onclick="saveGraphImage('csv', event);">CSV</a>
     </span>    
     <div class="extra-highlights" data-chart="countries-normalized"></div>
-    <a href="#" class="add-highlight" data-chart="countries-normalized">+ Add Additional Highlight</a>
+    <div class="extra-data"></div>
+    <a href="#" class="add-highlight" data-chart="countries-normalized">+ Add Additional Highlight</a> or
+    <a href="#" class="add-highlight" data-subdata="true" data-chart="countries-normalized">+ Add US State</a> or
+    <a href="#" class="add-data">+Add Additional Data</a>
     <div class="query-string" data-chart="countries-normalized"></div>
-  </div>  
+  </div>
+
+  <div class="chart-footer" style="border-top: 0px; background-color: hsla(211, 100%, 97%, 1);">
+    <div class="btn-group btn-group-toggle" style="float: right;" data-toggle="buttons">
+      <button class="btn btn-primary report-button">
+        &#x1F4DD; Generate Report
+      </button>
+    </div>
+    <div style="clear: both;"></div>
+
+    <div class="report">
+    </div>
+  </div>
 </section>

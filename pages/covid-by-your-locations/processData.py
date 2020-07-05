@@ -106,6 +106,22 @@ def processDate(fileName):
   df = df.astype({"Confirmed": "int32", "Deaths": "int32"})
   df["Date"] = date
 
+  def createIndex(row):
+    state = row["Province_State"]
+    if "Admin2" in row:
+      admin2 = row["Admin2"]
+    else:
+      admin2 = pd.np.NaN
+
+    if pd.isnull(admin2):
+      keyValue = state
+    else:
+      keyValue = admin2 + ", " + state
+
+    return keyValue
+
+  df["keyValue"] = df.apply(createIndex, axis=1)
+  df = df.set_index('keyValue')
   return df
 
 
@@ -115,28 +131,35 @@ import os
 
 files = os.listdir(path)
 
-df_today = processDate(files[-2])
-df_yesterday = processDate(files[-3])
-df_weekAgo = processDate(files[-9])
+print("Reading Data...")
+df_array = []
+for i in range(-2, -(3 + 28), -1):
+  df = processDate( files[i] )
+  if i != -2:
+    df = df[ ["Confirmed", "Deaths"] ]
+  df_array.append(df)
+
+  if i == -2:
+    df_today = df
+  elif i == -3:
+    df_yesterday = df
+  elif i == -9:
+    df_weekAgo = df
+
+    
 
 
 
 def delta_row_df(row, df, colName):
-  if pd.isna(row["Admin2"]):
-    matches = df[ ( df["Province_State"] == row["Province_State"] ) ]
-  else:
-    matches = df[ ( df["Admin2"] == row["Admin2"] ) & ( df["Province_State"] == row["Province_State"] ) ]
-
-  if len(matches) == 0:
-    a = 1
-    # row[colName + "_confirmed"] = pd.np.nan
-    # row[colName + "_deaths"] = pd.np.nan
-  else:
-    match = matches.iloc[0]
+  if row.name in df.index:
+    match = df.loc[ row.name ]
     row[colName + "_Confirmed"] = row["Confirmed"] - match["Confirmed"]
     row[colName + "_Deaths"] = row["Deaths"] - match["Deaths"]
 
   return row
+
+
+print("Processing - Part 1")
 
 def delta_yesterday(row):
   return delta_row_df(row, df_yesterday, "dYesterday")
@@ -149,6 +172,56 @@ def delta_week(row):
 
 df_today = df_today.apply(delta_week, axis=1)
 
+
+
+
+print("Processing - Part 2")
+
+df_today["dayAgo_Confirmed"] = df_today["Confirmed"]
+df_today["dayAgo_Deaths"] = df_today["Deaths"]
+for i in range(1, len(df_array)):
+  df1 = df_array[i]
+  df_today = df_today.join( df1, how='left', rsuffix='_r' )
+
+  df_today[f"d{str(i)}_Confirmed"] = df_today["dayAgo_Confirmed"] - df_today["Confirmed_r"]
+  df_today[f"d{str(i)}_Deaths"] = df_today["dayAgo_Deaths"] - df_today["Deaths_r"]
+  df_today[f"d{str(i)}_Confirmed"].fillna(0, inplace=True)
+  df_today[f"d{str(i)}_Deaths"].fillna(0, inplace=True)
+  df_today = df_today.astype({
+    f"d{str(i)}_Confirmed": "int32",
+    f"d{str(i)}_Deaths": "int32"
+  })
+
+  df_today["dayAgo_Confirmed"] = df_today["Confirmed_r"]
+  df_today["dayAgo_Deaths"] = df_today["Deaths_r"]
+
+  df_today = df_today.drop(columns=['Confirmed_r', 'Deaths_r'] )
+
+df_today = df_today.drop(columns=['dayAgo_Confirmed', 'dayAgo_Deaths'] )
+
+
+# def delta_other(row, df1, df2, columnPrefix):
+#   if row.name in df1.index and row.name in df2.index:
+#     m1 = df1.loc[ [row.name] ]
+#     m2 = df2.loc[ [row.name] ]
+
+#     m1 = m1.iloc[0]
+#     m2 = m2.iloc[0]
+#     row[columnPrefix + "_Confirmed"] = m1["Confirmed"] - m2["Confirmed"]
+#     row[columnPrefix + "_Deaths"] = m1["Deaths"] - m2["Deaths"]
+
+#   return row  
+
+# for i in range(1, len(df_array)):
+#   print(i)
+#   columnPrefix = str(i)
+#   df1 = df_array[i - 1]
+#   df2 = df_array[i]
+#   df_today = df_today.apply(delta_other, axis=1, args=(df1, df2, columnPrefix))
+
+
+
+print("Processing - Part 3")
 
 def add_city(row):
   if pd.isna(row["Admin2"]):

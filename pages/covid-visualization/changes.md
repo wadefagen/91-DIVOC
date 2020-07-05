@@ -3,7 +3,6 @@ layout: project
 
 title: "Change Log for 91-DIVOC #01"
 desc: This change log lists the major changes made to "An interactive visualization of the exponential spread of COVID-19".
-
 ---
 
 <style>
@@ -16,6 +15,118 @@ desc: This change log lists the major changes made to "An interactive visualizat
 <div class="card">
   <a href="/pages/covid-visualization/">An interactive visualization of the exponential spread of COVID-19 &gt;&gt;</a>
 </div>
+
+
+### July 5 - Animation Optimization
+
+- Improved and optimized the "Animate" option.
+- Fixed a bug related to "Additional Data" causing "Animate" to break.
+
+
+### July 4 - "Add Additional Data" Improvements
+
+- When the primary data view is a ratio (eg: mortality rate, test positivity), the graph will no longer scale to above 100% (even if additional data is above that).
+- When you "+Add Additional Data" to a ratio chart, you the default is now to "Scale Separately".
+- Clicking "+Add Additional Data" will now always, immediately, add the additional data.  (This fixes a bug that, in certain cases, you had to change the additional data before it displayed).
+- Fixed the additional data labels to show a percentage when adding additional data that is a percentage (eg: test positivity).
+- When calculating the test positivity for a country that reported zero cases and zero tests over the past week, the value now displays as 0% positivity instead of "infinity".
+
+Many thanks to [@TheWheelMe](https://twitter.com/TheWheelMe) for the [initial report](https://twitter.com/TheWheelMe/status/1279280304255983617).
+
+
+### July 2 - Add Additional Data
+
+- Added new feature: "+Add Additional Data" to show additional data in the same visualization.
+  - You can to overlay single-day data on top of the seven-day rolling average (using "Scale Using Graph Units")
+  - You can also overlay completely different data to see if there's a correlation between two different pieces of data (using "Scale Separately")
+
+- Added logic to store your processed data to speed up the visualization when processing data you've processed previously.
+  - Previously, if you change the "Data" from "New Cases" to "New Deaths" and then back to "New Cases", the graph re-processed all of the data.  This is no longer required and should significantly speed up the visualization. :)
+
+- Renamed "Y-Axis" value of "Fixed" to a more descriptive name "Scale to All-time Max".
+
+
+
+### July 1 - CSV Export
+
+- Added "CSV" as an option under "Save Current Image/Data" to save the current visualization's underlying data for further analysis.
+
+
+### June 30
+
+- Added "EU" to normalized data charts.
+- Fixed a bug when "(None)" is selected on the visualizations of US states.
+- Improved report formatting.
+
+
+### June 29 - Generate Report
+
+- New option: "Generate Report" to generate textual report on recent increases/decreases within the graphed data.
+  - The report can be generated on any graph with any data.
+  - The report must be re-generated any time data selection options are changed.
+
+
+### June 26 - Released 91-DIVOC-04
+
+- New Visualization: ["Coronavirus Contribution by State"](../coronavirus-contribution-by-state/)
+
+- Backend change to how data is loaded to reduce bandwidth.
+- Fixed animations when X-Axis is right-aligned with selection of a specific number of weeks.
+- Used mobile display of Y-Axis values for all displays.
+
+
+### June 23 - Added EU
+
+- Added country option "EU" that tracks just the EU countries in Europe.
+
+
+### June 18 - Default to Linear
+
+- Changed default scale to "Linear" from "Log" on all graphs.
+  - You can still change each graph to "Log" by using the button, by saving a log-graph link, or by including <code>?scale=log</code> at the end of the URL.
+
+- Added new "Highlight": "Scale to Highlight and Current Max" that combines both "Scale to Highlight" and "Current Max":
+  - This will always show ALL of countries or states, as it will scale to the maximum current value.
+  - Additionally, it will show ALL of the data in your highlighted countries, as it will scale to the maximum value among all of your highlights.
+  - Whichever one of these is larger will be used for your y-axis scale.
+
+- Modified the query string processing logic to apply your saved options to ALL graphs, not just the selected one, where possible.
+
+
+### June 17 - Add US States to Countries Map
+
+- Added information on the current processing task when the graphs are in a loading state.
+- Slightly optimized the data processing.
+
+- Added new option "+Add US State" to the country graphs.
+  - This allows you to compare, for example, Sweden vs. California vs. Texas normalized by population.
+- Now displaying "Georgia" (the country in Europe) as "Georgia (EU)" to avoid the name conflict with the US state.
+
+
+### June 16
+
+- Added "Y-Axis" option "Scale to Max Value". This will scale your y-axis value to the current maximum value, which will help for graphs with high outliers that crowd the rest of the data into a small portion in the graph.
+- The "Show": "Top 10/Top 25/etc" US graphs will no longer show regions, only states.
+
+- Changed default to right-align to view same-day comparisons of US states.  Left-align still available in "X-Axis" options.
+- Chrome-specific Fix: The graph will now display the options Chrome "remembers" for you in your drop-down selections (instead of using the default values), which will fix a UI display bug for Chrome users who arrive at the page via a back/forward button.
+
+
+### June 14 - US Regions
+
+- Non-highlighted data points now render fewer mouseover circles for data over a month old.  Even fewer for data over two months old.
+  - The line will always be correct, using every daily data point.
+  - Highlighted data will always render all circles.
+  - This should significantly speed up rendering time for the graphs.
+
+- Added US regions to US graphs based on the [United States Census Bureau's regions](https://en.wikipedia.org/wiki/United_States_Census_Bureau): "US-South", "US-Midwest", "US-Northeast", and "US-West".
+- Improved calculation of "Global" when using Johns Hopkins Data.
+
+
+### June 11
+
+- Fixed a bug in the calculation of the "7-day average" for ratios (test positivity, mortality rate) introduced in yesterday's update (the underlying data was taking cumulative data and averaging it, instead of daily data).
+
 
 ### June 10 - Multiple Data Sources
 

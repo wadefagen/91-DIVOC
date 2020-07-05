@@ -130,7 +130,7 @@ Kuwait,,4420110
 Panama,,4218808
 Mauritania,,4077347
 Croatia,,4076246
-Georgia,,3723464
+Georgia (EU),,3723464
 Uruguay,,3518552
 Eritrea,,3497117
 Mongolia,,3308624
@@ -300,3 +300,9 @@ Pitcairn Islands�(UK),,50
 Martinique,,376480
 Global,,7800000000
 Europe,,928919687
+EU,,445834883
+,US-West,78352268
+,US-South,124605703
+,US-Northeast,57013567
+,US-Midwest,68329004
+,US-exclude-NY/NJ/CT,297586983

@@ -31,12 +31,26 @@ header h1 {
   font-weight: bold;
   font-size: 3em;
   margin: 0px;
+  display: inline;
+  padding-right: 0px;
 }
+
+nav {
+  margin-top: 2px;
+}
+
+nav a {
+  margin: 0px;
+  color: hsla(199, 100%, 80%, 1);
+  padding: 0px 3px;
+}
+
 header h2 {
   margin: 0px;
   font-size: 1em;
   font-style: italic;
 }
+
 
 header.header-small h1 {
   font-family: 'Roboto Mono', monospace;
@@ -68,4 +82,21 @@ div.card {
   margin: 0px auto 15px auto;
   padding: 3px;
   background-color: hsla(199, 100%, 96%, 1);
+}
+
+
+.explore-more {
+  border: solid 1px hsla(199, 100%, 6%, 1);
+  background-color: hsla(199, 100%, 98%, 1);
+  padding: 2px;
+  padding-left: 6px;
+  border-left-width: 10px;
+}
+.explore-more > h6 {
+  margin-bottom: 0px;
+}
+
+.explore-more ul {
+  font-size: 14px;
+  margin-bottom: 0px;;
 }

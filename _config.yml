@@ -34,6 +34,15 @@ defaults:
       path: "" # an empty string here means all files in the project
     values:
       layout: "default"
+  -
+    scope:
+      path: "_updates"
+    values:
+      layout: "update"
+
+collections:
+  updates:
+    output: true
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

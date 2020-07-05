@@ -1,0 +1,19 @@
+---
+layout: bare
+---
+
+
+{% if page.visualization == 1 %}
+{% assign viz = "91-DIVOC-01: &quot;An interactive visualization of the exponential spread of COVID-19&quot;" %}
+{% assign viz_url = "/pages/covid-visualization/" %}
+{% else if page.visualization == 4 %}
+{% assign viz = "91-DIVOC-04: &quot;Coronavirus Contribution by State&quot;" %}
+{% assign viz_url = "/pages/coronavirus-contribution-by-state/" %}
+{% endif %}
+
+<div class="container mt-4">
+  <h3>{{page.title}}</h3>
+  <h5>{{ page.date | date: "%B %-d, %Y" }} &gt; <a href="{{vis_url}}">{{viz}}</a></h5>
+  <hr>
+  {{content}}
+</div>

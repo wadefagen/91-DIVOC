@@ -26,11 +26,11 @@ os.chdir(jhu_git)
 os.system("git pull")
 #exit(0)
 
-# 91-DIVOC #1
+
+# 91-DIVOC #1 + #4
 os.chdir(start_cwd)
-os.chdir("./covid-visualization/")
-os.system("python processData.py")
-os.system("python process-ctp.py")
+os.system("python jhu.py")
+os.system("python ctp.py")
 
 # 91-DIVOC #2
 os.chdir(start_cwd)
