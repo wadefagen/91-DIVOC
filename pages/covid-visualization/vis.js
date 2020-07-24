@@ -761,8 +761,6 @@ var do_process_data = function(data, chart, isSubdata = false) {
         } else if (chart.showDelta || isRatio) {
           // Always record, except when the raw data is 0.
           if (rawCaseValue == 0) { recordData = false; }
-        } else if (cases < chart.y0) {
-          recordData = false;
         }
 
         if (daysAgo == 0 && cases == 0) {
