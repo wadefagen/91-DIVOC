@@ -16,6 +16,99 @@ desc: This change log lists the major changes made to "An interactive visualizat
   <a href="/pages/covid-visualization/">An interactive visualization of the exponential spread of COVID-19 &gt;&gt;</a>
 </div>
 
+## July 21 - Interactive Visualization of COVID-19 in Illinois
+
+- Launched [91-DIVOC-05: "Interactive Visualization of COVID-19 in Illinois"](/pages/interactive-visualziation-of-covid-19-in-illinois/) containing detailed COVID-19 data from the Illinois Dept. of Health.
+
+
+## July 20 - Dynamic Label Placement
+
+- Added a new algorithm to allow labels to be dynamically moved (slightly) to minimize the overlap of labels to increase readability.
+- Using Shift+Click to add an additional highlight now updates your custom link immediately.
+- Improved scaling when "(None)" is selected as the highlight option.
+- Backend updates for 91-DIVOC #05 launch tomorrow! :)
+
+
+## July 18
+
+- Several small fixes improving on yesterday's update.
+
+
+## July 17 -- Our World in Data
+
+This is the most significant update to 91-DIVOC in quite some time, adding a new data source from [Our World in Data (Oxford University, et al)](https://ourworldindata.org/).  The Our World in Data dataset provides testing data for a number of global countries, allowing for "COVID-19 Tests" and "Test Positivity" in the "Data" selection on the countries graph, and other changes:
+
+- Added testing and test positivity to the countries graph.
+- Added new "Y-Axis" option: "Current Highlight Value".
+- Renamed the "Y-Axis" options to make what they do a little more clear.
+- Added "X-Axis" option "Days Ago, recent 12 weeks".
+
+
+As part of working with Our World in Data, a few bugs were fixed and other minor display changes:
+
+- The date now displays as "YYYY-MM-DD" (ex: 2020-07-17) instead of "MM-DD-YYYY".
+- Tooltips now show the correct data when mousing over a multi-day average (ex: 1 week, or 1 month average).
+
+
+The default data selection is now "Johns Hopkins & Our World in Data", using Our World in Data for the countries graph and Johns Hopkins for the United States data.  The data source will always be displayed at the bottom of the graph.
+
+
+
+## July 16
+
+- Renamed "Mortality Rate" to "Case Fatality Rate".
+
+
+## July 15 -- GIF and WebM Animation Saving
+
+Animations can now be saved right in your web browser!
+
+- Added new "Save" options: GIF and WebM.
+
+  - GIF takes a bit longer to encode and may sometimes be of lower quality, but should work on almost all web browsers.
+  - WebM is a open video format that is just starting to see wide-spread adoption.  WebM should work on Chrome, but may fail on other browsers.
+
+
+In addition, the saving of PNG images also improved:
+
+- PNG images now save a "Desktop-sized" chart that is sized better for sharing, instead of the mobile view.
+- PNG images now include the chart header instead of just the graph.
+- (These changes also appear in the animation creation above.)
+
+
+
+## July 13 -- Improved Tooltip
+
+- Improved mouseover tooltip display of decimal places for states/countries with very small numbers (ex: Japan, normalized by population).  The number of decimals shown is now based on the magnitude of the data.  ([Suggested on @ernest-tg on github#51](https://github.com/wadefagen/91-DIVOC/issues/51).)
+- Improved the code used to save the image as a PNG in preparation for future features.
+
+
+## July 9 - Region Enhancements
+
+The most recent update enhances the region selections -- we can explore now, for example, how the United States might compare to various WHO regions as a whole.
+
+- Added new global regions based on the [World Health Organization](https://en.wikipedia.org/wiki/WHO_regions) designated regions. 
+- Added a new "Show" selection to show only the regions for a specific graph (ex: WHO, US regions, etc).
+
+
+Additionally, the code was refactored to allow for better exploration of regions in future updates:
+
+- Refactored the region code to allow for code-defined regions (instead of defining the regions in pre-processing).  In a future update, this can be expanded to allow for "custom regions".
+- Removed the "Exclude NY/NJ/CT" region in favor of future custom regions.
+- Updated "Change Log" code to allow images to point to specific graphs instead of just the visualization.
+
+
+## July 6 - Additional Global "Show" Options
+
+- Added Additional "Show" Options for the Global Graphs (including population-based, WHO regions, and EU-27).
+- Added the "+Add Additional Data" selections to the custom/saved URL.
+
+- Added 1-week and 1-month case mortality rates to the "Data" selection.
+
+- Added informative loading messages while the visualization is initially loading.
+- Improved the responsiveness of the visualization while the graphs are initially loading.
+
+
 
 ### July 5 - Animation Optimization
 

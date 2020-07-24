@@ -10,7 +10,7 @@ img { border: solid 1px black; }
 
 <div class="row">
   <div class="col-md-4 mt-4">
-    <h5>National and State COVID-19 Data</h5>
+    <h5>Global COVID-19 Visualization</h5>
     <a href="/pages/covid-visualization/">
       <img src="/static/01.png" class="img-fluid">
     </a>
@@ -32,7 +32,7 @@ img { border: solid 1px black; }
   </div>
 
   <div class="col-md-4 mt-4">
-    <h5>COVID-19 by States &amp; Regions</h5>
+    <h5>COVID-19 by US States &amp; Regions</h5>
     <a href="/pages/coronavirus-contribution-by-state/">
       <img src="/static/04.png" class="img-fluid">
     </a>
@@ -52,6 +52,18 @@ img { border: solid 1px black; }
       <i>"Coronavirus Visualized as a 1,000-Person Community"</i>
     </a>
   </div>
+
+  <div class="col-md-4 mt-4">
+    <h5>Interactive Visualization of COVID-19 in Illinois</h5>
+    <a href="/pages/interactive-visualziation-of-covid-19-in-illinois/">
+      <img src="/static/05.png" class="img-fluid">
+    </a>
+    91-DIVOC-05:
+    <a href="/pages/interactive-visualziation-of-covid-19-in-illinois/">
+      <i>"Data-forward visualization of COVID-19 data in Illinois"</i>
+    </a>
+  </div>
+
 
 
 </div>

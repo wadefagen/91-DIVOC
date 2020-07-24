@@ -6,6 +6,113 @@ var _intial_load = true;
 var _dateObj_today, _dateObj_today_time;
 var _additionalHighlight_index = 0;
 
+const _global_regions = {
+  "who-afro": ["Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cameroon", "Cape Verde", "Central African Republic", "Chad", "Comoros", "Ivory Coast", "Democratic Republic of the Congo", "Equatorial Guinea", "Eritrea", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea-Bissau", "Kenya", "Lesotho", "Liberia", "Madagascar", "Malawi", "Mali", "Mauritania", "Mauritius", "Mozambique", "Namibia", "Niger", "Nigeria", "Republic of the Congo", "Rwanda", "São Tomé and Príncipe", "Senegal", "Seychelles", "Sierra Leone", "Somalia", "South Africa", "Swaziland", "Togo", "Uganda", "Tanzania", "Zambia", "Zimbabwe"],
+  "who-paho": ["Antigua and Barbuda", "Argentina", "Bahamas", "Barbados", "Belize", "Bolivia", "Brazil", "Canada", "Chile", "Colombia", "Costa Rica", "Cuba", "Dominica", "Dominican Republic", "Ecuador", "El Salvador", "Grenada", "Guatemala", "Guyana", "Haiti", "Honduras", "Jamaica", "Mexico", "Nicaragua", "Panama", "Paraguay", "Peru", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Suriname", "Trinidad and Tobago", "United States", "Uruguay", "Venezuela"],
+  "who-searo": ["Bangladesh", "Bhutan", "North Korea", "India", "Indonesia", "Maldives", "Myanmar", "Nepal", "Sri Lanka", "Thailand", "Timor-Leste"],
+  "who-euro": ["Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Georgia", "Germany", "Greece", "Hungary", "Iceland", "Ireland", "Israel", "Italy", "Kazakhstan", "Kyrgyzstan", "Latvia", "Lithuania", "Luxembourg", "Malta", "Monaco", "Montenegro", "Netherlands", "North Macedonia", "Norway", "Poland", "Portugal", "Moldova", "Romania", "Russia", "San Marino", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland", "Tajikistan", "Turkey", "Turkmenistan", "Ukraine", "United Kingdom", "Uzbekistan"],
+  "who-emro": ["Afghanistan", "Bahrain", "Djibouti", "Egypt", "Iran", "Iraq", "Jordan", "Kuwait", "Lebanon", "Libya", "Morocco", "Oman", "Pakistan", "Palestine", "Qatar", "Saudi Arabia", "Somalia", "Sudan", "Syria", "Tunisia", "United Arab Emirates", "Yemen"],
+  "who-wpro": ["Australia", "Brunei", "Cambodia", "China", "Cook Islands", "Fiji", "Japan", "Kiribati", "Laos", "Malaysia", "Marshall Islands", "Micronesia", "Mongolia", "Nauru", "New Zealand", "Niue", "Palau", "Papua New Guinea", "Philippines", "South Korea", "Samoa", "Singapore", "Solomon Islands", "Taiwan", "Tonga", "Tuvalu", "Vanuatu", "Vietnam"],
+  "eu27": ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania ", "Slovakia", "Slovenia", "Spain", "Sweden"],
+};
+
+const _us_regions = {
+  "northeast": ["Connecticut", "Maine", "Massachusetts", "New Hampshire", "Rhode Island", "Vermont", "New Jersey", "New York", "Pennsylvania"],
+  "midwest": ["Illinois", "Indiana", "Michigan", "Ohio", "Wisconsin", "Iowa", "Kansas", "Minnesota", "Missouri", "Nebraska", "North Dakota", "South Dakota"],
+  "south": ["Delaware", "Florida", "Georgia", "Maryland", "North Carolina", "South Carolina", "Virginia", "District of Columbia", "West Virginia", "Alabama", "Kentucky", "Mississippi", "Tennessee", "Arkansas", "Louisiana", "Oklahoma", "Texas"],
+  "west": ["Arizona", "Colorado", "Idaho", "Montana", "Nevada", "New Mexico", "Utah", "Wyoming", "Alaska", "California", "Hawaii", "Oregon", "Washington"],
+}
+
+var _custom_agg = {
+  global: [
+    { label: "WHO-Africa", countries: _global_regions["who-afro"] },
+    { label: "WHO-Americas", countries: _global_regions["who-paho"] },
+    { label: "WHO-Europe", countries: _global_regions["who-euro"] },
+    { label: "WHO-Southeast Asia", countries: _global_regions["who-searo"] },
+    { label: "WHO-E. Mediterranean", countries: _global_regions["who-emro"] },
+    { label: "WHO-Western Pacific", countries: _global_regions["who-wpro"] },
+    { label: "European Union", countries: _global_regions["eu27"] },
+
+    { group: "us", label: "US-Northeast", countries: _us_regions["northeast"] },
+    { group: "us", label: "US-Midwest", countries: _us_regions["midwest"] },
+    { group: "us", label: "US-South", countries: _us_regions["south"] },
+    { group: "us", label: "US-West", countries: _us_regions["west"] },
+  ],
+  dict: {}
+};
+
+for (let d of _custom_agg.global) {
+  d.rawdata = {};
+  for (let c of d.countries ) {
+    if (!_custom_agg.dict[c]) { _custom_agg.dict[c] = []; }
+    _custom_agg.dict[c].push( { label: d.label, rawdata: d.rawdata });
+  }
+}
+
+let applyCustomAgg = function() {
+  _custom_agg.dict = {};
+  for (let d of _custom_agg.global) {
+    d.rawdata = {};
+    for (let c of d.countries ) {
+      if (!_custom_agg.dict[c]) { _custom_agg.dict[c] = []; }
+      _custom_agg.dict[c].push( { label: d.label, rawdata: d.rawdata, src: d });
+    }
+  }  
+
+  for (let d of _rawData) {
+    let country = d["Country_Region"];
+    let isUS = false;
+    if (d["Province_State"] != "") {
+      country = d["Province_State"];
+      isUS = true;
+    }
+
+    let date = d["Date"];
+    let customAggData = _custom_agg.dict[country];
+    if (customAggData) {
+      for (let cd of customAggData) {
+        if (!cd.rawdata[date]) {
+          if (cd.src.group) { cd.rawdata[date] = { "aggregation": true, "Date": date, "Country_Region": "United States", "Province_State": cd.label }; }
+          else              { cd.rawdata[date] = { "aggregation": true, "Date": date, "Country_Region": cd.label, "Province_State": "" }; }
+        }
+
+        let rawdata = cd.rawdata[date];
+        for (let key in d) {
+          if (typeof(d[key]) == "number") {
+            if (!rawdata[key]) { rawdata[key] = 0; }
+            rawdata[key] += d[key];
+          }
+        }
+      }
+    }
+  }
+
+  // Append data
+  let aggData = [];
+  for (let d of _custom_agg.global) {
+    for (let dateKey in d.rawdata) {
+      aggData = aggData.concat(d.rawdata[dateKey]);
+    }
+  }
+  aggData = _.sortBy(aggData, "Date");
+  _rawData = _rawData.concat(aggData);
+
+  // Calculate population data
+  for (let cad of _custom_agg.global) {
+    let isUS = (cad.group == "us");
+
+    if (isUS) { _popData.state[ cad.label ] = 0; }
+    else      { _popData.country[ cad.label ] = 0; }
+
+    for (let country of cad.countries) {
+      if (isUS) { if (_popData.state[ country ]) { _popData.state[ cad.label ] += _popData.state[ country ]; } }
+      else      { if (_popData.country[ country ]) { _popData.country[ cad.label ]  += _popData.country[ country ]; } }
+    }
+  }
+};
+
+
+
 // Resize
 $(window).resize(function () {
   if (_rawData != null) {
@@ -19,6 +126,30 @@ $(window).resize(function () {
   }
 });
 
+
+var showLoadingSpinner = function(chart, message = "", cancel_f) {
+  if (chart) {
+    let el = $(`#${chart.id} .divoc-graph-loading div.loading-message`);
+    if (el.length > 0) {
+      el.html(message);
+    } else {
+      $("#" + chart.id).html(`<div class="text-center divoc-graph-loading">
+        <div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span> </div>
+        <div class="loading-message">${message}</div>
+        <button class="btn btn-danger divoc-spinner-cancel" style="display: none">Cancel</button>
+      </div>`);
+    }
+
+    if (cancel_f) {
+      $(".divoc-spinner-cancel").on('click', cancel_f);
+      $(".divoc-spinner-cancel").show();
+    } else {
+      $(".divoc-spinner-cancel").hide();
+    }
+  } else {
+    for (let c in charts) { showLoadingSpinner(charts[c], message); }
+  }
+}
 
 // reducers
 var reducer_sum_with_key = function(result, value, key) {
@@ -42,7 +173,7 @@ var reducer_byUSstate = function(result, value, key) {
   country = value["Country_Region"];
   state = value["Province_State"];
 
-  if (state == "") { return result; }
+  if (!state || state == "") { return result; }
   if (country != "United States") { return result; }
   if (state.indexOf("Princess") != -1) { return result; }
 
@@ -53,7 +184,7 @@ var reducer_byUSstate = function(result, value, key) {
 
 var reducer_byCountry = function(result, value, key) {
   state = value["Province_State"];
-  if (state != "") { return result; }
+  if (state && state != "") { return result; }
 
   key = value["Country_Region"];
   return reducer_sum_with_key(result, value, key);
@@ -79,30 +210,6 @@ var getStoredValue = function(key) {
 };
 
 
-// == Legacy ==
-function legacyFetchCookie(cname) {
-  // - src: https://www.w3schools.com/js/js_cookies.asp
-  var name = cname + "=";
-  var ca = document.cookie.split(';');
-  for(var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') { c = c.substring(1); }
-    if (c.indexOf(name) == 0) { return c.substring(name.length, c.length); }
-  }
-  return null;
-}
-
-if (!getStoredValue("state")) {
-  let v;
-  v = legacyFetchCookie("state");
-  if (v) { setStoredValue("state", v); }
-
-  v = legacyFetchCookie("country");
-  if (v) { setStoredValue("country", v); }
-}
-// == End Legacy ==
-
-
 // find default state value
 var stored;
 
@@ -113,10 +220,19 @@ var defaultCountry = "United States";
 if ((stored = getStoredValue("country"))) { defaultCountry = stored; }
 
 
+// == Legacy ==
+if (defaultCountry == "EU") {
+  defaultCountry = "European Union";
+}
+// == End Legacy ==
+
+
+
 // chart metadata
 var charts = {
   'countries': {
     self: 'countries',
+    dataSourceNeeded: 'countries',
     reducer: reducer_byCountry,
     scale: "linear",
     highlight: defaultCountry,
@@ -129,7 +245,7 @@ var charts = {
     dataSelection: 'cases',
     showDelta: true,
     avgData: 7,
-    dataSelection_y0: { 'active': 100, 'cases': 100, 'deaths': 10, 'recovered': 100, 'new-cases': 1, 'mortalityRate': 10},
+    dataSelection_y0: { 'active': 100, 'cases': 100, 'deaths': 10, 'recovered': 100, 'new-cases': 1, 'tests': 1, 'testPositivity': 10, 'mortalityRate': 10},
     yAxisScale: 'fixed',
     xMax: null, yMax: null, data: null,
     trendline: "default",
@@ -141,6 +257,7 @@ var charts = {
   },
   'states': {
     self: 'states',
+    dataSourceNeeded: 'states',
     reducer: reducer_byUSstate,
     highlight: defaultState,
     defaultHighlight: defaultState,
@@ -165,6 +282,8 @@ var charts = {
 
   'countries-normalized': {
     self: 'countries-normalized',
+    dataSourceNeeded: 'countries',
+
     reducer: reducer_byCountry,
     scale: "linear",
     highlight: defaultCountry,
@@ -190,6 +309,7 @@ var charts = {
   },
   'states-normalized': {
     self: 'states-normalized',
+    dataSourceNeeded: 'states',
     reducer: reducer_byUSstate,
     scale: "linear",
     highlight: defaultState,
@@ -346,29 +466,6 @@ var _prep_data = function(chart, fullData) {
     case "highlight-only":
       retain = highlights;
       break;
-    
-    case "northeast":
-      retain = ["Connecticut", "Maine", "Massachusetts", "New Hampshire", "Rhode Island", "Vermont", "New Jersey", "New York", "Pennsylvania"];
-      retain = retain.concat(highlights);
-      break;
-
-    case "midwest":
-      retain = ["Illinois", "Indiana", "Michigan", "Ohio", "Wisconsin", "Iowa", "Kansas", "Minnesota", "Missouri", "Nebraska", "North Dakota", "South Dakota"];
-      retain = retain.concat(highlights);
-      break;
-
-    case "south":
-      retain = [
-        "Delaware", "Florida", "Georgia", "Maryland", "North Carolina", "South Carolina", "Virginia", "District of Columbia", "West Virginia",
-        "Alabama", "Kentucky", "Mississippi", "Tennessee", "Arkansas", "Louisiana", "Oklahoma", "Texas"
-      ];        
-      retain = retain.concat(highlights);
-      break;
-
-    case "west":
-      retain = ["Arizona", "Colorado", "Idaho", "Montana", "Nevada", "New Mexico", "Utah", "Wyoming", "Alaska", "California", "Hawaii", "Oregon", "Washington"];
-      retain = retain.concat(highlights);
-      break;
 
     case "pop-small":
       retain_f = function(d) { return (d.pop <= 5e6) || (highlights.indexOf(d.country) != -1); }
@@ -378,11 +475,34 @@ var _prep_data = function(chart, fullData) {
       retain_f = function(d) { return (d.pop > 5e6) || (highlights.indexOf(d.country) != -1); }
       break;
 
+    case "pop100m": retain_f = function(d) { return (d.pop > 100e6) || (highlights.indexOf(d.country) != -1); }
+      break;
+
+    case "pop50m":  retain_f = function(d) { return (d.pop > 50e6) || (highlights.indexOf(d.country) != -1); }
+      break;
+
+    case "pop10m":  retain_f = function(d) { return (d.pop > 10e6) || (highlights.indexOf(d.country) != -1); }
+      break;
+
     case "us-states":
       exclude = ["US-exclude-NY/NJ/CT", "US-West", "US-Northeast", "US-Midwest", "US-South", "United States", "Puerto Rico", "Northern Mariana Islands", "Guam", "Virgin Islands"];
       break;
+
+    case "agg-only":
+      retain = _.map(_custom_agg.global, "label");
+      retain = retain.concat(highlights);
+      break;
   }
 
+  if ( _global_regions[chart.show] ) {
+    retain = _global_regions[chart.show];
+    retain = retain.concat(highlights);
+  }
+
+  if ( _us_regions[chart.show] ) {
+    retain = _us_regions[chart.show];
+    retain = retain.concat(highlights);
+  }
 
   if (retain.length > 0) {
     caseData = _.filter(caseData, function(d) { return (retain.indexOf(d.country) != -1 || highlights.indexOf(d.country) != -1); });
@@ -397,17 +517,18 @@ var _prep_data = function(chart, fullData) {
       caseData = _.filter(caseData, function(d) { return (d.pop > 1e7) || (highlights.indexOf(d.country) != -1); });
     }
 
+    exclude = _.map(_custom_agg.global, "label");
+
     if (chart.self == "states" || chart.self == "states-normalized") {
-      exclude = ["US-West", "US-Northeast", "US-Midwest", "US-South", "United States", "US-exclude-NY/NJ/CT"];
-      caseData = _.filter(caseData, function(d) {
-        return (exclude.indexOf(d.country) == -1) || (highlights.indexOf(d.country) != -1);
-      });
+      exclude.push("United States");
     } else {
-      exclude = ["Global"];
-      caseData = _.filter(caseData, function(d) {
-        return (exclude.indexOf(d.country) == -1) || (highlights.indexOf(d.country) != -1);
-      });
+      exclude = exclude.filter( function(d) { return d != "European Union"; } )
+      exclude.push("Global");
     }
+
+    caseData = _.filter(caseData, function(d) {
+      return (exclude.indexOf(d.country) == -1) || (highlights.indexOf(d.country) != -1);
+    });
 
     highlight_data = _.filter(caseData, function(d) { return highlights.indexOf(d.country) != -1; });
 
@@ -475,6 +596,21 @@ var process_data = function(data, chart, isSubdata = false, noPrepData = false) 
   if (!noPrepData) { prep_data(chart); }
 };
 
+var convertDateToObject = function(s) {
+  let dateParts = s.split("-");
+  let dateObj;
+
+  if (dateParts[0].length == 4) {
+    // yyyy-mm-dd
+    dateObj = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
+  } else {
+    // mm-dd-yyyy (legacy, from JHU)
+    dateObj = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
+  }
+
+  return dateObj;
+};
+
 
 var do_process_data = function(data, chart, isSubdata = false) {
   var agg;
@@ -504,55 +640,63 @@ var do_process_data = function(data, chart, isSubdata = false) {
 
   let isRatio = chart.isRatio;
 
-  let fetchCasesValue, fetchRawCasesValue, fetchCasesDelta;
-
+  let ratioData;
   switch (chart.dataSelection) {
     case 'testPositivity':
-      fetchCasesValue = function (country, date) {
-        if (agg[country][date]['tests'] == 0) { return 0; }
-        return (agg[country][date]['cases'] / agg[country][date]['tests']);
-      };
+      ratioData = { n: 'cases', d: 'tests', raw: 'tests' };
+      break;
 
-      fetchRawCasesValue = function (country, date) {
-        return agg[country][date]['tests'];
-      };
+    case 'mortalityRate':
+      ratioData = { n: 'deaths', d: 'cases', raw: 'deaths' };
+      break;
+  }
 
-      fetchCasesDelta = function(country, date_cur, date_prev) {
-        if ((agg[country][date_cur]['tests'] - agg[country][date_prev]['tests']) == 0) { return 0; }
-        return (agg[country][date_cur]['cases'] - agg[country][date_prev]['cases']) /
-               (agg[country][date_cur]['tests'] - agg[country][date_prev]['tests']);
+  let fetch = function(country, dataSelection, dates, i, raw=false) {
+    if (ratioData) {
+      if (raw) {
+        return fetchCasesValue_v2(country, ratioData.raw, dates, i);
+      } else {
+        let d = fetchCasesValue_v2(country, ratioData.d, dates, i);
+        if (d == 0) { return 0; }
+
+        let n = fetchCasesValue_v2(country, ratioData.n, dates, i);
+        return n/d;
       }
-      break;
+    } else {
+      return fetchCasesValue_v2(country, dataSelection, dates, i);
+    }
+  };
 
-      case 'mortalityRate':
-        fetchCasesValue = function (country, date) {
-          if (agg[country][date]['cases'] == 0) { return 0; }
-          return (agg[country][date]['deaths'] / agg[country][date]['cases']);
-        };
-  
-        fetchRawCasesValue = function (country, date) {
-          return agg[country][date]['deaths'];
-        };
-  
-        fetchCasesDelta = function(country, date_cur, date_prev) {
-          if ((agg[country][date_cur]['cases'] - agg[country][date_prev]['cases']) == 0) { return 0; }
-          return (agg[country][date_cur]['deaths'] - agg[country][date_prev]['deaths']) /
-                 (agg[country][date_cur]['cases'] - agg[country][date_prev]['cases']);
-        }
-        break;
-  
-    default:
-      fetchCasesValue = fetchRawCasesValue = function(country, date) {
-        return agg[country][date][chart.dataSelection];
-      };
+  let fetchDetla = function(country, dataSelection, dates, i) {
+    if (ratioData) {
+      let d0 = fetchCasesValue_v2(country, ratioData.d, dates, i);
+      let d1 = fetchCasesValue_v2(country, ratioData.d, dates, i - 1);
+      if (d0 - d1 == 0) { return 0; }
 
-      fetchCasesDelta = function(country, date_cur, date_prev) {
-        return agg[country][date_cur][chart.dataSelection] - agg[country][date_prev][chart.dataSelection];
-      };
-      break;
-  }  
+      let n0 = fetchCasesValue_v2(country, ratioData.n, dates, i);
+      let n1 = fetchCasesValue_v2(country, ratioData.n, dates, i - 1);
 
-  
+      return (n0 - n1) / (d0 - d1);
+    } else {
+      return fetchCasesValue_v2(country, dataSelection, dates, i) - fetchCasesValue_v2(country, dataSelection, dates, i - 1);
+    }
+  };
+
+  let fetchCasesValue_v2 = function(country, dataSelection, dates, i) {
+    let date = dates[i];
+    return agg[country][date][dataSelection];
+
+    let cases = NaN, di = 0;
+
+    while (isNaN(cases) && i - di >= 0) {
+      let date = dates[i - di];
+      cases = agg[country][date][dataSelection];
+      di++;
+    }
+
+    return cases;
+  };
+
   for (var country in agg) {
     var popSize = -1;
 
@@ -575,20 +719,22 @@ var do_process_data = function(data, chart, isSubdata = false) {
     for (var i = 0; i < dates.length; i++) {
       date = dates[i];
 
-      let dateParts = date.split("-");
-      let dateObj = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
+      let dateObj = convertDateToObject(date);
+
       let daysAgo = (_dateObj_today_time - dateObj.getTime()) / (1000 * 3600 * 24);
       daysAgo = Math.ceil(daysAgo);
 
-      let cases = fetchCasesValue(country, date);
-      var rawCaseValue = fetchRawCasesValue(country, date);
+      //let cases = fetchCasesValue(country, date);
+      let cases = fetch(country, chart.dataSelection, dates, i);
+      var rawCaseValue = fetch(country, chart.dataSelection, dates, i, true);
 
       if (chart.showDelta) {
         if (i == 0) {
           cases = 0;
         } else {
-          date_prev = dates[i - 1];
-          cases = fetchCasesDelta(country, date, date_prev);
+          //date_prev = dates[i - 1];
+          //cases = fetchCasesDelta(country, date, date_prev);
+          cases = fetchDetla(country, chart.dataSelection, dates, i);
         }
       }
 
@@ -616,6 +762,10 @@ var do_process_data = function(data, chart, isSubdata = false) {
           // Always record, except when the raw data is 0.
           if (rawCaseValue == 0) { recordData = false; }
         } else if (cases < chart.y0) {
+          recordData = false;
+        }
+
+        if (daysAgo == 0 && cases == 0) {
           recordData = false;
         }
 
@@ -698,6 +848,24 @@ if (!_data_src) { _data_src = "jhu"; }
 
 
 var _data_sources = {
+  // Johns Hopkins + OWID:
+  "merged": {
+    url: "../merged.csv?d=" + _reqStr,
+    f: function (row) {
+      row["Active"] = +row["Active"];
+      row["Confirmed"] = +row["Confirmed"];
+      row["Recovered"] = +row["Recovered"];
+      row["Deaths"] = +row["Deaths"];
+      row["People_Hospitalized"] = +row["People_Hospitalized"];
+      row["People_Tested"] = +row["People_Tested"];
+      
+      if (row["Country_Region"] == "Georgia") { row["Country_Region"] = "Georgia (EU)"; }        
+      return row;
+    },
+    name: "Combined John Hopkins/Our World in Data",
+    provides: ["countries-cases", "countries-deaths", "countries-tests", "states-cases", "states-deaths", "states-tests", "states-hospitalized"],
+  },
+
   // Johns Hopkins:
   "jhu": {
     url: "../jhu.csv?d=" + _reqStr,
@@ -709,9 +877,11 @@ var _data_sources = {
       row["People_Tested"] = +row["People_Tested"];
       row["People_Hospitalized"] = +row["People_Hospitalized"];
 
-      if (row["Country_Region"] == "Georgia") { row["Country_Region"] = "Georgia (EU)"; }
+      if (row["Country_Region"] == "Georgia") { row["Country_Region"] = "Georgia (EU)"; }        
       return row;
     },
+    name: "John Hopkins University CSSE",
+    provides: ["countries-cases", "countries-deaths", "states-cases", "states-deaths", "states-tests", "states-hospitalized", "countries-active", "countries-recovered"],
   },
 
   // COVID Tracking Project
@@ -726,8 +896,26 @@ var _data_sources = {
       row["People_Tested"] = +row["People_Tested"];
       row["People_Hospitalized"] = +row["People_Hospitalized"];
       return row;
-    }
+    },
+    name: "The COVID Tracking Project",
+    provides: ["states-cases", "states-deaths", "states-tests"],
   },
+
+  // Our World In Data
+  "owid": {
+    url: "../owid.csv?d=" + _reqStr,
+    f: function (row) {
+      row["Confirmed"] = +row["Confirmed"];
+      row["Deaths"] = +row["Deaths"];
+      row["People_Tested"] = +row["People_Tested"];
+
+      if (row["Country_Region"] == "Georgia") { row["Country_Region"] = "Georgia (EU)"; }        
+      return row;
+    },
+    name: "Our World in Data",
+    provides: ["countries-cases", "countries-deaths", "countries-tests"],
+  },
+
 
   // Wikipedia Population
   "wikipedia-pop": {
@@ -745,10 +933,11 @@ var _dataReady = false, _pageReady = false, _chartIdFirst;
 var tryRender = function () {
   if (_dataReady && _pageReady) {
     if (_intial_load) { process_ui_state(); process_query_string(); }
+
     _chartIdFirst = Object.keys(charts)[0];
 
     process_data(_rawData, charts[_chartIdFirst]);
-    doRender(charts[_chartIdFirst]);
+    render(charts[_chartIdFirst]);
 
     setTimeout(initialRender2, 100);
   }
@@ -759,7 +948,7 @@ var initialRender2 = function() {
     if (_chartIdFirst == chartid) { continue; }
 
     process_data(_rawData, charts[chartid]);
-    doRender(charts[chartid]);
+    render(charts[chartid]);
   }
 
   process_query_string_ui();
@@ -768,30 +957,29 @@ var initialRender2 = function() {
 
 var getDataPromise = function(dataSource) {
   let src = _data_sources[dataSource];
+  if (!src) { _data_sources["jhu"]; }
   return d3.csv(src.url, src.f);
 };
 
 var doInitialDataLoad = function() {
+  showLoadingSpinner(null, "Fetching and Visualizing Data...");
+
   // clear cache
   for (let chartKey in charts) { charts[chartKey].cache = {}; }
 
   let dataPromiseSource = [];
-  if (_data_src == "ctp") {
-    dataPromiseSource.push( getDataPromise("ctp") );
-  } else {
-    dataPromiseSource.push( getDataPromise("jhu") );
-  }
+  dataPromiseSource.push( getDataPromise(_data_src) );
   dataPromiseSource.push( getDataPromise("wikipedia-pop") );
   
   Promise.all(dataPromiseSource)
     .then(function(result) {
       data = result[0];
       populationData = result[1];
-  
-      let dateParts = data[data.length - 1].Date.split("-");
-      _dateObj_today = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
+
+      _dateObj_today = convertDateToObject(data[data.length - 1].Date);
       _dateObj_today_time = _dateObj_today.getTime();
       
+      // Add custom aggs
       _rawData = data;
   
       _popData = {country: {}, state: {}};
@@ -799,7 +987,10 @@ var doInitialDataLoad = function() {
         if (pop.Country) { _popData.country[pop.Country] = pop.Population; }
         if (pop.State) { _popData.state[pop.State] = pop.Population; }
       }
-  
+
+      applyCustomAgg(_rawData, _popData);
+      
+
       _dataReady = true;
       tryRender();
     })
@@ -845,6 +1036,17 @@ var updateAdditionalHighlight = function(e, isSubdata=false) {
 
 
 var _cssData = null;
+var saveGraph_fetchCSS = function() {
+  return new Promise((resolve, reject) => {
+    if (_cssData) {
+      resolve(_cssData);
+    } else {
+      $.get("css.css")
+      .done( (cssData) => { _cssData = cssData; resolve(_cssData); })
+      .fail( (message) => { reject(message); });
+    }
+  });
+};
 
 var saveGraphImage = function(format, e) {
   e.preventDefault();
@@ -852,22 +1054,18 @@ var saveGraphImage = function(format, e) {
 
   if (format == "csv") {
     saveAsCSV(chart);
-  } else if (!_cssData) {
-    $.get("css.css", function (cssData) {
-      _cssData = cssData;
-
+  } else if (format == "gif" || format == "webm") {
+    saveVideo(chart, format);
+  } else {
+    saveGraph_fetchCSS()
+    .then(() => {
       switch (format) {
         case 'svg': saveAsSVG(chart); break;
         case 'png': saveAsPNG(chart); break;
       }
     });
-  } else {
-    switch (format) {
-      case 'svg': saveAsSVG(chart); break;
-      case 'png': saveAsPNG(chart); break;
-    }
   }
-
+  
   gtag("event", "saveAs", {event_category: chart.self, event_label: format});
   return false;
 }
@@ -913,63 +1111,83 @@ var saveAsCSV = function(chart) {
 };
 
 
-var saveAsSVG = function(chart) {
-  var chartXML = $(`#chart-${chart.self}`).html();
-  chartXML = chartXML.replace(`<style></style>`, `<style>${_cssData}</style>`);
-  chartXML = chartXML.replace(`<style />`, `<style>${_cssData}</style>`);
+// https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob
+var _protofill_cavnas_toBlob = function() {
+  if (!HTMLCanvasElement.prototype.toBlob) {
+    Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
+      value: function (callback, type, quality) {
+        var dataURL = this.toDataURL(type, quality).split(',')[1];
+        setTimeout(function() {
+  
+          var binStr = atob( dataURL ),
+              len = binStr.length,
+              arr = new Uint8Array(len);
+  
+          for (var i = 0; i < len; i++ ) {
+            arr[i] = binStr.charCodeAt(i);
+          }
+  
+          callback( new Blob( [arr], {type: type || 'image/png'} ) );
+        });
+      }
+    });
+  }
+};
 
-  var hrefData = "data:image/svg+xml," + encodeURIComponent(chartXML);
+
+var getSvgDataString = function(svgxml) {
+  svgxml = svgxml.replace(`<style></style>`, `<style>${_cssData}</style>`);
+  svgxml = svgxml.replace(`<style />`, `<style>${_cssData}</style>`);
+
+  return "data:image/svg+xml," + encodeURIComponent(svgxml);
+};
+
+var saveAsSVG = function(chart) {
+  let hrefData = getSvgDataString( $(`#chart-${chart.self}`).html() );
   saveAs(hrefData, "91-DIVOC-" + chart.self + "-" + chart.highlight.replace(" ", "") + ".svg");
 
   gtag("event", "saveAs-SVG", {event_category: chart.self});
-}
+};
+
+var svgToCanvas = function(svg) {
+  return new Promise( (resolve, reject) => {
+    _protofill_cavnas_toBlob();
+
+    let html = svg.outerHTML;
+    let height = svg.getAttribute('height');
+    let width = svg.getAttribute('width');
+
+    let hrefData = getSvgDataString(html);
+    var canvas = $(`<canvas height="${height}" width="${width}" />`).get(0);
+    var ctx = canvas.getContext('2d');
+  
+    var img = new Image(width, height);
+    img.onload = function () {
+      ctx.drawImage(img, 0, 0, width, height);
+      resolve(canvas);
+    }
+    img.onerror = function (message) {
+      reject(message);
+    }  
+    img.src = hrefData;
+  });
+};
+
+var chartToCanvas = function(chart) {
+  //let svg  = $(`#chart-${chart.self} svg`).get(0);
+  let svg = doRender(chart, true, null).node();
+  return svgToCanvas(svg);
+};
 
 var saveAsPNG = function(chart) {
-  var chartSVG = $(`#chart-${chart.self} svg`);
-  var chartXML = $(`#chart-${chart.self}`).html();
-  chartXML = chartXML.replace(`<style></style>`, `<style>${_cssData}</style>`);
-  chartXML = chartXML.replace(`<style />`, `<style>${_cssData}</style>`);
-
-  var hrefData = "data:image/svg+xml," + encodeURIComponent(chartXML);
-
-  var canvas = $(`<canvas height="${chartSVG.height()}" width="${chartSVG.width()}" />`).get(0);
-  var ctx = canvas.getContext('2d');
-
-  var img = new Image(chartSVG.width(), chartSVG.height());
-  img.onload = function () {
-    ctx.drawImage(img, 0, 0, chartSVG.width(), chartSVG.height());
-
-    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob
-    if (!canvas.toBlob) {
-      if (!HTMLCanvasElement.prototype.toBlob) {
-        Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
-          value: function (callback, type, quality) {
-            var dataURL = this.toDataURL(type, quality).split(',')[1];
-            setTimeout(function() {
-      
-              var binStr = atob( dataURL ),
-                  len = binStr.length,
-                  arr = new Uint8Array(len);
-      
-              for (var i = 0; i < len; i++ ) {
-                arr[i] = binStr.charCodeAt(i);
-              }
-      
-              callback( new Blob( [arr], {type: type || 'image/png'} ) );
-            });
-          }
-        });
-      }
-    }
-
+  chartToCanvas(chart).then(function (canvas) {
     canvas.toBlob(function (blob) {
       saveAs(blob, "91-DIVOC-" + chart.self + "-" + chart.highlight.replace(" ", "") + ".png");
-    });      
-  }
-
-  img.src = hrefData;
-  gtag("event", "saveAs-PNG", {event_category: chart.self});
+      gtag("event", "saveAs-PNG", {event_category: chart.self});
+    });
+  });
 };
+
 
 var _update_graph = function(chart, value, attr, selector) {
   let chartSelector = "";
@@ -981,11 +1199,19 @@ var _update_graph = function(chart, value, attr, selector) {
   // UI Update:
   if (attr == "scale") {
     $(`.${selector}${chartSelector}[data-scale="${value}"]`).click();
-  } else if (attr == "extraHighlights") {
+  } else if (attr == "extraHighlights" || attr == "extraData" || attr == "extraDataScale") {
     value = value.split(",");
     chart[attr] = value;
   } else {
-    let el = $(`.${selector}${chartSelector} option[value="${value}"]`);
+    if (chart) { chart[attr] = value; }
+    else       { for (let chartKey in charts) { charts[chartKey][attr] = value; } }
+
+    let el;
+    if (chart) {
+      el = $(`section${chartSelector} .${selector} option[value="${value}"]`);
+    } else {
+      el = $(`.${selector} option[value="${value}"]`);
+    }
     el.prop('selected', true);
   }
 
@@ -998,6 +1224,7 @@ var _update_graph = function(chart, value, attr, selector) {
 var _qs_update_graph = function(chart, urlParams, qs, attr, selector) {
   let qs_value = urlParams.get(qs);
   if (qs_value) {
+    if (attr == "extraData" && !chart.extraDataScale)  { chart.extraDataScale = []; }
     _update_graph(chart, qs_value, attr, selector);
   }
 }
@@ -1013,6 +1240,15 @@ var process_query_string_ui = function() {
 
   if (chart.extraHighlights) {
     additionalHighlight_rerender(chart);
+  }
+
+  if (chart.extraData) {
+    for (let i = 0; i < chart.extraData.length; i++) {
+      let d = chart.extraData[i];
+      let scale = chart.extraDataScale[i];
+
+      ui_add_data(chart, scale, d);
+    }
   }
 }
 
@@ -1041,12 +1277,16 @@ var process_query_string = function() {
   _qs_update_graph(chart, urlParams, "highlight", "highlight", "highlight-select");
   _qs_update_graph(chart, urlParams, "extra", "extraHighlights", "extra-highlights");
   _qs_update_graph(chart, urlParams, "show", "show", "filter-select");
+  _qs_update_graph(chart, urlParams, "extraData", "extraData", "extra-data");
+  _qs_update_graph(chart, urlParams, "extraDataScale", "extraDataScale", "extra-data");
 
   if (otherChart) {
     _qs_update_graph(otherChart, urlParams, "data", "dataSelection", "data-select");
     _qs_update_graph(otherChart, urlParams, "highlight", "highlight", "highlight-select");
     _qs_update_graph(otherChart, urlParams, "extra", "extraHighlights", "extra-highlights");  
     _qs_update_graph(otherChart, urlParams, "show", "show", "filter-select");
+    _qs_update_graph(otherChart, urlParams, "extraData", "extraData", "extra-data");
+    _qs_update_graph(otherChart, urlParams, "extraDataScale", "extraDataScale", "extra-data");
   }
 
   updateQueryString(chart);
@@ -1104,6 +1344,10 @@ var generateUrl = function(chart) {
 
   if (chart.xaxis) { options.xaxis = chart.xaxis; }
   if (chart.extraHighlights) { options.extra = chart.extraHighlights; }
+  if (chart.extraData && chart.extraDataScale) {
+    options.extraData = chart.extraData; 
+    options.extraDataScale = chart.extraDataScale;
+  }
 
   var qs = Object.keys(options).map(function(key) {
     return key + '=' + encodeURIComponent(options[key])
@@ -1146,6 +1390,7 @@ var scaleToHighlight = function(e) {
   const chart = getChart(e.target);
   _update_graph(chart, "highlight", "yAxisScale", "yaxis-select");
   render(chart);
+  updateQueryString(chart);
 
   gtag("event", "scaleToHighlight-helper", {event_category: chart.self});
 };
@@ -1223,21 +1468,31 @@ var add_data_onremove = function (e) {
   gtag("event", "add-data-remove", {event_category: chart.self, event_label: JSON.stringify(chart.extraData)});
 };
 
-var ui_add_data = function (chart, scale="graph") {
+var ui_add_data = function (chart, scale="graph", dataSelection = undefined) {
   let el_add = $(`section[data-chart="${chart.self}"] .extra-data`);
   let el_dataSelection = $(`section[data-chart="${chart.self}"] .data-select`);
   
   let scale_selected = { graph: "", separately: "" };
   scale_selected[scale] = "selected";
 
+  let dataSelectOptions =
+    `<select class="form-control additional-data-select" onchange="add_data_onchange(event)">
+      ${el_dataSelection.html()}
+    </select>`;
+
+  if (dataSelection) {
+    let el = $(dataSelectOptions);
+    $("option:selected", el).removeAttr("selected");
+    $(`option[value=${dataSelection}`, el).attr("selected", true);
+    dataSelectOptions = el[0].outerHTML;
+  }
+
   let html =
     `<div><div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
       <div class="input-group-prepend">
         <span class="input-group-text">[<a href="#" onclick="add_data_onremove(event)">X</a>] Additional Data:</span>
       </div>
-      <select class="form-control additional-data-select" onchange="add_data_onchange(event)">
-        ${el_dataSelection.html()}
-      </select>
+      ${dataSelectOptions}
       <select class="form-control additional-data-select-scale" onchange="add_data_onchange(event)">
         <option value="graph"${scale_selected["graph"]}>Scale Using Graph Units</option>
         <option value="separately"${scale_selected["separately"]}>Scale Separately</option>
@@ -1249,11 +1504,18 @@ var ui_add_data = function (chart, scale="graph") {
 
 
 var updateQueryString = function(chart) {
+  if (!chart) {
+    for (let chartKey in charts) {
+      updateQueryString(charts[chartKey]);
+    }
+    return;
+  }
   var dataattr = chart.id.substring(6);
   var url = generateUrl(chart);
+
   var html = `Direct Link w/ Your Options: <a href="${url}">${url}</a>`;
-  $(`.query-string[data-chart="${dataattr}"]`).show();
-  $(`.query-string[data-chart="${dataattr}"]`).html(html);
+  $(`section[data-chart="${dataattr}"] .query-string`).show();
+  $(`section[data-chart="${dataattr}"] .query-string`).html(html);
 };
 
 var calculateDataOptions = function(value) {
@@ -1276,10 +1538,23 @@ var calculateDataOptions = function(value) {
     }
   }
 
-
   if (valuePieces[0] == 'testPositivity' || valuePieces[0] == 'mortalityRate') {
     options.isRatio = true;
     options.forceLinear = true;
+  }
+
+  switch (options.baseDataType) {
+    case "mortalityRate":
+      options.dataSourceNeeded = "deaths";
+      break;
+
+    case "testPositivity":
+      options.dataSourceNeeded = "tests";
+      break;
+
+    default:
+      options.dataSourceNeeded = options.baseDataType;
+      break;
   }
 
   return options;
@@ -1498,8 +1773,8 @@ $(function() {
     var value = $(e.target).val();
     if (value != _data_src) {
       _data_src = value;
-      showLoadingSpinner();
       doInitialDataLoad();
+      updateQueryString();
       gtag("event", "change-data", {event_category: 'all', event_label: value});
     }
   });
@@ -1699,7 +1974,7 @@ var generateDataLabel_v3 = function(chart, dType, title = false) {
     else if (dType.baseDataType == 'hospitalized') { dataLabel += "Total hospitalized with COVID-19"; }
     else if (dType.baseDataType == 'tests') { dataLabel += "COVID-19 Tests Performed"; }  
     else if (dType.baseDataType == 'testPositivity') { dataLabel += "COVID-19 Test Positivity Rate"; }  
-    else if (dType.baseDataType == 'mortalityRate') { dataLabel += "COVID-19 Confirmed Mortality Rate"; }  
+    else if (dType.baseDataType == 'mortalityRate') { dataLabel += "COVID-19 Case Fatality Rate"; }  
 
 
     if (dType.showDelta) { dataLabel += " per Day"; }
@@ -1721,7 +1996,7 @@ var generateDataLabel_v3 = function(chart, dType, title = false) {
     else if (dType.baseDataType == 'hospitalized') { dataLabel += "total hospitalizations"; }
     else if (dType.baseDataType == 'tests') { dataLabel += "COVID-19 tests performed"; }  
     else if (dType.baseDataType == 'testPositivity') { dataLabel += "test positivity"; }  
-    else if (dType.baseDataType == 'mortalityRate') { dataLabel += "mortality rate"; }  
+    else if (dType.baseDataType == 'mortalityRate') { dataLabel += "case fatality rate"; }  
   }
 
   return dataLabel;
@@ -1729,6 +2004,21 @@ var generateDataLabel_v3 = function(chart, dType, title = false) {
 
 var generateDataLabel = function(chart, title = false) {
   return generateDataLabel_v3(chart, calculateDataOptions(chart.dataRawSelection), title);
+};
+
+
+var numericFormat = function(num, minimumDecimals = 1) {
+  let suggestedDecimals;
+  if      (num > 100)  { suggestedDecimals = 0; }   /* 273 */
+  else if (num > 10)   { suggestedDecimals = 1; }   /* 27.3 */
+  else if (num > 1)    { suggestedDecimals = 2; }   /* 2.73 */
+  else if (num > 0.1)  { suggestedDecimals = 3; }   /* 0.273 */
+  else if (num > 0.01) { suggestedDecimals = 4; }   /* 0.0273 */
+  else                 { suggestedDecimals = 5; }
+
+  let maximumFractionDigits = Math.max(suggestedDecimals, minimumDecimals);
+
+  return num.toLocaleString("en-US", {maximumFractionDigits: maximumFractionDigits});
 };
 
 
@@ -1746,20 +2036,24 @@ var tip_html = function(chart) {
     var dType = calculateDataOptions(d.src.dataSelection);
 
     var geoGrowth = [];
-    if (i >= 2) {
-      let d0 = gData[i - 1];
+
+    let d0, d_prev;
+    d_prev = d0 = _.find(gData, function(r) { return r.daysAgo == d.daysAgo + 1; });
+    if (d0) {
       let ggrowth = Math.pow(d.cases / d0.cases, 1 / (d.dayCounter - d0.dayCounter));
       if (isFinite(ggrowth)) {
         geoGrowth.push(`Previous day: <b>${ggrowth.toFixed(2)}x</b> growth`);
       }
     }
-    if (i >= 8) {
-      let d0 = gData[i - 7];
+
+    d0 = _.find(gData, function(r) { return r.daysAgo == d.daysAgo + 7; });
+    if (d0) {
       let ggrowth = Math.pow(d.cases / d0.cases, 1 / (d.dayCounter - d0.dayCounter));
       if (isFinite(ggrowth)) {
         geoGrowth.push(`Previous week: <b>${ggrowth.toFixed(2)}x</b> /day`);
       }
     }
+
     if (i > 0) {
       let d0 = gData[0];
       let ggrowth = Math.pow(d.cases / d0.cases, 1 / (d.dayCounter - d0.dayCounter));
@@ -1786,9 +2080,8 @@ var tip_html = function(chart) {
 
 
     let dateStr = "";
-    let dateParts = d.date.split("-");
-    let date = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
-
+    let date = convertDateToObject(d.date);
+    
     if (date instanceof Date) {
       dateStr = `${ date.toLocaleDateString('en-US', { weekday: 'long'}) }, `;
     }
@@ -1806,9 +2099,9 @@ var tip_html = function(chart) {
 
     let numberStr;
     if (dType.isRatio) {
-      numberStr = (((d.rawcases)?d.rawcases:d.cases) * 100).toLocaleString("en-US", {maximumFractionDigits: 2}) + "%";
+      numberStr = numericFormat( (((d.rawcases)?d.rawcases:d.cases) * 100), 2 ) + "%";
     } else {
-      numberStr = ((d.rawcases)?d.rawcases:d.cases).toLocaleString("en-US", {maximumFractionDigits: 1})
+      numberStr = numericFormat( ((d.rawcases)?d.rawcases:d.cases) , 1);
     }
 
     if (d.rawcases) { s += "<i>"; }
@@ -1833,30 +2126,23 @@ var tip_html = function(chart) {
 
       
       
-      if (dType.showDelta) {
-        if (i > 0) {
-          let d_cur = gData[i];
-          let d_prev = gData[i - 1];
+      if (d_prev) {
+        let d_cur = d;
 
-          d_n = d_cur.n - d_prev.n;
-          d_d = d_cur.d - d_prev.d;
+        d_n = d_cur.n - d_prev.n;
+        d_d = d_cur.d - d_prev.d;
 
 
-          let avgString = "";
-          if (chart.avgData) {
-            avgString = `Past ${chart.avgData} days: `;
-            d_n = d_cur.sum_n;
-            d_d = d_cur.sum_d;
-          }
-
-          s += `<div class="tip-details" style="padding-bottom: 2px;"><i>` +
-            `${avgString}<b>${d_n.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> new ${n_label} / <b>${d_d.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> new ${d_label}` +
-            `</i></div>`;
+        let avgString = "";
+        if (chart.avgData) {
+          avgString = `Past ${chart.avgData} days: `;
+          d_n = d_cur.sum_n;
+          d_d = d_cur.sum_d;
         }
-      } else {
+
         s += `<div class="tip-details" style="padding-bottom: 2px;"><i>` +
-        `<b>${d_n.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> total ${n_label} / <b>${d_d.toLocaleString("en-US", {maximumFractionDigits: 1})}</b> total ${d_label}` +
-        `</i></div>`;
+          `${avgString}<b>${ numericFormat(d_n) }</b> new ${n_label} / <b>${ numericFormat(d_d) }</b> new ${d_label}` +
+          `</i></div>`;
       }
 
       geoGrowth = [];
@@ -1864,9 +2150,11 @@ var tip_html = function(chart) {
 
     if (d.rawcases && d.cases) {
       if (dType.isRatio) {
-        numberStr = (d.cases * 100).toLocaleString("en-US", {maximumFractionDigits: 2}) + "%";
+        //numberStr = (d.cases * 100).toLocaleString("en-US", {maximumFractionDigits: 2}) + "%";
+        numberStr = numericFormat( d.cases * 100, 2 ) + "%";
       } else {
-        numberStr = (d.cases).toLocaleString("en-US", {maximumFractionDigits: 1})
+        //numberStr = (d.cases).toLocaleString("en-US", {maximumFractionDigits: 1})
+        numberStr = numericFormat( d.cases );
       }
   
       var trailingDays = Math.min(d.dayCounter + 1, chart.avgData);
@@ -1898,17 +2186,6 @@ var textToClass = function (s) {
   return s.replace(/[\W_]+/g,"-");
 };
 
-var showLoadingSpinner = function(chart, message = "") {
-  if (chart) {
-    $("#" + chart.id).html(`<div class="text-center divoc-graph-loading">
-      <div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span> </div>
-      <div>${message}</div>
-    </div>`);
-  } else {
-    for (let c in charts) { showLoadingSpinner(charts[c]); }
-  }
-}
-
 var cancelAnimation = function(chart) {
   if (_animation_timeout) {
     clearTimeout(_animation_timeout);
@@ -1926,6 +2203,11 @@ var process_data_and_render = function(chart) {
     render(chart);
   }, 0);
 };
+
+var renderEvent = function(e) {
+  const chart = getChart(e.target);
+  render(chart);
+}
 
 var render = function(chart) {
   let countryCount = chart.data.length;
@@ -1958,6 +2240,8 @@ var calculateMaxDayRendered = function(chart) {
     maxDayRendered = 28;
   } else if (chart.xaxis == "right-8wk") {
     maxDayRendered = 7 * 8;
+  } else if (chart.xaxis == "right-12wk") {
+    maxDayRendered = 7 * 12;
   } else if (chart.xaxis == "right-all") {
     let m = _.maxBy(chart.data, 'totalDays');
     maxDayRendered = m.totalDays;
@@ -2007,31 +2291,224 @@ var doAnimate = function(chart, filter = 0) {
   } else {
     _animation_timeout = setTimeout(function() { doAnimate(chart, filter + 1) }, 100);
   }
-
-  /*
-  if (filter <= maxDayRendered && (filter == 0 || _animation_timeout)) {
-  } else {
-  }
-  */
 };
 
 
+var showDownload = function(chart, message = "", url, fileName) {
+  $("#" + chart.id).html(`<div class="text-center divoc-graph-loading">
+    <h4 style="padding-top: 30px">${message}</h4>
+    <a class="btn btn-primary" role="button" href="${url}" download="${fileName}">Download</a>
+    <button type="button" class="btn btn-info" onclick="renderEvent(event)">Return to Chart</button>
+  </div>`);
+}
 
-var doRender = function(chart, isInAnimation = false) {
+var showWebMFailure = function(chart) {
+  $("#" + chart.id).html(`<div class="text-center divoc-graph-loading">
+    <h4 style="padding-top: 30px">WebM Encoding Failed</h4>
+    <p>Your browser does not support WebM encoding.  Try using the GIF option to save an animation.</p>
+    <button type="button" class="btn btn-info" onclick="renderEvent(event)">Return to Chart</button>
+  </div>`);
+}
+
+var showGifFailure = function(chart) {
+  $("#" + chart.id).html(`<div class="text-center divoc-graph-loading">
+    <h4 style="padding-top: 30px">GIF Encoding Failed</h4>
+    <p>Your browser does not support GIF encoding.  You can use screen capture tool to save an animation.</p>
+    <button type="button" class="btn btn-info" onclick="renderEvent(event)">Return to Chart</button>
+  </div>`);
+}
+
+
+var saveVideo = function(chart, format = "gif", jumpBy = 1) {
+  let _cancelAnimation = false;
+  let videoWriter;
+
+  var cancelAnimationRender = function () {
+    _cancelAnimation = true;
+    showLoadingSpinner(chart, `Canceling Animation...`);
+
+    if (videoWriter) {
+      try {
+        if      (format == "gif")  { videoWriter.abort(); }
+      } catch (e) { }
+    }
+  };
+
+  var createAnimationCanvasList = async function(chart, jumpBy) {
+    let filter = 0;
+    let isLastAnimationFrame = false;
+    let canvasList = [];
+    let maxDayRendered = calculateMaxDayRendered(chart);
+    
+    await saveGraph_fetchCSS();
+    while (filter <= maxDayRendered && !_cancelAnimation) {
+      let lastFrame = false;
+      if (filter == maxDayRendered) { lastFrame = true; }
+
+      if (!lastFrame) {
+        showLoadingSpinner(chart, `Creating animation frame ${filter + 1}/${maxDayRendered + 1}...`, () => cancelAnimationRender());
+      } else {
+        showLoadingSpinner(chart, `Finalizing animation...`);
+      }
+
+      let chart_frame = _.cloneDeep(chart);
+
+      let filterFunction;
+      if (chart.xaxis && chart.xaxis != "left") {
+        filterFunction = function (d) { return (d.daysAgo >= maxDayRendered - filter ); }
+      } else {
+        filterFunction = function (d) { return (d.dayCounter <= filter); }
+      }
+
+      for (let chartData of chart_frame.data) {
+        chartData.data = _.filter(chartData.data, filterFunction);
+      }
+
+      svg = doRender(chart_frame, !isLastAnimationFrame, null).node();
+      canvas = await svgToCanvas(svg);
+
+      canvasList.push(canvas);
+      filter = filter + jumpBy;
+
+      // Ensure the last frame is always captured
+      if (!lastFrame && filter > maxDayRendered) {
+        filter = maxDayRendered;
+      }
+    }
+
+    return canvasList;
+  };
+
+  var _saveVideo = async function(chart, format, jumpBy) {
+    try {
+      // Init
+      if      (format == "webm") { videoWriter = new WebMWriter({ frameDuration: 100 }); }
+      else if (format == "gif")  { videoWriter = new GIF(); }    
+
+      let canvasList = await createAnimationCanvasList(chart, jumpBy);
+      for (let i = 0; i < canvasList.length && !_cancelAnimation; i++) {
+        let canvas = canvasList[i];
+        showLoadingSpinner(chart, `Rendering animation frames...`);
+
+        let delay = 100;
+        if (i == canvasList.length - 1) { delay = 2000; }
+
+        // Add Frame
+        if      (format == "webm") { videoWriter.addFrame(canvas, delay); }
+        else if (format == "gif")  { videoWriter.addFrame(canvas, {delay: delay}); }  
+      }
+
+      // Finalize
+      if (_cancelAnimation) {
+        doRender(chart);
+      } else if (format == "webm") {
+        showLoadingSpinner(chart, `Finalizing video...`);
+        let blob =  await videoWriter.complete();
+
+        let url = URL.createObjectURL(blob);
+        let fileName = "91-DIVOC-" + chart.self + ".webm";
+        showDownload(chart, "Your video is ready!", url, fileName);
+      }
+      
+      else if (format == "gif")  {
+        videoWriter.on('abort', function(pct) {
+          doRender(chart);
+        });
+
+        videoWriter.on('progress', function(pct) {
+          showLoadingSpinner(chart, `Finalizing GIF (${(100 * pct).toFixed(0)}%)...`, () => cancelAnimationRender());
+        });
+
+        videoWriter.on('finished', function(blob) {
+          let url = URL.createObjectURL(blob);
+          let fileName = "91-DIVOC-" + chart.self + ".gif";
+          showDownload(chart, "Your GIF is ready!", url, fileName);
+        });
+
+        videoWriter.render();
+      }
+
+    } catch (e) {
+      console.error(e);
+      if (format == "gif") { showGifFailure(chart); } 
+      if (format == "webm") { showWebMFailure(chart); } 
+    }
+  };
+
+  if (format == "webm") {
+    if (typeof WebMWriter == "undefined") { $.getScript("js/webm-writer-0.3.0.js", function () { _saveVideo(chart, format, jumpBy); } ) }
+    else { _saveVideo(chart, format, jumpBy); }
+  } else if (format == "gif") {
+    if (typeof GIF == "undefined") { $.getScript("js/gif.js", function () { _saveVideo(chart, format, jumpBy); } ) }
+    else { _saveVideo(chart, format, jumpBy); }
+  }
+};
+
+var getAttribution = function(chart) {
+  let realDataSource = _data_src;
+  if (_data_src == "merged") {
+    switch (chart.self) {
+      case "countries":
+      case "countries-normalzied":
+        realDataSource = "merged";
+        break;
+
+      default:
+        realDataSource = "jhu";
+        break;
+    }
+  }
+
+  let srcString;
+  srcString = _data_sources[realDataSource].name;
+
+  return `Data: ${srcString}; Updated: ${_dateUpdated}`;
+}
+
+var changeDataSourceSelection = function(newDataSource) {
+  $(".datasrc-select").val(newDataSource).change();
+};
+
+var doRender = function(chart, isInAnimation = false, target = chart.id) {
    if (chart.data.length == 0) {
-     let message;
+     let dType = calculateDataOptions(chart.dataRawSelection);
+
+     let dataSourceNeeded = chart.dataSourceNeeded + "-" + dType.dataSourceNeeded;
+
+     let message = "";
+     if (_data_sources[_data_src].provides.indexOf(dataSourceNeeded) == -1) {
+       message += `<b>${_data_sources[_data_src].name}</b> does not provide any data for your selection. (There may be data on other graphs, just not this one 😞.)`;
+
+       message += `<br><br>`;
+       message += `The good news is that your specific graph's data (<i>${dataSourceNeeded}</i>) is provided in the following datasets:`;
+
+       message += `<ul>`
+       for (let dataSrcKey in _data_sources) {
+         let d = _data_sources[dataSrcKey];
+         if (d.provides && d.provides.indexOf(dataSourceNeeded) != -1) {
+           message += `<li>${d.name} [<a href="javascript:changeDataSourceSelection('${dataSrcKey}');">Change to it now</a>]</li>`;
+         }
+       }
+
+       message += `</ul>`
+     }
+
+
+     /*
+
      if (_data_src == "ctp" && (chart.self == "countries" || chart.self == "countries-normalized")) {
        message = "The COVID Tracking Project provides data only for the United States.  See US data below. :)"
      } else {
        message = "There is no data available to display for your selected options.";
      }
+     */
      
      if (chart.highlight == "(None)" && chart.show == "highlight-only") {
       message = "You are asking for the impossible, I like the way you think! :)<br><br>" +
         `However, there is nothing to display when you select <b>(None)</b> as the highlight and then ask to show <b>"Highlight Only"</b>.`;
      }
 
-    $("#" + chart.id).html(`<div class="text-center divoc-graph-loading"><div role="status" style="padding-top: 20px;">
+    $("#" + chart.id).html(`<div class="divoc-graph-loading"><div role="status" style="padding: 20px;">
       ${message}
     </div></div>`);
     return;
@@ -2059,8 +2536,15 @@ var doRender = function(chart, isInAnimation = false) {
 
   var margin = { top: 10, right: 20, bottom: 45, left: 40 };
 
-  var cur_width = $("#sizer").width();
-  _client_width = cur_width;
+  var cur_width;
+  
+  if (target) {
+    cur_width = $("#sizer").width();
+    _client_width = cur_width;
+    cur_width -= 2;
+  } else {
+    cur_width = 1108;
+  }
 
   var height = 500;
   var isSmall = false;
@@ -2076,6 +2560,10 @@ var doRender = function(chart, isInAnimation = false) {
     margin.right = 10;
   }
 
+  if (!target) {
+    margin.top += 25;
+  }
+
   let future_date, future_time_added_right = 0;
   //future_date = new Date("2020-11-21");
 
@@ -2086,11 +2574,12 @@ var doRender = function(chart, isInAnimation = false) {
   if (labelOffGrid && future_time_added_right < 10) {
     let maxCountryLength = 0;
     for (let s of highlights) {
-      maxCountryLength = Math.max(maxCountryLength, s.length);
+      if (s) { maxCountryLength = Math.max(maxCountryLength, s.length); }
     }
     if (isSmall && maxCountryLength > 12) { maxCountryLength = 12; }
 
     margin.right += Math.ceil(maxCountryLength * 9);
+    if (!isSmall && margin.right < 80) { margin.right = 80; }
   }
 
   var width = cur_width - margin.right - margin.left;
@@ -2152,9 +2641,13 @@ var doRender = function(chart, isInAnimation = false) {
           dataInScope = d.data;
         }
 
-        if (dataInScope.length > 0) {            
-          let max = _.maxBy(dataInScope, 'cases').cases;
-          if (max > maxCases) { maxCases = max; }
+        if (dataInScope.length > 0) {       
+          let max = _.maxBy(dataInScope, 'cases')
+          
+          if (max) {
+            max = max.cases;
+            if (max > maxCases) { maxCases = max; }
+          }
         }
       }
     }
@@ -2177,8 +2670,13 @@ var doRender = function(chart, isInAnimation = false) {
     }
   }
   
-  if (chart.yAxisScale == "currentMax" || chart.yAxisScale == "both") {
+  if (!f || chart.yAxisScale == "highlightCurMax" || chart.yAxisScale == "currentMax" || chart.yAxisScale == "both") {
     let maxCasesValue = 0;
+
+    if (f && chart.yAxisScale == "highlightCurMax") {
+      scale_data = _.filter(scale_data, function (d) { return highlights.indexOf(d.country) != -1; });
+    }
+
     for (let d of scale_data) {
       let last;
       if (d.data.length > 0) {
@@ -2208,8 +2706,11 @@ var doRender = function(chart, isInAnimation = false) {
 
   if (isRatio) {
     scale_y0 = 0;
-    scale_yMax = _.maxBy(scale_data, 'maxCases').maxCases;
-    if (scale_yMax > 1) { scale_yMax = 1; }
+
+    if (scale_yMax > 1) {
+      scale_yMax = _.maxBy(scale_data, 'maxCases').maxCases;
+      if (scale_yMax > 1) { scale_yMax = 1; }
+    }
   }
 
   casesScale.domain([scale_y0, scale_yMax]).range([height, 0]);
@@ -2221,9 +2722,20 @@ var doRender = function(chart, isInAnimation = false) {
   }
 
   // SVG
-  $("#" + chart.id).html("");
+  var svg, baseSvg;
 
-  var svg = d3.select("#" + chart.id)
+  if (target == null) {
+    baseSvg = svg = d3.create("svg")
+    .attr("version", 1.1)
+    .attr("xmlns", "http://www.w3.org/2000/svg")    
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .style("width", width + margin.left + margin.right)
+    .style("height", height + margin.top + margin.bottom);
+  } else {
+    $("#" + chart.id).html("");
+
+    baseSvg = svg = d3.select("#" + target)
     .append("svg")
     .attr("version", 1.1)
     .attr("xmlns", "http://www.w3.org/2000/svg")    
@@ -2231,6 +2743,7 @@ var doRender = function(chart, isInAnimation = false) {
     .attr("height", height + margin.top + margin.bottom)
     .style("width", width + margin.left + margin.right)
     .style("height", height + margin.top + margin.bottom);
+  }
 
   svg.append("style");
     
@@ -2241,14 +2754,13 @@ var doRender = function(chart, isInAnimation = false) {
   var tip = d3.tip().attr('class', 'd3-tip').html(tip_html(chart));
   svg.call(tip);
 
-  /*
-  svg.append("text")
-    .attr("x", -55)
-    .attr("y", -20)
-    .attr("class", "chart-header")
-    .text(generateDataLabel(chart, true));
-  */
-
+  if (!target) {
+    svg.append("text")
+      .attr("x", -margin.left + 2)
+      .attr("y", -margin.top + 20)
+      .attr("class", "chart-header")
+      .text(generateDataLabel(chart, true));
+  }
 
   if (alignRight) {
     svg.append("rect")
@@ -2482,12 +2994,15 @@ var doRender = function(chart, isInAnimation = false) {
   if (chart.dataSelection == 'cases') { xAxisLabel += "case"; if (chart.y0 != 1) { xAxisLabel += "s"; }}
   else if (chart.dataSelection == 'active') { xAxisLabel += "active case"; if (chart.y0 != 1) { xAxisLabel += "s"; }}
   else if (chart.dataSelection == 'deaths' || chart.dataSelection == 'mortalityRate') { xAxisLabel += "death"; if (chart.y0 != 1) { xAxisLabel += "s"; } }
-  else if (chart.dataSelection == 'testPositivity') { xAxisLabel += "test"; if (chart.y0 != 1) { xAxisLabel += "s"; } }
+  else if (chart.dataSelection == 'tests' || chart.dataSelection == 'testPositivity') { xAxisLabel += "test"; if (chart.y0 != 1) { xAxisLabel += "s"; } }
   else if (chart.dataSelection == 'recovered') { xAxisLabel += "recover"; if (chart.y0 != 1) { xAxisLabel += "ies"; } else { xAxisLabel += "y"; }}
+  else if (chart.dataSelection == 'hospitalized') { xAxisLabel += "hospitalization"; if (chart.y0 != 1) { xAxisLabel += "s"; }}
   if (chart.normalizePopulation && !chart.isRatio) { xAxisLabel += "/1m people"; }
 
+  /*
   if (chart.dataSelection == 'tests') { xAxisLabel = "Days since Apr. 12"; }
   else if (chart.dataSelection == 'hospitalized') { xAxisLabel = "Days since Apr. 12"; }
+  */
 
   if (alignRight) {
     xAxisLabel = "Number of days ago";
@@ -2510,7 +3025,7 @@ var doRender = function(chart, isInAnimation = false) {
     else if (dType.baseDataType == 'tests') { yAxisLabel += "COVID-19 Tests" }
     else if (dType.baseDataType == 'hospitalized') { yAxisLabel += "Hospitalizations of COVID-19" }
     else if (dType.baseDataType == 'testPositivity') { yAxisLabel += "Test Positivity Rate" }
-    else if (dType.baseDataType == 'mortalityRate') { yAxisLabel += "Mortality Rate" }
+    else if (dType.baseDataType == 'mortalityRate') { yAxisLabel += "Case Fatality Rate" }
     if (chart.normalizePopulation && !dType.isRatio) {
       yAxisLabel += "/1m people";
     }
@@ -2539,27 +3054,14 @@ var doRender = function(chart, isInAnimation = false) {
   var yaxis_g = svg.append("g");
   _draw_yAxisLabel(yaxis_g, calculateDataOptions(chart.dataRawSelection));
 
+  svg.append("text")
+  .attr("x", width)
+  .attr("y", height + 32)
+  .attr("class", "text-credits")
+  .attr("text-anchor", "end")
+  .text(getAttribution(chart));
 
-
-  if (_data_src == "ctp") {
-    svg.append("text")
-    .attr("x", width)
-    .attr("y", height + 32)
-    .attr("class", "text-credits")
-    .attr("text-anchor", "end")
-    .text(`Data: The COVID Tracking Project; Updated: ${_dateUpdated}`);
-  } else {
-    svg.append("text")
-    .attr("x", width)
-    .attr("y", height + 32)
-    .attr("class", "text-credits")
-    .attr("text-anchor", "end")
-    .text(`Data: Johns Hopkins CSSE; Updated: ${_dateUpdated}`);
-  }
-
-  svg.append("a")
-    .attr("href", "http://waf.cs.illinois.edu/")
-    .append("text")
+  svg.append("text")
     .attr("x", width)
     .attr("y", height + 32 + 10)
     .attr("class", "axis-title")
@@ -2569,16 +3071,24 @@ var doRender = function(chart, isInAnimation = false) {
     .text(`Interactive Visualization: https://91-DIVOC.com/ by @profwade_`);
 
 
-  chart.data.sort(function (d1, d2) {
-    var highlight_d1 = ( highlights.indexOf(d1.country) != -1 );
-    var highlight_d2 = ( highlights.indexOf(d2.country) != -1 );
+    chart.data.sort(function (d1, d2) {
+      var highlight_d1 = ( highlights.indexOf(d1.country) != -1 );
+      var highlight_d2 = ( highlights.indexOf(d2.country) != -1 );
+  
+      if      ( highlight_d1 && !highlight_d2) { return 1; }
+      else if (!highlight_d1 &&  highlight_d2) { return -1; }
+      else {
+        let d1_d = d1.data[ d1.data.length - 1 ].cases;
+        let d2_d = d2.data[ d2.data.length - 1 ].cases;
+  
+        if      (d1_d > d2_d) { return -1; }
+        else if (d1_d < d2_d) { return 1; }
+        else { return 0; }
+      }
+    });
 
-    if      ( highlight_d1 && !highlight_d2) { return 1; }
-    else if (!highlight_d1 &&  highlight_d2) { return -1; }
-    else { return 0; }
-  });
+  var highlightedLabelLocations = {}, nonhighlightedLabelLocations = {};
 
-  let labelOffGrid_x = daysScale(0) + 5;
   var renderLineChartLabels = function (svg, i, data, dasharray) {
     var countryData = data[i];
     if (!countryData.data[0]) { return; }
@@ -2627,11 +3137,40 @@ var doRender = function(chart, isInAnimation = false) {
     if (labelOffGrid) {
       countryText
         .attr("x", function() {
-          return labelOffGrid_x;
+          return daysScale( -lastDataPoint.daysAgo ) + 5;
         })
         .attr("y", function () {
           if (lastDataPoint.cases < scale_y0) { return height + 5; }
-          return casesScale( lastDataPoint.cases );
+
+          let yLocation = Math.round( casesScale( lastDataPoint.cases ) );
+          let yChange = 0;
+          let yRange = 5;
+          let labelLocations;
+
+          if (isHighlighted) {
+            yRange = 10;
+            labelLocations = highlightedLabelLocations;
+          } else {
+            labelLocations = nonhighlightedLabelLocations;
+          }
+
+          while (
+            yChange < yRange * 2 &&
+            labelLocations[yLocation + yChange] &&
+            labelLocations[yLocation - yChange] 
+          ) {
+            yChange++;
+          }
+
+          if (yChange == yRange * 2) { }
+          else if ( !labelLocations[yLocation + yChange] ) { yLocation = yLocation + yChange; }
+          else if ( !labelLocations[yLocation - yChange] ) { yLocation = yLocation - yChange; }
+
+          for (let dy = -yRange; dy <= yRange; dy++) {
+            labelLocations[yLocation + dy] = 1;
+          }
+
+          return yLocation;
         })
         .attr("alignment-baseline", "middle")
         .attr("dominant-baseline", "middle")
@@ -2794,6 +3333,7 @@ var doRender = function(chart, isInAnimation = false) {
               additionalHighlight_rerender(chart);
               tip.hide();
               render(chart);
+              updateQueryString(chart);
             }
           }
         });
@@ -2882,7 +3422,7 @@ var doRender = function(chart, isInAnimation = false) {
   }
 
 
-  if (!f && chart.highlight != "(None)") {
+  if (target && !f && chart.highlight != "(None)") {
     var desc = `${chart.y0} `
     if (chart.dataSelection == 'cases') { desc += "case"; if (chart.y0 != 1) { desc += "s"; }}
     else if (chart.dataSelection == 'active') { desc += "active case"; if (chart.y0 != 1) { desc += "s"; }}
@@ -2898,11 +3438,13 @@ var doRender = function(chart, isInAnimation = false) {
       </div>`);
   }
 
-  if (minHighlightHeight > (0.67 * height) && !_animation_timeout && chart.highlight != "(None)" && minHighlightHeight < 99999) {
+  if (target && minHighlightHeight > (0.67 * height) && !_animation_timeout && chart.highlight != "(None)" && minHighlightHeight < 99999) {
     $("#" + chart.id).append(`<div class="alert alert-info" style="margin-top: 10px; margin-bottom: 0px; text-align: center; font-size: 12px;">Note: All of your highlighted data is in the bottom third of the graph. <a href="#" onclick="scaleToHighlight(event)">You can get a zoomed-in view of the graph by setting <b>Y-Axis</b> to <b>"Scale to Highlight"</b>.</a></div>`);
   }
 
-  if (!_animation_timeout) {
+  if (!_animation_timeout && target != null) {
     gtag("event", "render", {event_category: chart.self});
   }
+
+  return baseSvg;
 };

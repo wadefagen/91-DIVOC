@@ -17,6 +17,9 @@ layout: home
   <li>
     #04: <a href="pages/coronavirus-contribution-by-state/">Coronavirus Contribution by State</a>
   </li>
+  <li>
+    <b>NEW</b> #05: <a href="pages/interactive-visualziation-of-covid-19-in-illinois/">Interactive Visualization of COVID-19 in Illinois</a>
+  </li>
 </ul>
 
 {% assign updates = site.updates | sort: 'date' | reverse | limit: 5 %}
@@ -38,14 +41,27 @@ layout: home
 {% elsif update.visualization == 4 or update.newVisualization == 4 %}
 {% assign viz = "91-DIVOC-04: &quot;Coronavirus Contribution by State&quot;" %}
 {% assign viz_url = "/pages/coronavirus-contribution-by-state/" %}
+
+{% elsif update.visualization == 5 or update.newVisualization == 5 %}
+{% assign viz = "91-DIVOC-05: &quot;Interactive Visualization of COVID-19 in Illinois&quot;" %}
+{% assign viz_url = "/pages/interactive-visualziation-of-covid-19-in-illinois/" %}
+
+{% endif %}
+
+{% if viz_url %}
+{% assign img_url = viz_url %}
+{% endif %}
+
+{% if update.img_url %}
+{% assign img_url = update.img_url %}
 {% endif %}
 
 <hr>
 
 {% if update.img %}
-  {% if update.visualization %}<a href="{{viz_url}}">{% endif %}
+  {% if img_url %}<a href="{{img_url}}">{% endif %}
   <img alt="{{viz}}" src="/updates/{{update.img}}" class="img-fluid m-2" style="border: solid 1px black; max-width: 40%; max-height: 200px; text-align: center; float: right;">
-  {% if update.visualization %}</a>{% endif %}
+  {% if img_url %}</a>{% endif %}
 {% endif %}
 
 <h3 class="mb-0">{{ update.date | date: "%B %-d, %Y" }} &ndash; {{ update.title }}</h3>

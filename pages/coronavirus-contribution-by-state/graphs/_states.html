@@ -98,14 +98,21 @@
       <div style="clear: both;"></div>
     </div>
   </div>
-  <div class="chart-footer" style="border-top: 0px; font-size: 10px;">
-    <span style="float: right;">
-      Save Current Image:
-      <a href="#" class="saveAs-png" onclick="saveGraphImage('png', event);">PNG</a> |
-      <a href="#" onclick="saveGraphImage('svg', event);">SVG</a>
-    </span>    
+  <div class="chart-footer" style="border-top: 0px; font-size: 14px;">
     <div class="extra-highlights" data-chart="states"></div>
-    <a href="#" class="add-highlight" data-chart="states">+ Add Additional Highlight</a>
+
+    <div class="row">
+      <div class="col-sm-8">
+        <a href="#" class="add-highlight" data-chart="states">+ Add Additional Highlight</a>
+      </div>
+
+      <div class="col-sm-4 text-right">
+        Save Current Image:
+        <a href="#" class="saveAs-png" onclick="saveGraphImage('png', event);">PNG</a> |
+        <a href="#" onclick="saveGraphImage('svg', event);">SVG</a>
+      </div>
+    </div>
+
     <div class="query-string" data-chart="states"></div>
   </div>
 </section>

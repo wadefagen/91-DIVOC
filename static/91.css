@@ -92,11 +92,33 @@ div.card {
   padding-left: 6px;
   border-left-width: 10px;
 }
+
 .explore-more > h6 {
+  font-size: 18px;
+  margin-left: 5px;
   margin-bottom: 0px;
 }
 
-.explore-more ul {
-  font-size: 14px;
-  margin-bottom: 0px;;
+@media (max-width: 767.98px) {
+  .explore-more ul {
+    font-size: 16px;
+    margin-bottom: 0px;
+  }
+
+  .explore-more ul li {
+    padding: 6px 4px 6px 0px;
+    border-bottom: dotted 1px black;
+  }
+
+  .explore-more ul li:last-of-type {
+    border-bottom-width: 0px;
+  }
+
+}
+
+@media (min-width: 768px) {
+
+  .explore-more ul {
+    margin-bottom: 0px;
+  }
 }

@@ -27,7 +27,12 @@ This page archives all major updates to 91-DIVOC.  Click on any update to view t
 {% elsif update.visualization == 4 or update.newVisualization == 4 %}
 {% assign viz = "91-DIVOC-04: &quot;Coronavirus Contribution by State&quot;" %}
 {% assign viz_url = "/pages/coronavirus-contribution-by-state/" %}
+
+{% elsif page.visualization == 5 or page.newVisualization == 5 %}
+{% assign viz = "91-DIVOC-05: &quot;Interactive Visualization of COVID-19 in Illinois&quot;" %}
+{% assign viz_url = "/pages/interactive-visualziation-of-covid-19-in-illinois/" %}
 {% endif %}
+
 
 <li>
   {{ update.date | date: "%B %-d, %Y" }}

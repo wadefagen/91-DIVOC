@@ -39,7 +39,7 @@ def format_rows_to_JHU(row):
   year = d[0:4]
   month = d[4:6]
   day = d[6:8]
-  row['Date'] = month + "-" + day + "-" + year
+  row['Date'] = year + "-" + month + "-" + day
 
   row["Province_State"] = stateDict[ row["Province_State"] ]
 

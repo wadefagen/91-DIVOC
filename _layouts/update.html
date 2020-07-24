@@ -2,18 +2,38 @@
 layout: bare
 ---
 
-
-{% if page.visualization == 1 %}
+{% if page.visualization == 1 or page.newVisualization == 1 %}
 {% assign viz = "91-DIVOC-01: &quot;An interactive visualization of the exponential spread of COVID-19&quot;" %}
 {% assign viz_url = "/pages/covid-visualization/" %}
-{% else if page.visualization == 4 %}
+
+{% elsif page.visualization == 2 or page.newVisualization == 2 %}
+{% assign viz = "91-DIVOC-02: &quot;COVID-19 Data for Locations of People You Love&quot;" %}
+{% assign viz_url = "/pages/covid-by-your-locations/" %}
+
+{% elsif page.visualization == 3 or page.newVisualization == 3 %}
+{% assign viz = "91-DIVOC-03: &quot;Coronavirus Visualized as a 1,000-Person Community&quot;" %}
+{% assign viz_url = "/pages/coronavirus-1000-person-community/" %}
+
+{% elsif page.visualization == 4 or page.newVisualization == 4 %}
 {% assign viz = "91-DIVOC-04: &quot;Coronavirus Contribution by State&quot;" %}
 {% assign viz_url = "/pages/coronavirus-contribution-by-state/" %}
+
+{% elsif page.visualization == 5 or page.newVisualization == 5 %}
+{% assign viz = "91-DIVOC-05: &quot;Interactive Visualization of COVID-19 in Illinois&quot;" %}
+{% assign viz_url = "/pages/interactive-visualziation-of-covid-19-in-illinois/" %}
 {% endif %}
+
 
 <div class="container mt-4">
   <h3>{{page.title}}</h3>
+
   <h5>{{ page.date | date: "%B %-d, %Y" }} &gt; <a href="{{vis_url}}">{{viz}}</a></h5>
   <hr>
+  {% if page.img %}
+  {% if viz_url %}<a href="{{viz_url}}">{% endif %}
+  <img alt="{{viz}}" src="/updates/{{page.img}}" class="img-fluid m-2" style="border: solid 1px black; max-width: 40%; max-height: 200px; text-align: center; float: right;">
+  {% if viz_url %}</a>{% endif %}
+  {% endif %}  
+
   {{content}}
 </div>

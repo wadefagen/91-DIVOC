@@ -11,10 +11,9 @@ $(window).resize(function () {
   if (_rawData != null) {
     var new_width = $("#sizer").width();
     if (_client_width != new_width) {
-      render( charts['countries'] );
-      render( charts['states'] );
-      render( charts['countries-normalized'] );
-      render( charts['states-normalized'] );
+      for (let chartid in charts) {
+        render( charts[chartid] );
+      }
     }
   }
 });
@@ -395,7 +394,7 @@ var prep_data = function(chart) {
 
 var calculateDaysAgo = function(date) {
   let dateParts = date.split("-");
-  let dateObj = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
+  let dateObj = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
   let daysAgo = (_dateObj_today_time - dateObj.getTime()) / (1000 * 3600 * 24);
   // TODO: 
   return Math.ceil(daysAgo);
@@ -498,7 +497,7 @@ var process_data = function(data, chart, isSubdata = false, noPrepData = false) 
       date = dates[i];
 
       let dateParts = date.split("-");
-      let dateObj = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
+      let dateObj = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
       let daysAgo = (_dateObj_today_time - dateObj.getTime()) / (1000 * 3600 * 24);
       // TODO: 
       daysAgo = Math.ceil(daysAgo);
@@ -711,7 +710,7 @@ var doInitialDataLoad = function() {
       populationData = result[1];
   
       let dateParts = data[data.length - 1].Date.split("-");
-      _dateObj_today = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
+      _dateObj_today = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
       _dateObj_today_time = _dateObj_today.getTime();
       
       _rawData = data;
@@ -1328,7 +1327,7 @@ var tip_html = function(chart) {
     daysSince += `<b>${daysAgo}</b> day${(daysAgo != 1)?"s":""} ago)`;
 
     let dateParts = cData.date.split("-");
-    let date = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
+    let date = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
 
     let dateStr = "";
     if (date instanceof Date) {
@@ -1519,7 +1518,6 @@ const colorScale_colors = [
   { h: 150, s: 61, l: 26 },
   { h: 184, s: 90, l: 26 },
   { h: 320, s: 90, l: 26 },
-
 ];
 
 var regionColors = {};
@@ -1619,6 +1617,9 @@ var doRender = function(chart) {
     let r1 = stateToRegionMap[d1];
     let r2 = stateToRegionMap[d2];
 
+    if (!r1) { r1 = "~"; }
+    if (!r2) { r2 = "~"; }
+
     if (r1 == r2) { r1 = d1; r2 = d2; }
 
     if (r1 < r2) { return -1; }
@@ -1692,6 +1693,7 @@ var doRender = function(chart) {
 
   var cur_width = $("#sizer").width();
   _client_width = cur_width;
+  cur_width -= 2;
 
   var height = 500;
   var isSmall = false;
@@ -2012,9 +2014,7 @@ var doRender = function(chart) {
     .text(`Data: Johns Hopkins CSSE; Updated: ${_dateUpdated}`);
   }
 
-  svg.append("a")
-    .attr("href", "http://waf.cs.illinois.edu/")
-    .append("text")
+  svg.append("text")
     .attr("x", width)
     .attr("y", height + 32 + 10)
     .attr("class", "axis-title")
