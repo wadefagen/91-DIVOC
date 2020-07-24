@@ -26,6 +26,7 @@ layout: home
 
 {% for update in updates limit: 5 %}
 
+
 {% if update.visualization == 1 or update.newVisualization == 1 %}
 {% assign viz = "91-DIVOC-01: &quot;An interactive visualization of the exponential spread of COVID-19&quot;" %}
 {% assign viz_url = "/pages/covid-visualization/" %}
