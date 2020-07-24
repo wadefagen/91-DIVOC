@@ -3078,6 +3078,9 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
       if      ( highlight_d1 && !highlight_d2) { return 1; }
       else if (!highlight_d1 &&  highlight_d2) { return -1; }
       else {
+        if (!d1.data || d1.data.length == 0) { return 0; }
+        if (!d2.data || d2.data.length == 0) { return 0; }
+
         let d1_d = d1.data[ d1.data.length - 1 ].cases;
         let d2_d = d2.data[ d2.data.length - 1 ].cases;
   
