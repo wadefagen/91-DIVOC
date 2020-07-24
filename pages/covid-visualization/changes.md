@@ -16,6 +16,19 @@ desc: This change log lists the major changes made to "An interactive visualizat
   <a href="/pages/covid-visualization/">An interactive visualization of the exponential spread of COVID-19 &gt;&gt;</a>
 </div>
 
+## July 24 - Quality
+
+In all of these visualizations, I created visualizations that helped me make sense of the COVID-19 data.  At this point, I can spend hours diving into the data and there's few questions that I am unable to answer using 91-DIVOC graphs.  Therefore, for the next week, I'm looking to explore better documentation of this tool, fix any remaining bugs, and focus on quality improvements.  As part of this, I have already:
+
+- Resolved or labeled all issues and pull requests on the [91-DIVOC github page](https://github.com/wadefagen/91-DIVOC).
+- Created a [guide](/pages/interactive-visualziation-of-covid-19-in-illinois/guide/) for the Illinois-specific visualization detailing the various features of the visualization.
+- Fixed several bugs that were brought to my attention via e-mail.
+
+Additionally, I've started some initial work on some visualizations beyond COVID-19.  If you'd like to get a once-a-month update on data-forward visualizations, I [have an e-mail list](https://forms.gle/oLXWdijmr9i2Yxau9) that I'll be  providing a monthly update of all the latest visualizations to nerd out with.
+
+Let me know if you find any bugs and thanks for all the support! :)
+
+
 ## July 21 - Interactive Visualization of COVID-19 in Illinois
 
 - Launched [91-DIVOC-05: "Interactive Visualization of COVID-19 in Illinois"](/pages/interactive-visualziation-of-covid-19-in-illinois/) containing detailed COVID-19 data from the Illinois Dept. of Health.
