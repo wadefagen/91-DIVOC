@@ -1,0 +1,166 @@
+---
+layout: bare
+
+social-img: https://91-divoc.com/pages/covid-by-your-locations/img.png
+title: A project to display COVID-19 data only for the locations that matter most to you. Updated daily.
+---
+
+<style>
+  body { min-height: 100vh; }
+  .content-wrapper {
+    min-height: 100vh;
+    padding-bottom: 100px;
+    overflow: hidden;
+    display: block;
+    position: relative;    
+  }
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 75px;
+  }
+</style>
+
+<div class="content-wrapper">
+<header class="container-fluid header-small">
+  <div class="container">
+    <h1>
+      <a href="/">91-DIVOC</a>
+    </h1>
+  </div>
+</header>
+
+<link rel="stylesheet" href="css.css">
+
+<div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1);">
+  <div class="container lead">
+    <h2>Supporting 91-DIVOC</h2>
+  </div>
+</div>
+
+
+<div class="container viz">
+  <h3>Overview</h3>
+
+  <p>
+    91-DIVOC started a side project for me over Spring Break.  Over the past two weeks, I'm incredibly humbled by the amount of people
+    who have found this site useful.  To date this site has been viewed by over 3,000,000 times from nearly every country in the world.
+  </p>
+
+  <p>
+    During the past week, I spent a lot of time optimizing the site to minimize the cost.  If you have a technical background, here
+    are a few of the things I've done:
+  </p>
+
+  <ul>
+    <li>Using aggressive HTTP compression to minimize the bandwidth cost of files hosted from 91-DIVOC</li>
+    <li>Using CDNs for all libraries used</li>
+    <li>Minimizing the number of files requested per page load by combining files where possible (eg: css, js, etc)</li>
+    <li>Enabling both http:// and https:// access to allow for less CPU-intensive HTTP connections</li>
+  </ul>
+
+  <p>
+    These changes have helped reduce the cost of the site significantly.  However, the bandwidth cost alone is 
+  </p>  
+
+
+
+
+  <div class="alert alert-secondary" style="margin-top: 10px; padding-top: 20px;">
+    There is a lot of COVID-19 data out there.  Increasingly, I have been focused on the locations where I have family and close friends.
+    <ul>
+      <li>Displays COVID-19 data for <b>only the locations you select</b>.</li>
+      <li>This pages <b>remembers your locations</b> when you come back (using local storage, your locations are never sent to the server).</li>
+    </ul>
+
+    This is <b>updated daily</b> with the Johns Hopkins CSSE data, which is typically released around 7:00pm Central.
+  </div>
+
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Location</th>
+          <th>Confirmed Cases</th>
+          <th>Total Deaths</th>
+        </tr>
+      </thead>
+
+      <tbody id="datatable">
+      </tbody>
+
+      <thead>
+        <tr>
+          <th colspan="3" style="background-color: hsla(199, 100%, 94%, 1);">
+            <div>Add New Location:</div>
+            <div class="btn-group" style="width: 100%; max-width: 600px;">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><b>County</b>:</span>
+              </div>
+              <input type="text" class="form-control" id="addLocation">
+            </div>
+            <div style="font-weight: normal; font-size: 12px; margin-left: 3px;">Most data is divided by <b>counties</b> (not cities), so try the <b>county name</b> of the locations that matter most to you.</div>
+          </th>
+        </tr>
+      </thead>
+
+    </table>
+  </div>
+
+  <hr>
+  
+  <div class="container-fluid">
+    <div class="container lead" style="padding: 0px;">
+      <div><b>Global and State-level Visualization</b>: <a href="../covid-visualization/">91-DIVOC #01: An interactive visualization of the exponential spread of COVID-19</a></div>
+      <div><b>More Details</b>: <a href="/">91-DIVOC #02 - Local Storage</a></div>
+      <div><b>COVID-19 Dataset</b>: <a href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series" target="_blank">2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns Hopkins CSSE</a></div>
+    </div>
+  </div>
+  
+  <noscript>
+    <style>.social-hide { display: none; }</style>
+    <img class="social-hide" itemprop="image" src="img.png">
+  </noscript>
+
+</div>
+
+<footer class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <br>
+        <div style="font-size: 12px;">
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/">(CC) BY-SA 4.0</a>
+        </div>
+      </div>
+      <div class="col-9" style="text-align: right;">
+        <div style="color: #ddd;">&ndash; wade</div>
+        <div style="font-size: 12px;">
+          <a href="https://waf.cs.illinois.edu">Website</a> | 
+          <a href="https://www.instagram.com/profwade/">Instagram</a> |
+          <a href="https://www.twitter.com/profwade_/">Twitter</a> |
+          <a href="https://www.github.com/wadefagen/">GitHub</a>
+        </div>    
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js" integrity="sha256-VeNaFBVDhoX3H+gJ37DpT/nTuZTdjYro9yBruHjVmoQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.9/jquery.csv.min.js"></script>
+
+<script src="js.js"></script>
+
+<!--
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="d3-tip.js"></script>
+-->

@@ -1,0 +1,68 @@
+---
+layout: bare
+
+social-img: https://91-divoc.com/pages/covid-visualization/img.png
+title: An interactive visualization of the exponential spread of COVID-19
+---
+
+<link rel="stylesheet" href="css.css">
+
+<div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1);">
+  <div class="container lead">
+    <h2>An interactive visualization of the exponential spread of COVID-19</h2>
+    A project to explore the global growth of COVID-19.  Updated daily.  <a href="overview.html">Overview and motivations</a>.
+  </div>
+</div>
+
+<div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1); background-color: hsla(270, 30%, 97%, 1);">
+  <div class="container pt-3">
+    This page is a single-chart subset of the full 91-DIVOC visualization.  You can view the other visualizations in the following pages:
+    <ul>
+      <li>
+        Single Page, Main Visualization: <a href="index.html">All Four Visualizations</a>
+      </li>
+      <li>
+        Raw Data:
+        {% if page.name == "countries.html" %}<b>{% endif %}<a href="countries.html">Countries</a>{% if page.name == "countries.html" %}</b>{% endif %},
+        {% if page.name == "states.html" %}<b>{% endif %}<a href="states.html">US States</a>{% if page.name == "states.html" %}</b>{% endif %}    
+      </li>
+      <li>
+        Population Normalized:
+        {% if page.name == "countries-normalized.html" %}<b>{% endif %}<a href="countries-normalized.html">Countries</a>{% if page.name == "countries-normalized.html" %}</b>{% endif %},
+        {% if page.name == "states-normalized.html" %}<b>{% endif %}<a href="states-normalized.html">US States</a>{% if page.name == "states-normalized.html" %}</b>{% endif %}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="container">
+  <div id="sizer"></div>
+  {{content}}
+</div>
+
+
+<div class="container-fluid viz" style="margin-top: 20px;">
+  <div class="container lead">
+    <div><b>More Details</b>: <a href="/">91-DIVOC #01 - COVID-19 Dataset</a></div>
+    <div><b>COVID-19 Dataset</b>: <a href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series" target="_blank">2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns Hopkins CSSE</a></div>
+    <div><b>Population Datasets</b>:
+      <a href="https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population">Wikipedia, list of countries</a> and 
+      <a href="https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States_by_population">Wikipedia, list of US states</a>
+    </div>
+  </div>
+</div>
+
+<noscript>
+  <style>.social-hide { display: none; }</style>
+  <img class="social-hide" itemprop="image" src="img.png">
+</noscript>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js" integrity="sha256-VeNaFBVDhoX3H+gJ37DpT/nTuZTdjYro9yBruHjVmoQ=" crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="d3-tip.js"></script>
+<script src="../jhu-updated.js"></script>
+<script src="vis.js?v=20200421"></script>

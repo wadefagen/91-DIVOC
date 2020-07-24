@@ -1,0 +1,167 @@
+<section data-chart="countries">
+  <div class="chart-header" style="margin-top: 20px;" id="countries">
+    <h2>New Confirmed COVID-19 Cases by Country per Day in Illinois</h2>
+  </div>
+  <div id="chart-countries" class="chart-viz">
+    <div class="text-center divoc-graph-loading">
+      <div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span> </div>
+      <div>Loading Visualization...</div>
+    </div>
+  </div>
+  <div class="chart-footer">
+    <div>
+      <div class="data-scale-float">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <div class="input-group-prepend">
+            <span class="input-group-text" style="background-color: #dde; font-weight: bold !important;">Data:</span>
+          </div>
+          <select class="form-control data-select" data-chart="countries">
+            <option value="cases">Cases</option>
+            <option value="cases-daily">New Cases /Day</option>
+            <option value="cases-daily-7" selected>New Cases /Day, 1 Wk. Average</option>
+            <option disabled="disabled">—————————</option>
+            <option value="deaths">Deaths</option>
+            <option value="deaths-daily">New Deaths /Day</option>
+            <option value="deaths-daily-7">New Deaths /Day, 1 Wk. Average</option>
+            <option disabled="disabled">—————————</option>
+            <option value="tests">Tests</option>
+            <option value="tests-daily">New Tests /Day</option>
+            <option value="tests-daily-7">New Tests /Day, 1 Wk. Average</option>
+            <option disabled="disabled">—————————</option>
+            <option value="testPositivity">Test Positivity (Computed)</option>
+            <option value="testPositivity-daily-7">Test Positivity (Computed), 1 Wk. Avg.</option>
+            <option disabled="disabled">—————————</option>
+            <option value="testPositivityRate">Test Positivity (IL-DPH)</option>
+            <option value="testPositivityRate-daily-7">Test Positivity (IL-DPH), 1 Wk. Avg.</option>
+            <option disabled="disabled">—————————</option>
+            <option value="icu">ICU Utilization</option>
+            <option value="icu-daily-7">ICU Utilization, 1 Wk. Avg.</option>
+            <option disabled="disabled">—————————</option>
+            <option value="ventilator">Ventilators In Use</option>
+            <option value="ventilator-daily-7">Ventilators In Use, 1 Wk. Avg.</option>
+            <option disabled="disabled">—————————</option>
+            <option value="beds">Medical Beds In Use</option>
+            <option value="beds-daily-7">Medical Beds In Use, 1 Wk. Avg.</option>
+          </select>
+        </div>
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Scale:</span>
+          </div>          
+          <label class="btn btn-info scaleSelection" data-scale="log" data-chart="countries">
+            <input type="radio" name="scale" autocomplete="off"> Log
+          </label>
+          <label class="btn btn-info active scaleSelection" data-scale="linear" data-chart="countries">
+            <input type="radio" name="scale" autocomplete="off" checked> Linear
+          </label>
+        </div>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Highlight:</span>
+        </div>
+        <select class="form-control highlight-select" id="highlight-chart-countries" data-chart="countries">
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            Show:
+          </span>
+        </div>
+        <select class="form-control filter-select" id="filter-chart-countries" data-chart="countries">
+          <option value="highlight-only">Highlight Only</option>
+          <option disabled="disabled">——————</option>
+          <option value="Region: Northeast">Northeast Region Counties</option>
+          <option value="Region: North Central">N. Central Region Counties</option>
+          <option value="Region: Central">Central Region Counties</option>
+          <option value="Region: Southern">Southern Region Counties</option>
+          <option disabled="disabled">——————</option>
+          <option value="-10">Bottom 10 by Data</option>
+          <option value="-25">Bottom 25 by Data</option>
+          <option value="10">Top 10 by Data</option>
+          <option value="25" selected>Top 25 by Data</option>
+          <option value="50">Top 50 by Data</option>
+          <option disabled="disabled">——————</option>
+          <option value="agg-only">Regions/Cities Only</option>
+          <option disabled="disabled">——————</option>
+          <option value="all">Everything</option>
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">X-Axis:</span>
+        </div>
+        <select class="form-control xaxis-select" data-chart="countries">
+          <option value="right-all">All Data</option>
+          <option disabled="disabled">——————</option>
+          <option value="right-4wk">Recent 4 Weeks</option>
+          <option value="right-8wk">Recent 8 Weeks</option>
+          <option value="right-12wk" selected>Recent 12 Weeks</option>
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Y-Axis:</span>
+        </div>
+        <select class="form-control yaxis-select" data-chart="countries">
+          <option disabled="disabled">—— Highlight Scaling ——</option>
+          <option value="highlight">Scale To Highlight</option>
+          <option value="highlightCurMax">Current Highlight Value</option>
+          <option value="both" selected>All Highlight &amp; All Current</option>
+          <option disabled="disabled">—— All Data Scaling ——</option>
+          <option value="currentMax">All Current Values</option>
+          <option value="fixed">All Data</option>
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" style="float: right;" data-toggle="buttons">
+        <button class="btn btn-info animate-button" data-chart="countries">
+          &#9654; Animate
+        </button>
+      </div>
+
+      <span class="lesser-used-options" style="display: none;">
+      </span>
+
+      <div style="clear: both;"></div>
+    </div>
+  </div>
+
+  <div class="chart-footer" style="border-top: 0px; font-size: 14px;">
+    <div class="extra-highlights"></div>
+    <div class="extra-data"></div>
+
+    <div class="row">
+      <div class="col-sm-8">
+        <a href="#" class="add-highlight">+Add Additional Highlight</a>
+      </div>
+
+      <div class="col-sm-4 text-right">
+        Save:
+        <a href="#" class="saveAs-png" onclick="saveGraphImage('png', event);">PNG</a> |
+        <a href="#" onclick="saveGraphImage('svg', event);">SVG</a> |
+        <a href="#" onclick="saveGraphImage('gif', event);">GIF</a> |
+        <a href="#" onclick="saveGraphImage('webm', event);">WebM</a> |
+        <a href="#" onclick="saveGraphImage('csv', event);">CSV</a>
+      </div>
+    </div>
+
+    <div class="query-string" data-chart="countries" style="margin-top: 3px;"></div>
+  </div>
+
+  <div class="chart-footer" style="border-top: 0px; background-color: hsla(211, 100%, 97%, 1);">
+    <div class="btn-group btn-group-toggle" style="float: right;" data-toggle="buttons">
+      <button class="btn btn-primary report-button">
+        &#x1F4DD; Generate Report
+      </button>
+    </div>
+    <span class="report"></span>
+    <div style="clear: both;"></div>
+  </div>
+</section>

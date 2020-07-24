@@ -1,0 +1,118 @@
+<section data-chart="states">
+  <div class="chart-header" style="margin-top: 20px;" id="states">
+    <h2>New COVID-19 Cases by US States per Day</h2>
+  </div>
+  <div id="chart-states" class="chart-viz">
+    <div class="text-center divoc-graph-loading"><b>Loading Data...</b></div>
+  </div>
+  <div class="chart-footer">
+    <div>
+      <div class="data-scale-float">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Data:</span>
+          </div>
+          <select class="form-control data-select" data-chart="states">
+            <option value="cases">Total Confirmed Cases</option>
+            <option value="cases-daily">New Cases /Day</option>
+            <option value="cases-daily-7" selected>New Cases, 1 Wk. Avg.</option>
+            <option disabled="disabled">—————————</option>
+            <option value="deaths">Total Deaths</option>
+            <option value="deaths-daily">New Deaths /Day</option>
+            <option value="deaths-daily-7">New Deaths, 1 Wk. Avg.</option>
+            <option disabled="disabled">—————————</option>
+            <option value="tests">Total COVID-19 Tests</option>
+            <option value="tests-daily">New Tests /Day</option>
+            <option value="tests-daily-7">New Tests, 1 Wk. Avg.</option>
+            <option disabled="disabled">—————————</option>
+            <option value="hospitalized">Hospitalized Cases</option>
+            <option value="hospitalized-daily">New Hospitalized /Day</option>
+            <option value="hospitalized-daily-7">New Hosp., 1 Wk. Avg.</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Show:</span>
+        </div>
+        <select class="form-control filter-select" id="filter-chart-states" data-chart="states">
+          <option value="northeast">Only Northeast</option>
+          <option value="midwest">Only Midwest</option>
+          <option value="south">Only South</option>
+          <option value="west">Only West</option>
+          <option disabled="disabled">——————</option>
+          <option value="!northeast">Exclude Northeast</option>
+          <option value="!midwest">Exclude Midwest</option>
+          <option value="!south">Exclude South</option>
+          <option value="!west">Exclude West</option>
+          <option disabled="disabled">——————</option>
+          <option value="pop-small">&lt;5m Pop.</option>
+          <option value="pop-large">&gt;5m Pop.</option>
+          <option disabled="disabled">——————</option>
+          <option value="us-states" selected>All</option>
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">X-Axis:</span>
+        </div>
+        <select class="form-control xaxis-select" data-chart="states">
+          <option value="right-4wk">Recent 4 weeks</option>
+          <option value="right-8wk">Recent 8 weeks</option>
+          <option value="right-12wk">Recent 12 weeks</option>
+          <option value="right-all" selected>All data</option>
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">View:</span>
+        </div>
+        <select class="form-control display-select">
+          <option value="stacked" selected>Stacked Data</option>
+          <option value="pct">Stacked Percentage</option>
+          <option value="center">Centered</option>
+        </select>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Group By:</span>
+        </div>
+        <select class="form-control region-select">
+          <option value="census" selected>Census Bureau Regions</option>
+          <option value="BEA">Bureau of Economic Analysis </option>
+          <option value="USDA">USDA ARS Regions</option>
+          <option disabled="disabled">——————</option>
+          <option value="population">Population (Wikipedia)</option>
+          <option value="partisan">Governor Partisan Affiliation</option>
+        </select>
+      </div>
+
+      <span class="lesser-used-options" style="display: none;">
+      </span>
+
+      <div style="clear: both;"></div>
+    </div>
+  </div>
+  <div class="chart-footer" style="border-top: 0px; font-size: 14px;">
+    <div class="extra-highlights" data-chart="states"></div>
+
+    <div class="row">
+      <div class="col-sm-8">
+        <a href="#" class="add-highlight" data-chart="states">+ Add Additional Highlight</a>
+      </div>
+
+      <div class="col-sm-4 text-right">
+        Save Current Image:
+        <a href="#" class="saveAs-png" onclick="saveGraphImage('png', event);">PNG</a> |
+        <a href="#" onclick="saveGraphImage('svg', event);">SVG</a>
+      </div>
+    </div>
+
+    <div class="query-string" data-chart="states"></div>
+  </div>
+</section>

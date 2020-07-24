@@ -8,28 +8,75 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@profwade_" />
     <meta name="twitter:creator" content="@profwade_" />
-    <meta name="twitter:title" content="{{site.title}}" />
-    {% if page.title %}<meta name="twitter:description" content="{{page.title}}" />{% endif %}
+    {% if page.title %}<meta name="twitter:title" content="{{page.title | default: site.title}} | 91-DIVOC" />{% endif %}
+    {% if page.description %}<meta name="twitter:description" content="{{page.description}}" />{% endif %}
     {% if page.social-img %}<meta name="twitter:image" content="{{page.social-img}}" />{% endif %}
 
-    <meta property="og:title" content="{{site.title}}">
-    {% if page.title %}<meta property="og:description" content="{{page.title}}">{% endif %}
+    <meta property="og:title" content="{{page.title | default: site.title}} | 91-DIVOC">
+    {% if page.description %}<meta property="og:description" content="{{page.description}}">{% endif %}
     {% if page.social-img %}<meta property="og:image" content="{{page.social-img}}">{% endif %}
     <meta property="og:url" content="https://91-divoc.com{{page.url}}">
 
+    {% if page.description %}
+    <meta name="description" content="{{ page.description }}">
+    {% endif %}
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto|Roboto+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ "/static/91.css" | relative_url }}">
 
-    <title>{{site.title}}</title>
+    <title>{{page.title | default: site.title}} | 91-DIVOC</title>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-67232409-3"></script>
     <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-67232409-3');</script>
+    <script data-ad-client="ca-pub-9247209205736147" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>    
   </head>
   <body>
-    <div>
+    {% if page.url == "/" %}
+    <header class="container-fluid">
+      <div class="container">
+        <nav style="float: right;">
+          <a href="/">Home</a> &bull; <a href="/visualizations.html">All 91-DIVOC Visualizations</a>
+        </nav>
+        <h1>91-DIVOC</h1>
+        <h2><i>Let's flip the script on COVID-19 and build fantastic things!</i></h2>
+      </div>
+    </header>
+    {% else %}
+    <header class="container-fluid header-small">
+      <div class="container mb-1" style="line-height: 10px;">
+        <nav style="float: right; line-height: 24px;">
+          <a href="/">Home</a> &bull; <a href="/visualizations.html">Visualizations</a>
+        </nav>
+        <h1><a href="/">91-DIVOC</a></h1>
+        <span style="font-size: 12px; white-space: nowrap;">by <a href="https://waf.cs.illinois.edu/">Prof. Wade, Univ. of Illinois &#x1F9E1;&#x1F499;</a></span>
+      </div>
+    </header>
+    {% endif %}
+
     {{content}}
-    </div>
+
+    <footer class="container-fluid mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-12" style="text-align: right;">
+            <div style="color: #ddd;">&ndash; wade</div>
+            <div style="font-size: 12px;">
+              <a href="https://waf.cs.illinois.edu" style="color: white;">https://waf.cs.illinois.edu/</a><br> 
+     
+              Follow for Updates:
+              <a href="https://www.twitter.com/profwade_/">Twitter</a> |
+              <a href="https://www.linkedin.com/in/profwade/">LinkedIn</a> |
+              <a href="https://www.instagram.com/profwade/">Instagram</a> |
+              <a href="https://www.github.com/wadefagen/">GitHub</a>
+              <div style="font-size: 12px; float: left;">
+                <a href="https://creativecommons.org/licenses/by/4.0/">(CC) BY 4.0</a> |
+                <a href="/privacy.html">Data &amp; Privacy</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

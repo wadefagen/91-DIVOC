@@ -3,23 +3,15 @@ layout: bare
 
 social-img: https://91-divoc.com/pages/covid-visualization/img.png
 title: An interactive visualization of the exponential spread of COVID-19
+description: Interactive visualization of COVID-19.  Updated daily.
 ---
 
-<header class="container-fluid header-small">
-  <div class="container">
-    <h1>
-      <a href="/">91-DIVOC</a>
-    </h1>
-  </div>
-</header>
-
-<link rel="stylesheet" href="css.css">
-<style>.data-scale-float { float: right; padding-bottom: 3px; }</style>
+<link rel="stylesheet" href="css.css?v=2">
 
 <div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1);">
   <div class="container lead">
     <h2>An interactive visualization of the exponential spread of COVID-19</h2>
-    A project to explore the global growth of COVID-19.  Updated daily.  Inspired by the work of <a href="https://twitter.com/jburnmurdoch" target="_blank">John Burn-Murdoch</a>.
+    A project to explore the global growth of COVID-19.  Updated daily.  <a href="overview.html">Overview and motivations</a>.
   </div>
 </div>
 
@@ -29,203 +21,75 @@ title: An interactive visualization of the exponential spread of COVID-19
     A few interesting bits I found interesting to explore:
     <ul>
       <li>
-        There are two different ways to view the exact same data:
-        <ul>
-          <li>The <b>logarithmic scale</b> shows a great comparison of the magnitude of growth between countries, but less of the human impact.</li>
-          <li>The <b>linear scale</b> shows the real human impact -- a growth twice the size is twice the number of real people infected.</li>    
-          <li><b>Switch between the two</b> by toggling the scale at the bottom of each graph.</li>
-        </ul>
-      </li>
-      <li>
         These graphs are not just images.  <b>Hover over any data point</b> to see the data behind it.
       </li>
       <li>
-        April 10 Feature Update: Dynamic trendlines! [<a href="changes.html" style="color: hsla(199, 100%, 40%, 1);">View all updates</a>]
+        There are millions of combinations of graphs to view:
+        <ul>
+          <li>You can <b>add multiple highlights</b> and change <b>view subsets of the data</b> by editing options below each graph.</li>
+          <li><b>Switch between a linear and log scale</b> by toggling the scale at the bottom of each graph.</li>
+          <li>Generate <b>detailed data reports</b> based off the visualization you create.</li> 
+          <li>
+            View all the graphs below or each graph individually:
+            <a href="countries.html">by countries</a>, <a href="states.html">by US States</a>, or population normalized
+            <a href="countries-normalized.html">by country</a>, or <a href="states-normalized.html">by US state</a>.
+          </li>
+        </ul>
+      </li>
+      <li style="margin-top: 5px;">
+        Latest Enhancement: <i>(July 24)</i>
+        Resolved/tagged all issues on this project's <a href="https://github.com/wadefagen/91-DIVOC">open-source GitHub page</a> and working to fix any bugs identified.  Let me know if you notice anything that doesn't work as expected. :)
+        [<a href="changes.html" style="color: hsla(199, 100%, 40%, 1);">See full change log</a>]
+        <!--
+        Finally, <a href="changes.html" style="color: hsla(199, 100%, 40%, 1);">the change log</a> documents all major changes and improvements made to this visualization.
+        -->
+      </li>
+      <li>
+        This visualization is <b>updated daily</b> from multiple data sources.
+        <i id="jhu-updated"></i>
       </li>
     </ul>
-
-    This visualization is <b>updated daily</b> with the Johns Hopkins CSSE data, which is typically released around 7:00pm Central.
-    <i id="jhu-updated"></i>
+    <hr>
+    
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Data Source:</span>
+      </div>
+      <select class="form-control datasrc-select">
+        <option value="merged">Johns Hopkins &amp; Our World in Data</option>
+        <option value="jhu" selected>Johns Hopkins University CSSE</option>
+        <option value="owid">Our World in Data (Oxford, et al)</option>
+        <option value="ctp">The COVID Tracking Project (The Atlantic)</option>
+      </select>
+    </div>
   </div>
+
+
 
   <div id="sizer"></div>
-  <!-- -->
-  <div class="chart-header" style="margin-top: 20px;">
-    <h2>COVID-19 Cases by Country</h2>
+
+  {% include_relative graphs/_countries.html %}
+  {% include_relative graphs/_states.html %}
+
+  <div class="container">
+    <div class="explore-more" style="margin-top: 15px;">
+      <h6>Explore More 91-DIVOC</h6>
+      <ul>
+        <li>Once Monthly Visualization Updates: <a href="https://forms.gle/oLXWdijmr9i2Yxau9" target="_blank">Join Prof. Wade's e-mail list</a>, creator of 91-DIVOC</li>
+        <li><a href="../covid-by-your-locations/"><b>91-DIVOC #02</b>: COVID-19 Data for Locations of People You Love</a></li>
+        <li><a href="../coronavirus-1000-person-community/"><b>91-DIVOC #03</b>: Coronavirus Visualized as a 1,000-Person Community</a></li>
+        <li><a href="../coronavirus-contribution-by-state/"><b>91-DIVOC #04</b>: Coronavirus Contribution by State</a></li>
+        <li><a href="../interactive-visualziation-of-covid-19-in-illinois/"><b>91-DIVOC #05</b>: Interactive Visualization of COVID-19 in Illinois</a></li>
+      </ul>      
+    </div>  
   </div>
-  <div id="chart-countries" class="chart-viz">
-    <div class="text-center" style="height: 500px;"><b>Loading Data...</b></div>
-  </div>
-  <div class="chart-footer">
-    <div>
-      <div class="data-scale-float">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Data:</span>
-          </div>
-          <select class="form-control data-select" data-chart="countries">
-            <option value="active">Active Cases</option>
-            <option value="cases" selected>Confirmed Cases</option>
-            <option value="cases-daily">New Cases /Day</option>
-            <option value="deaths">Deaths</option>
-            <option value="deaths-daily">New Deaths /Day</option>
-            <option value="recovered">Recovered </option>
-          </select>          
-        </div>
-
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Scale:</span>
-          </div>          
-          <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="countries">
-            <input type="radio" name="scale" autocomplete="off" checked> Log
-          </label>
-          <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="countries">
-            <input type="radio" name="scale" autocomplete="off"> Linear
-          </label>
-        </div>
-      </div>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Highlight:</span>
-        </div>
-        <select class="form-control" id="highlight-chart-countries">
-        </select>
-      </div>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Show:</span>
-        </div>
-        <select class="form-control filter-select" id="filter-chart-countries" data-chart="countries">
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50" selected>50</option>
-          <option value="9999">All</option>
-        </select>
-      </div>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Y-Axis:</span>
-        </div>
-        <select class="form-control yaxis-select" data-chart="countries">
-          <option value="log">Fixed</option>
-          <option value="highlight">Scale to Highlight</option>
-        </select>
-      </div>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Trendline:</span>
-        </div>
-        <select class="form-control trendline-select" data-chart="countries">
-          <option value="default">Default</option>
-          <option value="35">Only 35% growth</option>
-          <option value="highlight-1week">One week trend</option>
-          <option value="highlight-3day">Three-day trend</option>
-          <option value="highlight-1day">One day trend</option>
-          <option value="all">All trendlines</option>
-        </select>
-      </div>
-    </div>
-  </div>
-  <!-- -->
-  <div class="chart-header" style="margin-top: 20px;">
-    <h2>COVID-19 Cases by US States/Territories</h2>
-  </div>
-  <div id="chart-states" class="chart-viz">
-    <div class="text-center" style="height: 500px;"><b>Loading Data...</b></div>
-  </div>
-  <div class="chart-footer">
-    <div>
-      <div class="data-scale-float">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Data:</span>
-          </div>
-          <select class="form-control data-select" data-chart="states">
-            <option value="active">Active Cases</option>
-            <option value="cases" selected>Confirmed Cases</option>
-            <option value="cases-daily">New Cases /Day</option>
-            <option value="deaths">Deaths</option>
-            <option value="deaths-daily">New Deaths /Day</option>
-            <option value="recovered">Recovered</option>
-          </select>
-        </div>
-
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Scale:</span>
-          </div>          
-          <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="states">
-            <input type="radio" name="scale" autocomplete="off" checked> Log
-          </label>
-          <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="states">
-            <input type="radio" name="scale" autocomplete="off"> Linear
-          </label>
-        </div>
-      </div>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Highlight:</span>
-        </div>
-        <select class="form-control" id="highlight-chart-states">
-        </select>
-      </div>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Show:</span>
-        </div>
-        <select class="form-control filter-select" id="filter-chart-states" data-chart="states">
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="9999" selected>All</option>
-        </select>
-      </div>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Y-Axis:</span>
-        </div>
-        <select class="form-control yaxis-select" data-chart="states">
-          <option value="log">Fixed</option>
-          <option value="highlight">Scale to Highlight</option>
-        </select>
-      </div>        
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Trendline:</span>
-        </div>
-        <select class="form-control trendline-select" data-chart="states">
-          <option value="default">Default</option>
-          <option value="35">Only 35% growth</option>
-          <option value="highlight-1week">One week trend</option>
-          <option value="highlight-3day">Three-day trend</option>
-          <option value="highlight-1day">One day trend</option>
-          <option value="all">All trendlines</option>
-        </select>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="card" style="margin-top: 15px;">
-    <a href="../covid-by-your-locations/">91-DIVOC #02: See US county-level data for locations that matter most to you &gt;&gt;</a>
-  </div>  
 </div>
 
-<div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1); margin-top: 15px;">
-</div>
+<div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1); margin-top: 15px;"></div>
 
 <div class="container viz">
   <div class="alert alert-secondary" style="margin-top: 10px; padding-top: 20px;">
-    <h4>Same Data -- Normalized by Population</h4>
+    <h4 id="normalized">Same Data -- Normalized by Population</h4>
 
     The visualizations below use the exact same COVID-19 data from Johns Hopkins except that the data is now normalized by dividing
     by the country or state population.
@@ -236,180 +100,21 @@ title: An interactive visualization of the exponential spread of COVID-19
     </ul>
   </div>
 
-  <!-- -->
-  <div class="chart-header" style="margin-top: 20px;">
-    <h2>COVID-19 Cases by Country, normalized by country population</h2>
-  </div>
-  <div id="chart-countries-normalized" class="chart-viz">
-    <div class="text-center" style="height: 500px;"><b>Loading Data...</b></div>
-  </div>
-  <div class="chart-footer">
-    <div>
-      <div class="data-scale-float">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Data:</span>
-          </div>
-          <select class="form-control data-select" data-chart="countries-normalized">
-            <option value="active">Active Cases</option>
-            <option value="cases" selected>Confirmed Cases</option>
-            <option value="cases-daily">New Cases /Day</option>
-            <option value="deaths">Deaths</option>
-            <option value="deaths-daily">New Deaths /Day</option>            
-            <option value="recovered">Recovered </option>
-          </select>
-        </div>
+  {% include_relative graphs/_countries-normalized.html %}
+  {% include_relative graphs/_states-normalized.html %}
 
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Scale:</span>
-          </div>          
-          <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="countries-normalized">
-            <input type="radio" name="scale" autocomplete="off" checked> Log
-          </label>
-          <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="countries-normalized">
-            <input type="radio" name="scale" autocomplete="off"> Linear
-          </label>
-        </div>
-      </div>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px; padding-left: 10px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Highlight:</span>
-        </div>
-        <select class="form-control" id="highlight-chart-countries-normalized">
-        </select>
-      </div>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Show:</span>
-        </div>
-        <select class="form-control filter-select" id="filter-chart-countries-normalized" data-chart="countries-normalized">
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50" selected>50</option>
-          <option value="9999">All</option>
-        </select>
-      </div>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Y-Axis:</span>
-        </div>
-        <select class="form-control yaxis-select" data-chart="countries-normalized">
-          <option value="log">Fixed</option>
-          <option value="highlight">Scale to Highlight</option>
-        </select>
-      </div>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Trendline:</span>
-        </div>
-        <select class="form-control trendline-select" data-chart="countries-normalized">
-          <option value="default">Default</option>
-          <option value="35">Only 35% growth</option>
-          <option value="highlight-1week">One week trend</option>
-          <option value="highlight-3day">Three-day trend</option>
-          <option value="highlight-1day">One day trend</option>
-          <option value="all">All trendlines</option>
-        </select>
-      </div>
-      
-
+  <div class="container">
+    <div class="explore-more" style="margin-top: 15px;">
+      <h6>Explore More 91-DIVOC</h6>
+      <ul>
+        <li>Once Monthly Visualization Updates: <a href="https://forms.gle/oLXWdijmr9i2Yxau9" target="_blank">Join Prof. Wade's e-mail list</a>, creator of 91-DIVOC</li>
+        <li><a href="../covid-by-your-locations/"><b>91-DIVOC #02</b>: COVID-19 Data for Locations of People You Love</a></li>
+        <li><a href="../coronavirus-1000-person-community/"><b>91-DIVOC #03</b>: Coronavirus Visualized as a 1,000-Person Community</a></li>
+        <li><a href="../coronavirus-contribution-by-state/"><b>91-DIVOC #04</b>: Coronavirus Contribution by State</a></li>
+        <li><a href="../interactive-visualziation-of-covid-19-in-illinois/"><b>91-DIVOC #05</b>: Interactive Visualization of COVID-19 in Illinois</a></li>
+      </ul>
     </div>
   </div>
-  <!-- -->
-  <div class="chart-header" style="margin-top: 20px;">
-    <h2>COVID-19 Cases by US States/Territories, normalized by population</h2>
-  </div>
-  <div id="chart-states-normalized" class="chart-viz">
-    <div class="text-center" style="height: 500px;"><b>Loading Data...</b></div>
-  </div>
-  <div class="chart-footer">
-    <div>
-      <div class="data-scale-float">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Data:</span>
-          </div>
-          <select class="form-control data-select" data-chart="states-normalized">
-            <option value="active">Active Cases</option>
-            <option value="cases" selected>Confirmed Cases</option>
-            <option value="cases-daily">New Cases /Day</option>
-            <option value="deaths">Deaths</option>
-            <option value="deaths-daily">New Deaths /Day</option>
-            <option value="recovered">Recovered </option>
-          </select>
-        </div>
-                
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Scale:</span>
-          </div>          
-          <label class="btn btn-info active scaleSelection" data-scale="log" data-chart="states-normalized">
-            <input type="radio" name="scale" autocomplete="off" checked> Log
-          </label>
-          <label class="btn btn-info scaleSelection" data-scale="linear" data-chart="states-normalized">
-            <input type="radio" name="scale" autocomplete="off"> Linear
-          </label>
-        </div>
-      </div>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Highlight:</span>
-        </div>
-        <select class="form-control" id="highlight-chart-states-normalized">
-        </select>
-      </div>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Show:</span>
-        </div>
-        <select class="form-control filter-select" id="filter-chart-states-normalized" data-chart="states-normalized">
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="9999" selected>All</option>
-        </select>
-      </div>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Y-Axis:</span>
-        </div>
-        <select class="form-control yaxis-select" data-chart="states-normalized">
-          <option value="log">Fixed</option>
-          <option value="highlight">Scale to Highlight</option>
-        </select>
-      </div>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Trendline:</span>
-        </div>
-        <select class="form-control trendline-select" data-chart="states-normalized">
-          <option value="default">Default</option>
-          <option value="35">Only 35% growth</option>
-          <option value="highlight-1week">One week trend</option>
-          <option value="highlight-3day">Three-day trend</option>
-          <option value="highlight-1day">One day trend</option>
-          <option value="all">All trendlines</option>
-        </select>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="card" style="margin-top: 15px;">
-    <a href="../covid-by-your-locations/">91-DIVOC #02: See US county-level data for locations that matter most to you &gt;&gt;</a>
-  </div>  
-
-  <!-- -->
-  
 </div>
 
 <div class="container-fluid viz" style="margin-top: 20px;">
@@ -428,35 +133,17 @@ title: An interactive visualization of the exponential spread of COVID-19
   <img class="social-hide" itemprop="image" src="img.png">
 </noscript>
 
-<footer class="container-fluid">
-  <div class="container">
-    <div class="row">
-      <div class="col-3">
-        <br>
-        <div style="font-size: 12px;">
-          <a href="https://creativecommons.org/licenses/by-sa/4.0/">(CC) BY-SA 4.0</a>
-        </div>
-      </div>
-      <div class="col-9" style="text-align: right;">
-        <div style="color: #ddd;">&ndash; wade</div>
-        <div style="font-size: 12px;">
-          <a href="https://waf.cs.illinois.edu">Website</a> | 
-          <a href="https://www.instagram.com/profwade/">Instagram</a> |
-          <a href="https://www.twitter.com/profwade_/">Twitter</a> |
-          <a href="https://www.github.com/wadefagen/">GitHub</a>
-        </div>    
-      </div>
-    </div>
-  </div>
-</footer>
+<div class="container">
+  <hr>
+  <!-- GA/Display--><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9247209205736147" data-ad-slot="3955045624" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
 
+<script defer src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js" integrity="sha256-VeNaFBVDhoX3H+gJ37DpT/nTuZTdjYro9yBruHjVmoQ=" crossorigin="anonymous"></script>
-<script src="https://d3js.org/d3.v5.min.js"></script>
-<script src="d3-tip.js"></script>
-<script src="../jhu-updated.js"></script>
-<script src="vis.js?v=20200323"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js" integrity="sha256-u/J1Urdrk3nCYFefpoeTMgI5viU1ujCDu2fXXoSJjhg=" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js" integrity="sha256-VeNaFBVDhoX3H+gJ37DpT/nTuZTdjYro9yBruHjVmoQ=" crossorigin="anonymous"></script>
+<script defer src="https://d3js.org/d3.v5.min.js"></script>
+<script defer src="d3-tip.js"></script>
+<script defer src="../jhu-updated.js"></script>
+<script defer src="vis.js?v=20200717"></script>
