@@ -1,4 +1,5 @@
 _site
+_prod
 .sass-cache
 .jekyll-metadata
 sync

@@ -957,67 +957,129 @@ var initialRender2 = function() {
   _intial_load = false;
 };
 
-var getDataPromise = function(dataSource) {
-  let src = _data_sources[dataSource];
-  if (!src) { _data_sources["jhu"]; }
-  return d3.csv(src.url, src.f);
+
+
+// 
+var _f_timeout = function() {
+  showLoadingSpinner(null, "Your loading took longer than expecting.  Trying again...");
+  _initialDataLoad();
 };
 
-var doInitialDataLoad = function() {
-  showLoadingSpinner(null, "Fetching and Visualizing Data...");
+var _f_load_progress = function(e) {
+  console.log(e);
+  clearTimeout(_initialLoadTimer);
+  _initialLoadTimer = setTimeout(_f_timeout, 10000);
 
+  var pct = (100 * e.loaded / e.total).toFixed(0);
+  showLoadingSpinner(null, `Fetching Data (${pct}%)...`);
+};
+
+var _f_load_success = function() {
+  let allFinished = true;
+  for (let dR of _dataRequests) {
+    if (!dR.data) { allFinished = false; }
+  }
+
+  if (allFinished) {
+    _f_load_allSuccess();
+  }
+};
+
+var _f_load_allSuccess = function () {
+  clearTimeout(_initialLoadTimer);
+  _initialLoadTimer = undefined;
+
+  data = _dataRequests[0].data;
+  populationData = _dataRequests[1].data;
+
+  _dateObj_today = convertDateToObject(data[data.length - 1].Date);
+  _dateObj_today_time = _dateObj_today.getTime();
+  
+  // Add custom aggs
+  _rawData = data;
+
+  _popData = {country: {}, state: {}};
+  for (var pop of populationData) {
+    if (pop.Country) { _popData.country[pop.Country] = pop.Population; }
+    if (pop.State) { _popData.state[pop.State] = pop.Population; }
+  }
+
+  applyCustomAgg(_rawData, _popData);
+  _dataReady = true;
+  tryRender();
+};
+
+var _f_load_failure = function(err) {
+  console.error(err);
+  
+  for (let chartid of Object.keys(charts)) {
+    $("#" + charts[chartid].id).html(`
+      <div class="alert alert-danger" style="margin: 20px; border: 1px solid red;">
+        <p><b>Failed to load COVID-19 data.</b></p>
+        <ul>
+          <li>This is usually caused by either your device losing internet or the 91-DIVOC server having problems.</li>
+          <li>You can try refreshing in a few seconds and it should work (I hope!).</li>
+          <li>If you continue to get the error, feel free to reach out and let me know about the error message below. Thanks! :)</li>
+        </ul>
+        <hr>
+        <pre>${err}</pre>
+      </div>
+    `);
+
+    if (_initialLoadTimer) {
+      // Try again one final time...
+      clearTimeout(_initialLoadTimer);
+      _initialLoadTimer = undefined;
+      _initialDataLoad();
+    }
+  }
+
+  gtag("event", "data-loading-error");
+};
+
+
+
+
+var startDataRequest = function(dataSource) {
+  let src = _data_sources[dataSource];
+  if (!src) { _data_sources["jhu"]; }
+  src.data = undefined;
+
+  let xhr = src.xhr = new XMLHttpRequest();
+  xhr.open("GET", src.url);
+  xhr.addEventListener("progress", _f_load_progress);
+  xhr.addEventListener("error", _f_load_failure);
+  xhr.addEventListener("load", function () {
+    src.data = d3.csvParse( xhr.response, src.f );
+    _f_load_success();
+  });
+  xhr.send();
+
+  return src;
+};
+
+
+var _dataRequests = [];
+var _initialDataLoad = function() {
   // clear cache
   for (let chartKey in charts) { charts[chartKey].cache = {}; }
 
-  let dataPromiseSource = [];
-  dataPromiseSource.push( getDataPromise(_data_src) );
-  dataPromiseSource.push( getDataPromise("wikipedia-pop") );
-  
-  Promise.all(dataPromiseSource)
-    .then(function(result) {
-      data = result[0];
-      populationData = result[1];
-
-      _dateObj_today = convertDateToObject(data[data.length - 1].Date);
-      _dateObj_today_time = _dateObj_today.getTime();
-      
-      // Add custom aggs
-      _rawData = data;
-  
-      _popData = {country: {}, state: {}};
-      for (var pop of populationData) {
-        if (pop.Country) { _popData.country[pop.Country] = pop.Population; }
-        if (pop.State) { _popData.state[pop.State] = pop.Population; }
-      }
-
-      applyCustomAgg(_rawData, _popData);
-      
-
-      _dataReady = true;
-      tryRender();
-    })
-    .catch(function (err) {
-      console.error(err);
-  
-      for (let chartid of Object.keys(charts)) {
-        $("#" + charts[chartid].id).html(`
-          <div class="alert alert-danger" style="margin: 20px; border: 1px solid red;">
-            <p><b>Failed to load COVID-19 data.</b></p>
-            <ul>
-              <li>This is usually caused by either your device losing internet or the 91-DIVOC server having problems.</li>
-              <li>You can try refreshing in a few seconds and it should work (I hope!).</li>
-              <li>If you continue to get the error, feel free to reach out and let me know about the error message below. Thanks! :)</li>
-            </ul>
-            <hr>
-            <pre>${err}</pre>
-          </div>
-        `);
-      }
-  
-      gtag("event", "data-loading-error");
-    });
+  _dataRequests = [];
+  _dataRequests.push( startDataRequest(_data_src) );
+  _dataRequests.push( startDataRequest("wikipedia-pop") );
 };
+
+
+var _initialLoadTimer;
+var doInitialDataLoad = function() {
+  showLoadingSpinner(null, "Fetching and Visualizing Data...");
+  _initialDataLoad();
+  
+  _initialLoadTimer = setTimeout(_f_timeout, 10000);
+};
+
 doInitialDataLoad();
+
 
 
 
@@ -1052,6 +1114,17 @@ var saveGraph_fetchCSS = function() {
 
 var saveGraphImage = function(format, e) {
   e.preventDefault();
+
+  if (typeof saveAs == "undefined") {
+    $.getScript("https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js", function () {
+      saveGraphImage2(format, e);
+    })
+  } else {
+    saveGraphImage2(format, e);
+  }
+};
+
+var saveGraphImage2 = function(format, e) {
   const chart = getChart(e.target);
 
   if (format == "csv") {
