@@ -433,9 +433,8 @@ var prep_data = function(chart, resetReport = true) {
     let originalShow = chart.show;
     chart.show = "highlight-only";
     for (let extraDataStr of chart.extraData) {
-
       updateDataSelectionOptions(chart, extraDataStr, false);
-      chart.displayData[extraDataStr + "-extraData"] = _prep_data(chart, chart.cache[extraDataStr]);
+      chart.displayData[extraDataStr + "-extraData"] = _prep_data(chart, chart.cache[extraDataStr], extraDataStr);
     }
     chart.show = originalShow;
   }
@@ -444,7 +443,7 @@ var prep_data = function(chart, resetReport = true) {
   if (resetReport) { doResetReport(chart); }
 };
 
-var _prep_data = function(chart, fullData) {
+var _prep_data = function(chart, fullData, extraDataStr = undefined) {
   var caseData = fullData;
   var allCountries = _.map(caseData, 'country').sort();
   var highlights = [ chart.highlight ];
@@ -455,7 +454,11 @@ var _prep_data = function(chart, fullData) {
   }
 
   if (chart.subdata && chart.extraHighlights) {
-    let highlightedSubdata = _.filter(chart.subdata, function (d) {
+    let subdataSrc = chart.subdata;
+    if (extraDataStr && chart.cache[extraDataStr + "-subdata"]) {
+      subdataSrc = chart.cache[extraDataStr + "-subdata"];
+    }
+    let highlightedSubdata = _.filter(subdataSrc, function (d) {
       return chart.extraHighlights.indexOf(d.country) != -1;
     });
     caseData = caseData.concat(highlightedSubdata);
@@ -584,6 +587,7 @@ var process_data = function(data, chart, isSubdata = false, noPrepData = false) 
       _process_data_verify(chart, extraDataSrc, false);
 
       if (chart.subdata) { _process_data_verify(chart, extraDataSrc, true); }
+      if (isSubdata) { _process_data_verify(chart, extraDataSrc, true); }
     }
   }
 
@@ -1481,7 +1485,7 @@ var ui_add_data = function (chart, scale="graph", dataSelection = undefined) {
   if (dataSelection) {
     let el = $(dataSelectOptions);
     $("option:selected", el).removeAttr("selected");
-    $(`option[value=${dataSelection}`, el).attr("selected", true);
+    $(`option[value=${dataSelection}]`, el).attr("selected", true);
     dataSelectOptions = el[0].outerHTML;
   }
 

@@ -16,6 +16,11 @@ desc: This change log lists the major changes made to "An interactive visualizat
   <a href="/pages/covid-visualization/">An interactive visualization of the exponential spread of COVID-19 &gt;&gt;</a>
 </div>
 
+## July 25
+
+- Fixed [#54](https://github.com/wadefagen/91-DIVOC/issues/54) found by [@jasonbuechler](https://github.com/jasonbuechler)
+
+
 ## July 24 - Quality
 
 In all of these visualizations, I created visualizations that helped me make sense of the COVID-19 data.  At this point, I can spend hours diving into the data and there's few questions that I am unable to answer using 91-DIVOC graphs.  Therefore, for the next week, I'm looking to explore better documentation of this tool, fix any remaining bugs, and focus on quality improvements.  As part of this, I have already:
