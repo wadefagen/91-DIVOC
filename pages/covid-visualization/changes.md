@@ -20,7 +20,7 @@ desc: This change log lists the major changes made to "An interactive visualizat
 
 - Fixed [#54](https://github.com/wadefagen/91-DIVOC/issues/54) found by [@jasonbuechler](https://github.com/jasonbuechler)
 - Updated logic for loading data files from server to (hopefully) improve robustness.  If you ever have the visualization fail to load, please let me know!
-
+- Updated visualization to pass automated "Mobile-Ready" with minor tweaks.
 
 ## July 24 - Quality
 

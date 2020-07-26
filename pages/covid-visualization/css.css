@@ -176,6 +176,20 @@ i {
   border-top: dashed 1px #aaa;
 }
 
+.saveOptions {  
+  padding-top: 3px;
+  margin-top: 3px;
+  border-top: dashed 1px #aaa;
+}
+
+.addOptions {
+  line-height: 175%;
+}
+
+.addOptions a {
+  white-space: nowrap;
+}
+
 
 @media (min-width: 501px) {
   .divoc-graph-loading { height: 555px; }
@@ -189,3 +203,7 @@ i {
 
 div.card { background-color: #cfe; } div.card > a { color: #064; }
 section { margin-bottom: 30px; }
+
+.btn-group {
+  margin-bottom: 2px;
+}

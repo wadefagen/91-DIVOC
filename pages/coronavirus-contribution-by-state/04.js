@@ -1852,8 +1852,69 @@ var doRender = function(chart) {
 
   svg.append("style");
     
+  var hasAddedMouseOver = false;
   svg = svg.append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  .on('mouseover', function () {
+    if (!hasAddedMouseOver) {
+      hasAddedMouseOver = true;
+
+      svg.selectAll(".Cmouse")
+      .on("mousemove", (d, i, elems) => {
+        let mouse_daysAgo = Math.ceil(daysScale.invert(d3.mouse(elems[i])[0]));
+        let x = daysScale(mouse_daysAgo); // - maxDayRendered);
+    
+        let d_index = d.length - 1 + mouse_daysAgo;
+        let mouse_coordData = d[ d_index ];
+        let cases_y0 = mouse_coordData[0];
+        let y0 = casesScale(cases_y0);
+        let cases_y1 = mouse_coordData[1];
+        let y1 = casesScale(cases_y1);
+        let mouse_allData = d[d_index].data;
+    
+        let state = d.key
+        let date = mouse_allData.Date;
+        let value = mouse_allData[state];
+    
+        focusBottom
+        .attr("cx", x)
+        .attr("cy", y0)
+        .attr("fill", colorScale(state));
+    
+        focusTop
+        .attr("cx", x)
+        .attr("cy", y1)
+        .attr("fill", colorScale(state));
+    
+        focusLine
+        .attr("x1", x)
+        .attr("x2", x)
+        .attr("y1", y0)
+        .attr("y2", y1);
+    
+        let toolTipData = {
+          state: state,
+          date: date,
+          value: value,
+          daysAgo: -mouse_daysAgo,
+          caseSum: mouse_allData.caseSum
+        };
+    
+        tip.show(d, i, toolTipData, focusTop._groups[0][0]);
+      })
+      .on("mouseover", function () {
+        focusTop.style("display", null);
+        focusBottom.style("display", null);
+        focusLine.style("display", null);
+      })
+      .on("mouseout", function () {
+        tip.hide();
+        focusTop.style("display", "none");
+        focusBottom.style("display", "none");
+        focusLine.style("display", "none");
+      });      
+    }
+  })  
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   // Mouseovers
   var tip = d3.tip().attr('class', 'd3-tip').html(tip_html(chart));
@@ -2035,59 +2096,8 @@ var doRender = function(chart) {
   .append("path")
   .attr("fill", (d) => colorScale(d.key))
   .attr("d", area)
-  .on("mousemove", (d, i, elems) => {
-    let mouse_daysAgo = Math.ceil(daysScale.invert(d3.mouse(elems[i])[0]));
-    let x = daysScale(mouse_daysAgo); // - maxDayRendered);
+  .attr("class", "Cmouse")
 
-    let d_index = d.length - 1 + mouse_daysAgo;
-    let mouse_coordData = d[ d_index ];
-    let cases_y0 = mouse_coordData[0];
-    let y0 = casesScale(cases_y0);
-    let cases_y1 = mouse_coordData[1];
-    let y1 = casesScale(cases_y1);
-    let mouse_allData = d[d_index].data;
-
-    let state = d.key
-    let date = mouse_allData.Date;
-    let value = mouse_allData[state];
-
-    focusBottom
-    .attr("cx", x)
-    .attr("cy", y0)
-    .attr("fill", colorScale(state));
-
-    focusTop
-    .attr("cx", x)
-    .attr("cy", y1)
-    .attr("fill", colorScale(state));
-
-    focusLine
-    .attr("x1", x)
-    .attr("x2", x)
-    .attr("y1", y0)
-    .attr("y2", y1);
-
-    let toolTipData = {
-      state: state,
-      date: date,
-      value: value,
-      daysAgo: -mouse_daysAgo,
-      caseSum: mouse_allData.caseSum
-    };
-
-    tip.show(d, i, toolTipData, focusTop._groups[0][0]);
-  })
-  .on("mouseover", function () {
-    focusTop.style("display", null);
-    focusBottom.style("display", null);
-    focusLine.style("display", null);
-  })
-  .on("mouseout", function () {
-    tip.hide();
-    focusTop.style("display", "none");
-    focusBottom.style("display", "none");
-    focusLine.style("display", "none");
-  });
 
 
   var y_grid = d3.axisLeft(casesScale).tickSize(-width).tickFormat("");

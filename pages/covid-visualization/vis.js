@@ -966,12 +966,14 @@ var _f_timeout = function() {
 };
 
 var _f_load_progress = function(e) {
-  console.log(e);
   clearTimeout(_initialLoadTimer);
   _initialLoadTimer = setTimeout(_f_timeout, 10000);
 
-  var pct = (100 * e.loaded / e.total).toFixed(0);
-  showLoadingSpinner(null, `Fetching Data (${pct}%)...`);
+  var pct = "";
+  if (e.loaded && isFinite(e.loaded) && e.total && isFinite(e.total) && e.total != 0) {
+    pct = " (" + (100 * e.loaded / e.total).toFixed(0) + "%)";
+  }
+  showLoadingSpinner(null, `Fetching Data${pct}...`);
 };
 
 var _f_load_success = function() {
@@ -2821,8 +2823,56 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
   }
 
   svg.append("style");
-    
+  
+  let hasAddedMouseOver = false;
   svg = svg.append("g")
+    .on('mouseover', function () {
+      if (!hasAddedMouseOver) {
+        hasAddedMouseOver = true;
+
+        svg.selectAll(".Cmouse")
+        .on('mouseover', function (d, i) {
+
+          /*
+          if ( this.getAttribute("cx") > (width * 0.75) ) {
+            console.log("DIRECTION");
+            tip.direction("w");
+          } else if  ( this.getAttribute("cx") < (width * 0.25) ) {
+            tip.direction("e");
+          } else {
+            tip.direction("n");
+          }
+          */
+          tip.show(d, i);
+
+          let cssClass = ".C-" + textToClass(d.country);
+          svg.selectAll(cssClass)
+            .classed('svg-hover-highlight', true);
+
+        })
+        .on('mouseout', function (d, i) {
+          tip.hide(d, i);
+
+          let cssClass = ".C-" + textToClass(d.country);
+          svg.selectAll(cssClass)
+            .classed('svg-hover-highlight', false);
+        })
+        .on('click', function (d) {
+          if (d3.event.shiftKey || d3.event.ctrlKey) {
+            const chart = getChart(this);
+
+            if (!chart.extraHighlights) { chart.extraHighlights = []; }
+            if (chart.highlight != d.country && chart.extraHighlights.indexOf(d.country) == -1) {
+              chart.extraHighlights.push(d.country);
+              additionalHighlight_rerender(chart);
+              tip.hide();
+              render(chart);
+              updateQueryString(chart);
+            }
+          }
+        });
+      }
+    })
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   // Mouseovers
@@ -3382,40 +3432,8 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
         }
         return null;
       })
-      .attr("class", function (d) { return "C-" + textToClass(d.country); })
+      .attr("class", function (d) { return "Cmouse C-" + textToClass(d.country); })
       .attr("fill", function (d) { return colorScale(d.country); })
-
-    if (!isInAnimation) {
-      countryCircles.on('mouseover', function (d, i) {
-          tip.show(d, i);
-
-          let cssClass = ".C-" + textToClass(d.country);
-          svg.selectAll(cssClass)
-            .classed('svg-hover-highlight', true);
-
-        })
-        .on('mouseout', function (d, i) {
-          tip.hide(d, i);
-
-          let cssClass = ".C-" + textToClass(d.country);
-          svg.selectAll(cssClass)
-            .classed('svg-hover-highlight', false);
-        })
-        .on('click', function (d) {
-          if (d3.event.shiftKey) {
-            const chart = getChart(this);
-
-            if (!chart.extraHighlights) { chart.extraHighlights = []; }
-            if (chart.highlight != d.country && chart.extraHighlights.indexOf(d.country) == -1) {
-              chart.extraHighlights.push(d.country);
-              additionalHighlight_rerender(chart);
-              tip.hide();
-              render(chart);
-              updateQueryString(chart);
-            }
-          }
-        });
-      }
   };
 
   var __render_line_chart = function(svg, data, dasharray = undefined) {
