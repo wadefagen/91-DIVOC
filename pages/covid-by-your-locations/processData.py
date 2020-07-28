@@ -251,12 +251,10 @@ print("Processing - Part 4: Loading Population")
 df_pop = pd.read_csv("county_population.csv")
 df_pop = df_pop[ df_pop["population"] > 0 ]
 df_pop["State"] = df_pop["State"].replace(stateDict)
-#df_pop["County Name"] = df_pop["County Name"].str.split(" ").str.join("-") 
 df_pop["County"] = df_pop["County Name"].apply(removeLastIndex)
 df_pop["keyValue"] = df_pop["County"] + ", " + df_pop["State"]
 df_pop.set_index("keyValue", inplace=True)
 
-print(df_pop)
 
 print("Processing - Part 5: Adding Population")
 
@@ -283,4 +281,4 @@ for keyName in df_today.index:
 
 
 print(df_today)
-# df_today.to_csv('jhu-county-data.csv', index=False)
+df_today.to_csv('jhu-county-data.csv', index=False)

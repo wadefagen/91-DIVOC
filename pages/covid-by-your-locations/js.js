@@ -38,6 +38,37 @@ var pctGrowth = function(d, str) {
   return pct + `% growth over the past week (+${ parseInt(d["dWeek_" + str]).toLocaleString("en-US", {maximumFractionDigits: 0}) })`;
 };
 
+var population = function(d, str) {
+  if (!d.Population) {
+    return "No population information available.";
+  }
+
+  var val = d[str];
+  if (!isNaN(val)) {
+    val = (val / d.Population) * 100;
+    num = val.toLocaleString("en-US", {maximumFractionDigits: 3});
+    return `...or <b>${num}</b>% of the population.`;
+  }
+
+  return "No population information available.";
+};
+
+var per100k = function(d, str) {
+  if (!d.Population) {
+    return "No population information available.";
+  }
+
+  var val = d[str];
+  if (!isNaN(val)) {
+    val = (val / d.Population) * 1e5;
+    num = val.toLocaleString("en-US", {maximumFractionDigits: 2});
+    return `...or <b>${num}</b> deaths /100k residents`;
+  }
+
+  return "No population information available.";
+};
+
+
 var cases = function(d, str) {
   var val = d[str];
   var num = "0";
@@ -186,6 +217,7 @@ var populateByKey = function(key) {
   svg = tr.append("td")
   .html(`
     ${cases(d, "Confirmed")}
+    <div style="font-size: 12px;">${population(d, "Confirmed")}</div>
     <div style="font-size: 12px;">${pctGrowth(d, "Confirmed")}</div>
     <h6 style="border-top: solid 1px #ddd; padding-top: 5px; margin-top: 5px; margin-bottom: 0px; font-size: 12px;">New Cases/day:</h6>
   `);
@@ -195,6 +227,7 @@ var populateByKey = function(key) {
   svg = tr.append("td")
   .html(`
     ${cases(d, "Deaths")}
+    <div style="font-size: 12px;">${per100k(d, "Deaths")}</div>
     <div style="font-size: 12px;">${pctGrowth(d, "Deaths")}</div>
     <h6 style="border-top: solid 1px #ddd; padding-top: 5px; margin-top: 5px; margin-bottom: 0px; font-size: 12px;">New Deaths/day:</h6>
   `);
@@ -267,17 +300,6 @@ $(function() {
         }
         d.caseData = caseData;
         d.max = { cases: max_cases, deaths: max_deaths };
-
-
-
-        /*
-        d.Confirmed = +d.Confirmed;
-        d.Deaths = +d.Deaths;
-        d.dWeek_Confirmed = +d.dWeek_Confirmed;
-        d.dYesterday_Confirmed = +d.dYesterday_Confirmed;
-        d.dWeek_Deaths = +d.dWeek_Deaths;
-        d.dYesterday_Deaths = +d.dYesterday_Deaths;
-        */
 
         var value = `${d.Admin2}, ${d.Province_State}`;
         if (d.Province_State == "District of Columbia") {
