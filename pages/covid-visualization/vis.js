@@ -5,6 +5,7 @@ var _client_width = -1;
 var _intial_load = true;
 var _dateObj_today, _dateObj_today_time;
 var _additionalHighlight_index = 0;
+var __debug = (location.hostname === "localhost");
 
 const _global_regions = {
   "who-afro": ["Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cameroon", "Cape Verde", "Central African Republic", "Chad", "Comoros", "Ivory Coast", "Democratic Republic of the Congo", "Equatorial Guinea", "Eritrea", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea-Bissau", "Kenya", "Lesotho", "Liberia", "Madagascar", "Malawi", "Mali", "Mauritania", "Mauritius", "Mozambique", "Namibia", "Niger", "Nigeria", "Republic of the Congo", "Rwanda", "São Tomé and Príncipe", "Senegal", "Seychelles", "Sierra Leone", "Somalia", "South Africa", "Swaziland", "Togo", "Uganda", "Tanzania", "Zambia", "Zimbabwe"],
@@ -112,16 +113,14 @@ let applyCustomAgg = function() {
 };
 
 
-
 // Resize
 $(window).resize(function () {
   if (_rawData != null) {
     var new_width = $("#sizer").width();
     if (_client_width != new_width) {
-      render( charts['countries'] );
-      render( charts['states'] );
-      render( charts['countries-normalized'] );
-      render( charts['states-normalized'] );
+      for (let chartid in charts) {
+        render( charts[chartid] );
+      }
     }
   }
 });
@@ -853,6 +852,7 @@ var _data_sources = {
   // Johns Hopkins + OWID:
   "merged": {
     url: "../merged.csv?d=" + _reqStr,
+    url_cdn: "https://cdn.91-divoc.com/pages/merged.csv?d=" + _reqStr,
     f: function (row) {
       row["Active"] = +row["Active"];
       row["Confirmed"] = +row["Confirmed"];
@@ -871,6 +871,7 @@ var _data_sources = {
   // Johns Hopkins:
   "jhu": {
     url: "../jhu.csv?d=" + _reqStr,
+    url_cdn: "https://cdn.91-divoc.com/pages/jhu.csv?d=" + _reqStr,
     f: function (row) {
       row["Active"] = +row["Active"];
       row["Confirmed"] = +row["Confirmed"];
@@ -889,6 +890,7 @@ var _data_sources = {
   // COVID Tracking Project
   "ctp": {
     url: "../ctp.csv?d=" + _reqStr,
+    url_cdn: "https://cdn.91-divoc.com/pages/ctp.csv?d=" + _reqStr,
     f: function (row) {
       row["Country_Region"] = "United States";
       row["Active"] = +row["Active"];
@@ -906,6 +908,7 @@ var _data_sources = {
   // Our World In Data
   "owid": {
     url: "../owid.csv?d=" + _reqStr,
+    url_cdn: "https://cdn.91-divoc.com/pages/owid.csv?d=" + _reqStr,
     f: function (row) {
       row["Confirmed"] = +row["Confirmed"];
       row["Deaths"] = +row["Deaths"];
@@ -922,6 +925,7 @@ var _data_sources = {
   // Wikipedia Population
   "wikipedia-pop": {
     url: "wikipedia-population.csv",
+    url_cdn: "https://cdn.91-divoc.com/pages/covid-visualization/wikipedia-population.csv",
     f: function (row) {
       row["Population"] = (+row["Population"]);
       return row;    
@@ -1040,6 +1044,12 @@ var _f_load_failure = function(err) {
 };
 
 
+const measureText_canvas = document.createElement('canvas');
+const measureText_context = measureText_canvas.getContext('2d');
+var measureText = function(text, fontSize, fontFace) {
+  measureText_context.font = fontSize + 'px ' + fontFace;
+  return measureText_context.measureText(text).width;
+};
 
 
 var startDataRequest = function(dataSource) {
@@ -1049,6 +1059,8 @@ var startDataRequest = function(dataSource) {
 
   let xhr = src.xhr = new XMLHttpRequest();
   xhr.open("GET", src.url);
+  //if (__debug) { xhr.open("GET", src.url);     }
+  //else         { xhr.open("GET", src.url_cdn); }
   xhr.addEventListener("progress", _f_load_progress);
   xhr.addEventListener("error", _f_load_failure);
   xhr.addEventListener("load", function () {
@@ -3222,6 +3234,22 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
     if (!countryData.data[0]) { return; }
     var isHighlighted = (highlights.indexOf(countryData.country) != -1);
 
+    let fontSize;
+    if (isHighlighted) {
+      if (dasharray) { fontSize = 8; }
+      else           { fontSize = 15; }
+    } else {
+      fontSize = 10;
+    }
+
+    let textString;
+    if (dasharray) {
+      let s = calculateDataOptions(countryData.data[0].src.dataSelection).baseDataType;
+      textString = s.charAt(0).toUpperCase() + s.slice(1);
+    } else {
+      textString = countryData.country;
+    }
+
     var countryText = svg.append("text")
       .attr("fill", function (d) { return colorScale(countryData.data[0].country); })
       .attr("class", "label-country C-" + textToClass(countryData.data[0].country))
@@ -3230,21 +3258,8 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
         if (isHighlighted) { return 1; }
         else { return 0.3; }
       })
-      .style("font-size", function () {
-        if (isHighlighted) {
-          if (dasharray) { return "8px"; }
-          return "15px";
-        }
-        else { return null; }
-      })
-      .text( function () {
-        if (dasharray) {
-          let s = calculateDataOptions(countryData.data[0].src.dataSelection).baseDataType;
-          return s.charAt(0).toUpperCase() + s.slice(1);
-        } else {
-          return countryData.country;
-        }
-      });
+      .style("font-size", `${fontSize}px`)
+      .text(textString);
 
     var textHeightAdjustment = 0;
     if (isSmall && isHighlighted && daysScale(countryData.maxDay) > (width * 3)/4 ) { textHeightAdjustment = -10; }
@@ -3315,25 +3330,30 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
         .attr("alignment-baseline", "middle")
         .attr("dominant-baseline", "middle")
         .attr("text-anchor", "end")
-    } else if (countryData.maxDay + 2 < maxDayRendered || !countryData.data[maxDayRendered - 1]) { 
+    } else { // if (countryData.maxDay + 2 < maxDayRendered || !countryData.data[maxDayRendered - 1]) { 
+      let text_x = 5 + daysScale(lastDataPoint.dayCounter) + textHeightAdjustment;
+      let text_anchor = "start";
+
+      if (text_x + 100 > width) {
+        let textSize = measureText(textString, fontSize, 'Montserrat');
+
+        if (textSize && text_x + textSize > width + margin.right - 2) {
+          text_anchor = "end";
+          text_x = width + margin.right - 2;
+        }
+      }
+
       countryText
-        .attr("x", 5 + daysScale(lastDataPoint.dayCounter) + textHeightAdjustment )
+        .attr("x", text_x)
         .attr("y", function () {
           if (lastDataPoint.cases < scale_y0) { return height + 5; }
           return casesScale( lastDataPoint.cases ) + textHeightAdjustment;
         })
         .attr("alignment-baseline", "middle")
         .attr("dominant-baseline", "middle")
-    } else {
-      // Off of left side of chart
-      countryText
-        .attr("x", daysScale(maxDayRendered) - 5 + textHeightAdjustment )
-        .attr("y", function () {
-          if (lastDataPoint.cases < scale_y0) { return height + 5; }
-          return casesScale(lastDataPoint.cases) - 5 + textHeightAdjustment;
-        })
-        .attr("text-anchor", "end")
+        .attr("text-anchor", text_anchor)
     }
+
   };
 
   var minHighlightHeight = 99999;

@@ -8,26 +8,27 @@ desc: 91-DIVOC provides a data-froward visualization of COVID-19 data in the Uni
 
 ## Data Sources
 
-All of the data presented on this visualization comes from either Johns Hopkins University, Oxford University (Our World in Data), or The Atlantic (COVID Tracking Project).  By default, all data is sourced from Johns Hopkins University.
-
-
-
- the Illinois Department of Public Health's COVID-19 website.  Specifically,
-the data is gathered from two pages:
-
-1. ["Restore Illinois"](https://www.dph.illinois.gov/restore) provides region-level data for test positivity, ICU utilization, ventilator utilization, and medical bed utilization.
-2. ["COVID-19 Statistics"](https://www.dph.illinois.gov/covid19/covid19-statistics) provides county-level data for the number of confirmed cases, deaths, and COVID-19 tests.
+All of the data presented on this visualization comes from either Johns Hopkins University, Oxford University (Our World in Data), or The Atlantic (COVID Tracking Project).  By default, all data is sourced from Johns Hopkins University.  You can switch between the data sources by using the "Data Source" control at the top of the visualization.
 
 ### Regions
 
-The "Restore Illinois" regions are based off of the Emergency Medical Services Regions, as defined in [Title 77, Chapter 1(f) §515.200: Emergency Medical Services Regions](https://www.ilga.gov/commission/jcar/admincode/077/077005150B02000R.html).  The "Restore Illinois" regions are further defined as:
+In addition to the country and state data provided by the data sources, several regions are added for additional context.  These regions include:
 
-- "Northeast Region" (EMS 7-11), including greater Chicago area
-- "North Central Region" (EMS 1, 2), including Rockford, Quad Cities, Peoria, and Bloomington-Normal
-- "Central Region" (EMS 3, 6), including Champaign-Urbana, Springfield, and Decatur
-- "Southern Region" (EMS 4, 5), including greater St. Louis, Carbondale, and Mt. Vernon
+1. All [World Health Organization (WHO) regions](https://en.wikipedia.org/wiki/WHO_regions), which includes:
+  - African Region (WHO-AFRO)
+  - Region of the Americas (WHO-PAHO)
+  - South-East Asia Region (WHO-SEARO)
+  - European Region (WHO-EURO)
+  - Eastern Mediterranean Region (WHO-EMRO)
+  - Western Pacific Region (WHO-WPRO)
 
-The 91-DIVOC visualizations computes region totals based off of the "Restore Illinois" areas when provided county-level data.
+2. The [European Union, based off the current union of 27 members states ("EU-27")](https://en.wikipedia.org/wiki/European_Union).
+
+3. The four [United States' US Census Bureau-designated regions](https://en.wikipedia.org/wiki/List_of_regions_of_the_United_States#Census_Bureau-designated_regions_and_divisions):
+  - Northeast, which includes New Jersey and Pennsylvania and states further to the northeast
+  - South, which includes Delaware, Maryland, West Virginia, Kentucky, Arkansas, Oklahoma, Texas, and all states south and east of those.
+  - Midwest, which includes the Dakotas, Nebraska and Kansas
+  - West, which includes Hawaii and Alaska
 
 <hr>
 

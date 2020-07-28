@@ -6,6 +6,27 @@ path = '../../../../COVID-19/csse_covid_19_data\csse_covid_19_daily_reports/'
 # if os.getenv("JHU_GIT"):
 #   path = os.getenv("JHU_GIT")
 
+stateTranslation = [
+  ['Arizona', 'AZ'], ['Alabama', 'AL'], ['Alaska', 'AK'], ['Arkansas', 'AR'], ['California', 'CA'],
+  ['Colorado', 'CO'], ['Connecticut', 'CT'], ['Delaware', 'DE'], ['Florida', 'FL'], ['Georgia', 'GA'],
+  ['Hawaii', 'HI'], ['Idaho', 'ID'], ['Illinois', 'IL'], ['Indiana', 'IN'], ['Iowa', 'IA'],
+  ['Kansas', 'KS'], ['Kentucky', 'KY'], ['Louisiana', 'LA'], ['Maine', 'ME'], ['Maryland', 'MD'],
+  ['Massachusetts', 'MA'], ['Michigan', 'MI'], ['Minnesota', 'MN'], ['Mississippi', 'MS'], ['Missouri', 'MO'],
+  ['Montana', 'MT'], ['Nebraska', 'NE'], ['Nevada', 'NV'], ['New Hampshire', 'NH'], ['New Jersey', 'NJ'],
+  ['New Mexico', 'NM'], ['New York', 'NY'], ['North Carolina', 'NC'], ['North Dakota', 'ND'], ['Ohio', 'OH'],
+  ['Oklahoma', 'OK'], ['Oregon', 'OR'], ['Pennsylvania', 'PA'], ['Rhode Island', 'RI'], ['South Carolina', 'SC'],
+  ['South Dakota', 'SD'], ['Tennessee', 'TN'], ['Texas', 'TX'], ['Utah', 'UT'], ['Vermont', 'VT'],
+  ['Virginia', 'VA'], ['Washington', 'WA'], ['West Virginia', 'WV'], ['Wisconsin', 'WI'], ['Wyoming', 'WY'],
+  ['American Samoa', 'AS'], ['Guam', 'GU'], ['Northern Mariana Islands', 'MP'], ['Puerto Rico', 'PR'], ['Virgin Islands', 'VI'],
+  ['District of Columbia', 'DC']
+]
+
+
+stateDict = {}
+
+for el in stateTranslation:
+  stateDict[ el[1] ] = el[0]
+
 cityTransform = {
   "Cook, Illinois": "Chicago",
   "Harris, Texas": "Houston",
@@ -200,28 +221,7 @@ for i in range(1, len(df_array)):
 df_today = df_today.drop(columns=['dayAgo_Confirmed', 'dayAgo_Deaths'] )
 
 
-# def delta_other(row, df1, df2, columnPrefix):
-#   if row.name in df1.index and row.name in df2.index:
-#     m1 = df1.loc[ [row.name] ]
-#     m2 = df2.loc[ [row.name] ]
-
-#     m1 = m1.iloc[0]
-#     m2 = m2.iloc[0]
-#     row[columnPrefix + "_Confirmed"] = m1["Confirmed"] - m2["Confirmed"]
-#     row[columnPrefix + "_Deaths"] = m1["Deaths"] - m2["Deaths"]
-
-#   return row  
-
-# for i in range(1, len(df_array)):
-#   print(i)
-#   columnPrefix = str(i)
-#   df1 = df_array[i - 1]
-#   df2 = df_array[i]
-#   df_today = df_today.apply(delta_other, axis=1, args=(df1, df2, columnPrefix))
-
-
-
-print("Processing - Part 3")
+print("Processing - Part 3: Adding Cities")
 
 def add_city(row):
   if pd.isna(row["Admin2"]):
@@ -236,6 +236,51 @@ def add_city(row):
 
 df_today = df_today.apply(add_city, axis=1)
 
+def removeLastIndex(s):
+  arr = s.split(" ")
+  if arr[-1] == "County" or arr[-1] == "Borough" or arr[-1] == "Parish":
+    arr = arr[:-1]
+  elif arr[-1] == "Area" and arr[-2] == "Census":
+    arr = arr[:-2]
+
+  return " ".join(arr)
+
+
+print("Processing - Part 4: Loading Population")
+
+df_pop = pd.read_csv("county_population.csv")
+df_pop = df_pop[ df_pop["population"] > 0 ]
+df_pop["State"] = df_pop["State"].replace(stateDict)
+#df_pop["County Name"] = df_pop["County Name"].str.split(" ").str.join("-") 
+df_pop["County"] = df_pop["County Name"].apply(removeLastIndex)
+df_pop["keyValue"] = df_pop["County"] + ", " + df_pop["State"]
+df_pop.set_index("keyValue", inplace=True)
+
+print(df_pop)
+
+print("Processing - Part 5: Adding Population")
+
+for keyName in df_today.index:
+  if keyName in df_pop.index:
+    df_today.loc[keyName, "Population"] = df_pop.loc[keyName, "population"]
+    continue
+
+  keyPieces = keyName.split(",")
+  if len(keyPieces) >= 2:
+    k = keyPieces[0] + " city" + "," + keyPieces[1]
+    if k in df_pop.index:
+      df_today.loc[keyName, "Population"] = df_pop.loc[k, "population"]
+      continue
+
+    k = keyPieces[0] + " City" + "," + keyPieces[1]
+    if k in df_pop.index:
+      df_today.loc[keyName, "Population"] = df_pop.loc[k, "population"]
+      continue
+  
+  print("Missing: " + keyName)
+
+
+
 
 print(df_today)
-df_today.to_csv('jhu-county-data.csv', index=False)
+# df_today.to_csv('jhu-county-data.csv', index=False)
