@@ -1651,7 +1651,7 @@ var doRender = function(chart) {
     let region = stateToRegionMap[state];
 
     if (!regions[region]) { regions[region] = { name: region, start: d[0] }; }
-    regions[region].end = d[1];
+    if (isFinite(d[1])) { regions[region].end = d[1]; }
   }
 
   let lowestData = stackData[0];
@@ -2129,7 +2129,6 @@ var doRender = function(chart) {
     let region = regions[region_key];
 
     if (region.name) {
-
       svg.append("line")
       .attr("x1", width)
       .attr("x2", width + 10)
