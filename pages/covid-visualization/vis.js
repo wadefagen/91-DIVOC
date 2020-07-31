@@ -295,7 +295,7 @@ var charts = {
     dataSelection: 'cases',
     showDelta: true,
     avgData: 7,
-    dataSelection_y0: { 'active': 1, 'cases': 1, 'deaths': 1, 'recovered': 1, 'mortalityRate': 10 },
+    dataSelection_y0: { 'active': 1, 'cases': 1, 'deaths': 1, 'recovered': 1, 'new-cases': 1, 'tests': 1, 'testPositivity': 10, 'mortalityRate': 10 },
     yAxisScale: 'fixed',
     xMax: null, yMax: null, data: null,
     trendline: "default",
@@ -412,9 +412,12 @@ var transformToTrailingAverage = function (casesData, period) {
   }
 }
 
-var getHTMLCountryOptionsToSelect = function(allCountries, selectedCountry) {
+var getHTMLCountryOptionsToSelect = function(allCountries, selectedCountry, addMetaOptions = true) {
   var html = "";
-  allCountries.unshift("(None)");
+  if (addMetaOptions) {
+    allCountries.unshift("(None, without dimming)");
+    allCountries.unshift("(None)");
+  }
   for (var country of allCountries) {
     var el_option = $("<option />").val(country).text(country);
     if (selectedCountry == country) { el_option.attr("selected", true); }
@@ -836,7 +839,7 @@ var do_process_data = function(data, chart, isSubdata = false) {
     chart.xMax = maxDayCounter;
   } else {
     caseData = _.filter(caseData, function (d) { return d.country != "United States"; } )
-  }  
+  }
 
   return caseData;
 };
@@ -1520,7 +1523,7 @@ var ui_add_highlight = function(chart, chartId, index, selectedOption=null, isSu
           <span class="input-group-text">[<a href="#" data-index="${index}" data-chart="${chartId}" onclick="additionalHighlightRemove(event)">X</a>] ${additionalText}:</span>
         </div>
         <select class="form-control additional-highlight-select" onchange="updateAdditionalHighlight(event, ${isSubdata})" data-chart="${chartId}">
-          ${getHTMLCountryOptionsToSelect(allCountries, selectedOption)}
+          ${getHTMLCountryOptionsToSelect(allCountries, selectedOption, false)}
         </select>
       </div><br>`;
 
@@ -2558,8 +2561,23 @@ var changeDataSourceSelection = function(newDataSource) {
   $(".datasrc-select").val(newDataSource).change();
 };
 
+var nonHighlightColorScale = d3.scaleOrdinal(d3.schemeCategory10);
+nonHighlightColorScale("A"); nonHighlightColorScale("B"); nonHighlightColorScale("C"); nonHighlightColorScale("D");
+
 var doRender = function(chart, isInAnimation = false, target = chart.id) {
-   if (chart.data.length == 0) {
+  let highlightNone = false, disableDimming = false;
+  switch (chart.highlight) {
+    case "(None)": 
+      highlightNone = true;
+      break;
+
+    case "(None, without dimming)":
+      highlightNone = true;
+      disableDimming = true;
+      break;    
+  }
+
+  if (chart.data.length == 0) {
      let dType = calculateDataOptions(chart.dataRawSelection);
 
      let dataSourceNeeded = chart.dataSourceNeeded + "-" + dType.dataSourceNeeded;
@@ -2592,7 +2610,7 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
      }
      */
      
-     if (chart.highlight == "(None)" && chart.show == "highlight-only") {
+     if (highlightNone && chart.show == "highlight-only") {
       message = "You are asking for the impossible, I like the way you think! :)<br><br>" +
         `However, there is nothing to display when you select <b>(None)</b> as the highlight and then ask to show <b>"Highlight Only"</b>.`;
      }
@@ -3251,11 +3269,14 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
     }
 
     var countryText = svg.append("text")
-      .attr("fill", function (d) { return colorScale(countryData.data[0].country); })
+      .attr("fill", function () {
+        if (isHighlighted) { return colorScale(countryData.data[0].country); }
+        else               { return nonHighlightColorScale(countryData.data[0].country); }
+      })
       .attr("class", "label-country C-" + textToClass(countryData.data[0].country))
       .classed("C_highlight", isHighlighted)
       .style("opacity", function () {
-        if (isHighlighted) { return 1; }
+        if (isHighlighted || disableDimming) { return 1; }
         else { return 0.3; }
       })
       .style("font-size", `${fontSize}px`)
@@ -3369,7 +3390,10 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
       .append("path")
       .attr("fill", "none")
       .attr("class", function (d) { return "C-" + textToClass(d[0].country); })
-      .attr("stroke", function (d) { return colorScale(d[0].country); } )
+      .attr("stroke", function (d) {
+        if (isHighlighted) { return colorScale(d[0].country); }
+        else               { return nonHighlightColorScale(d[0].country); }
+      } )
       .attr("stroke-width", function (d) {
         if (isHighlighted) {
           if (dasharray) { return 2; }
@@ -3378,7 +3402,7 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
         else { return 1; }
       })
       .style("opacity", function (d) {
-        if (isHighlighted) { return 1; }
+        if (isHighlighted || disableDimming) { return 1; }
         else { return (isSmall) ? 0.15 : 0.3; }
       })
       .attr("d", d3.line()
@@ -3433,7 +3457,7 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
         return casesScale(d.cases);
       })
       .style("opacity", function (d) {
-        if (isHighlighted) { return 1; }        
+        if (isHighlighted || disableDimming) { return 1; }        
         else { return (isSmall) ? 0.15 : 0.3; }
       })
       .attr("r", function (d) {
@@ -3453,7 +3477,11 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
         return null;
       })
       .attr("class", function (d) { return "Cmouse C-" + textToClass(d.country); })
-      .attr("fill", function (d) { return colorScale(d.country); })
+      .attr("fill", function (d) {
+        if (isHighlighted) { return colorScale(d.country); }
+        else               { return nonHighlightColorScale(d.country); }
+        
+      })
   };
 
   var __render_line_chart = function(svg, data, dasharray = undefined) {
@@ -3538,7 +3566,7 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
   }
 
 
-  if (target && !f && chart.highlight != "(None)") {
+  if (target && !f && !highlightNone) {
     var desc = `${chart.y0} `
     if (chart.dataSelection == 'cases') { desc += "case"; if (chart.y0 != 1) { desc += "s"; }}
     else if (chart.dataSelection == 'active') { desc += "active case"; if (chart.y0 != 1) { desc += "s"; }}
@@ -3554,7 +3582,7 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
       </div>`);
   }
 
-  if (target && minHighlightHeight > (0.67 * height) && !_animation_timeout && chart.highlight != "(None)" && minHighlightHeight < 99999) {
+  if (target && minHighlightHeight > (0.67 * height) && !_animation_timeout && !highlightNone && minHighlightHeight < 99999) {
     $("#" + chart.id).append(`<div class="alert alert-info" style="margin-top: 10px; margin-bottom: 0px; text-align: center; font-size: 12px;">Note: All of your highlighted data is in the bottom third of the graph. <a href="#" onclick="scaleToHighlight(event)">You can get a zoomed-in view of the graph by setting <b>Y-Axis</b> to <b>"Scale to Highlight"</b>.</a></div>`);
   }
 
