@@ -1,8 +1,8 @@
-<section data-chart="states-normalized">
-  <div class="chart-header" style="margin-top: 20px;" id="states-normalized">
-    <h2>New COVID-19 Cases by US States/Territories per Day, normalized by population</h2>
+<section data-chart="states">
+  <div class="chart-header" style="margin-top: 20px;" id="states">
+    <h2>New COVID-19 Cases by US States/Territories per Day</h2>
   </div>
-  <div id="chart-states-normalized" class="chart-viz">
+  <div id="chart-states" class="chart-viz">
     <div class="text-center divoc-graph-loading"><b>Loading Data...</b></div>
   </div>
   <div class="chart-footer">
@@ -12,7 +12,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Data:</span>
           </div>
-          <select class="form-control data-select" data-chart="states-normalized">
+          <select class="form-control data-select" data-chart="states">
             <option value="cases">Total Confirmed Cases</option>
             <option value="cases-daily">New Cases /Day</option>
             <option value="cases-daily-7" selected>New Cases, 1 Wk. Avg.</option>
@@ -23,7 +23,7 @@
             <option disabled="disabled">—————————</option>
             <option value="mortalityRate">Case Fatality Rate</option>
             <option value="mortalityRate-daily-7">Case Fatality Rate, 1 Wk.</option>
-            <option value="mortalityRate-daily-30">Case Fatality Rate, 1 Mo.</option> 
+            <option value="mortalityRate-daily-30">Case Fatality Rate, 1 Mo.</option>
             <option disabled="disabled">—————————</option>
             <option value="tests">Total COVID-19 Tests</option>
             <option value="tests-daily">New Tests /Day</option>
@@ -31,22 +31,22 @@
             <option disabled="disabled">—————————</option>
             <option value="testPositivity">Cumulative Test Positivity</option>
             <option value="testPositivity-daily">Daily Test Positivity</option>
-            <option value="testPositivity-daily-7">Daily Test Positivity, 1 Wk. Avg.</option>            
+            <option value="testPositivity-daily-7">Daily Test Positivity, 1 Wk. Avg.</option>
             <option disabled="disabled">—————————</option>
             <option value="hospitalized">Hospitalized Cases</option>
             <option value="hospitalized-daily">New Hospitalized /Day</option>
             <option value="hospitalized-daily-7">New Hosp., 1 Wk. Avg.</option>
           </select>
         </div>
-                
+
         <div class="btn-group btn-group-toggle scaleSelectionArea" data-toggle="buttons">
           <div class="input-group-prepend">
             <span class="input-group-text">Scale:</span>
           </div>
-          <label class="btn btn-info scaleSelection" data-scale="log" data-chart="states-normalized">
+          <label class="btn btn-info scaleSelection" data-scale="log" data-chart="states">
             <input type="radio" name="scale" autocomplete="off"> Log
           </label>
-          <label class="btn btn-info active scaleSelection" data-scale="linear" data-chart="states-normalized">
+          <label class="btn btn-info active scaleSelection" data-scale="linear" data-chart="states">
             <input type="radio" name="scale" autocomplete="off" checked> Linear
           </label>
         </div>
@@ -56,7 +56,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Highlight:</span>
         </div>
-        <select class="form-control highlight-select" id="highlight-chart-states-normalized" data-chart="states-normalized">
+        <select class="form-control highlight-select" id="highlight-chart-states" data-chart="states">
         </select>
       </div>
 
@@ -64,7 +64,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Show:</span>
         </div>
-        <select class="form-control filter-select" id="filter-chart-states-normalized" data-chart="states-normalized">
+        <select class="form-control filter-select" id="filter-chart-states" data-chart="states">
           <option value="highlight-only">Highlight Only</option>
           <option disabled="disabled">——————</option>
           <option value="northeast">Northeast</option>
@@ -92,7 +92,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">X-Axis:</span>
         </div>
-        <select class="form-control xaxis-select" data-chart="states-normalized">
+        <select class="form-control xaxis-select" data-chart="states">
           <option value="left">Days since threshold (left aligned) </option>
           <option value="right-4wk">Days ago, recent 4 weeks</option>
           <option value="right-8wk">Days ago, recent 8 weeks</option>
@@ -106,7 +106,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Y-Axis:</span>
         </div>
-        <select class="form-control yaxis-select" data-chart="states-normalized">
+        <select class="form-control yaxis-select" data-chart="states">
           <option disabled="disabled">—— Highlight Scaling ——</option>
           <option value="highlight">All Highlight Data</option>
           <option value="highlightCurMax">Current Highlight Value</option>
@@ -116,15 +116,15 @@
           <option value="fixed">All Data</option>
         </select>
       </div>
-
+      
       <div class="btn-group btn-group-toggle" style="float: right;" data-toggle="buttons">
-        <button class="btn btn-info animate-button" data-scale="log" data-chart="states-normalized">
+        <button class="btn btn-info animate-button" data-scale="log" data-chart="states">
           &#9654; Animate
         </button>
       </div>
 
       <span class="lesser-used-options" style="display: none;">
-      </span>
+      </span>      
 
       <div style="clear: both;"></div>
     </div>
@@ -164,5 +164,4 @@
     <div class="report">
     </div>
   </div>
-</div>
 </section>

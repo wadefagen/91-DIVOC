@@ -18,7 +18,7 @@ layout: home
     #04: <a href="pages/coronavirus-contribution-by-state/">Coronavirus Contribution by State</a>
   </li>
   <li>
-    <b>NEW</b> #05: <a href="pages/interactive-visualziation-of-covid-19-in-illinois/">Interactive Visualization of COVID-19 in Illinois</a>
+    #05: <a href="pages/interactive-visualization-of-covid-19-in-illinois/">Interactive Visualization of COVID-19 in Illinois</a>
   </li>
 </ul>
 
@@ -45,7 +45,7 @@ layout: home
 
 {% elsif update.visualization == 5 or update.newVisualization == 5 %}
 {% assign viz = "91-DIVOC-05: &quot;Interactive Visualization of COVID-19 in Illinois&quot;" %}
-{% assign viz_url = "/pages/interactive-visualziation-of-covid-19-in-illinois/" %}
+{% assign viz_url = "/pages/interactive-visualization-of-covid-19-in-illinois/" %}
 
 {% endif %}
 

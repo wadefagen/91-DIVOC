@@ -1,12 +1,9 @@
-<section data-chart="countries">
-  <div class="chart-header" style="margin-top: 20px;" id="countries">
-    <h2>New COVID-19 Cases by Country per Day</h2>
+<section data-chart="states-normalized">
+  <div class="chart-header" style="margin-top: 20px;" id="states-normalized">
+    <h2>New COVID-19 Cases by US States/Territories per Day, normalized by population</h2>
   </div>
-  <div id="chart-countries" class="chart-viz">
-    <div class="text-center divoc-graph-loading">
-      <div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span> </div>
-      <div>Loading Visualization...</div>
-    </div>
+  <div id="chart-states-normalized" class="chart-viz">
+    <div class="text-center divoc-graph-loading"><b>Loading Data...</b></div>
   </div>
   <div class="chart-footer">
     <div>
@@ -15,7 +12,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Data:</span>
           </div>
-          <select class="form-control data-select" data-chart="countries">
+          <select class="form-control data-select" data-chart="states-normalized">
             <option value="cases">Total Confirmed Cases</option>
             <option value="cases-daily">New Cases /Day</option>
             <option value="cases-daily-7" selected>New Cases, 1 Wk. Avg.</option>
@@ -26,7 +23,7 @@
             <option disabled="disabled">—————————</option>
             <option value="mortalityRate">Case Fatality Rate</option>
             <option value="mortalityRate-daily-7">Case Fatality Rate, 1 Wk.</option>
-            <option value="mortalityRate-daily-30">Case Fatality Rate, 1 Mo.</option>
+            <option value="mortalityRate-daily-30">Case Fatality Rate, 1 Mo.</option> 
             <option disabled="disabled">—————————</option>
             <option value="tests">Total COVID-19 Tests</option>
             <option value="tests-daily">New Tests /Day</option>
@@ -34,24 +31,22 @@
             <option disabled="disabled">—————————</option>
             <option value="testPositivity">Cumulative Test Positivity</option>
             <option value="testPositivity-daily">Daily Test Positivity</option>
-            <option value="testPositivity-daily-7">Daily Test Positivity, 1 Wk. Avg.</option>
+            <option value="testPositivity-daily-7">Daily Test Positivity, 1 Wk. Avg.</option>            
             <option disabled="disabled">—————————</option>
-            <option value="recovered">Total Recovered</option>
-            <option value="recovered-daily">New Recoveries /Day</option>
-            <option value="recovered-daily-7">New Recoveries, 1 Wk. Avg.</option>
-            <option disabled="disabled">—————————</option>
-            <option value="active">Total Active Cases</option>
+            <option value="hospitalized">Hospitalized Cases</option>
+            <option value="hospitalized-daily">New Hospitalized /Day</option>
+            <option value="hospitalized-daily-7">New Hosp., 1 Wk. Avg.</option>
           </select>
         </div>
-
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                
+        <div class="btn-group btn-group-toggle scaleSelectionArea" data-toggle="buttons">
           <div class="input-group-prepend">
             <span class="input-group-text">Scale:</span>
-          </div>          
-          <label class="btn btn-info scaleSelection" data-scale="log" data-chart="countries">
+          </div>
+          <label class="btn btn-info scaleSelection" data-scale="log" data-chart="states-normalized">
             <input type="radio" name="scale" autocomplete="off"> Log
           </label>
-          <label class="btn btn-info active scaleSelection" data-scale="linear" data-chart="countries">
+          <label class="btn btn-info active scaleSelection" data-scale="linear" data-chart="states-normalized">
             <input type="radio" name="scale" autocomplete="off" checked> Linear
           </label>
         </div>
@@ -61,40 +56,35 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Highlight:</span>
         </div>
-        <select class="form-control highlight-select" id="highlight-chart-countries" data-chart="countries">
+        <select class="form-control highlight-select" id="highlight-chart-states-normalized" data-chart="states-normalized">
         </select>
       </div>
 
       <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 3px;">
         <div class="input-group-prepend">
-          <span class="input-group-text">
-            Show:
-          </span>
+          <span class="input-group-text">Show:</span>
         </div>
-        <select class="form-control filter-select" id="filter-chart-countries" data-chart="countries">
+        <select class="form-control filter-select" id="filter-chart-states-normalized" data-chart="states-normalized">
           <option value="highlight-only">Highlight Only</option>
           <option disabled="disabled">——————</option>
-          <option value="pop100m">Population over 100m</option>
-          <option value="pop50m">Population over 50m</option>
-          <option value="pop10m">Population over 10m</option>
+          <option value="northeast">Northeast</option>
+          <option value="midwest">Midwest</option>
+          <option value="south">South</option>
+          <option value="west">West</option>
           <option disabled="disabled">——————</option>
-          <option value="who-afro">Africa (WHO)</option>
-          <option value="who-paho">Americas (WHO)</option>
-          <option value="who-euro">Europe (WHO)</option>
-          <option value="eu27">European Union (EU-27)</option>
-          <option value="who-searo">Southeast Asia (WHO)</option>
-          <option value="who-emro">E. Mediterranean (WHO)</option>
-          <option value="who-wpro">Western Pacific (WHO)</option>
+          <option value="pop-small">&lt;5m Pop.</option>
+          <option value="pop-large">&gt;5m Pop.</option>
           <option disabled="disabled">——————</option>
-          <option value="-10">Bottom 10 by Data</option>
-          <option value="-25">Bottom 25 by Data</option>
-          <option value="10">Top 10 by Data</option>
-          <option value="25" selected>Top 25 by Data</option>
-          <option value="50">Top 50 by Data</option>
+          <option value="10">Top 10</option>
+          <option value="25">Top 25</option>
+          <option value="50">Top 50</option>
           <option disabled="disabled">——————</option>
+          <option value="-10">Bottom 10</option>
+          <option value="-25">Bottom 25</option>
+          <option disabled="disabled">——————</option>
+          <option value="us-states" selected>All States &amp; DC</option>
           <option value="agg-only">Regions</option>
-          <option disabled="disabled">——————</option>
-          <option value="all">Everything</option>
+          <option value="all">All</option>
         </select>
       </div>
 
@@ -102,12 +92,12 @@
         <div class="input-group-prepend">
           <span class="input-group-text">X-Axis:</span>
         </div>
-        <select class="form-control xaxis-select" data-chart="countries">
-          <option value="left" selected>Days since threshold (left aligned) </option>
+        <select class="form-control xaxis-select" data-chart="states-normalized">
+          <option value="left">Days since threshold (left aligned) </option>
           <option value="right-4wk">Days ago, recent 4 weeks</option>
           <option value="right-8wk">Days ago, recent 8 weeks</option>
           <option value="right-12wk">Days ago, recent 12 weeks</option>
-          <option value="right">Days ago, all highlighted data</option>
+          <option value="right" selected>Days ago, all highlighted data</option>
           <option value="right-all">Days ago, all visible data</option>
         </select>
       </div>
@@ -116,7 +106,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Y-Axis:</span>
         </div>
-        <select class="form-control yaxis-select" data-chart="countries">
+        <select class="form-control yaxis-select" data-chart="states-normalized">
           <option disabled="disabled">—— Highlight Scaling ——</option>
           <option value="highlight">All Highlight Data</option>
           <option value="highlightCurMax">Current Highlight Value</option>
@@ -128,7 +118,7 @@
       </div>
 
       <div class="btn-group btn-group-toggle" style="float: right;" data-toggle="buttons">
-        <button class="btn btn-info animate-button" data-chart="countries">
+        <button class="btn btn-info animate-button" data-scale="log" data-chart="states-normalized">
           &#9654; Animate
         </button>
       </div>
@@ -147,7 +137,6 @@
     <div>
       <div class="addOptions">
         <a href="#" class="add-highlight">+Add Additional Highlight</a> or
-        <a href="#" class="add-highlight" data-subdata="true">+Add US State</a> or
         <a href="#" class="add-data">+Add Additional Data</a>
       </div>
 
@@ -170,7 +159,10 @@
         &#x1F4DD; Generate Report
       </button>
     </div>
-    <span class="report"></span>
     <div style="clear: both;"></div>
+
+    <div class="report">
+    </div>
   </div>
+</div>
 </section>

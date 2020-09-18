@@ -32,7 +32,21 @@ title: An interactive visualization of the exponential spread of COVID-19
         {% if page.name == "states-normalized.html" %}<b>{% endif %}<a href="states-normalized.html">US States</a>{% if page.name == "states-normalized.html" %}</b>{% endif %}
       </li>
     </ul>
+    <hr>
+    
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-bottom: 12px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Data Source:</span>
+      </div>
+      <select class="form-control datasrc-select">
+        <option value="merged">Johns Hopkins &amp; Our World in Data</option>
+        <option value="jhu" selected>Johns Hopkins University CSSE</option>
+        <option value="owid">Our World in Data (Oxford, et al)</option>
+        <option value="ctp">The COVID Tracking Project (The Atlantic)</option>
+      </select>
+    </div>      
   </div>
+
 </div>
 
 <div class="container">

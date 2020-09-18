@@ -46,7 +46,7 @@ os.system("python processData.py")
 
 # 91-DIVOC #5
 os.chdir(start_cwd)
-os.chdir("./interactive-visualziation-of-covid-19-in-illinois/sync/")
+os.chdir("./interactive-visualization-of-covid-19-in-illinois/sync/")
 os.system("python sync.py")
 
 

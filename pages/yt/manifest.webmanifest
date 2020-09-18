@@ -1,0 +1,14 @@
+{
+  "name": "91-DIVOC",
+  "short_name": "91-DIVOC",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "theme_color": "#00151f",
+  "description": "Interactive visualization of COVID-19",
+  "icons": [{
+    "src": "/static/91.png",
+    "sizes": "238x238",
+    "type": "image/png"
+  }]
+}

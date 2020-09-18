@@ -1,0 +1,221 @@
+svg {
+  background-color:hsla(270, 30%, 99%, 1);  
+}
+
+.lesser-used-options .input-group-text {
+  background-color: hsla(295, 100%, 95%, 1);
+}
+
+.input-group-prepend .input-group-text  {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.form-control {
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+
+}
+
+.svg-hover-highlight {
+  opacity: 1 !important;
+}
+
+path.svg-hover-highlight {
+  stroke-width: 2px;
+}
+
+circle.svg-hover-highlight {
+  stroke: black;
+  stroke-width: 0.5px;
+  /* display: inline !important; */
+}
+
+text.C_highlight {
+  stroke: black;
+  stroke-width: 0.3px;
+}
+
+text.svg-hover-highlight {
+  font-size: 15px;
+  stroke: black;
+  stroke-width: 0.3px;
+}
+
+.chart-viz {
+  background-color:hsla(270, 30%, 99%, 1);
+  border-left: solid 1px #ccc;
+  border-right: solid 1px #ccc;
+  border-top: solid 1px #ccc;
+}
+
+.chart-header, .chart-header h2  {
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.3em;
+  font-weight: bold;
+  padding: 0px;  
+  border-bottom-width: 0px;
+}
+
+.chart-footer {
+  background-color:hsla(270, 30%, 99%, 1);
+  border: solid 1px #ccc;
+  padding: 5px;
+}
+
+.axis text {
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.axis-title {
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.grid {
+  stroke-opacity: 0.15;
+  color:hsla(270, 30%, 50%, 1);
+}
+
+.tip-country {
+  font-weight: bold;
+  border-bottom: solid 1px black;      
+}
+
+.tip-details {
+  font-size: 12px;
+}
+
+.text-credits {
+  opacity: 0.3;
+  font-weight: bold;
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.label-country {
+  font-size: 10px;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
+
+i {
+  color: #aaa;
+}
+
+.data-scale-float { float: right; text-align: right; }
+.data-scale-float > div { padding-bottom: 3px; }
+
+
+/* == https://rawgit.com/Caged/d3-tip/master/examples/example-styles.css ==  */
+.d3-tip {
+  line-height: 1;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #000;
+  border-radius: 2px;
+  pointer-events: none;
+  border: solid 1px black;
+
+  margin-bottom: 200px;
+  
+  width: 200px;
+  text-align: center;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  pointer-events: none;
+}
+
+.d3-tip.n:after {
+  content: "\25BC";
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+  text-align: center;
+}
+
+/* Eastward tooltips */
+.d3-tip.e:after {
+  content: "\25C0";
+  margin: -4px 0 0 0;
+  top: 50%;
+  left: -8px;
+}
+
+/* Southward tooltips */
+.d3-tip.s:after {
+  content: "\25B2";
+  margin: 0 0 1px 0;
+  top: -8px;
+  left: 0;
+  text-align: center;
+}
+
+/* Westward tooltips */
+.d3-tip.w:after {
+  content: "\25B6";
+  margin: -4px 0 0 -1px;
+  top: 50%;
+  left: 100%;
+}
+
+.query-string {
+  display: none;
+  border-top: dashed 1px #aaa;
+
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.saveOptions {  
+  padding-top: 3px;
+  margin-top: 3px;
+  border-top: dashed 1px #aaa;
+}
+
+.addOptions {
+  line-height: 175%;
+}
+
+.addOptions a {
+  white-space: nowrap;
+}
+
+
+@media (min-width: 501px) {
+  .divoc-graph-loading { height: 555px; }
+  .divoc-graph-loading > .spinner-border { margin-top: 250px; }
+}
+
+@media (max-width: 500px) {
+  .divoc-graph-loading { height: 355px; }
+  .divoc-graph-loading > .spinner-border { margin-top: 150px; }
+}
+
+div.card { background-color: #cfe; } div.card > a { color: #064; }
+section { margin-bottom: 30px; }
+
+.btn-group {
+  margin-bottom: 2px;
+}

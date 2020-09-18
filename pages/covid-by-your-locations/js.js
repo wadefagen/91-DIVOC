@@ -38,6 +38,31 @@ var pctGrowth = function(d, str) {
   return pct + `% growth over the past week (+${ parseInt(d["dWeek_" + str]).toLocaleString("en-US", {maximumFractionDigits: 0}) })`;
 };
 
+var growth_cases = function (d, str) {
+  if (!d.Population) { return pctGrowth(d, str); }
+
+  console.log(d);
+  console.log(d[str]);
+  console.log(d["dWeek_" + str]);
+
+  let diff = d["dWeek_" + str];
+  let val = (diff / d.Population) * 100000;
+  let num = val.toLocaleString("en-US", {maximumFractionDigits: 2});
+
+  return `<i><b>+${num}</b> new cases /100,000 people <b>in the past week</b> (+${diff})</i>`;
+};
+
+var growth_deaths = function (d, str) {
+  if (!d.Population) { return pctGrowth(d, str); }
+
+  let diff = d["dWeek_" + str];
+  let val = (diff / d.Population) * 100000;
+  let num = val.toLocaleString("en-US", {maximumFractionDigits: 3});
+
+  return `<i><b>+${num}</b> new deaths /100,000 people <b>in the past week</b> (+${diff})</i>`;
+};
+
+
 var population = function(d, str) {
   if (!d.Population) {
     return "No population information available.";
@@ -62,7 +87,7 @@ var per100k = function(d, str) {
   if (!isNaN(val)) {
     val = (val / d.Population) * 1e5;
     num = val.toLocaleString("en-US", {maximumFractionDigits: 2});
-    return `...or <b>${num}</b> deaths /100k residents`;
+    return `...or <b>${num}</b> deaths /100k residents.`;
   }
 
   return "No population information available.";
@@ -218,7 +243,7 @@ var populateByKey = function(key) {
   .html(`
     ${cases(d, "Confirmed")}
     <div style="font-size: 12px;">${population(d, "Confirmed")}</div>
-    <div style="font-size: 12px;">${pctGrowth(d, "Confirmed")}</div>
+    <div style="font-size: 12px;">${growth_cases(d, "Confirmed")}</div>
     <h6 style="border-top: solid 1px #ddd; padding-top: 5px; margin-top: 5px; margin-bottom: 0px; font-size: 12px;">New Cases/day:</h6>
   `);
   render(svg, d, "cases");
@@ -228,7 +253,7 @@ var populateByKey = function(key) {
   .html(`
     ${cases(d, "Deaths")}
     <div style="font-size: 12px;">${per100k(d, "Deaths")}</div>
-    <div style="font-size: 12px;">${pctGrowth(d, "Deaths")}</div>
+    <div style="font-size: 12px;">${growth_deaths(d, "Deaths")}</div>
     <h6 style="border-top: solid 1px #ddd; padding-top: 5px; margin-top: 5px; margin-bottom: 0px; font-size: 12px;">New Deaths/day:</h6>
   `);
   render(svg, d, "deaths");

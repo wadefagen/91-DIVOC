@@ -16,38 +16,6 @@ desc: This change log lists the major changes made to "An interactive visualizat
   <a href="/pages/covid-visualization/">An interactive visualization of the exponential spread of COVID-19 &gt;&gt;</a>
 </div>
 
-## Sept. 10 - Added Normalized/Non-normalized Statistics
-
-For all mouseovers in area where the population is known, the mouseover will provide a normalized value for the data (ex: "3 cases /100k") in addition to the raw data.  When viewing a normalized chart, the raw data value is also given.
-
-Additionally, the data stream from Our World In Data is now updated daily providing global testing data. 🎉
-
-
-## August 7 - US-Total, Computed
-
-Johns Hopkins University has always reported the "United States" as part of their list of countries and, in a second dataset, reported the 50 states and US territories as individual locations.  The number of confirmed cases and deaths between the "United States" total and the sum of the 50 states' data has always varied slightly, accounting for the cases is the US territories, cruise ships, repatriation flights, and more.  Previous cases of large discrepancies between the data have always been paired with a spike in a single state data where a number of previously unreported cases were reported in a single day.
-
-Recently, the difference between the sums (particularly in the number of deaths) has become significant without a known cause.  To help dive deep into this difference, I've added a new "Data" value in the graphs of the US states:
-
-- Added "Data" value "US-Total, Computed*" to the two graphs of the US states.  This data is computed based off the sum of the 50 individual states' data instead of using the "United States" value.
-- You can compare the difference between the two values by choosing one and them using "+Add Additional Data".  You can add this to the "global" graph by choosing "+Add US State" (since the data is computed via the state-level data).
-
-
-## August 5
-
-Over the past few months, one of the most common question I was asked was "how did you get started?" or "how was this created?".  Over the past week, I created a video that dives into how 91-DIVOC was created:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FSY12kiK1_o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-This is my first exploration of video, so I'd love your feedback!  I believe it should give you some insight in how this visualization is created. :)
-
-
-## August 3
-
-- Allowed the display of "log-scale" graphs on percentage graphs (ex: test positivity, case fatality rates).
-- Improved the title on normalized percentage graphs ("test positivity" is never normalized, as it's a percentage).
-- Wrote a article, ["Minimizing Overlapping Labels in Interactive Visualizations"](https://towardsdatascience.com/minimizing-overlapping-labels-in-interactive-visualizations-b0eabd62ef0), for Towards Data Science about the new label layout algorithms for the right-align graphs.
-
 ## July 30
 
 - Added new "Highlight" option, "(None, without dimming)" to show all of the data without the non-highlight opacity filter applied.

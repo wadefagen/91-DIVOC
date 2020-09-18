@@ -68,6 +68,26 @@ def applyTestingCountForward(row):
   val = row["People_Tested"]
   date = row["Date"]
   dDays = 1
+  dForward = -1
+
+  while pd.isnull(val):
+    futureDate = rollBackDate(date, dForward)
+    key = row["Country_Region"] + " @ " + futureDate
+    if key in df_merged_testingData.index:
+      df_future = df_merged_testingData.loc[key]
+    else:
+      break
+
+    val = df_future["People_Tested"]
+    dForward = dForward - 1
+
+  if pd.isnull(val):
+    # No future data is available, so don't rollback data.
+    return row
+
+
+
+  val = row["People_Tested"]
 
   while pd.isnull(val):
     oldDate = rollBackDate(date, dDays)
