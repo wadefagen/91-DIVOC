@@ -545,8 +545,31 @@ var _prep_data = function(chart, fullData, extraDataStr = undefined) {
 
     highlight_data = _.filter(caseData, function(d) { return highlights.indexOf(d.country) != -1; });
 
-    if (chart.normalizePopulation) {
-      caseData = _.sortBy(caseData, function (d) { return -d.data[ d.data.length - 1 ].cases / d.pop; });
+    if (chart.avgData) {
+      caseData = _.sortBy(caseData, function (d) {
+        let sum = 0;
+        let ct = 0;
+        for (i = 0; i < chart.avgData; i++) {
+          if (d.data.length - i - 1 < 0) { break; }
+
+          let r = d.data[d.data.length - i - 1];
+          if (r) {
+            var datum;
+            if (chart.normalizePopulation && !chart.isRatio && r.rawcases !== undefined) {
+              datum = r.rawcases;
+            } else {
+              datum = r.cases;
+            }
+
+            if (datum !== undefined) {
+              sum += datum;
+              ct++;
+            }
+          }
+        }
+        d.sortAvg = sum / ct;
+        return -sum / ct;
+      });
     } else {
       caseData = _.sortBy(caseData, function (d) { return -d.data[ d.data.length - 1 ].cases; });
     }
@@ -814,6 +837,10 @@ var do_process_data = function(data, chart, isSubdata = false) {
             cases: cases,
             daysAgo: daysAgo
           };
+
+          if (chart.normalizePopulation && !chart.isRatio) {
+            record.rrcases = rawCaseValue;
+          }
 
           if (ratioData) {
             record.n = fetchCasesValue_v2( country, ratioData.n, dates, i );
