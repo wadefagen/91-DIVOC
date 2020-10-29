@@ -20,6 +20,9 @@ layout: home
   <li>
     #05: <a href="pages/interactive-visualization-of-covid-19-in-illinois/">Interactive Visualization of COVID-19 in Illinois</a>
   </li>
+  <li>
+    #06: <a href="pages/covid-19-at-big-ten-conference-schools/">COVID-19 at Big Ten Conference Schools</a>
+  </li>
 </ul>
 
 {% assign updates = site.updates | sort: 'date' | reverse | limit: 5 %}
@@ -46,6 +49,11 @@ layout: home
 {% elsif update.visualization == 5 or update.newVisualization == 5 %}
 {% assign viz = "91-DIVOC-05: &quot;Interactive Visualization of COVID-19 in Illinois&quot;" %}
 {% assign viz_url = "/pages/interactive-visualization-of-covid-19-in-illinois/" %}
+
+{% elsif update.visualization == 6 or update.newVisualization == 6 %}
+{% assign viz = "91-DIVOC-06: &quot;COVID-19 at Big Ten Conference Schools&quot;" %}
+{% assign viz_url = "/pages/covid-19-at-big-ten-conference-schools/" %}
+
 
 {% endif %}
 

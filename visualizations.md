@@ -64,6 +64,16 @@ img { border: solid 1px black; }
     </a>
   </div>
 
+  <div class="col-md-4 mt-4">
+    <h5>COVID-19 at Big Ten Conference Schools</h5>
+    <a href="/pages/covid-19-at-big-ten-conference-schools/">
+      <img src="/static/05.png" class="img-fluid">
+    </a>
+    91-DIVOC-06:
+    <a href="/pages/covid-19-at-big-ten-conference-schools/">
+      <i>"Interactive, data-forward visualization of publicly-reported COVID-19 data from Big Ten schools. Customizable views of confirmed cases, tests administered, test positivity, and more. Updated daily."</i>
+    </a>
+  </div>
 
 
 </div>

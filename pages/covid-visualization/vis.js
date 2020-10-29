@@ -44,7 +44,7 @@ var _custom_agg = {
     { group: "us", label: "US-Midwest", countries: _us_regions["midwest"] },
     { group: "us", label: "US-South", countries: _us_regions["south"] },
     { group: "us", label: "US-West", countries: _us_regions["west"] },
-    { group: "us", label: "US-Total, Computed*", countries: _us_regions["us_computed"] },
+    //{ group: "us", label: "US-Total, Computed*", countries: _us_regions["us_computed"] },
 
   ],
   dict: {}
@@ -220,7 +220,7 @@ var getStoredValue = function(key) {
 // find default state value
 var stored;
 
-var defaultState = "New York";
+var defaultState = "California";
 if ((stored = getStoredValue("state"))) { defaultState = stored; }
 
 var defaultCountry = "United States";
@@ -252,7 +252,7 @@ var charts = {
     dataSelection: 'cases',
     showDelta: true,
     avgData: 7,
-    dataSelection_y0: { 'active': 100, 'cases': 100, 'deaths': 10, 'recovered': 100, 'new-cases': 1, 'tests': 1, 'testPositivity': 10, 'mortalityRate': 10},
+    dataSelection_y0: { 'active': 100, 'cases': 100, 'deaths': 10, 'recovered': 100, 'new-cases': 1, 'tests': 1, 'testPositivity': 10, 'mortalityRate': 10 },
     yAxisScale: 'fixed',
     xMax: null, yMax: null, data: null,
     trendline: "default",
@@ -384,18 +384,18 @@ var transformToTrailingAverage2_ratio = function (data, period) {
 };
 
 
-var transformToTrailingAverage2 = function (data, period) {
+var transformToTrailingAverage2 = function (data, period, skipNeg = true) {
   var largest = -1;
   var sum = 0, ct = 0;
 
   for (var i = 0; i < data.length; i++) {
     val = ('rawcases' in data[i]) ? (data[i].rawcases) : (data[i].cases);
-    if (val > 0) { sum += val; } 
+    if (val > 0 || !skipNeg) { sum += val; } 
 
     var j = i - period;
     if (j >= 0) {
       val = ('rawcases' in data[j]) ? (data[j].rawcases) : (data[j].cases);
-      if (val > 0) { sum -= val; }
+      if (val > 0 || !skipNeg) { sum -= val; }
     } else {
       ct++;
     }
@@ -410,12 +410,33 @@ var transformToTrailingAverage2 = function (data, period) {
   return largest;
 };
 
-var transformToTrailingAverage = function (casesData, period) {
+var transformToDailyChange = function (casesData) {
+  for (var countryData of casesData) {
+
+    let data = countryData.data;
+    let max = 0, min = 0;
+
+    for (var i = data.length - 1; i > 0; i--) {
+      //data[i].pre_transform = data[i].cases;
+
+      let value = data[i].cases - data[i - 1].cases;
+      data[i].cases = value;
+      //data[i].rawcases = value;
+      if      (value > max) { max = value; }
+      else if (value < min) { min = value; }
+    }
+
+    countryData.maxCases = max;
+    countryData.minCases = min;
+  }
+};
+
+var transformToTrailingAverage = function (casesData, period, skipNeg = true) {
   for (var countryData of casesData) {
     if ('n' in countryData.data[0]) {
       countryData.maxCases = transformToTrailingAverage2_ratio(countryData.data, period);
     } else {
-      countryData.maxCases = transformToTrailingAverage2(countryData.data, period);
+      countryData.maxCases = transformToTrailingAverage2(countryData.data, period, skipNeg);
     }
   }
 }
@@ -524,12 +545,13 @@ var _prep_data = function(chart, fullData, extraDataStr = undefined) {
   } else if (retain_f) {
     caseData = _.filter(caseData, retain_f);
   } else if (chart.show != "all") {
-    let numShow = parseInt(chart.show);
-
-    if (chart.id == "chart-countries-normalized") {
+    let chartShowOption = chart.show;
+    if (chartShowOption.endsWith("-lg")) {
+      chartShowOption = chartShowOption.substring(0, chartShowOption.length - 3);
       caseData = _.filter(caseData, function(d) { return (d.pop > 1e6) || (highlights.indexOf(d.country) != -1); });
     }
-
+   
+    let numShow = parseInt(chart.show);
     exclude = _.map(_custom_agg.global, "label");
 
     if (chart.self == "states" || chart.self == "states-normalized") {
@@ -588,7 +610,13 @@ var _prep_data = function(chart, fullData, extraDataStr = undefined) {
     $highlight.html(getHTMLCountryOptionsToSelect(allCountries, chart.highlight));
   }
 
+  let dType = calculateDataOptions(chart.dataRawSelection);
+
   if (chart.avgData && chart.avgData > 1) { transformToTrailingAverage(caseData, chart.avgData); }
+  if (dType.isDerivative) { transformToDailyChange(caseData); }
+  if (dType.derivativeAvg) { transformToTrailingAverage(caseData, dType.derivativeAvg, false); }
+
+
   return caseData;
 };
 
@@ -699,8 +727,12 @@ var do_process_data = function(data, chart, isSubdata = false) {
       ratioData = { n: 'deaths', d: 'cases', raw: 'deaths' };
       break;
 
-    case 'cfr_30':
-      ratioData = { n: 'deaths', d: 'cases-30', raw: 'deaths' };
+    case 'cfr14':
+      ratioData = { n: "deaths", d: { value: "cases", lag: 14 }, raw: 'deaths' };
+      break;
+
+    case 'cfr28':
+      ratioData = { n: "deaths", d: { value: "cases", lag: 28 }, raw: 'deaths' };
       break;
   }
 
@@ -736,9 +768,20 @@ var do_process_data = function(data, chart, isSubdata = false) {
   };
 
   let fetchCasesValue_v2 = function(country, dataSelection, dates, i) {
-    let date = dates[i];
-    return agg[country][date][dataSelection];
+    if (dataSelection.lag) {
+      let index = i - dataSelection.lag;
+      if (index >= 0) {
+        let date = dates[index];
+        return agg[country][date][dataSelection.value];          
+      }
+
+      return 0;
+    } else {
+      let date = dates[i];
+      return agg[country][date][dataSelection];
+    }
   };
+
 
   /*
   if (true) {
@@ -800,8 +843,8 @@ var do_process_data = function(data, chart, isSubdata = false) {
       }
 
       if (chart.normalizePopulation && !chart.isRatio) {
-        cases = (cases / popSize) * 1e6;
-        rawCaseValue = (rawCaseValue / popSize) * 1e6;
+        cases = (cases / popSize) * 1e5;
+        rawCaseValue = (rawCaseValue / popSize) * 1e5;
       }
 
       if (dayCounter == -1) {
@@ -882,7 +925,8 @@ var do_process_data = function(data, chart, isSubdata = false) {
         maxDay: maxDay,
         totalDays: totalDays,
         lastDayCases: lastDayCases,
-        dataSelection: chart.dataSelection
+        dataSelection: chart.dataSelection,
+        dataRawSelection: chart.dataRawSelection,
       };
 
       for (let d of countryData) {
@@ -927,14 +971,14 @@ var _data_sources = {
       row["Confirmed"] = +row["Confirmed"];
       row["Recovered"] = +row["Recovered"];
       row["Deaths"] = +row["Deaths"];
-      row["People_Hospitalized"] = +row["People_Hospitalized"];
+      //row["People_Hospitalized"] = +row["People_Hospitalized"];
       row["People_Tested"] = +row["People_Tested"];
       
       if (row["Country_Region"] == "Georgia") { row["Country_Region"] = "Georgia (EU)"; }        
       return row;
     },
-    name: "Combined John Hopkins/Our World in Data",
-    provides: ["countries-cases", "countries-deaths", "countries-tests", "states-cases", "states-deaths", "states-tests", "states-hospitalized"],
+    name: "Combined Johns Hopkins/Our World in Data",
+    provides: ["countries-cases", "countries-deaths", "countries-tests", "states-cases", "states-deaths", "states-tests"],
   },
 
   // Johns Hopkins:
@@ -947,13 +991,13 @@ var _data_sources = {
       row["Recovered"] = +row["Recovered"];
       row["Deaths"] = +row["Deaths"];
       row["People_Tested"] = +row["People_Tested"];
-      row["People_Hospitalized"] = +row["People_Hospitalized"];
+      //row["People_Hospitalized"] = +row["People_Hospitalized"];
 
       if (row["Country_Region"] == "Georgia") { row["Country_Region"] = "Georgia (EU)"; }        
       return row;
     },
-    name: "John Hopkins University CSSE",
-    provides: ["countries-cases", "countries-deaths", "states-cases", "states-deaths", "states-tests", "states-hospitalized", "countries-active", "countries-recovered"],
+    name: "Johns Hopkins University CSSE",
+    provides: ["countries-cases", "countries-deaths", "states-cases", "states-deaths", "states-tests", "countries-active", "countries-recovered"],
   },
 
   // COVID Tracking Project
@@ -971,7 +1015,7 @@ var _data_sources = {
       return row;
     },
     name: "The COVID Tracking Project",
-    provides: ["states-cases", "states-deaths", "states-tests"],
+    provides: ["states-cases", "states-deaths", "states-tests", 'states-hospitalized'],
   },
 
   // Our World In Data
@@ -1681,7 +1725,8 @@ var calculateDataOptions = function(value) {
     showDelta: false,
     isRatio: false,
     baseDataType: value,
-    forceLinear: false
+    forceLinear: false,
+    isDerivative: false,    
   };
 
   let valuePieces = value.split('-');
@@ -1691,18 +1736,31 @@ var calculateDataOptions = function(value) {
     options.showDelta = true;
 
     // eg: cases-daily-7
-    if (valuePieces.length == 3) {
+    if (valuePieces.length >= 3) {
       options.avgData = parseInt(valuePieces[2]);
     }
+
+    // eg: cases-daily-7-dx
+    if (valuePieces.length >= 4) {
+      if (valuePieces[3] == "dx") { options.isDerivative = true; }
+    }
+
+    // eg: cases-daily-7-dx-7
+    if (valuePieces.length >= 5) {
+      options.derivativeAvg = parseInt(valuePieces[4]);
+    }
+
   }
 
-  if (valuePieces[0] == 'testPositivity' || valuePieces[0] == 'mortalityRate') {
+  if (valuePieces[0] == 'testPositivity' || valuePieces[0] == 'mortalityRate' || valuePieces[0] == "cfr14" || valuePieces[0] == "cfr28") {
     options.isRatio = true;
     options.forceLinear = true;
   }
 
   switch (options.baseDataType) {
     case "mortalityRate":
+    case "crf14":
+    case "cfr28":
       options.dataSourceNeeded = "deaths";
       break;
 
@@ -1730,13 +1788,13 @@ var updateDataSelectionOptions = function(chart, value, apply_ui_changes = true)
     value = valuePieces[0];
     chart.showDelta = true;
 
-    if (valuePieces.length == 3) {
+    if (valuePieces.length >= 3) {
       chart.avgData = parseInt(valuePieces[2]);
     }
   }
 
   chart.isRatio = false;
-  if (value == 'testPositivity' || value == 'mortalityRate') {
+  if (value == 'testPositivity' || value == 'mortalityRate' || value == "cfr14" || value == "cfr28") {
     chart.isRatio = true;
     //chart.forceLinear = true;
 
@@ -1749,7 +1807,13 @@ var updateDataSelectionOptions = function(chart, value, apply_ui_changes = true)
 
 
   chart.dataSelection = value;
-  chart.y0 = chart.dataSelection_y0[value];
+  if (chart.dataSelection_y0 && chart.dataSelection_y0[value]) {
+    chart.y0 = chart.dataSelection_y0[value];
+  } else {
+    chart.y0 = 0.01;
+  }
+  
+  //chart.y0 = 0;
 
   if (apply_ui_changes) { $("#" + chart.id.substring(6)).html("<h2>" + generateDataLabel(chart, true) + "</h2>"); }
 };
@@ -2032,7 +2096,7 @@ var generateReport = function (chart) {
         num += ` ${generateDataLabel(chart)}`;
 
         if (chart.normalizePopulation && !chart.isRatio) {
-          num += ` /1m`;
+          num += ` /100k`;
         }
       }
 
@@ -2119,11 +2183,15 @@ var generateDataLabel_v3 = function(chart, dType, title = false) {
   var dataLabel = "";
 
   if (title) {
+    if (dType.isDerivative) {
+      dataLabel += "Daily Change in ";
+    }
+
     if (dType.isRatio) {
-      if (dType.showDelta) { dataLabel = "Daily "; }
-      else { dataLabel = "Cumulative "; }      
+      if (dType.showDelta) { dataLabel += "Daily "; }
+      else { dataLabel += "Cumulative "; }      
     } 
-    else if (dType.showDelta) { dataLabel = "New "; }
+    else if (dType.showDelta) { dataLabel += "New "; }
 
     if (dType.baseDataType == 'cases') { dataLabel += "Confirmed COVID-19 Cases"; }
     else if (dType.baseDataType == 'active') { dataLabel += "Active COVID-19 Cases"; }
@@ -2133,6 +2201,8 @@ var generateDataLabel_v3 = function(chart, dType, title = false) {
     else if (dType.baseDataType == 'tests') { dataLabel += "COVID-19 Tests Performed"; }  
     else if (dType.baseDataType == 'testPositivity') { dataLabel += "COVID-19 Test Positivity Rate"; }  
     else if (dType.baseDataType == 'mortalityRate') { dataLabel += "COVID-19 Case Fatality Rate"; }  
+    else if (dType.baseDataType == 'cfr14') { dataLabel += "COVID-19 Case Fatality Rate (Lagged)"; }
+    else if (dType.baseDataType == 'cfr28') { dataLabel += "COVID-19 Case Fatality Rate (Lagged)"; }  
 
 
     if (dType.showDelta && !dType.isRatio) { dataLabel += " per Day"; }
@@ -2145,7 +2215,12 @@ var generateDataLabel_v3 = function(chart, dType, title = false) {
     if (dType.isRatio) {
       //if (!dType.showDelta) { dataLabel = "cumulative "; }      
     } 
-    else if (dType.showDelta) { dataLabel = "new "; }
+
+    if (dType.isDerivative) {
+      dataLabel += "daily change in ";
+    }
+
+    else if (dType.showDelta) { dataLabel += "new "; }
 
     if (dType.baseDataType == 'cases') { dataLabel += "confirmed cases"; }
     else if (dType.baseDataType == 'active') { dataLabel += "active cases"; }
@@ -2155,6 +2230,8 @@ var generateDataLabel_v3 = function(chart, dType, title = false) {
     else if (dType.baseDataType == 'tests') { dataLabel += "COVID-19 tests performed"; }  
     else if (dType.baseDataType == 'testPositivity') { dataLabel += "test positivity"; }  
     else if (dType.baseDataType == 'mortalityRate') { dataLabel += "case fatality rate"; }  
+    else if (dType.baseDataType == 'cfr14') { dataLabel += "case fatality rate (lagged)"; }  
+    else if (dType.baseDataType == 'cfr28') { dataLabel += "case fatality rate (lagged)"; }  
   }
 
   return dataLabel;
@@ -2190,8 +2267,9 @@ var tip_html = function(chart) {
     if (chart.xaxis && chart.xaxis.indexOf("right") != -1) { alignRight = true; }
 
     //var gData = _.find(chart.data, function (e) { return e.country == d.country }).data;
+    //console.log(d.src);
     var gData = d.src.data;
-    var dType = calculateDataOptions(d.src.dataSelection);
+    var dType = calculateDataOptions(d.src.dataRawSelection);
 
     var geoGrowth = [];
 
@@ -2221,7 +2299,7 @@ var tip_html = function(chart) {
     }
 
     var s2 = "";
-    if (chart.normalizePopulation && !dType.isRatio) { s2 = " per 1,000,000 people"; }
+    if (chart.normalizePopulation && !dType.isRatio) { s2 = " per 100,000 people"; }
 
     var dataLabel = generateDataLabel_v3(chart, dType);
     var dataLabel_cutoff = dataLabel;
@@ -2270,7 +2348,7 @@ var tip_html = function(chart) {
       if (!chart.normalizePopulation && d.pop) {
         s += `<i> (or <b>${numericFormat(d.cases / d.pop * 100000)}</b> /100k people)</i>`;
       } else if (chart.normalizePopulation && d.pop) {
-        s += `<i> (or <b>${numericFormat(d.cases * d.pop / 1000000)}</b> total)</i>`;
+        s += `<i> (or <b>${numericFormat(d.cases * d.pop / 100000)}</b> total)</i>`;
       }
     }
     s += `</div>`;
@@ -2289,6 +2367,12 @@ var tip_html = function(chart) {
         case "mortalityRate":
           n_label = "deaths";
           d_label = "cases";
+          break;
+
+        case "cfr14":
+        case "cfr28":
+          n_label = "deaths";
+          d_label = "lagged cases";
           break;
       }
 
@@ -2334,7 +2418,7 @@ var tip_html = function(chart) {
         if (!chart.normalizePopulation && d.pop) {
           s += `<i> (or <b>${numericFormat(d.cases / d.pop * 100000)}</b> /100k people)</i>`;
         } else if (chart.normalizePopulation && d.pop) {
-          s += `<i> (or <b>${numericFormat(d.cases * d.pop / 1000000)}</b> total)</i>`;
+          s += `<i> (or <b>${numericFormat(d.cases * d.pop / 100000)}</b> total)</i>`;
         }
       }
   
@@ -2392,6 +2476,7 @@ var render = function(chart) {
   let countryCount = chart.data.length;
 
   let dataPointCount = 0;
+  //console.log(chart);
   for (let d of chart.data) { dataPointCount += d.data.length; }
 
   countryCount = countryCount.toLocaleString("en-US", {maximumFractionDigits: 0});
@@ -2664,8 +2749,8 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
       break;    
   }
 
+  let dType = calculateDataOptions(chart.dataRawSelection);
   if (chart.data.length == 0) {
-     let dType = calculateDataOptions(chart.dataRawSelection);
 
      let dataSourceNeeded = chart.dataSourceNeeded + "-" + dType.dataSourceNeeded;
 
@@ -2784,6 +2869,8 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
   switch (chart.dataSelection) {
     case 'testPositivity':
     case 'mortalityRate':
+    case 'cfr14':
+    case 'cfr28':
       isRatio = true;
       break;
   }
@@ -2824,8 +2911,9 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
 
   let scale_yMax;
 
-  let _find_max_cases = function(data) {
+  let _find_minmax_cases = function(data) {
     var maxCases = -1;
+    var minCases = 0;
     for (let d of data) {
       if (d.data.length > 0) {
         let dataInScope = [];
@@ -2836,20 +2924,30 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
         }
 
         if (dataInScope.length > 0) {       
-          let max = _.maxBy(dataInScope, 'cases')
-          
+          let max = _.maxBy(dataInScope, 'cases');
           if (max) {
             max = max.cases;
             if (max > maxCases) { maxCases = max; }
+          }
+
+          let min = _.minBy(dataInScope, 'cases');          
+          if (min) {
+            min = min.cases;
+            if (min < minCases) { minCases = min; }
           }
         }
       }
     }
 
-    return maxCases;
+    return {max: maxCases, min: minCases};
   };
 
+
+
+
   let scale_y_highlight, scale_y_curMax;
+  let scale_y_highlight_min, scale_y_curMin, scale_yMin;
+
   if (chart.yAxisScale == "highlight" || chart.yAxisScale == "both" || chart.yAxisScale == "fixed") {
     let highlights_data;
     if (chart.yAxisScale == "highlight" || chart.yAxisScale == "both") {
@@ -2859,13 +2957,18 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
     }
 
     if (highlights_data.length > 0) {
-      let maxCases = _find_max_cases(highlights_data);
+      let minmax = _find_minmax_cases(highlights_data);
+      let maxCases = minmax.max;
       scale_y_highlight = scale_yMax = maxCases * 1.05;
+
+      let minCases = minmax.min;
+      scale_y_highlight_min = scale_yMin = minCases * 1.05;
     }
   }
   
   if (!f || chart.yAxisScale == "highlightCurMax" || chart.yAxisScale == "currentMax" || chart.yAxisScale == "both") {
     let maxCasesValue = 0;
+    let minCasesValue = 0;
 
     if (f && chart.yAxisScale == "highlightCurMax") {
       scale_data = _.filter(scale_data, function (d) { return highlights.indexOf(d.country) != -1; });
@@ -2883,19 +2986,26 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
       }
 
       if (last && last.cases > maxCasesValue) { maxCasesValue = last.cases; }
+      if (last && last.cases < minCasesValue) { minCasesValue = last.cases; }
     }
 
     scale_y_curMax = scale_yMax = maxCasesValue * 1.05;
+    scale_y_curMin = scale_yMin = minCasesValue * 1.05;
   }
 
   if (chart.yAxisScale == "both") {
     if (scale_y_highlight && scale_y_curMax) {
       scale_yMax = Math.max(scale_y_highlight, scale_y_curMax);
+      scale_yMin = Math.min(scale_y_highlight_min, scale_y_curMin);
     } else if (scale_y_highlight) {
       scale_yMax = scale_y_highlight;
     } else {
       scale_yMax = scale_y_curMax;
     }
+  }
+
+  if (dType.isDerivative && scale_yMin < 0) {
+    scale_y0 = scale_yMin;
   }
 
   if (isRatio) {
@@ -2907,6 +3017,8 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
       if (scale_yMax > 1) { scale_yMax = 1; }
     }
   }
+
+
 
   casesScale.domain([scale_y0, scale_yMax]).range([height, 0]);
   
@@ -3005,6 +3117,16 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
       .text(generateDataLabel(chart, true));
   }
 
+  if (scale_y0 < 0) {
+    svg.append("line")
+      .attr("x1", 0)
+      .attr("x2", width)
+      .attr("y1", casesScale(0))
+      .attr("y2", casesScale(0))
+      .attr("stroke-width", 3)
+      .attr("stroke", "#ccc");
+  }
+
   if (alignRight) {
     svg.append("rect")
       .attr("x", daysScale(-14))
@@ -3073,11 +3195,24 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
   // Axes
   let xTickValues = [0];
   let xTickValue_ct = 0;
+  
+  let advOnSmall = maxDayRendered / 10;
+  if (advOnSmall < 7) { advOnSmall = 7; }
+  else if (advOnSmall < 14) { advOnSmall = 14; }
+  else if (advOnSmall < 21) { advOnSmall = 21; }
+  else { advOnSmall = 28; }
+
+
   while (xTickValue_ct <= maxDayRendered) {
     if (alignRight) { xTickValues.push(-xTickValue_ct); }
     else { xTickValues.push(xTickValue_ct); }
 
-    xTickValue_ct += 7;
+    if (isSmall) {
+      xTickValue_ct += advOnSmall;
+    } else {
+      xTickValue_ct += 7;
+    }
+    
   }
 
   var x_axis = d3.axisBottom(daysScale);
@@ -3117,6 +3252,11 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
     }
   } else {
     y_axis_tickFormat = function (val) {
+      let isNeg = false;
+      if (val < 0) {
+        val *= -1;
+        isNeg = true;
+      }
       var oom = Math.log10(val);
 
       let suffix = "";
@@ -3126,8 +3266,8 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
       else if (oom < 6) { factor = 1e3; suffix = "k"; }
       else if (oom < 9) { factor = 1e6; suffix = "m"; }
 
-      if (val % factor < factor / 10) { return (val / factor).toFixed(0) + suffix; }
-      else { return (val / factor).toFixed(1) + suffix; }      
+      if (val % factor < factor / 10) { return ((isNeg)?"-":"") + (val / factor).toFixed(0) + suffix; }
+      else { return ((isNeg)?"-":"") + (val / factor).toFixed(1) + suffix; }      
     }
   }
   
@@ -3238,11 +3378,11 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
   var xAxisLabel = `Days since ${chart.y0} `
   if (chart.dataSelection == 'cases') { xAxisLabel += "case"; if (chart.y0 != 1) { xAxisLabel += "s"; }}
   else if (chart.dataSelection == 'active') { xAxisLabel += "active case"; if (chart.y0 != 1) { xAxisLabel += "s"; }}
-  else if (chart.dataSelection == 'deaths' || chart.dataSelection == 'mortalityRate') { xAxisLabel += "death"; if (chart.y0 != 1) { xAxisLabel += "s"; } }
+  else if (chart.dataSelection == 'deaths' || chart.dataSelection == 'mortalityRate' || chart.dataRawSelection == "cfr14" || chart.dataRawSelection == "cfr28") { xAxisLabel += "death"; if (chart.y0 != 1) { xAxisLabel += "s"; } }
   else if (chart.dataSelection == 'tests' || chart.dataSelection == 'testPositivity') { xAxisLabel += "test"; if (chart.y0 != 1) { xAxisLabel += "s"; } }
   else if (chart.dataSelection == 'recovered') { xAxisLabel += "recover"; if (chart.y0 != 1) { xAxisLabel += "ies"; } else { xAxisLabel += "y"; }}
   else if (chart.dataSelection == 'hospitalized') { xAxisLabel += "hospitalization"; if (chart.y0 != 1) { xAxisLabel += "s"; }}
-  if (chart.normalizePopulation && !chart.isRatio) { xAxisLabel += "/1m people"; }
+  if (chart.normalizePopulation && !chart.isRatio) { xAxisLabel += "/100k people"; }
 
   /*
   if (chart.dataSelection == 'tests') { xAxisLabel = "Days since Apr. 12"; }
@@ -3262,6 +3402,8 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
 
   let _draw_yAxisLabel = function(g, dType) {
     var yAxisLabel = "";
+    if (dType.isDerivative) { yAxisLabel += "Daily Change in "; }
+
     if (dType.showDelta) { yAxisLabel += "New Daily "; }
     if (dType.baseDataType == 'cases') { yAxisLabel += "Confirmed Cases"; }
     else if (dType.baseDataType == 'active') { yAxisLabel += "Active Cases"; }
@@ -3271,8 +3413,11 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
     else if (dType.baseDataType == 'hospitalized') { yAxisLabel += "Hospitalizations of COVID-19" }
     else if (dType.baseDataType == 'testPositivity') { yAxisLabel += "Test Positivity Rate" }
     else if (dType.baseDataType == 'mortalityRate') { yAxisLabel += "Case Fatality Rate" }
+    else if (dType.baseDataType == 'cfr14') { yAxisLabel += "Case Fatality Rate (Lagged)" }
+    else if (dType.baseDataType == 'cfr28') { yAxisLabel += "Case Fatality Rate (Lagged)" }
+
     if (chart.normalizePopulation && !dType.isRatio) {
-      yAxisLabel += "/1m people";
+      yAxisLabel += "/100k people";
     }
   
     g.append("text")
@@ -3283,7 +3428,7 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
      .attr("text-anchor", "end")
      .text(yAxisLabel);
   
-    if (dType.avgData) {
+    if (dType.avgData && dType.avgData > 1) {
       g.append("text")
        .attr("transform", "rotate(-90)")
        .attr("x", -2)
@@ -3664,7 +3809,7 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
     else if (chart.dataSelection == 'recovered') { desc += "recover"; if (chart.y0 != 1) { desc += "ies"; } else { desc += "y"; }}
     else if (chart.dataSelection == 'testPositivity') { desc += "test"; if (chart.y0 != 1) { desc += "s"; }}
     else if (chart.dataSelection == 'hospitalized') { desc += "hospitalization"; if (chart.y0 != 1) { desc += "s"; }}
-    if (chart.normalizePopulation && !chart.isRatio) { desc += "/1m people"; }
+    if (chart.normalizePopulation && !chart.isRatio) { desc += "/100k people"; }
 
     $("#" + chart.id).append(
       `<div class="alert alert-secondary" style="margin-top: 10px; margin-bottom: 0px; text-align: center; font-size: 12px;">

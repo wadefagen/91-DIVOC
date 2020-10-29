@@ -16,14 +16,7 @@ the data is gathered from two pages:
 
 ### Regions
 
-The "Restore Illinois" regions are based off of the Emergency Medical Services Regions, as defined in [Title 77, Chapter 1(f) §515.200: Emergency Medical Services Regions](https://www.ilga.gov/commission/jcar/admincode/077/077005150B02000R.html).  The "Restore Illinois" regions are further defined as:
-
-- "Northeast Region" (EMS 7-11), including greater Chicago area
-- "North Central Region" (EMS 1, 2), including Rockford, Quad Cities, Peoria, and Bloomington-Normal
-- "Central Region" (EMS 3, 6), including Champaign-Urbana, Springfield, and Decatur
-- "Southern Region" (EMS 4, 5), including greater St. Louis, Carbondale, and Mt. Vernon
-
-The 91-DIVOC visualizations computes region totals based off of the "Restore Illinois" areas when provided county-level data.
+The Illinois regions are based off of the Emergency Medical Services Regions, as defined in [Title 77, Chapter 1(f) §515.200: Emergency Medical Services Regions](https://www.ilga.gov/commission/jcar/admincode/077/077005150B02000R.html).  The 91-DIVOC visualizations computes region totals based off of the "Illinois" areas when provided county-level data.
 
 <hr>
 
@@ -59,14 +52,14 @@ On the "Restore Illinois" page, the Department of Health shows gauge visualizati
 
 <div class="row text-center">
   <div class="col-md-6 mb-3">
-    <a href="/pages/interactive-visualziation-of-covid-19-in-illinois/?chart=countries&highlight=Cook&show=25&y=highlight&scale=linear&data=testPositivity-daily-7&data-source=il-dph&xaxis=right-12wk&extra=#countriess">
+    <a href="/pages/interactive-visualization-of-covid-19-in-illinois/?chart=countries&highlight=Cook&show=25&y=highlight&scale=linear&data=testPositivity-daily-7&data-source=il-dph&xaxis=right-12wk&extra=#countriess">
       <img src="testPositivity-Cook.png" class="img-fluid" style="max-width: 80%; border: solid 1px black;"><br>
       <i style="font-size: 12px;">Click to view the interactive version of this visualization.<br></i>
       Test Positivity of Cook County
     </a>
   </div>
   <div class="col-md-6">
-    <a href="/pages/interactive-visualziation-of-covid-19-in-illinois/?chart=countries&highlight=(All%20Regions)&show=25&y=highlight&scale=linear&data=icu-daily-7&data-source=il-dph&xaxis=right-12wk#countries">
+    <a href="/pages/interactive-visualization-of-covid-19-in-illinois/?chart=countries&highlight=(All%20Regions)&show=25&y=highlight&scale=linear&data=icu-daily-7&data-source=il-dph&xaxis=right-12wk#countries">
       <img src="icu-Regions.png" class="img-fluid" style="max-width: 80%; border: solid 1px black;"><br>
       <i style="font-size: 12px;">Click to view the interactive version of this visualization.<br></i>
       ICU Utilization of All Regions
@@ -90,14 +83,14 @@ It is often useful to highlight multiple counties to compare case data between v
 
 <div class="row text-center">
   <div class="col-md-6 mb-3">
-    <a href="/pages/interactive-visualziation-of-covid-19-in-illinois/?chart=countries&highlight=Lake&show=25&y=highlight&scale=linear&data=cases-daily-7&data-source=il-dph&xaxis=right-12wk&extra=Champaign#countries">
+    <a href="/pages/interactive-visualization-of-covid-19-in-illinois/?chart=countries&highlight=Lake&show=25&y=highlight&scale=linear&data=cases-daily-7&data-source=il-dph&xaxis=right-12wk&extra=Champaign#countries">
       <img src="cases-Lake-Champaign.png" class="img-fluid" style="max-width: 80%; border: solid 1px black;"><br>
       <i style="font-size: 12px;">Click to view the interactive version of this visualization.<br></i>
       New Confirmed Cases in Lake and Champaign Counties per Day
     </a>
   </div>
   <div class="col-md-6">
-    <a href="/pages/interactive-visualziation-of-covid-19-in-illinois/?chart=countries&highlight=Cook&show=25&y=highlight&scale=linear&data=testPositivity-daily-7&data-source=il-dph&xaxis=right-12wk&extra=Lake#countries">
+    <a href="/pages/interactive-visualization-of-covid-19-in-illinois/?chart=countries&highlight=Cook&show=25&y=highlight&scale=linear&data=testPositivity-daily-7&data-source=il-dph&xaxis=right-12wk&extra=Lake#countries">
       <img src="tests-Lake-Champaign.png" class="img-fluid" style="max-width: 80%; border: solid 1px black;"><br>
       <i style="font-size: 12px;">Click to view the interactive version of this visualization.<br></i>
       Daily COVID-19 Tests in Lake and Champaign Counties
@@ -121,14 +114,14 @@ This normalized view of the data allows each county to be compared in a way that
 
 <div class="row text-center">
   <div class="col-md-6 mb-3">
-    <a href="/pages/interactive-visualziation-of-covid-19-in-illinois/?chart=countries&highlight=Cook&show=25&y=highlight&scale=linear&data=tests&data-source=il-dph&xaxis=right-12wk&extra=Champaign#countries">
+    <a href="/pages/interactive-visualization-of-covid-19-in-illinois/?chart=countries&highlight=Cook&show=25&y=highlight&scale=linear&data=tests&data-source=il-dph&xaxis=right-12wk&extra=Champaign#countries">
       <img src="tests-Cook-Champaign.png" class="img-fluid" style="max-width: 80%; border: solid 1px black;"><br>
       <i style="font-size: 12px;">Click to view the interactive version of this visualization.<br></i>
       Cook vs. Champaign County Total Tests (Raw)
     </a>
   </div>
   <div class="col-md-6">
-    <a href="/pages/interactive-visualziation-of-covid-19-in-illinois/?chart=countries-normalized&highlight=Cook&show=25&y=highlight&scale=linear&data=tests&data-source=il-dph&xaxis=right-12wk&extra=Champaign#countries-normalized">
+    <a href="/pages/interactive-visualization-of-covid-19-in-illinois/?chart=countries-normalized&highlight=Cook&show=25&y=highlight&scale=linear&data=tests&data-source=il-dph&xaxis=right-12wk&extra=Champaign#countries-normalized">
       <img src="tests-normalized-Cook-Champaign.png" class="img-fluid" style="max-width: 80%; border: solid 1px black;"><br>
       <i style="font-size: 12px;">Click to view the interactive version of this visualization.<br></i>
       Cook vs. Champaign County Total Tests (Normalized)
@@ -150,14 +143,14 @@ Behind the highlighted data, other data is shown slightly faded to provide great
 
 <div class="row text-center">
   <div class="col-md-6 mb-3">
-    <a href="/pages/interactive-visualziation-of-covid-19-in-illinois/?chart=countries-normalized&highlight=Region%3A%20Northeast&show=Region%3A%20Northeast&y=highlight&scale=linear&data=cases-daily-7&data-source=il-dph&xaxis=right-12wk#countries-normalized">
+    <a href="/pages/interactive-visualization-of-covid-19-in-illinois/?chart=countries-normalized&highlight=Region%3A%20Northeast&show=Region%3A%20Northeast&y=highlight&scale=linear&data=cases-daily-7&data-source=il-dph&xaxis=right-12wk#countries-normalized">
       <img src="cases-NE-show_NE.png" class="img-fluid" style="max-width: 80%; border: solid 1px black;"><br>
       <i style="font-size: 12px;">Click to view the interactive version of this visualization.<br></i>
       Northeast Region <b>showing Only Northeast Region Counties</b>, normalized by population
     </a>
   </div>
   <div class="col-md-6">
-    <a href="/pages/interactive-visualziation-of-covid-19-in-illinois/?chart=countries-normalized&highlight=Region%3A%20Northeast&show=all&y=highlight&scale=linear&data=cases-daily-7&data-source=il-dph&xaxis=right-12wk#countries-normalized">
+    <a href="/pages/interactive-visualization-of-covid-19-in-illinois/?chart=countries-normalized&highlight=Region%3A%20Northeast&show=all&y=highlight&scale=linear&data=cases-daily-7&data-source=il-dph&xaxis=right-12wk#countries-normalized">
       <img src="cases-NE-show_everything.png" class="img-fluid" style="max-width: 80%; border: solid 1px black;"><br>
       <i style="font-size: 12px;">Click to view the interactive version of this visualization.<br></i>
       Northeast Region <b>showing Everything</b>, normalized by population

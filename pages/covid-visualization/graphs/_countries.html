@@ -39,7 +39,17 @@
             <option value="recovered">Total Recovered</option>
             <option value="recovered-daily">New Recoveries /Day</option>
             <option value="recovered-daily-7">New Recoveries, 1 Wk. Avg.</option>
-            <option disabled="disabled">—————————</option>
+
+            <option disabled="disabled">—— Derivative Charts -—</option>
+            <option value="cases-daily-1-dx">DailyΔ in New Cases /Day</option>
+            <option value="cases-daily-7-dx">DailyΔ in New Cases /Day, 1 Wk. Avg</option>
+            <option value="deaths-daily-1-dx">DailyΔ in New Deaths /Day</option>
+            <option value="deaths-daily-7-dx">DailyΔ in New Deaths /Day, 1 Wk. Avg</option>
+            <option disabled="disabled">—— Experimental Charts ——</option>
+            <option value="cfr14-daily-7">CFR (2-week lag), recent 1 Wk.</option>
+            <option value="cfr14-daily-30">CFR (2-week lag), recent 1 Mo.</option>
+            <option value="cfr28-daily-7">CFR (4-week lag), recent 1 Wk.</option>
+            <option value="cfr28-daily-30">CFR (4-week lag), recent 1 Mo.</option>
             <option value="active">Total Active Cases</option>
           </select>
         </div>
@@ -103,11 +113,11 @@
           <span class="input-group-text">X-Axis:</span>
         </div>
         <select class="form-control xaxis-select" data-chart="countries">
-          <option value="left" selected>Days since threshold (left aligned) </option>
+          <option value="left">Days since threshold (left aligned) </option>
           <option value="right-4wk">Days ago, recent 4 weeks</option>
           <option value="right-8wk">Days ago, recent 8 weeks</option>
           <option value="right-12wk">Days ago, recent 12 weeks</option>
-          <option value="right">Days ago, all highlighted data</option>
+          <option value="right" selected>Days ago, all highlighted data</option>
           <option value="right-all">Days ago, all visible data</option>
         </select>
       </div>

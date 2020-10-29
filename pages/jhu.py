@@ -430,7 +430,7 @@ df = pd.concat([df, df_allByDate], sort=False)
 # df = pd.concat([df, df_agg], sort=False)
 
 
-
+df = df.drop(['People_Hospitalized'], axis=1)
 df = df.astype({"Confirmed": "int32", "Recovered": "int32", "Active": "int32", "Deaths": "int32"})
 #print(df)
 df.to_csv('jhu.csv', index=False, float_format='%.0f')

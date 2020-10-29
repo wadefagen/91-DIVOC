@@ -16,6 +16,54 @@ desc: This change log lists the major changes made to "An interactive visualizat
   <a href="/pages/covid-visualization/">An interactive visualization of the exponential spread of COVID-19 &gt;&gt;</a>
 </div>
 
+## Oct. 28 - Derivative and Experimental Charts
+
+Added several new data selections:
+
+- "Derivative Charts" that show the change of the daily cases.  A positive derivative indicates that the there is currently the daily cases are increasing at an increasing rate, a zero derivative indicates that there is no change in daily cases (the same number of new cases were detected yesterday and today), and a negative derivative indicates that there is a deceasing number of new daily cases (fewer new cases were detected today than yesterday).
+
+- "Experimental Charts" that are playing around with non-transitional charts (mostly out of request from others).  The current two show a the current case fatality rate using a 2-week or 4-week lagged number of cases.
+
+
+## Oct. 18 - New Guide and Normalized Graph Improvements 
+
+I've added a [small guide](/pages/covid-visualization/#guide) to the visualization, providing an overview of the key aspects of the visualization including the data sources, regions, normalized data, and more.  Additionally:
+
+- Normalized populations are now displayed /100k instead of /1m people in all of the normalized visualizations
+- On the normalized visualizations, the default "Show" option is now "Top 25 by Data w/ Pop. >1m".  The previous default, "Top 25 by Data" (without any filters) is still available as a selection.  This was done as the default display was dominated by two small countries, The Holy See and Andorra, having 5-10x the normalized cases /day than the rest of the world.
+- The default state has been changed from New York to California.
+
+
+## Oct. 15 - Big Ten School Visualization Colors
+
+Starting a bit over a month ago, Johns Hopkins University has stopped reporting any state-level hospitalization data (you can see [the empty column in their raw data](https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports_us/10-14-2020.csv)).  Fortunately, the COVID Tracking Project by The Atlantic continues to report this data and, when choosing state-level hospitalization data graphs, you are prompted to select the COVID Tracking Project data source to view the data.  (It appears they're not tracking every state, but they're getting data from the majority of the states.)
+
+Additionally, the mobile layout labels were getting extremely cluttered -- the latest update cleans up the spacing on x-axis labels when viewing the visualization on a mobile layout. 🎉
+
+
+## Oct. 1 - New Visualization: COVID-19 at Big Ten Conference Schools
+
+The University of Illinois has been widely reported in national media for testing every single student twice a week -- how are they doing?  How do they compare to their peer schools within the Big Ten Conference?
+
+The newest 91-DIVOC visualization explores [COVID-19 at Big Ten Conference Schools](/pages/covid-19-at-big-ten-conference-schools/), tracking the number of confirmed cases of COVID-19, total COVID-19 tests administered, and the test positivity.
+
+As with all of the visualization, the visualization is updated daily. :)
+
+
+## Sept. 30 - Removed Filter on "Top 10" on Normalized Graphs
+
+In the early days of the COVID era, [The Holy See (Vatican City)](https://91-divoc.com/pages/covid-visualization/?chart=countries-normalized&highlight=Holy%20See&show=25&y=both&scale=linear&data=cases-daily-7&data-source=jhu&xaxis=left#countries-normalized) confirmed 3 cases on March 24th, 2 more on March 28th, and another 5 cases in April.  At that time, the Holy See dominated the normalized cases having an official population of just 799 residents.
+
+As part of today's update, I removed this filter completely -- the normalized data no longer filters small countries.  This is notable as Johns Hopkins University tracks the microstate of Andorra [(Wikipedia)](https://en.wikipedia.org/wiki/Andorra) -- with a ~100 new cases and a population of 77,543, Andorra has been the location of one of fastest spread of COVID-19 on a population-normalized basis [(91-DIVOC Graph)](https://91-divoc.com/pages/covid-visualization/?chart=countries-normalized&highlight=Andorra&show=25&y=both&scale=linear&data=cases-daily-7&data-source=jhu&xaxis=left#countries-normalized).
+
+Additionally, a few tooltips were cleaned up.  Look for a brand new visualization tomorrow! :)
+
+
+## Sept. 18 - Normalized "Top 25" shows data based on normalized-values
+
+Selecting "Top 25" (or other similar options) on a normalized chart now works more as expected, showing the top 25 **normalized** values instead of the top 25 raw values.
+
+
 ## Sept. 10 - Added Normalized/Non-normalized Statistics
 
 For all mouseovers in area where the population is known, the mouseover will provide a normalized value for the data (ex: "3 cases /100k") in addition to the raw data.  When viewing a normalized chart, the raw data value is also given.

@@ -4,7 +4,7 @@ manifest: manifest.webmanifest
 
 social-img: https://91-divoc.com/pages/covid-visualization/img.png
 title: An interactive visualization of the exponential spread of COVID-19
-description: Interactive visualization of COVID-19.  Updated daily.
+description: An interactive, data-forward visualization of COVID-19 data.  Updated daily.
 ---
 
 <style>svg{background-color:#fcfbfd}.lesser-used-options .input-group-text{background-color:#fce5ff}.input-group-prepend .input-group-text{border-top-right-radius:0;border-bottom-right-radius:0}.form-control{border-top-left-radius:0!important;border-bottom-left-radius:0!important}.svg-hover-highlight{opacity:1!important}path.svg-hover-highlight{stroke-width:2px}circle.svg-hover-highlight{stroke:#000;stroke-width:.5px}text.C_highlight{stroke:#000;stroke-width:.3px}text.svg-hover-highlight{font-size:15px;stroke:#000;stroke-width:.3px}.chart-viz{background-color:#fcfbfd;border-left:solid 1px #ccc;border-right:solid 1px #ccc;border-top:solid 1px #ccc}.chart-header,.chart-header h2{text-align:left;font-family:Roboto,sans-serif;font-size:1.3em;font-weight:700;padding:0;border-bottom-width:0}.chart-footer{background-color:#fcfbfd;border:solid 1px #ccc;padding:5px}.axis text{font-weight:700;font-family:Montserrat,sans-serif}.axis-title{font-size:14px;font-weight:700;font-family:Montserrat,sans-serif}.grid{stroke-opacity:.15;color:#7f59a5}.tip-country{font-weight:700;border-bottom:solid 1px #000}.tip-details{font-size:12px}.text-credits{opacity:.3;font-weight:700;font-size:12px;font-family:Montserrat,sans-serif}.label-country{font-size:10px;font-weight:700;font-family:Montserrat,sans-serif}i{color:#aaa}.data-scale-float{float:right;text-align:right}.data-scale-float>div{padding-bottom:3px}.d3-tip{line-height:1;padding:4px;background:rgba(255,255,255,.9);color:#000;border-radius:2px;pointer-events:none;border:solid 1px #000;margin-bottom:200px;width:200px;text-align:center}.d3-tip:after{box-sizing:border-box;display:inline;font-size:10px;width:100%;line-height:1;color:rgba(0,0,0,.8);position:absolute;pointer-events:none}.d3-tip.n:after{content:"\25BC";margin:-1px 0 0 0;top:100%;left:0;text-align:center}.d3-tip.e:after{content:"\25C0";margin:-4px 0 0 0;top:50%;left:-8px}.d3-tip.s:after{content:"\25B2";margin:0 0 1px 0;top:-8px;left:0;text-align:center}.d3-tip.w:after{content:"\25B6";margin:-4px 0 0 -1px;top:50%;left:100%}.query-string{display:none;border-top:dashed 1px #aaa;overflow-wrap:break-word;word-wrap:break-word;-ms-word-break:break-all;word-break:break-all;word-break:break-word;-ms-hyphens:auto;-moz-hyphens:auto;-webkit-hyphens:auto;hyphens:auto}.saveOptions{padding-top:3px;margin-top:3px;border-top:dashed 1px #aaa}.addOptions{line-height:175%}.addOptions a{white-space:nowrap}@media (min-width:501px){.divoc-graph-loading{height:555px}.divoc-graph-loading>.spinner-border{margin-top:250px}}@media (max-width:500px){.divoc-graph-loading{height:355px}.divoc-graph-loading>.spinner-border{margin-top:150px}}div.card{background-color:#cfe}div.card>a{color:#064}section{margin-bottom:30px}.btn-group{margin-bottom:2px}</style>
@@ -38,8 +38,8 @@ description: Interactive visualization of COVID-19.  Updated daily.
         </ul>
       </li>
       <li style="margin-top: 5px;">
-        Latest Enhancement:
-        "Top 25" now shows "Top 25" normalized when selected on normalized graphs
+        Latest Feature:
+        Added a new <a href="#guide">guide</a> to this visualization at the bottom of the page + normalized data improvementments.
         [<a href="changes.html" style="color: hsla(199, 100%, 40%, 1);">See full change log</a>]
         <!--
         Finally, <a href="changes.html" style="color: hsla(199, 100%, 40%, 1);">the change log</a> documents all major changes and improvements made to this visualization.
@@ -76,11 +76,12 @@ description: Interactive visualization of COVID-19.  Updated daily.
     <div class="explore-more" style="margin-top: 15px;">
       <h6>Explore More 91-DIVOC</h6>
       <ul>
-        <li>Once Monthly Visualization Updates: <a href="https://forms.gle/oLXWdijmr9i2Yxau9" rel="noreferrer" target="_blank">Join Prof. Wade's e-mail list</a>, creator of 91-DIVOC</li>
+        <li><b>NEW</b> &ndash; <a href="../covid-19-at-big-ten-conference-schools/"><b>91-DIVOC #06</b>: COVID-19 at Big Ten Conference Schools</a></li>
         <li><a href="../covid-by-your-locations/"><b>91-DIVOC #02</b>: COVID-19 Data for Locations of People You Love</a></li>
         <li><a href="../coronavirus-1000-person-community/"><b>91-DIVOC #03</b>: Coronavirus Visualized as a 1,000-Person Community</a></li>
         <li><a href="../coronavirus-contribution-by-state/"><b>91-DIVOC #04</b>: Coronavirus Contribution by State</a></li>
         <li><a href="../interactive-visualziation-of-covid-19-in-illinois/"><b>91-DIVOC #05</b>: Interactive Visualization of COVID-19 in Illinois</a></li>
+        <li>Once Monthly Visualization Updates: <a href="https://forms.gle/oLXWdijmr9i2Yxau9" rel="noreferrer" target="_blank">Join Prof. Wade's e-mail list</a>, creator of 91-DIVOC</li>
       </ul>      
     </div>  
   </div>
@@ -96,7 +97,7 @@ description: Interactive visualization of COVID-19.  Updated daily.
     by the country or state population.
     <ul>
       <li>
-        The data is presented as <b>confirmed cases per 1,000,000 people</b>, based on the <a href="https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population" rel="noreferrer">country</a> or <a href="https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States_by_population" rel="noreferrer">US state/territory</a> population found on Wikipedia.
+        The data is presented as <b>confirmed cases per 100,000 people</b>, based on the <a href="https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population" rel="noreferrer">country</a> or <a href="https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States_by_population" rel="noreferrer">US state/territory</a> population found on Wikipedia.
       </li>
     </ul>
   </div>
@@ -108,23 +109,13 @@ description: Interactive visualization of COVID-19.  Updated daily.
     <div class="explore-more" style="margin-top: 15px;">
       <h6>Explore More 91-DIVOC</h6>
       <ul>
-        <li>Once Monthly Visualization Updates: <a href="https://forms.gle/oLXWdijmr9i2Yxau9" rel="noreferrer" target="_blank">Join Prof. Wade's e-mail list</a>, creator of 91-DIVOC</li>
+        <li><b>NEW</b> &ndash; <a href="../covid-19-at-big-ten-conference-schools/"><b>91-DIVOC #06</b>: COVID-19 at Big Ten Conference Schools</a></li>
         <li><a href="../covid-by-your-locations/"><b>91-DIVOC #02</b>: COVID-19 Data for Locations of People You Love</a></li>
         <li><a href="../coronavirus-1000-person-community/"><b>91-DIVOC #03</b>: Coronavirus Visualized as a 1,000-Person Community</a></li>
         <li><a href="../coronavirus-contribution-by-state/"><b>91-DIVOC #04</b>: Coronavirus Contribution by State</a></li>
         <li><a href="../interactive-visualziation-of-covid-19-in-illinois/"><b>91-DIVOC #05</b>: Interactive Visualization of COVID-19 in Illinois</a></li>
+        <li>Once Monthly Visualization Updates: <a href="https://forms.gle/oLXWdijmr9i2Yxau9" rel="noreferrer" target="_blank">Join Prof. Wade's e-mail list</a>, creator of 91-DIVOC</li>
       </ul>
-    </div>
-  </div>
-</div>
-
-<div class="container-fluid viz" style="margin-top: 20px;">
-  <div class="container lead">
-    <div><b>More Details</b>: <a href="/">91-DIVOC #01 - COVID-19 Dataset</a></div>
-    <div><b>COVID-19 Dataset</b>: <a href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series">2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns Hopkins CSSE</a></div>
-    <div><b>Population Datasets</b>:
-      <a href="https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population">Wikipedia, list of countries</a> and 
-      <a href="https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States_by_population">Wikipedia, list of US states</a>
     </div>
   </div>
 </div>
@@ -134,8 +125,116 @@ description: Interactive visualization of COVID-19.  Updated daily.
   <img class="social-hide" itemprop="image" src="img.png">
 </noscript>
 
+<hr style="border-top: dashed 1px hsla(199, 100%, 6%, 1); margin-top: 15px;">
+
 <div class="container">
-  <hr>
+  <!-- GA/Display--><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9247209205736147" data-ad-slot="3955045624" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<hr style="border-top: dashed 1px hsla(199, 100%, 6%, 1); margin-top: 15px;">
+
+<section class="container" id="guide">
+  <h3>Guide to the 91-DIVOC Visualizations</h3>
+
+  <h5>Data Sources</h5>
+  <p>
+    All of the data presented on this visualization comes from a trusted, high-quality data source: either Johns Hopkins University,
+    Oxford University (Our World in Data), or The Atlantic (COVID Tracking Project).  You can switch between the data sources by using the "Data Source"
+    control at the top of the visualization.  By default, Johns Hopkins University is displayed by default but your data selection can be stored by
+    bookmarking a "Direct Link" that is displayed below each of the visualizations.  All data sets are updated multiple times each day.
+  </p>
+  <p>
+    In the visualization controls, the &quot;Data&quot; selection allows you view various different data about COVID-19, including cases, deaths,
+    tests, hospitalizations, test positivity rates, case fatality rates, and more.  If a data selection is not available for a selected source,
+    you will be prompted to switch to a data source where the data is available.
+  </p>
+  <p>
+    The specific data source used will always be displayed in the lower-right corner of the graph.
+  </p>
+
+
+  <h5>Regions</h5>
+  <p>
+    In addition to the country and state data provided by the data sources, several regions are added for additional context.
+    These regions include:
+
+    <ol>
+      <li>
+        All <a href="https://en.wikipedia.org/wiki/WHO_regions">World Health Organization (WHO) regions</a>, which includes:
+        <ul>
+          <li>African Region (WHO-AFRO)</li>
+          <li>Region of the Americas (WHO-PAHO)</li>
+          <li>South-East Asia Region (WHO-SEARO)</li>
+          <li>European Region (WHO-EURO)</li>
+          <li>Eastern Mediterranean Region (WHO-EMRO)</li>
+          <li>Western Pacific Region (WHO-WPRO)</li>
+        </ul>
+      </li>
+      <li>
+        The <a href="https://en.wikipedia.org/wiki/European_Union">European Union, based off the current union of 27 members states ("EU-27")</a>.
+        Note that the EU-27 does <b>not</b> include the United Kingdom.
+      </li>
+      <li>
+        The four <a href="https://en.wikipedia.org/wiki/List_of_regions_of_the_United_States#Census_Bureau-designated_regions_and_divisions">United States' US Census Bureau-designated regions</a>:
+        <ul>
+          <li>Northeast, which includes New Jersey and Pennsylvania and states further to the northeast</li>
+          <li>South, which includes Delaware, Maryland, West Virginia, Kentucky, Arkansas, Oklahoma, Texas, and all states south</li>
+          <li>Midwest, which includes the Dakotas, Nebraska and Kansas</li>
+          <li>West, which includes Hawaii and Alaska</li>
+        </ul>
+      </li>
+    </ol>
+
+    Each region can be selected as a "Highlight" option in the controls below each graph.  Additionally, by choosing "+Add Additional Highlight",
+    multiple selections can be highlighted on each graph.
+  </p>
+
+  <h5>Normalized Data by Population</h5>
+  <p>
+    The first two visualizations displays the raw case data (ex: number of cases, deaths, tests, etc).
+    The last two visualizations displays the same data <b>normalized</b> by the official population displayed in cases per 100,000 people.
+    This normalized view provides a more equatable comparison between regions of different sizes (ex: California, Texas, Illinois, and New York
+    will have more cases if the distribution of cases were uniform simply because they have more residents).  The formula used is:
+    <div class="text-center mb-3">
+      (data value) / (population) * 100,000
+    </div>
+
+    The population of each country is sourced from the following Wikipedia pages:
+    <ul>
+      <li>For populations of countries, <a href="https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population">&quot;List of countries and dependencies by population&quot;</a></li>
+      <li>For populations of US states and territories, <a href="https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States_by_population">&quot;List of states and territories of the United States by population&quot;</a></li>
+    </ul>
+
+    Additionally, the use of data per 100,000 people provides an easy translation to a percentage since 1,000 is 1% of 100,000.  Therefore, the thousands-digit
+    comma can be thought of as the decimal point for viewing the data as a percentage of the population.  For example, on Oct. 14, 2020, Johns Hopkins'
+    data shows the United States to have a cumulative total of <b>2,403</b> confirmed cases / 100,000 people -- or <b>2.403%</b> of the population of the United States.
+  </p>
+
+  <h5>Direct Link</h5>
+  <p>
+    Finally, every change you make to the visualization will generate a &quot;Direct Link&quot; that will link to the specific
+    visualization you have created.  You can bookmark this link to view it later or share it with friends/family to share the
+    exact graph you are exploring.
+  </p>
+
+  <h5>More Information</h5>
+  <p>
+    There are many more options to explore in the visualization controls, including the ability to save an image or video/GIF
+    of your graph.  This 91-DIVOC project is a side-project of mine while I'm not working on teaching the next generation of
+    students about Computer Science at The University of Illinois.  You can read about my motivation for creating this project,
+    and some of the uses it has received, on the <a href="overview.html">&quot;Overview and Motivations &quot;</a> page. 
+  </p>
+  <p>
+    Finally, if you have any questions or feedback, you can write to me (<a href="https://waf.cs.illinois.edu/">faculty website</a>,
+    and additional contact information at the bottom of this page) -- I read all of the e-mails, reply to as many as I'm able to,
+    and I'd love to hear from you! :)
+  </p>
+  
+</section>
+
+<hr style="border-top: dashed 1px hsla(199, 100%, 6%, 1); margin-top: 15px;">
+
+<div class="container">
   <!-- GA/Display--><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9247209205736147" data-ad-slot="3955045624" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 

@@ -1,0 +1,15 @@
+---
+layout: bare
+---
+
+<div class="container-fluid viz" style="border-bottom: dashed 1px hsla(199, 100%, 6%, 1);">
+  <div class="container lead">
+    <h2>{{page.title}}</h2>
+    {{page.description}}
+    {% if page.jhuUpdated %}<i id="jhu-updated"></i>{% endif %}
+  </div>
+</div>
+
+<div class="container viz">
+  {{content}}
+</div>
