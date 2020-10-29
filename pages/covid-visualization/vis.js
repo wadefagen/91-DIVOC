@@ -3018,6 +3018,7 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
     }
   }
 
+  if (chart.scale == "log") { scale_y0 = 0.001; }
 
 
   casesScale.domain([scale_y0, scale_yMax]).range([height, 0]);
@@ -3240,6 +3241,15 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
     else { tickValueIncrease = 5; }
   }
 
+  if (scale_yMax < 10) {
+    tickValues.push(0.5);
+    tickValues.push(0.1);
+    tickValues.push(0.05);
+    tickValues.push(0.01);
+    tickValues.push(0.005);
+    tickValues.push(0.001);
+  }
+
 
   let y_axis_tickFormat;
   if (isRatio) {
@@ -3250,6 +3260,8 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
     } else {
       y_axis_tickFormat = d3.format(".0%");
     }
+  } else if (chart.scale == "log") {
+    y_axis_tickFormat = d3.format(".1");
   } else {
     y_axis_tickFormat = function (val) {
       let isNeg = false;
@@ -3831,7 +3843,14 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
       `<div class="alert alert-secondary" style="margin-top: 10px; margin-bottom: 0px; text-align: center; font-size: 12px;">
         <b>*</b>: &quot;US-Total, Computed*&quot; is computed by summing the 50 individaul states' data; "United States" displays the data reported for the US as a whole.
       </div>`);
+  }
 
+  if (!_animation_timeout && dType.isDerivative && chart.scale == "log") {
+    $("#" + chart.id).append(
+      `<div class="alert alert-warning" style="margin-top: 10px; margin-bottom: 0px; text-align: center; font-size: 12px;">
+        <b>Note:</b> Log scaled graphs do not display negative values (the log of a negative number is a complex/imaginary number).  Negative values
+        are rendered below the axis, but this graph would be best viewed as a linear graph.
+      </div>`);
   }
 
   return baseSvg;
