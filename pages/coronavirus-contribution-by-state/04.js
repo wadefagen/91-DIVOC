@@ -1345,8 +1345,14 @@ var tip_html = function(chart) {
 
     let pctCases = ((cases / cData.caseSum) * 100).toLocaleString("en-US", {maximumFractionDigits: 2}) + "%";
 
+    let wholeRegionText = "United States";
+    if (chart.show != "us-states") {
+      wholeRegionText = "selected data";
+    }
+
+
     s += `<div class="tip-details">`;
-    s += `<b>${pctCases}%</b> of all ${dataLabel} in the United States on ${cData.date}`;
+    s += `<b>${pctCases}%</b> of all ${dataLabel} in the ${wholeRegionText} on ${cData.date}`;
     s += `</div>`;
       
     gtag("event", "mouseover", {event_category: chart.self, event_label: d.country, value: d.dayCounter});
