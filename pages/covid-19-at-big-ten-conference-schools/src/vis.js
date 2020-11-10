@@ -682,8 +682,8 @@ var do_process_data = function(data, chart, isSubdata = false) {
 
       let dateObj = convertDateToObject(date);
 
-      let daysAgo = (_dateObj_today_time - dateObj.getTime()) / (1000 * 3600 * 24);
-      daysAgo = Math.ceil(daysAgo);
+      let daysAgo = (_dateObj_today_time - dateObj.getTime() + 3.7e6) / (1000 * 3600 * 24);
+      daysAgo = Math.round(daysAgo);
 
       //let cases = fetchCasesValue(country, date);
       let cases = fetch(country, chart.dataSelection, dates, i);
@@ -2853,7 +2853,7 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
         relDate < endDate;
         relDate = new Date(relDate.setMonth(relDate.getMonth()+1)))
     {
-      let daysAgo = (_dateObj_today_time - relDate.getTime()) / (1000 * 3600 * 24);
+      let daysAgo = Math.round((_dateObj_today_time - relDate.getTime() + 3.7e6) / (1000 * 3600 * 24));
       if (daysAgo > maxDayRendered) { continue; }
 
       dateLines.push({

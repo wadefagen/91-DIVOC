@@ -395,9 +395,9 @@ var prep_data = function(chart) {
 var calculateDaysAgo = function(date) {
   let dateParts = date.split("-");
   let dateObj = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
-  let daysAgo = (_dateObj_today_time - dateObj.getTime()) / (1000 * 3600 * 24);
+  let daysAgo = (_dateObj_today_time - dateObj.getTime() + 3.7e6) / (1000 * 3600 * 24);
   // TODO: 
-  return Math.ceil(daysAgo);
+  return Math.round(daysAgo);
 };
 
 var process_data = function(data, chart, isSubdata = false, noPrepData = false) {
@@ -498,9 +498,9 @@ var process_data = function(data, chart, isSubdata = false, noPrepData = false) 
 
       let dateParts = date.split("-");
       let dateObj = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]));
-      let daysAgo = (_dateObj_today_time - dateObj.getTime()) / (1000 * 3600 * 24);
+      let daysAgo = (_dateObj_today_time - dateObj.getTime() + 3.7e6) / (1000 * 3600 * 24);
       // TODO: 
-      daysAgo = Math.ceil(daysAgo);
+      daysAgo = Math.round(daysAgo);
 
       let cases = fetchCasesValue(country, date);
       var rawCaseValue = fetchRawCasesValue(country, date);
@@ -2161,7 +2161,7 @@ var doRender = function(chart) {
         relDate < endDate;
         relDate = new Date(relDate.setMonth(relDate.getMonth()+1)))
     {
-      let daysAgo = (_dateObj_today_time - relDate.getTime()) / (1000 * 3600 * 24);
+      let daysAgo = Math.round((_dateObj_today_time - relDate.getTime() + 3.7e6) / (1000 * 3600 * 24));
       if (daysAgo > maxDayRendered) { continue; }
 
       dateLines.push({

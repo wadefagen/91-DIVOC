@@ -682,8 +682,8 @@ var do_process_data = function(data, chart, isSubdata = false) {
 
       let dateObj = convertDateToObject(date);
 
-      let daysAgo = (_dateObj_today_time - dateObj.getTime()) / (1000 * 3600 * 24);
-      daysAgo = Math.ceil(daysAgo);
+      let daysAgo = (_dateObj_today_time - dateObj.getTime() + 3.7e6) / (1000 * 3600 * 24);
+      daysAgo = Math.round(daysAgo);
 
       //let cases = fetchCasesValue(country, date);
       let cases = fetch(country, chart.dataSelection, dates, i);
@@ -1179,14 +1179,12 @@ var process_query_string = function() {
   _qs_update_graph(null, urlParams, "scale", "scale", "scaleSelection");
 
   
-  /*
   let chartId = urlParams.get("chart");
   if (!chartId) { return; }
 
   let chart = charts[chartId];
   if (!chart) { return; }
-  */
- let chart = charts.countries;
+  //let chart = charts.countries;
 
   let otherChart;
   if (chart.self == "states") { otherChart = chart["states-normalized"]; }
@@ -2005,7 +2003,7 @@ var tip_html = function(chart) {
     }
 
     var s2 = "";
-    if (chart.normalizePopulation && !dType.isRatio) { s2 = " per 1,000,000 people"; }
+    if (chart.normalizePopulation && !dType.isRatio) { s2 = " per 100,000 people"; }
 
     var dataLabel = generateDataLabel_v3(chart, dType);
     var dataLabel_cutoff = dataLabel;
@@ -2776,7 +2774,7 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
         relDate < endDate;
         relDate = new Date(relDate.setMonth(relDate.getMonth()+1)))
     {
-      let daysAgo = (_dateObj_today_time - relDate.getTime()) / (1000 * 3600 * 24);
+      let daysAgo = Math.round((_dateObj_today_time - relDate.getTime() + 3.7e6) / (1000 * 3600 * 24));
       if (daysAgo > maxDayRendered) { continue; }
 
       dateLines.push({

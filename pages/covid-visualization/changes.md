@@ -16,6 +16,25 @@ desc: This change log lists the major changes made to "An interactive visualizat
   <a href="/pages/covid-visualization/">An interactive visualization of the exponential spread of COVID-19 &gt;&gt;</a>
 </div>
 
+## Nov. 2 -- Improving the Y-Axis on Log Scaling
+
+With the introduction of derivative charts, the new code for log scaling on some graphs (particularly those with large values, like a graph of cumulative deaths) left a lot of whitespace at the bottom of the graph due to x-intercept of the y-axis was "fixed" at starting at 0.001.
+
+Log scales are tricky as they are undefined at 0, so you are unable to start the y-axis labeling as 0 and visualizations are forced to choose a non-zero value.  (This differs from a linear scale, where best practices dictate that -- unless it's both obvious to the reader and for a clear reason -- an honest visualization will always start with the y-axis at zero.)  With today's update, I've implemented new code to calculate the starting value (x-intercept) for the log scales.
+
+In general, the scale for all log graphs will start at the 10<sup><code>x</code></sup> power such that 10<sup><code>x</code></sup> is lower than the lowest positive data point, with two exceptions:
+- The lowest value for `x` is -3 (or 0.001), even if data values are smaller than 0.001 (ex: less than 0.001 cases /100k).  These points, will be displayed as a data point below the x-axis (slightly outside of the graph region).
+- If the graph spans over 5 orders of magnitude, `x` is increased (up to a maximum of `x=0` or 1) to attempt to show 5 orders of magnitude.  Since `x` is capped at `x=0`, graphs with large values may still show many more orders of magnitude.
+
+
+## Oct. 30 - More Derivative Charts
+
+I received a number of questions (and a lot of interest) on the derivative charts that were recently added -- the charts helped show the overall trends, but the day-of-week swings in the underlying data made the chart less useful beyond that.  To help provide more context around the derivative charts, I've added derivative charts of the "One-Week Rolling Averages" to answer the question: *What is the daily change in the 1-week rolling average?*  Additionally, this new derivative can also be viewed, itself, as a one-week average.
+
+- Add four more derivative charts, all of the one-week rolling average values
+- Fixed a typo in the mouseover tooltip on the derivative charts.
+
+
 ## Oct. 28 - Derivative and Experimental Charts
 
 Added several new data selections:

@@ -384,17 +384,17 @@ var transformToTrailingAverage2_ratio = function (data, period) {
 };
 
 
-var transformToTrailingAverage2 = function (data, period, skipNeg = true) {
+var transformToTrailingAverage2 = function (data, period, skipNeg = true, rawcasesString = "rawcases") {
   var largest = -1;
   var sum = 0, ct = 0;
 
   for (var i = 0; i < data.length; i++) {
-    val = ('rawcases' in data[i]) ? (data[i].rawcases) : (data[i].cases);
+    val = (rawcasesString in data[i]) ? (data[i][rawcasesString]) : (data[i].cases);
     if (val > 0 || !skipNeg) { sum += val; } 
 
     var j = i - period;
     if (j >= 0) {
-      val = ('rawcases' in data[j]) ? (data[j].rawcases) : (data[j].cases);
+      val = (rawcasesString in data[j]) ? (data[j][rawcasesString]) : (data[j].cases);
       if (val > 0 || !skipNeg) { sum -= val; }
     } else {
       ct++;
@@ -403,7 +403,7 @@ var transformToTrailingAverage2 = function (data, period, skipNeg = true) {
     avg = sum / ct;
     if (avg > largest) { largest = avg; }
 
-    if ( !('rawcases' in data[i]) ) { data[i].rawcases = data[i].cases; }
+    if ( !(rawcasesString in data[i]) ) { data[i][rawcasesString] = data[i].cases; }
     data[i].cases = avg;
   }
 
@@ -417,9 +417,19 @@ var transformToDailyChange = function (casesData) {
     let max = 0, min = 0;
 
     for (var i = data.length - 1; i > 0; i--) {
-      //data[i].pre_transform = data[i].cases;
+      let value1, value2;
+      if ('preTransform' in data[i]) {
+        value1 = data[i].preTransform;
+        value2 = data[i - 1].preTransform;
+      } else {
+        value1 = data[i].cases;
+        value2 = data[i - 1].cases;
+        data[i].preTransform = value1;
+      }
 
-      let value = data[i].cases - data[i - 1].cases;
+
+      //let value = data[i].cases - data[i - 1].cases;
+      let value = value1 - value2;
       data[i].cases = value;
       //data[i].rawcases = value;
       if      (value > max) { max = value; }
@@ -431,12 +441,12 @@ var transformToDailyChange = function (casesData) {
   }
 };
 
-var transformToTrailingAverage = function (casesData, period, skipNeg = true) {
+var transformToTrailingAverage = function (casesData, period, skipNeg = true, rawcasesString = "rawcases") {
   for (var countryData of casesData) {
     if ('n' in countryData.data[0]) {
       countryData.maxCases = transformToTrailingAverage2_ratio(countryData.data, period);
     } else {
-      countryData.maxCases = transformToTrailingAverage2(countryData.data, period, skipNeg);
+      countryData.maxCases = transformToTrailingAverage2(countryData.data, period, skipNeg, rawcasesString);
     }
   }
 }
@@ -614,7 +624,7 @@ var _prep_data = function(chart, fullData, extraDataStr = undefined) {
 
   if (chart.avgData && chart.avgData > 1) { transformToTrailingAverage(caseData, chart.avgData); }
   if (dType.isDerivative) { transformToDailyChange(caseData); }
-  if (dType.derivativeAvg) { transformToTrailingAverage(caseData, dType.derivativeAvg, false); }
+  if (dType.derivativeAvg) { transformToTrailingAverage(caseData, dType.derivativeAvg, false, "rawcases2"); }
 
 
   return caseData;
@@ -825,8 +835,8 @@ var do_process_data = function(data, chart, isSubdata = false) {
 
       let dateObj = convertDateToObject(date);
 
-      let daysAgo = (_dateObj_today_time - dateObj.getTime()) / (1000 * 3600 * 24);
-      daysAgo = Math.ceil(daysAgo);
+      let daysAgo = (_dateObj_today_time - dateObj.getTime() + 3.7e6) / (1000 * 3600 * 24);
+      daysAgo = Math.round(daysAgo);
 
       //let cases = fetchCasesValue(country, date);
       let cases = fetch(country, chart.dataSelection, dates, i);
@@ -2179,11 +2189,11 @@ var generateReport = function (chart) {
   gtag("event", "create-report", {event_category: chart.self});
 };
 
-var generateDataLabel_v3 = function(chart, dType, title = false) {
+var generateDataLabel_v3 = function(chart, dType, title = false, baseDataLabel = false) {
   var dataLabel = "";
 
   if (title) {
-    if (dType.isDerivative) {
+    if (dType.isDerivative && !baseDataLabel) {
       dataLabel += "Daily Change in ";
     }
 
@@ -2216,7 +2226,7 @@ var generateDataLabel_v3 = function(chart, dType, title = false) {
       //if (!dType.showDelta) { dataLabel = "cumulative "; }      
     } 
 
-    if (dType.isDerivative) {
+    if (dType.isDerivative && !baseDataLabel) {
       dataLabel += "daily change in ";
     }
 
@@ -2340,10 +2350,13 @@ var tip_html = function(chart) {
       numberStr = numericFormat( ((d.rawcases)?d.rawcases:d.cases) , 1);
     }
 
-
-    if (d.rawcases) { s += "<i>"; }
+    let baseDataLabel = dataLabel;
+    if (d.rawcases) {
+      s += "<i>";
+      baseDataLabel = generateDataLabel_v3(chart, dType, false, true);
+    }
     s += `<div class="tip-details" style="border-bottom: solid 1px black; padding-bottom: 2px;">`;
-    s += `<b>${numberStr}</b> ${dataLabel}${s2} on ${dateStr}${d.date} ${daysSince}`
+    s += `<b>${numberStr}</b> ${baseDataLabel}${s2} on ${dateStr}${d.date} ${daysSince}`
     if (!dType.isRatio && !(d.rawcases && d.cases)) {
       if (!chart.normalizePopulation && d.pop) {
         s += `<i> (or <b>${numericFormat(d.cases / d.pop * 100000)}</b> /100k people)</i>`;
@@ -2913,7 +2926,7 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
 
   let _find_minmax_cases = function(data) {
     var maxCases = -1;
-    var minCases = 0;
+    var minCases = 1e20;
     for (let d of data) {
       if (d.data.length > 0) {
         let dataInScope = [];
@@ -2968,7 +2981,7 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
   
   if (!f || chart.yAxisScale == "highlightCurMax" || chart.yAxisScale == "currentMax" || chart.yAxisScale == "both") {
     let maxCasesValue = 0;
-    let minCasesValue = 0;
+    let minCasesValue = 1e20;
 
     if (f && chart.yAxisScale == "highlightCurMax") {
       scale_data = _.filter(scale_data, function (d) { return highlights.indexOf(d.country) != -1; });
@@ -3018,7 +3031,20 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
     }
   }
 
-  if (chart.scale == "log") { scale_y0 = 0.001; }
+  if (chart.scale == "log") {
+    let oom = Math.log10(scale_yMax);
+
+    if (oom <= 2) { scale_y0 = 0.001; }
+    else if (oom <= 3) { scale_y0 = 0.01; }
+    else if (oom <= 4) { scale_y0 = 0.1; }
+    else { scale_y0 = 1; }
+
+    console.log(scale_yMin);
+    if (scale_yMin > scale_y0) {
+      oom = Math.floor(Math.log10(scale_yMin)) 
+      scale_y0 = Math.pow(10, oom);
+    }
+  }
 
 
   casesScale.domain([scale_y0, scale_yMax]).range([height, 0]);
@@ -3143,7 +3169,7 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
         relDate < endDate;
         relDate = new Date(relDate.setMonth(relDate.getMonth()+1)))
     {
-      let daysAgo = (_dateObj_today_time - relDate.getTime()) / (1000 * 3600 * 24);
+      let daysAgo = Math.round((_dateObj_today_time - relDate.getTime() + 3.7e6) / (1000 * 3600 * 24));
       if (daysAgo > maxDayRendered) { continue; }
 
       dateLines.push({
@@ -3230,10 +3256,10 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
      .call(x_grid);
 
   // Have tickValues at 1, 5, 10, 50, 100, ...
-  var tickValue = 1;
+  var tickValue = 0.001;
   var tickValueIncrease = 5; 
   var tickValues = [];
-  while (tickValue <= 1e6) {
+  while (tickValue <= 1e9) {
     if (tickValue >= scale_y0 && tickValue <= scale_yMax) { tickValues.push(tickValue); }
     tickValue *= tickValueIncrease;
 
@@ -3241,14 +3267,6 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
     else { tickValueIncrease = 5; }
   }
 
-  if (scale_yMax < 10) {
-    tickValues.push(0.5);
-    tickValues.push(0.1);
-    tickValues.push(0.05);
-    tickValues.push(0.01);
-    tickValues.push(0.005);
-    tickValues.push(0.001);
-  }
 
 
   let y_axis_tickFormat;
@@ -3754,8 +3772,11 @@ var doRender = function(chart, isInAnimation = false, target = chart.id) {
 
       let extraDataScale = chart.extraDataScale[i];
       if (extraDataScale == "separately") {
-        let maxCases = _find_max_cases(displayData);
-        casesScale.domain([scale_y0, maxCases * 1.05]).range([height, 0]);
+        let minMaxCases = _find_minmax_cases(displayData);
+        let maxCases = minMaxCases.max;
+        let minCases = Math.min(scale_y0, minMaxCases.min);
+        scale_y0 = minCases;
+        casesScale.domain([minCases, maxCases * 1.05]).range([height, 0]);
 
         let dType = calculateDataOptions(extraDataScale);
         if (dType.isRatio) {
